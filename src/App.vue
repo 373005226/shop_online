@@ -1,13 +1,12 @@
 <template>
   <div>
-    <router-view/>
+    <router-view class="body"/>
   </div>
 </template>
 
 <style lang="less">
-
-</style>
-
-<style>
-  @import "assets/css/base.css";
+  @import "./assets/css/base.css";
+  .body{
+    background: #ededed;
+  }
 </style>
