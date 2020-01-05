@@ -14,26 +14,36 @@
       <el-col :span="12">
         <div class="nav-title">
           <el-row :gutter="20">
-            <el-col :span="6" :offset="6">
-              <div>
-                <span class="nav_position">
+            <el-col :span="3" :offset="6" style="position:relative;left: 0px;">
+                <span @mouseover="change_person(true)" @mouseout="change_person(false)">
                   <img src="../assets/img/person.png">
                 </span>
-                <span class="nav_position" @mouseover="change_cart(true)" @mouseout="change_cart(false)">
 
-                  <img src="../assets/img/buy.png" >
-                  <span class="cart_nums" style="padding-left: 5px;">0</span>
-                  <!--    显示购物车下拉页面-->
-                  <div class="cart_position" v-show="showcart">
-                    <div class="cart_style">
-                      <div class="cart_style_triangle">
-                      </div>
+                <!--    显示个人信息下拉页面-->
+                <div class="person_position" v-show="showperson">
+                  <div class="person_style">
+                    <div class="person_style_triangle">
                     </div>
                   </div>
+                </div>
 
-                </span>
-              </div>
             </el-col>
+
+            <el-clo :span="3" style="position:relative;left: 0px;">
+              <span @mouseover="change_cart(true)" @mouseout="change_cart(false)">
+                  <img src="../assets/img/buy.png" >
+                  <span class="cart_nums" style="padding-left: 5px;">0</span>
+                </span>
+
+              <!--    显示购物车下拉页面-->
+              <div class="cart_position" v-show="showcart">
+                <div class="cart_style">
+                  <div class="cart_style_triangle">
+                  </div>
+                </div>
+              </div>
+
+            </el-clo>
 
           </el-row>
 
@@ -52,12 +62,16 @@
     name: "headers",
     data(){
       return{
-        showcart:false
+        showcart:false,
+        showperson:false
       }
     },
     methods:{
       change_cart(state){
         this.showcart = state
+      },
+      change_person(state){
+        this.showperson = state
       }
     }
   }
@@ -86,15 +100,9 @@
     padding-right: 5px
   }
 
-  .nav_position {
-    position: relative;
-    left: 0;
-    top: 0px;
-  }
-
   .cart_position {
     position: relative;
-    left: -93px;
+    left: 335px;
     top: 0px;
   }
 
@@ -114,5 +122,29 @@
     position: relative;
     top: -6px;
     left: 192px;
+  }
+
+  .person_position{
+    position: relative;
+    left: -30px;
+    top: 0px;
+  }
+
+  .person_style {
+    height: 300px;
+    width: 150px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 5px 5px 20px 0 rgba(0, 0, 0, 0.15);
+  }
+
+  .person_style_triangle {
+    height: 25px;
+    width: 25px;
+    background: #FFFFFF;
+    -webkit-transform: rotate(45deg); /* Safari 和 Chrome */;
+    position: relative;
+    top: -6px;
+    left: 65px;
   }
 </style>
