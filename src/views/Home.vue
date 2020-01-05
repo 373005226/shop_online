@@ -1,20 +1,20 @@
 <template>
   <div class="home">
-    <Header></Header>
-    <HelloWorld/>
+    <Headers></Headers>
+    <Search_nav></Search_nav>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '../components/HelloWorld.vue'
-import Header from "../common/header";
+import Headers from "../common/headers"
+import Search_nav from "../components/search_nav";
 
 export default {
   name: 'home',
   components: {
-    HelloWorld,
-    Header
+    Search_nav,
+    Headers
   }
 }
 </script>
