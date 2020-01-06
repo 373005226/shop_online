@@ -28,7 +28,7 @@
               </div>
             </el-col>
 
-            <el-clo :span="3">
+            <el-col :span="3">
               <span @mouseover="change_cart(true)" @mouseout="change_cart(false)">
                 <img src="../assets/img/buy.png">
                 <span class="cart_nums" style="padding-left: 5px;">0</span>
@@ -42,7 +42,7 @@
               </span>
 
 
-            </el-clo>
+            </el-col>
 
           </el-row>
 
@@ -98,16 +98,10 @@
     border-radius: 10px;
     padding-right: 5px
   }
-  /*@media (min-width: 1920px){*/
-  /*  .cart_position {*/
-  /*    position: relative;*/
-  /*    left: 335px;*/
-  /*    top: 0px;*/
-  /*  }*/
-  /*}*/
+
   .cart_position {
     position: relative;
-    left: 335px;
+    left: -155px;
     top: 0px;
   }
 
