@@ -1,30 +1,38 @@
 <template>
-  <div class="main-nav">
-    <div class="nav-first" @mouseenter="isNavEnter = true" @mouseleave="isNavEnter = false">
-      <ul>
-        <li v-for="(item,index) in navFirst" :key="index"
-            :class="{active: item.type === selected}"
-            @mouseenter="selected = item.type">
-          <p>
-            <span>{{item.name}}</span>
-            <span class="icon">></span>
-          </p>
-        </li>
-      </ul>
-    </div>
-    <div class="nav-sec" v-show="isNavEnter || isMenuEnter"
-         @mouseenter="isMenuEnter = true" @mouseleave="isMenuEnter = false">
-      <ul v-for="(item,index) in navFirst" v-show="item.type === selected" :key="index">
-        <li v-for="(key,index) in navSec[item.type]" :key="index">
-          <div class="product">
-            <a :href="key.link">
-              <img :src="key.imgUrl" alt="">
-              <p class="title">{{key.title}}</p>
-            </a>
+  <div>
+    <el-row>
+      <el-col :offset="5">
+        <div class="main-nav">
+          
+          <div class="nav-first" @mouseenter="isNavEnter = true" @mouseleave="isNavEnter = false">
+            <ul>
+              <li v-for="(item,index) in navFirst" :key="index"
+                  :class="{active: item.type === selected}"
+                  @mouseenter="selected = item.type">
+                <p>
+                  <span>{{item.name}}</span>
+                  <span class="icon">></span>
+                </p>
+              </li>
+            </ul>
           </div>
-        </li>
-      </ul>
-    </div>
+
+          <div class="nav-sec" v-show="isNavEnter || isMenuEnter"
+               @mouseenter="isMenuEnter = true" @mouseleave="isMenuEnter = false">
+            <ul v-for="(item,index) in navFirst" v-show="item.type === selected" :key="index">
+              <li v-for="(key,index) in navSec[item.type]" :key="index">
+                <div class="product">
+                  <a :href="key.link">
+                    <img :src="key.imgUrl" alt="">
+                    <p class="title">{{key.title}}</p>
+                  </a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -127,7 +135,6 @@
     background: #fff;
     opacity: 0.8;
     /*margin: 0 auto;*/
-    margin-left: 533px;
     position: relative;
     display: flex;
     justify-content: flex-start;
