@@ -1,20 +1,22 @@
 <template>
   <div class="home">
     <Headers></Headers>
-    <Search_nav></Search_nav>
+    <search></search>
+    <main-page></main-page>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import Headers from "../common/headers"
-import Search_nav from "../components/search_nav";
-
+import search from "../common/search"
+import MainPage from "../components/MainPage";
 export default {
   name: 'home',
   components: {
-    Search_nav,
-    Headers
+    Headers,
+    search,
+    MainPage
   }
 }
 </script>
