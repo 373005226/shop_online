@@ -1,9 +1,9 @@
 <template>
   <div>
     <el-row>
-      <el-col :offset="5">
+      <el-col :offset="5" :span="20">
         <div class="main-nav">
-          
+
           <div class="nav-first" @mouseenter="isNavEnter = true" @mouseleave="isNavEnter = false">
             <ul>
               <li v-for="(item,index) in navFirst" :key="index"
@@ -135,12 +135,13 @@
     background: #fff;
     opacity: 0.8;
     /*margin: 0 auto;*/
-    position: relative;
+    position: absolute;
     display: flex;
     justify-content: flex-start;
 
     > .nav-first {
-      width: 215px;
+      /*width: 215px;*/
+      width: 8.4vw;
       height: 458px;
       position: relative;
       z-index: 5;
@@ -179,9 +180,10 @@
     .nav-sec {
       height: 458px;
       width: 992px;
-      position: absolute;
+      position: relative;
       top: 0;
-      right: 17px;
+      right: 0px;
+      /*right: 1.5%;*/
       background: #fff;
       opacity: 0.8;
       z-index: 5;
