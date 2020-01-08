@@ -28,20 +28,22 @@
 
 <style scoped>
   .active_banner_top{
-    background: #EE9A00;
+    /*background: #EE9A00;*/
+    background: #f5803c;
+    color: #F1E7CC;
   }
   .banner_top {
     /*background: #F3780D;*/
-    background-color: #ff6700;
-    background-image: linear-gradient(62deg, #ff6700 0%, #F7CE68 100%);
-    color: #F1E7CC;
+    /*background-color: #ff6700;*/
+    /*background-image: linear-gradient(62deg, #ff6700 0%, #F7CE68 100%);*/
+    color: #606266;
     height: 40px;
     line-height: 40px;
     text-align: center;
   }
 
   .el-col-3:hover {
-    background: #EDB424;
+    color: #EDB424;
     transition: all 0.25s;
   }
 </style>

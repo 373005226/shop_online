@@ -3,34 +3,34 @@
     <el-row>
       <el-col :offset="5" :span="20">
         <div class="main-nav">
+            <div class="nav-first" @mouseenter="isNavEnter = true" @mouseleave="isNavEnter = false">
+              <ul>
+                <li v-for="(item,index) in navFirst" :key="index"
+                    :class="{active: item.type === selected}"
+                    @mouseenter="selected = item.type">
+                  <p>
+                    <span>{{item.name}}</span>
+                    <span class="icon">></span>
+                  </p>
+                </li>
+              </ul>
+            </div>
 
-          <div class="nav-first" @mouseenter="isNavEnter = true" @mouseleave="isNavEnter = false">
-            <ul>
-              <li v-for="(item,index) in navFirst" :key="index"
-                  :class="{active: item.type === selected}"
-                  @mouseenter="selected = item.type">
-                <p>
-                  <span>{{item.name}}</span>
-                  <span class="icon">></span>
-                </p>
-              </li>
-            </ul>
-          </div>
-
-          <div class="nav-sec" v-show="isNavEnter || isMenuEnter"
-               @mouseenter="isMenuEnter = true" @mouseleave="isMenuEnter = false">
-            <ul v-for="(item,index) in navFirst" v-show="item.type === selected" :key="index">
-              <li v-for="(key,index) in navSec[item.type]" :key="index">
-                <div class="product">
-                  <a :href="key.link">
-                    <img :src="key.imgUrl" alt="">
-                    <p class="title">{{key.title}}</p>
-                  </a>
-                </div>
-              </li>
-            </ul>
-          </div>
+            <div class="nav-sec" v-show="isNavEnter || isMenuEnter"
+                 @mouseenter="isMenuEnter = true" @mouseleave="isMenuEnter = false">
+              <ul v-for="(item,index) in navFirst" v-show="item.type === selected" :key="index">
+                <li v-for="(key,index) in navSec[item.type]" :key="index">
+                  <div class="product">
+                    <a :href="key.link">
+                      <img :src="key.imgUrl" alt="">
+                      <p class="title">{{key.title}}</p>
+                    </a>
+                  </div>
+                </li>
+              </ul>
+            </div>
         </div>
+
       </el-col>
     </el-row>
   </div>
@@ -48,8 +48,7 @@
           {name: '水果蔬菜', type: 'phone'},
           {name: '新鲜肉类', type: 'pad'},
           {name: '酒水饮料', type: 'tv'},
-          {name: '主食熟食', type: 'router'},
-          {name: '美妆护肤', type: 'charger'},
+          {name: '美妆护肤', type: 'charger'} ,
           {name: '家具用品', type: 'earphone'},
           {name: '家电产品', type: 'protect'},
           {name: '五金工具', type: 'card'},
@@ -133,7 +132,6 @@
     font-size: 14px;
     width: 1226px;
     background: #fff;
-    opacity: 0.8;
     /*margin: 0 auto;*/
     position: absolute;
     display: flex;
@@ -150,7 +148,7 @@
         display: flex;
         justify-content: space-between;
         flex-direction: column;
-        background: rgba(0, 0, 0, 0.6);
+        background: rgba(0, 0, 0, 0.35);
         padding: 20px 0;
         color: #fff;
 
@@ -161,7 +159,9 @@
           cursor: pointer;
 
           &:hover {
-            background: #ff6700;
+            /*background: #ff6700;*/
+            background: #f5803c;
+            transition: all 0.25s;
           }
 
           > p {
@@ -178,19 +178,19 @@
     }
 
     .nav-sec {
-      height: 458px;
+      height: 420px;
       width: 992px;
       position: relative;
       top: 0;
       right: 0px;
       /*right: 1.5%;*/
       background: #fff;
-      opacity: 0.8;
+      opacity: 0.6;
       z-index: 5;
       overflow: hidden;
       border: 1px solid #e0e0e0;
       border-left: none;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.18);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.35);
 
       ul {
         height: 458px;
@@ -228,5 +228,8 @@
         }
       }
     }
+  }
+  li {
+    list-style-type:none;
   }
 </style>
