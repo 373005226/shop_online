@@ -7,6 +7,7 @@
         <img class="banner" slot="item2" src="@/assets/img/banner/banner2.jpg" />
         <img class="banner" slot="item3" src="@/assets/img/banner/banner3.jpg" />
       </FadeSwiper>
+
     </div>
 </template>
 
@@ -14,6 +15,7 @@
   import banner_top from "./Home/banner_top";
   import MainNav from "./Home/MainNav";
   import FadeSwiper from "./Home/FadeSwiper";
+  import SectionHeader from "./Home/SectionHeader";
   export default {
       name: "MainPage",
       data(){
@@ -34,7 +36,8 @@
       components: {
         banner_top,
         MainNav,
-        FadeSwiper
+        FadeSwiper,
+        SectionHeader
       }
     }
 </script>
