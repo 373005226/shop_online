@@ -28,8 +28,7 @@
 
 <style scoped>
   .active_banner_top{
-    /*background: #EE9A00;*/
-    background: #f5803c;
+    background: #c5c5c5;
     color: #F1E7CC;
   }
   .banner_top {
