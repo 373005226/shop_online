@@ -1,34 +1,32 @@
 <template>
   <div class="nav-title">
-    <div style="padding-left: 260px;">
-      欢迎来到小L的店，一站式线上选购平台
-    </div>
-    <div style="margin-left: auto;margin-right: 500px;">
-      <div style="position: absolute;left: 1150px;">
-        <span @mouseover="change_person(true)" @mouseout="change_person(false)">
-          <img src="@/assets/img/person.png">
-        </span>
+    <div class="nav">
+      <div class="title">
+        欢迎来到小L的店，一站式线上选购平台
+      </div>
+      <div style="position:absolute;left: 80vw;">
 
-        <div class="person_position" v-show="showperson">
-          <div class="person_style">
-            <div class="person_style_triangle">
+        <div style="position: absolute;">
+          <span @mouseover="change_person(true)" @mouseout="change_person(false)">
+            <img src="@/assets/img/person.png">
+          </span>
+          <div class="person_position" v-show="showperson">
+            <div class="person_style">
+              <div class="person_style_triangle"></div>
             </div>
           </div>
         </div>
 
-      </div>
+        <div style="position:absolute;left: 5vw;">
+           <span @mouseover="change_cart(true)" @mouseout="change_cart(false)">
+            <img src="@/assets/img/buy.png">
+           </span>
 
-      <div style="position:absolute;left: 1300px;">
-        <span @mouseover="change_cart(true)" @mouseout="change_cart(false)">
-          <img src="@/assets/img/buy.png">
-          <span class="cart_nums">0</span>
-        </span>
-
-        <div class="cart_position" v-show="showcart">
-          <div class="cart_style">
-            <div class="cart_style_triangle">
+          <div class="cart_position" v-show="showcart">
+            <div class="cart_style">
+              <div class="cart_style_triangle"></div>
+              <p class="cart_none_text">购物车为空哦</p>
             </div>
-            <p style="padding-top: 170px;color: #999999;">购物车为空哦</p>
           </div>
         </div>
 
@@ -69,17 +67,23 @@
     border-radius: 4px;
     display: flex;
     flex-direction: row;
+    padding: 0px 300px 0 370px;
   }
-
-  .cart_nums {
-    background: #9B9B9B;
-    color: white;
-    border: 5px;
-    padding-left: 5px;
-    border-radius: 10px;
-    padding-right: 5px;
+  .title{
+    font-size: 15px;
+    position: relative;
   }
-
+  .nav{
+    margin: 0% auto;
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .cart_none_text{
+    padding-top: 170px;
+    color: #999999;
+  }
   .cart_position {
     position: relative;
     left: -185px;

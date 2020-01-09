@@ -1,7 +1,10 @@
 <template>
   <div>
     <el-row class="banner_top">
-      <el-col :span="2" :offset="5" class="active_banner_top">
+      <el-col :span="3" :offset="3" class="active_banner_top">
+        首页
+      </el-col>
+      <el-col :span="3" class="active_banner_top">
         全部分类
       </el-col>
       <el-col :span="3" v-for="(item,index) in catelogy" :key="index">
@@ -19,7 +22,8 @@
         catelogy:[
           {name:'秒杀商城'},
           {name:"新品专场"},
-          {name:'生鲜专场'}
+          {name:'生鲜专场'},
+          {name:'年货专场'}
         ]
       }
     }
@@ -28,8 +32,8 @@
 
 <style scoped>
   .active_banner_top{
-    background: rgba(0, 0, 0, 0.35);
-    color: #EBEEF5;
+    /*background: rgba(0, 0, 0, 0.25);*/
+    /*color: #EBEEF5;*/
   }
   .banner_top {
     /*background: #F3780D;*/

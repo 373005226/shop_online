@@ -179,10 +179,11 @@
 
     .nav-sec {
       height: 420px;
-      width: 992px;
+      /*width: 992px;*/
+      width: 40vw;
       position: relative;
       top: 0;
-      right: 0px;
+      left: 0.06vw;
       /*right: 1.5%;*/
       background: #fff;
       opacity: 0.6;
