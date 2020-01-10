@@ -3,7 +3,29 @@
     <Headers></Headers>
     <search></search>
     <main-page></main-page>
-  </div>
+
+      <section class="newGoods section">
+        <SectionHeader title="新品首发" tips="周一周四上新，为你寻觅世间好物" moreText="更多新品>"/>
+        <Slick
+          :ulWidth="(266*goodsList.length)+(10*(goodsList.length-1))"
+          :showWidth="(266*4)+(10*3)"
+          :height="360"
+        >
+          <ul class="goodsList" :style="{width:`${(266*goodsList.length)+(10*(goodsList.length-1))}px`}" slot="list">
+            <GoodsItem
+              v-for="(item,index) in goodsList"
+              :style="{marginRight: (index+1)%4===0?'0px':'10px'}"
+              :id="item.id"
+              :img="item.img"
+              :name="item.name"
+              :price="item.price"
+              :key="index"
+            />
+          </ul>
+        </Slick>
+      </section>
+
+      </div>
 </template>
 
 <script>
@@ -11,12 +33,79 @@
 import Headers from "../common/headers"
 import search from "../common/search"
 import MainPage from "../components/MainPage";
+import GoodsItem from "../components/Home/GoodsItem";
+import SectionHeader from "../components/Home/SectionHeader";
+import Slick from "../components/Home/Slick";
 export default {
-  name: 'home',
+  name: 'Home',
+  data(){
+    return{
+      widths: '',
+      typeList:[
+        {name: '水果蔬菜'},
+        {name: '新鲜肉类'},
+        {name: '酒水饮料'},
+        {name: '美妆护肤'} ,
+        {name: '家具用品'},
+        {name: '家电产品'},
+        {name: '五金工具'},
+        {name: '服饰'},
+        {name: '办公文具'}
+      ],
+      goodsList:[
+        {
+          img:require('@/assets/img/food/好丽友薯片.jpg'),
+          name:'好丽友薯片',
+          price:16
+        },
+        {
+          img:require('@/assets/img/food/奥利奥冰淇淋味夹心饼干22.8.jpg'),
+          name:'奥利奥冰淇淋味夹心饼干',
+          price:22.8
+        },
+        {
+          img:require('@/assets/img/food/奥利奥蓝莓味夹心饼干.jpg'),
+          name:'奥利奥蓝莓味夹心饼干',
+          price:26
+        },
+        {
+          img:require('@/assets/img/food/稻香村糕点礼盒53.jpg'),
+          name:'稻香村糕点礼盒',
+          price:22.8
+        },
+        {
+          img:require('@/assets/img/food/费列罗巧克力81.5.jpg'),
+          name:'费列罗巧克力',
+          price:81.5
+        },
+        {
+          img:require('@/assets/img/food/达利园糕点34.2.jpg'),
+          name:'达利园糕点',
+          price:34.2
+        }
+      ]
+    }
+  },
+  created() {
+     this.widths = document.body.clientWidth
+  },
   components: {
     Headers,
     search,
-    MainPage
+    MainPage,
+    GoodsItem,
+    SectionHeader,
+    Slick
   }
 }
 </script>
+
+<style scoped>
+  .newGoods{
+    margin:450px 150px 0 200px;
+  }
+  .section{
+    padding:30px;
+    overflow: hidden;
+  }
+</style>

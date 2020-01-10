@@ -1,6 +1,7 @@
 <template>
     <div>
       <banner_top></banner_top>
+      <MainNav></MainNav>
       <FadeSwiper class="swiperBox" style="margin-top: -4px;" width="100vw" height="419px" v-for="(item,index) in banner_img" :key="index">
         <img class="banner" slot="item1" src="@/assets/img/banner/banner1.jpg" />
         <img class="banner" slot="item2" src="@/assets/img/banner/banner2.jpg" />
@@ -12,8 +13,8 @@
 
 <script>
   import banner_top from "./Home/banner_top";
+  import MainNav from "./Home/MainNav";
   import FadeSwiper from "./Home/FadeSwiper";
-  // import SectionHeader from "./Home/SectionHeader";
   export default {
       name: "MainPage",
       data(){
@@ -33,6 +34,7 @@
       },
       components: {
         banner_top,
+        MainNav,
         FadeSwiper,
       }
     }

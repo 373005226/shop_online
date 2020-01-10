@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-row>
-      <el-col :offset="5" :span="20">
+      <el-col :offset="3" :span="20">
         <div class="main-nav">
             <div class="nav-first" @mouseenter="isNavEnter = true" @mouseleave="isNavEnter = false">
               <ul>
@@ -37,8 +37,8 @@
 </template>
 
 <script>
-
   export default {
+    name:'MainNav',
     data() {
       return {
         selected: '',
@@ -139,7 +139,8 @@
 
     > .nav-first {
       /*width: 215px;*/
-      width: 8.4vw;
+      width: 12vw;
+      text-align: center;
       height: 458px;
       position: relative;
       z-index: 5;
@@ -148,7 +149,7 @@
         display: flex;
         justify-content: space-between;
         flex-direction: column;
-        background: rgba(0, 0, 0, 0.35);
+        background: rgba(0, 0, 0, 0.3);
         padding: 20px 0;
         color: #fff;
 
