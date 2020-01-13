@@ -59,9 +59,6 @@
         this.curPage += 1;
       }
     },
-    mounted() {
-
-    }
   }
 </script>
 

@@ -2,15 +2,21 @@
   <div class="home">
     <Headers></Headers>
     <search></search>
-    <main-page></main-page>
+    <swiper></swiper>
+    <div style="background: #f2f2f2">
 
       <section class="newGoods section">
         <SectionHeader title="新品首发" tips="周一周四上新，为你寻觅世间好物" moreText="更多新品>"/>
-        <Slick
-          :ulWidth="(266*goodsList.length)+(10*(goodsList.length-1))"
-          :showWidth="(266*4)+(10*3)"
-          :height="360"
-        >
+<!--        <Slick-->
+<!--          :ulWidth="(266*goodsList.length)+(10*(goodsList.length-1))"-->
+<!--          :showWidth="(266*4)+(10*3)"-->
+<!--          :height="360"-->
+<!--        >-->
+          <Slick
+            :ulWidth="(266*goodsList.length)+(10*(goodsList.length-1))"
+            :showWidth="widths-497"
+            :height="360"
+          >
           <ul class="goodsList" :style="{width:`${(266*goodsList.length)+(10*(goodsList.length-1))}px`}" slot="list">
             <GoodsItem
               v-for="(item,index) in goodsList"
@@ -24,18 +30,20 @@
           </ul>
         </Slick>
       </section>
-
-      </div>
+    <ranking></ranking>
+    </div>
+  </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import Headers from "../common/headers"
 import search from "../common/search"
-import MainPage from "../components/MainPage";
+import swiper from "../components/swiper";
 import GoodsItem from "../components/Home/GoodsItem";
 import SectionHeader from "../components/Home/SectionHeader";
 import Slick from "../components/Home/Slick";
+import Ranking from "../components/Home/Ranking";
 export default {
   name: 'Home',
   data(){
@@ -80,22 +88,49 @@ export default {
         },
         {
           img:require('@/assets/img/food/达利园糕点34.2.jpg'),
-          name:'达利园糕点',
+          name:'达利园糕点1',
           price:34.2
-        }
+        },
+        {
+          img:require('@/assets/img/food/达利园糕点34.2.jpg'),
+          name:'达利园糕点2',
+          price:34.2
+        },
+        {
+          img:require('@/assets/img/food/达利园糕点34.2.jpg'),
+          name:'达利园糕点3',
+          price:34.2
+        },
+        {
+          img:require('@/assets/img/food/达利园糕点34.2.jpg'),
+          name:'达利园糕点4',
+          price:34.2
+        },
+        {
+          img:require('@/assets/img/food/达利园糕点34.2.jpg'),
+          name:'达利园糕点5',
+          price:34.2
+        },
+        {
+          img:require('@/assets/img/food/达利园糕点34.2.jpg'),
+          name:'达利园糕点6',
+          price:34.2
+        },
       ]
     }
   },
   created() {
-     this.widths = document.body.clientWidth
+    this.widths = document.body.clientWidth
+    console.log(this.widths)
   },
   components: {
     Headers,
     search,
-    MainPage,
+    swiper,
     GoodsItem,
     SectionHeader,
-    Slick
+    Slick,
+    Ranking
   }
 }
 </script>

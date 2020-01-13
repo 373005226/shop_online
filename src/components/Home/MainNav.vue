@@ -45,15 +45,16 @@
         isNavEnter: false,
         isMenuEnter: false,
         navFirst: [
-          {name: '水果蔬菜', type: 'phone'},
-          {name: '新鲜肉类', type: 'pad'},
-          {name: '酒水饮料', type: 'tv'},
-          {name: '美妆护肤', type: 'charger'} ,
-          {name: '家具用品', type: 'earphone'},
-          {name: '家电产品', type: 'protect'},
+          {name: '水果、蔬菜', type: 'phone'},
+          {name: '肉类、海鲜', type: 'live'},
+          {name: '酒水、饮料、冲饮', type: 'pad'},
+          {name: '粮油、零食、宠物', type: 'tv'},
+          {name: '美妆个护', type: 'charger'} ,
+          {name: '医疗保健', type: 'earphone'},
+          {name: '家电、家居产品', type: 'protect'},
           {name: '五金工具', type: 'card'},
-          {name: '服饰', type: 'bag'},
-          {name: '办公文具', type: 'live'}
+          {name: '办公文具 ', type: 'bag'},
+          {name: '服饰', type: 'bag'}
         ],
         navSec: {
           phone: [
@@ -141,27 +142,29 @@
       /*width: 215px;*/
       width: 12vw;
       text-align: center;
-      height: 458px;
+      /*height: 458px;*/
       position: relative;
       z-index: 5;
+      padding-top: 22px;
 
       ul {
         display: flex;
         justify-content: space-between;
         flex-direction: column;
         background: rgba(0, 0, 0, 0.3);
-        padding: 20px 0;
+        padding: 5px 0;
         color: #fff;
 
         li {
           padding-left: 30px;
-          height: 42px;
-          line-height: 42px;
+          height: 41px;
+          line-height: 41px;
           cursor: pointer;
 
           &:hover {
             /*background: #ff6700;*/
             background: #f5803c;
+            opacity: 0.7;
             transition: all 0.25s;
           }
 
