@@ -17,13 +17,13 @@
 
         <div class="c-rank-cont">
           <ul class="clearfix">
-            <li>
+            <li v-for="(item,index) in ranklist" :key="index">
               <a>
-                <img src="@/assets/img/food/好丽友薯片.jpg">
-                <p class="name">ROYAL CANIN 皇家狗粮 CC优选成犬狗粮 全价粮 8kg 全犬种通用成犬粮 均衡营养助力健康成长每一步</p>
+                <img :src="item.img">
+                <p class="name">{{item.name}}</p>
                 <p class="price">
                   ￥&nbsp;
-                  <em>76.00</em>
+                  <em>{{item.price}}</em>
                 </p>
                 <a class="cartBtn">
                 </a>
@@ -55,8 +55,12 @@
               name:'酒水饮料'
             },
             {
+              img:require('@/assets/img/icon/零食.png'),
+              name:'零食'
+            },
+            {
               img:require('@/assets/img/icon/粮油.png'),
-              name:'粮油'
+              name:'粮油副食'
             },
             {
               img:require('@/assets/img/icon/美妆.png'),
@@ -77,6 +81,58 @@
             {
               img:require('@/assets/img/icon/服饰.png'),
               name:'服饰'
+            },
+          ],
+          ranklist:[
+            {
+              img:require('@/assets/img/food/xiandanguoshu/包菜5斤18.jpg'),
+              name:'包菜5斤',
+              price:18
+            },
+            {
+              img:require('@/assets/img/food/xiandanguoshu/东北大蒜2.5斤16.8.jpg'),
+              name:'东北大蒜2.5斤',
+              price:16.8
+            },
+            {
+              img:require('@/assets/img/food/xiandanguoshu/土豆5斤21.png'),
+              name:'土豆5斤',
+              price:21
+            },
+            {
+              img:require('@/assets/img/food/xiandanguoshu/地瓜2.5斤7.6.jpg'),
+              name:'地瓜2.5斤',
+              price:7.6
+            },
+            {
+              img:require('@/assets/img/food/xiandanguoshu/小南瓜2.5斤23.8.jpg'),
+              name:'小南瓜2.5斤23.8',
+              price:23.8
+            },
+            {
+              img:require('@/assets/img/food/xiandanguoshu/小米辣5斤39.8.jpg'),
+              name:'小米辣5斤',
+              price:39.8
+            },
+            {
+              img:require('@/assets/img/food/xiandanguoshu/山东水萝卜2.5kg22.8.jpg'),
+              name:'山东水萝卜2.5kg',
+              price:22.8
+            },
+            {
+              img:require('@/assets/img/food/xiandanguoshu/广西圣女果5斤29.8.jpg'),
+              name:'广西圣女果5斤',
+              price:29.8
+            },
+            {
+              img:require('@/assets/img/food/xiandanguoshu/玉米9斤29.9.png'),
+              name:'玉米9斤29.9',
+              price:29.9
+            },
+            {
+              img:require('@/assets/img/food/xiandanguoshu/生姜5斤23.9.jpg'),
+              name:'生姜5斤',
+              price:23.9
             },
           ]
         }
@@ -112,22 +168,32 @@
   }
   .c-rank .c-rank-nav {
     width: 1190px;
-    height: 88px;
+    /*height: 88px;*/
+    height: 100px;
     margin-bottom: 10px;
     background: #fff;
     overflow: hidden;
   }
   .c-rank .c-rank-nav ul{
-    padding-top: 20px;
+    padding-top: 13px;
+    line-height: 36px ;
   }
   .c-rank .c-rank-nav ul li {
-    margin: 0 17.5px;
+    margin: 0 11px;
     float: left;
     width: 97px;
     height: 86px;
     background: #fff;
-    border: 1px solid #fff;
+    /*border: 1px solid #fff;*/
     text-align: center;
+  }
+  .c-rank .c-rank-nav ul li:hover{
+    border-bottom: 3px solid orange;
+    transition: all 0.1s;
+  }
+  .c-rank .c-rank-nav ul li:hover p{
+    color: orange;
+    transition: all 0.1s;
   }
   .c-rank .c-rank-nav ul li img{
     height: 40px;
@@ -184,6 +250,10 @@
   .c-rank .c-rank-cont ul li:hover img{
     transform: scale(1.08);
   }
+  /*hover时候文字放大*/
+  .c-rank .c-rank-cont ul li:hover .name{
+    color: red;
+  }
   /*图片的文字说明*/
   .c-rank .c-rank-cont ul li .name {
     width: 140px;
@@ -196,6 +266,7 @@
     margin-left: 45px;
     margin-bottom: 14px;
     letter-spacing: 1.17px;
+    transition: all 0.3s;
   }
   /*价格文字要缩小*/
   .c-rank .c-rank-cont ul li .price {
