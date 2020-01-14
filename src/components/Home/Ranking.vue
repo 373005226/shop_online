@@ -18,12 +18,12 @@
         <div class="c-rank-cont">
           <ul class="clearfix">
             <li v-for="(item,index) in ranklist" :key="index">
-              <a>
+              <a href="#">
                 <img :src="item.img">
                 <p class="name">{{item.name}}</p>
                 <p class="price">
                   ￥&nbsp;
-                  <em>{{item.price}}</em>
+                  <strong>{{item.price}}</strong>
                 </p>
                 <a class="cartBtn">
                 </a>

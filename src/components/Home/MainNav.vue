@@ -183,6 +183,7 @@
 
     .nav-sec {
       height: 420px;
+      margin-top: 22px;
       /*width: 992px;*/
       width: 40vw;
       position: relative;

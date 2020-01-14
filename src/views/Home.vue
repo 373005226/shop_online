@@ -31,6 +31,8 @@
         </Slick>
       </section>
     <ranking></ranking>
+      <catelogy></catelogy>
+      <MyFooter></MyFooter>
     </div>
   </div>
 </template>
@@ -44,6 +46,8 @@ import GoodsItem from "../components/Home/GoodsItem";
 import SectionHeader from "../components/Home/SectionHeader";
 import Slick from "../components/Home/Slick";
 import Ranking from "../components/Home/Ranking";
+import catelogy from "../components/Home/catelogy";
+import MyFooter from "../components/Home/MyFooter";
 export default {
   name: 'Home',
   data(){
@@ -130,7 +134,9 @@ export default {
     GoodsItem,
     SectionHeader,
     Slick,
-    Ranking
+    Ranking,
+    catelogy,
+    MyFooter
   }
 }
 </script>
@@ -143,4 +149,5 @@ export default {
     padding:30px;
     overflow: hidden;
   }
+
 </style>
