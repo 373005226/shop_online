@@ -101,7 +101,7 @@ export default {
     height: 54px;
     line-height: 54px;
     top: 50%;
-    margin-top: -27px;
+    /*margin-top: -27px;*/
     position: absolute;
     display: inline-block;
     vertical-align: middle;

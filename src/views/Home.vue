@@ -1,17 +1,17 @@
 <template>
   <div class="home">
-    <Headers></Headers>
-    <search></search>
-    <swiper></swiper>
+    <my-header></my-header>
+    <banner_top></banner_top>
+    <MainNav></MainNav>
+    <FadeSwiper class="swiperBox" width="100vw" height="419px" v-for="(item,index) in banner_img" :key="index">
+      <img class="banner" slot="item1" src="@/assets/img/banner/banner1.jpg" />
+      <img class="banner" slot="item2" src="@/assets/img/banner/banner2.jpg" />
+      <img class="banner" slot="item3" src="@/assets/img/banner/banner3.jpg" />
+    </FadeSwiper>
     <div style="background: #f2f2f2">
 
       <section class="newGoods section">
         <SectionHeader title="新品首发" tips="周一周四上新，为你寻觅世间好物" moreText="更多新品>"/>
-<!--        <Slick-->
-<!--          :ulWidth="(266*goodsList.length)+(10*(goodsList.length-1))"-->
-<!--          :showWidth="(266*4)+(10*3)"-->
-<!--          :height="360"-->
-<!--        >-->
           <Slick
             :ulWidth="(266*goodsList.length)+(10*(goodsList.length-1))"
             :showWidth="widths-497"
@@ -31,17 +31,18 @@
         </Slick>
       </section>
     <ranking></ranking>
-      <catelogy></catelogy>
-      <MyFooter></MyFooter>
+    <catelogy></catelogy>
+    <MyFooter></MyFooter>
     </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Headers from "../common/headers"
-import search from "../common/search"
-import swiper from "../components/swiper";
+import MyHeader from "../common/MyHeader";
+import banner_top from "../components/Home/banner_top";
+import MainNav from "../components/Home/MainNav";
+import FadeSwiper from "../components/Home/FadeSwiper";
 import GoodsItem from "../components/Home/GoodsItem";
 import SectionHeader from "../components/Home/SectionHeader";
 import Slick from "../components/Home/Slick";
@@ -120,6 +121,17 @@ export default {
           name:'达利园糕点6',
           price:34.2
         },
+      ],
+      banner_img: [
+        {
+          imgurl:require('../assets/img/banner/banner1.jpg')
+        },
+        {
+          imgurl:require('../assets/img/banner/banner2.jpg')
+        },
+        {
+          imgurl:require('../assets/img/banner/banner3.jpg')
+        }
       ]
     }
   },
@@ -128,9 +140,10 @@ export default {
     console.log(this.widths)
   },
   components: {
-    Headers,
-    search,
-    swiper,
+    MyHeader,
+    banner_top,
+    MainNav,
+    FadeSwiper,
     GoodsItem,
     SectionHeader,
     Slick,
@@ -141,7 +154,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="less">
   .newGoods{
     margin:450px 150px 0 200px;
   }
@@ -149,5 +162,16 @@ export default {
     padding:30px;
     overflow: hidden;
   }
-
+  .swiperBox{
+    position: absolute;
+    left: 0;
+    /*top: 230px;*/
+    /*margin-top: 20px;*/
+    display: block;
+    box-shadow: 0 -1px 2px rgba(0,0,0,0.2);
+    overflow: hidden;
+  .banner{
+    transform: scale(1.2,1);
+  }
+  }
 </style>

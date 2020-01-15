@@ -145,7 +145,7 @@
       /*height: 458px;*/
       position: relative;
       z-index: 5;
-      padding-top: 22px;
+      /*padding-top: 22px;*/
 
       ul {
         display: flex;
@@ -183,7 +183,7 @@
 
     .nav-sec {
       height: 420px;
-      margin-top: 22px;
+      /*margin-top: 22px;*/
       /*width: 992px;*/
       width: 40vw;
       position: relative;
