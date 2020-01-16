@@ -37,6 +37,8 @@
 </template>
 
 <script>
+  import {catelogy} from "../../api/goods";
+
   export default {
     name:'MainNav',
     data() {
@@ -86,6 +88,14 @@
           ]
         }
       }
+    },
+    created() {
+      catelogy().then(res=>{
+        console.log(res)
+        this.navFirst = res
+      }).catch(err=>{
+        console.log(err)
+      })
     }
   }
 </script>
