@@ -48,7 +48,7 @@ import SectionHeader from "../components/Home/SectionHeader";
 import Slick from "../components/Home/Slick";
 import Ranking from "../components/Home/Ranking";
 import catelogy from "../components/Home/catelogy";
-import MyFooter from "../components/Home/MyFooter";
+import MyFooter from "../common/MyFooter";
 export default {
   name: 'Home',
   data(){
