@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 const Home =()=>import('../views/Home.vue')
+const detail =()=>import('../views/detail')
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -12,6 +14,7 @@ const routes = [
   {
     path: '/detail',
     name:'detail',
+    component:detail
   }
 ]
 

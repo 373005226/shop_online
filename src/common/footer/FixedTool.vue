@@ -50,7 +50,7 @@
 </script>
 
 <style lang="scss">
-  @import "../assets/css/iconfont.css";
+  @import "../../assets/css/iconfont.css";
   .FixedTool{
     .fixedtool{
       position: fixed;

@@ -115,7 +115,7 @@ export default {
 </script>
 
 <style lang="scss">
-  @import "../assets/css/main.css";
+  @import "../../assets/css/main.css";
     .footer{
       clear: both;
       padding-top: 50px;

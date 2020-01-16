@@ -1,20 +1,22 @@
 <template>
     <div class="FadeSwiper" :style="{width:width,height:height}" @mouseover.stop="clearTimer" @mouseout.stop="setTimer">
       <div class="swiperWrapper">
-        <div class="swiperItem" v-for="(item,index) in len" :style="{opacity:curIndex===index?1:0}" :key="index">
-          <slot :name="'item'+(index+1)"></slot>
+        <div class="swiperItem" v-for="(item,index) in banner_list" :style="{opacity:curIndex===index?1:0}" :key="index">
+          <img :src="item.image">
         </div>
       </div>
       <div class="prev arrow" @click="prev"><i class="el-icon-arrow-left" /></div>
       <div class="next arrow" @click="next"><i class="el-icon-arrow-right" /></div>
       <div class="circles">
-        <span v-for="(item,index) in len" :key="index" @click="selectPage(index)" :class="curIndex===index?'selected':''"></span>
+        <span v-for="(item,index) in banner_list" :key="index" @click="selectPage(index)" :class="curIndex===index?'selected':''"></span>
       </div>
     </div>
 </template>
 
 <script>
-export default {
+  import {banner} from "../../api";
+
+  export default {
   name: 'FadeSwiper',
   props:{
     width:{
@@ -32,7 +34,18 @@ export default {
     return{
       len:Object.keys(this.$slots).length,
       curIndex:0,
-      timer:null
+      timer:null,
+      banner_list:[
+        {
+          img:require('@/assets/img/banner/banner1.jpg')
+        },
+        {
+          img:require('@/assets/img/banner/banner2.jpg')
+        },
+        {
+          img:require('@/assets/img/banner/banner3.jpg')
+        }
+      ]
     }
   },
   methods:{
@@ -66,6 +79,12 @@ export default {
   },
   beforeDestroyed(){
     this.clearTimer();
+  },
+  created() {
+    banner().then(res=>{
+      console.log(res)
+      this.banner_list = res
+    })
   }
 }
 </script>
