@@ -11,11 +11,11 @@
             <li class="GoodsItem" :style="{marginRight: (index+1)%4===0?'0px':'10px'}" v-for="(item,index) in goodsList" :key="index">
               <router-link to="/detail">
                 <div class="imgBox">
-                  <img :src="item.img" alt="商品图片"/>
+                  <img :src="item.images[0].image" alt="商品图片" v-if="item.images!== undefined &&  item.images.length > 0 "/>
                 </div>
                 <div class="goodsInfo">
                   <span class="goodsName ellipsis">{{item.name}}</span>
-                  <span class="price">{{'¥'+item.price}}</span>
+                  <span class="price" v-if="item.specification!== undefined &&  item.specification.length > 0 ">{{'¥'+item.specification[0].shop_price}}</span>
                 </div>
               </router-link>
 
@@ -29,7 +29,9 @@
 <script>
   import SectionHeader from "./SectionHeader";
   import Slick from "./Slick";
-    export default {
+  import {goods} from "../../api/goods";
+
+  export default {
       name: "new_goodslsit",
       data() {
         return {
@@ -100,6 +102,10 @@
       created() {
         this.widths = document.body.clientWidth
         console.log(this.widths)
+        goods().then(res=>{
+          console.log(res)
+          this.goodsList = res
+        })
       }
     }
 </script>

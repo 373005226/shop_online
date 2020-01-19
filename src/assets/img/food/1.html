@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+        }
+        #box{
+            display: block;
+            width: 350px;
+            
+            /* overflow: hidden; */
+            position: relative;
+        }
+        #small{
+            /* width: 350px; */
+        }
+        #mask{
+            position: absolute;
+            top:0;
+            width: 200px;
+            height: 200px;
+            background-color: yellow;
+            opacity: 0.5;
+            display: none;
+            cursor: move;
+        }
+        #img1{
+            position: relative;
+        }
+        #big{
+            width:500px;
+            height: 500px;
+            overflow: hidden;
+            position: absolute;
+            left:360px;
+            top: 0;
+        }
+        #img2{
+            position: relative;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <div id="small">
+            <img src="好丽友薯片.jpg" alt="" width="350" id="img1">
+            <div id="mask"></div>
+        </div>
+        <div id="big">
+            <img src="好丽友薯片.jpg" alt="" id="img2" width="2000">
+        </div>
+    </div>  
+    <script>
+        var box=document.getElementById('box');
+        var small=document.getElementById('small');
+        var big=document.getElementById('big');
+        var mask=document.getElementById('mask');
+        var img2=document.getElementById('img2');
+        small.onmouseover=function(){
+            mask.style.display='block';
+            img2.style.display='block';
+            small.onmousemove=function(e){
+                var x=e.pageX-small.offsetLeft;
+                var y=e.pageY-small.offsetTop;
+                mask.style.left=x-mask.offsetWidth/2+'px';
+                mask.style.top=y-mask.offsetHeight/2+'px';
+
+                var bix=mask.offsetLeft/small.offsetWidth;
+                var biy=mask.offsetTop/small.offsetHeight;
+                var img2x=img2.offsetWidth*bix;
+                var img2y=img2.offsetHeight*biy;
+                img2.style.left=-img2x+'px';
+                img2.style.top=-img2y+'px';
+            }
+        }
+        small.onmouseout=function(){
+            mask.style.display='none';
+            img2.style.display='none';
+        }
+    </script>
+</body>
+</html>

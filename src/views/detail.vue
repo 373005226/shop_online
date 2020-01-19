@@ -192,11 +192,11 @@
         return{
           imgInit:0,
           imgs:[
-            'https://yanxuan-item.nosdn.127.net/68527c3e88af6ae1328fdcf0d1686aff.png?type=webp&imageView&thumbnail=430x430&quality=95',
-            'https://yanxuan-item.nosdn.127.net/768dc17a5f8668d62b64a0649917e1d7.png?type=webp&imageView&thumbnail=430x430&quality=95',
-            'https://yanxuan-item.nosdn.127.net/3eb818149f1eda5ed9f51b0c0ab760c9.png?type=webp&imageView&thumbnail=430x430&quality=95',
-            'https://yanxuan-item.nosdn.127.net/d60b41195a853e65a7dd0b3ac5cc0e8b.png?type=webp&imageView&thumbnail=430x430&quality=95',
-            'https://yanxuan-item.nosdn.127.net/07f63a4df938a91a32268e5340d6ef08.png?type=webp&imageView&thumbnail=430x430&quality=95'
+            '//imgservice.suning.cn/uimg1/b2c/image/H-ybAAwUE1JVQD91xY_zlg.jpg_800w_800h_4e',
+            '//imgservice.suning.cn/uimg1/b2c/image/66jxuFpIDQPWI3Sb5YWXhg.jpg_800w_800h_4e ',
+            '//imgservice.suning.cn/uimg1/b2c/image/xEAGTRKFnOvPhVj82a83lA.jpg_800w_800h_4e',
+            '//imgservice.suning.cn/uimg1/b2c/image/QI1d_pxunf6nQKidqE3MXg.jpg_800w_800h_4e',
+            '//imgservice.suning.cn/uimg1/b2c/image/yNDGowzk4MtByRCNdnwnXg.jpg_800w_800h_4e'
           ],
           // 颜色
           colorInit:0,
