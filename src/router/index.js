@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 const Home =()=>import('../views/Home.vue')
 const detail =()=>import('../views/detail')
 const search =()=>import('../views/search')
+const cart =()=>import('../views/cart')
 Vue.use(VueRouter)
 
 const routes = [
@@ -20,6 +21,11 @@ const routes = [
     path:'/search',
     name:'search',
     component:search
+  },
+  {
+    path:'/cart',
+    name:'cart',
+    component: cart
   }
 ]
 

@@ -4,11 +4,6 @@
       <div class="searchBox">
         <div class="row">
           <!-- 面包屑 -->
-<!--          <div class="crumbs">-->
-<!--            <span class="crumb-name ">全部商品</span>-->
-<!--            <div class="icon icon-right_s"></div>-->
-<!--            <span class="">{{$route.query.keyword}}</span>-->
-<!--          </div>-->
           <crumbs></crumbs>
           <!-- content -->
           <div class="content">
@@ -17,11 +12,21 @@
               <div class="sorts">
                 <span class="name">排序：</span>
                 <a class="sort sort-default">默认</a>
-                <a class="sort">
+                <a class="sort sort-default">综合</a>
+                <a class="sort" @click="change_price">
                   <span>价格</span>
                   <div class="icons">
-                    <i class="icon icon-up_s"></i>
-                    <i class="icon icon-down_s"></i>
+                    <img src="@/assets/img/上下.png" v-if="price_default==0">
+                    <img src="@/assets/img/上.png" v-if="price_default==1">
+                    <img src="@/assets/img/下.png" v-if="price_default==2">
+                  </div>
+                </a>
+                <a class="sort" @click="change_sale">
+                  <span>销量</span>
+                  <div class="icons">
+                    <img src="@/assets/img/上下.png" v-if="sale_default==0">
+                    <img src="@/assets/img/上.png" v-if="sale_default==1">
+                    <img src="@/assets/img/下.png" v-if="sale_default==2">
                   </div>
                 </a>
               </div>
@@ -53,12 +58,15 @@
                 </ul>
               </div>
             </div>
-            <boot-page ></boot-page>
+
+            <el-pagination style="text-align: center"
+                           background
+                           layout="prev, pager, next"
+                           :total="1000">
+            </el-pagination>
           </div>
 
 
-          <!-- 推荐 -->
-          <Recom />
         </div>
       </div>
       <my-footer></my-footer>
@@ -70,16 +78,46 @@
   import MyFooter from "../common/footer/MyFooter";
   import crumbs from "../common/crumbs";
     export default {
-        name: "search",
+      name: "search",
       components:{
           MyHeader,
           MyFooter,
-        crumbs
+          crumbs
+      },
+      data(){
+        return{
+          price_default:0,
+          sale_default:0
+        }
+      },
+      methods:{
+        change_price(){
+          if (this.price_default==0){
+            this.price_default=1
+          }
+          if(this.price_default==1){
+            this.price_default=2
+          }else if(this.price_default==2){
+            this.price_default=1
+          }
+          this.sale_default = 0
+        },
+        change_sale(){
+          if (this.sale_default==0){
+            this.sale_default=1
+          }
+          if(this.sale_default==1){
+            this.sale_default=2
+          }else if(this.sale_default==2){
+            this.sale_default=1
+          }
+          this.price_default = 0
+        }
       }
     }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .searchBox{
     background-color: #f5f5f5;
     .content{
@@ -106,20 +144,26 @@
             display: flex;
             div.icons{
               position: relative;
-              i{
-                font-size: 12px;
-                &.active{
-                  color: #b4a078;
-                }
-                &:nth-child(1){
-                  position: absolute;
-                  top:-1px;
-                }
-                &:nth-child(2){
-                  position: absolute;
-                  top:5px;
-                }
+              img{
+                height: 13px;
+                width: 13px;
+                padding-left: 2px;
+                padding-top: 1px;
               }
+              /*i{*/
+              /*  font-size: 12px;*/
+              /*  &.active{*/
+              /*    color: #b4a078;*/
+              /*  }*/
+              /*  &:nth-child(1){*/
+              /*    position: absolute;*/
+              /*    top:2px;*/
+              /*  }*/
+              /*  &:nth-child(2){*/
+              /*    position: absolute;*/
+              /*    top:5px;*/
+              /*  }*/
+              /*}*/
             }
           }
           .sort{

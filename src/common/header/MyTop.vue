@@ -13,7 +13,8 @@
           <!-- cart -->
           <div v-show="!showNavTop" class="cartEnterWrap">
             <router-link to="/cart" class="cartEnter">
-              <i class="icon icon-gouwuche"></i>
+<!--              <i class="icon icon-gouwuche"></i>-->
+              <img src="../../assets/img/购物车.png" style="margin-left: 15px;">
               <span class="cartName">购物车</span>
               <i class="cat-badge cart-num">0</i>
             </router-link>

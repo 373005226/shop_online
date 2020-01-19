@@ -91,9 +91,9 @@
                   <div class="specProp">
                     <span class="type">数量</span>
                     <div class="number cont">
-                      <span :class="number <= 1? 'noActive' :''" @click="numReduce" class="jian icon icon-reduce"></span>
+                      <span :class="number <= 1? 'noActive' :''" @click="numReduce" class="el-icon-minus"></span>
                       <span class="number">{{number}}</span>
-                      <span @click="number++" class="jia icon icon-add"></span>
+                      <span @click="number++" class="el-icon-plus"></span>
                     </div>
                   </div>
                 </div>
@@ -103,7 +103,7 @@
                 <a @click="handleBuy" href="javascript:;" class="button ghost">立即购买</a>
                 <a href="javascript:;" class="button addCart"><span class="icon icon-gouwuche"></span> 加入购物车</a>
                 <div class="addSc">
-                  <div class="icon icon-star"></div>
+                  <div class="icon el-icon-star-off"></div>
                   <div class="text">收藏</div>
                 </div>
               </div>
@@ -229,7 +229,7 @@
           ],
 
           comments:[
-            {text:'质量上乘',},
+            {text:'质量上乘'},
             {text:'性价比高'},
             {text:'很舒服'}
           ],
@@ -272,7 +272,7 @@
     }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
   .detailBox{
     .content{
       padding: 0 0 80px;
@@ -663,7 +663,7 @@
                     span{
                       display: inline-block;
                       margin: 0 10px 10px 0;
-                      padding: 0 7px 0 16px;
+                      padding: 0 7px 0 7px;
                       line-height: 26px;
                       border-radius: 100px;
                       background-color: #F5F3EF;
