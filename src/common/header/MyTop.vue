@@ -103,7 +103,7 @@ export default {
     },
     // 点击搜索
     handleSearch(){
-      this.$router.push(`/search?keyword=${this.searchValue}`)
+      this.$router.push(`/search`)
     },
     handleScroll() {
       let top = document.documentElement.scrollTop;

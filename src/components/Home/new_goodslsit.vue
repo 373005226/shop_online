@@ -9,13 +9,16 @@
         >
           <ul class="goodsList" :style="{width:`${(266*goodsList.length)+(10*(goodsList.length-1))}px`}" slot="list">
             <li class="GoodsItem" :style="{marginRight: (index+1)%4===0?'0px':'10px'}" v-for="(item,index) in goodsList" :key="index">
-              <div class="imgBox">
-                <img :src="item.img" alt="商品图片"/>
-              </div>
-              <div class="goodsInfo">
-                <span class="goodsName ellipsis">{{item.name}}</span>
-                <span class="price">{{'¥'+item.price}}</span>
-              </div>
+              <router-link to="/detail">
+                <div class="imgBox">
+                  <img :src="item.img" alt="商品图片"/>
+                </div>
+                <div class="goodsInfo">
+                  <span class="goodsName ellipsis">{{item.name}}</span>
+                  <span class="price">{{'¥'+item.price}}</span>
+                </div>
+              </router-link>
+
             </li>
           </ul>
         </slick>
