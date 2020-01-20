@@ -22,7 +22,9 @@
           <div class="siteNav-r">
             <div class="siteNavItem">
               <div class="siteNavItemHd">
-                <a href="javascript:void(0)" class="siteNavItem" @click="handleLogin">登录</a>
+                <a class="siteNavItem" @click="handleLogin">登录</a>
+                <span class="siteNavItem">/</span>
+                <a class="siteNavItem">注册</a>
               </div>
             </div>
             <div class="siteNavItem" v-for="(item,index) in siteNavList" :key="index">

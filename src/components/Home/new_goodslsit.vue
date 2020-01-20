@@ -64,34 +64,9 @@
             },
             {
               img: require('@/assets/img/food/达利园糕点34.2.jpg'),
-              name: '达利园糕点1',
+              name: '达利园糕点',
               price: 34.2
-            },
-            {
-              img: require('@/assets/img/food/达利园糕点34.2.jpg'),
-              name: '达利园糕点2',
-              price: 34.2
-            },
-            {
-              img: require('@/assets/img/food/达利园糕点34.2.jpg'),
-              name: '达利园糕点3',
-              price: 34.2
-            },
-            {
-              img: require('@/assets/img/food/达利园糕点34.2.jpg'),
-              name: '达利园糕点4',
-              price: 34.2
-            },
-            {
-              img: require('@/assets/img/food/达利园糕点34.2.jpg'),
-              name: '达利园糕点5',
-              price: 34.2
-            },
-            {
-              img: require('@/assets/img/food/达利园糕点34.2.jpg'),
-              name: '达利园糕点6',
-              price: 34.2
-            },
+            }
           ],
         }
       },
