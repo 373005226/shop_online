@@ -4,6 +4,7 @@ const Home =()=>import('../views/Home.vue')
 const detail =()=>import('../views/detail')
 const search =()=>import('../views/search')
 const cart =()=>import('../views/cart')
+const login =()=>import('../views/login')
 Vue.use(VueRouter)
 
 const routes = [
@@ -26,6 +27,11 @@ const routes = [
     path:'/cart',
     name:'cart',
     component: cart
+  },
+  {
+    path:'/login',
+    name:'login',
+    component:login
   }
 ]
 

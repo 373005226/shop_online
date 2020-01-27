@@ -4,11 +4,12 @@
         <div class="row" style="height: 100%;">
           <!-- logo -->
           <router-link to="/" v-show="!showNavTop" class="tabLogo funcTabFixed-hide">
-            <i class="logo"></i>
+<!--            <i class="logo"></i>-->
           </router-link>
           <!-- 小Logo -->
           <router-link to="/" v-show="showNavTop" class="tabLogo-fixed">
-            <i class="logo"></i>
+<!--            <i class="logo"></i>-->
+
           </router-link>
           <!-- cart -->
           <div v-show="!showNavTop" class="cartEnterWrap">
@@ -20,37 +21,37 @@
             </router-link>
           </div>
           <!-- nav -->
-<!--          <ul class="tabNav">-->
-<!--            <li class="tabNav-item">-->
-<!--              <router-link to="/" class="topLevel">首页</router-link>-->
-<!--            </li>-->
-<!--            <li class="tabNav-item" :class="index == tabNav.length-1 ? 'last' :''" v-for="(item,index) in tabNav" :key='index' >-->
-<!--              <router-link :to="'/categoryList?id='" class="topLevel" >{{item.text}}</router-link>-->
-<!--                <div class="tabNav-dropdown"  >-->
-<!--                  <ul class="cateGroupList">-->
-<!--                    <div class="cateGroup" v-for="(itema,indexa) in item.navList" :key='indexa'>-->
-<!--                      <div class="cateGroup-name">{{itema.title}}</div>-->
-<!--                      <div class="columnList">-->
-<!--                        <div class="cateColumn">-->
-<!--                          <div class="cateItem" v-for="(itemb,indexb) in itema.list" :key='indexb'>-->
-<!--                            <router-link :to="'/categoryList'">-->
-<!--                              <img :src="itemb.img" class="subCate-icon" :alt="itemb.text" />-->
-<!--                              <span class="subCate-text">{{itemb.text}}</span>-->
-<!--                            </router-link>-->
-<!--                          </div>-->
-<!--                        </div>-->
-<!--                      </div>-->
-<!--                    </div>-->
-<!--                  </ul>-->
-<!--                </div>-->
-<!--            </li>-->
-<!--            &lt;!&ndash; <li v-show="!showNavTop" class="tabNav-item">-->
-<!--              <a href="" class="topLevel">为你严选</a>-->
-<!--            </li>-->
-<!--            <li v-show="!showNavTop" class="tabNav-item">-->
-<!--              <a href="" class="topLevel">众筹</a>-->
-<!--            </li> &ndash;&gt;-->
-<!--          </ul>-->
+          <ul class="tabNav">
+            <li class="tabNav-item">
+              <router-link to="/" class="topLevel">首页</router-link>
+            </li>
+            <li class="tabNav-item" :class="index == tabNav.length-1 ? 'last' :''" v-for="(item,index) in tabNav" :key='index' >
+              <router-link :to="'/categoryList?id='" class="topLevel" >{{item.text}}</router-link>
+                <div class="tabNav-dropdown"  >
+                  <ul class="cateGroupList">
+                    <div class="cateGroup" v-for="(itema,indexa) in item.navList" :key='indexa'>
+                      <div class="cateGroup-name">{{itema.title}}</div>
+                      <div class="columnList">
+                        <div class="cateColumn">
+                          <div class="cateItem" v-for="(itemb,indexb) in itema.list" :key='indexb'>
+                            <router-link :to="'/categoryList'">
+                              <img :src="itemb.img" class="subCate-icon" :alt="itemb.text" />
+                              <span class="subCate-text">{{itemb.text}}</span>
+                            </router-link>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </ul>
+                </div>
+            </li>
+            <!-- <li v-show="!showNavTop" class="tabNav-item">
+              <a href="" class="topLevel">为你严选</a>
+            </li>
+            <li v-show="!showNavTop" class="tabNav-item">
+              <a href="" class="topLevel">众筹</a>
+            </li> -->
+          </ul>
           <!-- search -->
           <div v-show="!showNavTop" class="search">
             <div class="searchInputWrap">

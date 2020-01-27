@@ -22,7 +22,7 @@
           <div class="siteNav-r">
             <div class="siteNavItem">
               <div class="siteNavItemHd">
-                <a class="siteNavItem" @click="handleLogin">登录</a>
+                <a class="siteNavItem" @click="Login">登录</a>
                 <span class="siteNavItem">/</span>
                 <a class="siteNavItem">注册</a>
               </div>
@@ -106,8 +106,8 @@ export default {
   },
   methods:{
     // 显示login
-    handleLogin(){
-      this.$refs.login.open()
+    Login(){
+      this.$router.push('/login')
     },
     // 隐藏 login
     closeLogin(){

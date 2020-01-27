@@ -79,7 +79,6 @@
         console.log(this.widths)
         goods().then(res=>{
           console.log(res)
-          this.goodsList = res
         })
       }
     }
