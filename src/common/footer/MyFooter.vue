@@ -1,27 +1,28 @@
 <template>
   <div class="footer" >
-<!--    <div class="ft1">-->
-<!--        <div class="row">-->
-<!--            <div class="item">-->
-<!--                <div class="serviceTel">-->
-<!--                    <div class="hd">客户服务</div>-->
-<!--                    <div class="">-->
-<!--                        <a href="" class="kefuBtn">-->
-<!--                            <i class="icon icon-erjikefu"></i>-->
-<!--                            <div class="margin-top-10">在线客服</div>-->
-<!--                        </a>-->
-<!--                        <a href="" class="feedbackBtn">-->
-<!--                            <i class="icon icon-comment"></i>-->
-<!--                            <div class="margin-top-10">用户反馈</div>-->
-<!--                        </a>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="item">-->
-<!--                <div class="whatIsYX">-->
-<!--                    <div class="hd">何为严选</div>-->
-<!--                    <p class="desc">网易原创生活类电商品牌，秉承网易一贯的严谨态度，我们深入世界各地，从源头全程严格把控商品生产环节，力求帮消费者甄选到优质的商品</p>-->
-<!--                </div>-->
+    <div class="ft1">
+        <div class="row">
+            <div class="item">
+                <div class="serviceTel">
+                    <div class="hd">客户服务</div>
+                    <div class="">
+                        <a href="" class="kefuBtn">
+                            <i class="icon icon-erjikefu"></i>
+                            <div class="margin-top-10">在线客服</div>
+                        </a>
+                        <a href="" class="feedbackBtn">
+                            <i class="icon icon-comment"></i>
+                            <div class="margin-top-10">用户反馈</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="whatIsYX">
+                    <div class="hd">何为多购</div>
+                    <p class="desc">多购为原创生活类电商品牌，秉承一贯的严谨态度，力求帮消费者甄选到优质的商品。
+                      <br/>本商城提供线上线下的经营模式，力求为消费者提供最真实，最方便的购物平台</p>
+                </div>
 <!--                <div class="followUs">-->
 <!--                    <p class="title">关注我们 :</p>-->
 <!--                    <div class="followWayList">-->
@@ -36,18 +37,18 @@
 <!--                        </div>-->
 <!--                    </div>-->
 <!--                </div>-->
-<!--            </div>-->
-<!--            <div class="item">-->
-<!--                <div class="ftAppDownload">-->
-<!--                    <h4 class="hd">扫码下载严选APP</h4>-->
-<!--                    <div class="footQRcode">-->
-<!--                        <img src="@/assets/img/code.png" alt="">-->
-<!--                    </div>-->
-<!--                    <div class="tip">下载领1000元新人礼包</div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
+            </div>
+            <div class="item">
+                <div class="ftAppDownload">
+                    <h4 class="hd">扫码下载多购APP</h4>
+                    <div class="footQRcode">
+                        <img src="@/assets/img/code.png" alt="">
+                    </div>
+                    <div class="tip">下载领新人礼包</div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="ft2">
         <div class="row">
             <ul class="siteEnsure">
@@ -118,9 +119,9 @@ export default {
   @import "../../assets/css/main.css";
     .footer{
       clear: both;
-      padding-top: 50px;
+      /*padding-top: 50px;*/
       .ft1{
-        height: 240px;
+        height: 265px;
         padding-top: 60px;
         padding-bottom: 34px;
         background-color: #fff;
@@ -130,6 +131,7 @@ export default {
           height: 204px;
           float: left;
           border-left: 1px solid #e9e9e9;
+          z-index: 1;
           &:last-child{
               width: 32%
           }
@@ -242,6 +244,7 @@ export default {
       }
       .ft2{
         height: 250px;
+        /*margin-top: 25px;*/
         padding-top: 37px;
         background-color: #414141;
         .siteEnsure{

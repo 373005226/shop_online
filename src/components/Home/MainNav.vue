@@ -116,7 +116,7 @@
       text-align: center;
       /*height: 458px;*/
       position: relative;
-      z-index: 5;
+      z-index: 1;
       /*padding-top: 22px;*/
 
       ul {
@@ -164,7 +164,7 @@
       /*right: 1.5%;*/
       background: #fff;
       opacity: 0.6;
-      z-index: 5;
+      z-index: 1;
       overflow: hidden;
       border: 1px solid #e0e0e0;
       border-left: none;
