@@ -9,7 +9,7 @@
         >
           <ul class="goodsList" :style="{width:`${(266*goodsList.length)+(10*(goodsList.length-1))}px`}" slot="list">
             <li class="GoodsItem" :style="{marginRight: (index+1)%4===0?'0px':'10px'}" v-for="(item,index) in goodsList" :key="index">
-              <router-link to="/detail">
+              <router-link :to="{path:'/detail',query:{id:item.id}}">
                 <div class="imgBox">
                   <img :src="item.images[0].image" alt="商品图片" v-if="item.images!== undefined &&  item.images.length > 0 "/>
                 </div>
@@ -78,7 +78,7 @@
         this.widths = document.body.clientWidth
         // console.log(this.widths)
         goods().then(res=>{
-          // console.log(res)
+          console.log(res)
           this.goodsList = res
         })
       }

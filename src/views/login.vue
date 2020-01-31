@@ -105,6 +105,7 @@
     box-shadow: 0px 0px 0px;
     border-radius: 3px;
     border: 0px;
+    cursor: pointer;
   }
   .login:hover{
     background-color: #f52b00;

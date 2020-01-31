@@ -34,6 +34,8 @@
       Ranking,
       catelogy,
       MyFooter
+    },
+    created() {
     }
   }
 </script>

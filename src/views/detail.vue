@@ -181,7 +181,9 @@
   import MyHeader from "../common/header/MyHeader";
   import MyFooter from "../common/footer/MyFooter";
   import crumbs from "../common/crumbs";
-    export default {
+  import {detail} from "../api/goods";
+
+  export default {
       name: "detail",
       components:{
         MyHeader,
@@ -241,6 +243,11 @@
         }
       },
       methods:{
+        _getdetailgoods(id){
+          detail(id).then(res=>{
+            console.log(res)
+          })
+        },
         // 去评论
         goComm(){
           this.navTabInit = 1;
@@ -269,6 +276,10 @@
           this.$router.push('/order')
         }
       },
+      created() {
+        console.log(this.$route.query.id)
+        this._getdetailgoods(3)
+      }
     }
 </script>
 

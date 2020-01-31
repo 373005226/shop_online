@@ -18,7 +18,7 @@
 <!--              <i class="icon icon-gouwuche"></i>-->
               <img src="../../assets/img/购物车.png" style="margin-left: 15px;">
               <span class="cartName">购物车</span>
-              <i class="cat-badge cart-num">0</i>
+              <i class="cat-badge cart-num">{{$store.state.cartList.length}}</i>
             </router-link>
           </div>
           <!-- nav -->

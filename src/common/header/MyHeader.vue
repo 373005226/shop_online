@@ -22,9 +22,11 @@
           <div class="siteNav-r">
             <div class="siteNavItem">
               <div class="siteNavItemHd">
-                <a class="siteNavItem" @click="Login">登录</a>
-                <span class="siteNavItem">/</span>
-                <a class="siteNavItem">注册</a>
+                <div v-if="$store.state.login  == false">
+                  <a class="siteNavItem" @click="Login">登录</a>
+                  <span class="siteNavItem">/</span>
+                  <a class="siteNavItem">注册</a>
+                </div>
               </div>
             </div>
             <div class="siteNavItem" v-for="(item,index) in siteNavList" :key="index">

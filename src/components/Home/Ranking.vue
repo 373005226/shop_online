@@ -1,7 +1,7 @@
 <template>
     <div>
       <div class="main-title">
-        <p class="lg">排行榜</p>
+        <p class="lg">销售排行榜</p>
         <p class="sm">RANKING LIST</p>
       </div>
       <div class="c-rank">
@@ -9,7 +9,7 @@
         <div class="c-rank-nav">
           <ul>
             <li v-for="(item,index) in catelogy" :key="index">
-              <img :src="item.img">
+              <img :src="item.icon">
               <p class="name">{{item.name}}</p>
             </li>
           </ul>
@@ -37,7 +37,9 @@
 </template>
 
 <script>
-    export default {
+  import {catelogy} from "../../api/goods";
+
+  export default {
       name: "Ranking",
       data(){
         return{
@@ -136,8 +138,16 @@
             },
           ]
         }
+      },
+    methods:{
+    },
+      created() {
+        catelogy().then(res=>{
+          console.log(res)
+          this.catelogy = res
+        })
       }
-    }
+  }
 </script>
 
 <style scoped lang="less">
@@ -195,6 +205,10 @@
     color: orange;
     transition: all 0.1s;
   }
+  /*hoverfont{*/
+  /*  color: orange;*/
+  /*  transition: all 0.1s;*/
+  /*}*/
   .c-rank .c-rank-nav ul li img{
     height: 40px;
   }
