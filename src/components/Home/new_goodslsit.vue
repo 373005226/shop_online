@@ -76,9 +76,10 @@
       },
       created() {
         this.widths = document.body.clientWidth
-        console.log(this.widths)
+        // console.log(this.widths)
         goods().then(res=>{
-          console.log(res)
+          // console.log(res)
+          this.goodsList = res
         })
       }
     }

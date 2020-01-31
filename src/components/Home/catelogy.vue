@@ -1,7 +1,8 @@
 <template>
   <div>
+    <div v-for="(item,index) in catelogy_list" :key="index">
     <div class="main-title">
-      <p class="lg">超市生鲜</p>
+      <p class="lg">{{item.name}}</p>
       <p class="sm">RANKING LIST</p>
     </div>
 
@@ -9,96 +10,68 @@
       <div class="c-title">
         <p class="icon"></p>
         <div>
-          <p class="title">超市生鲜</p>
+          <p class="title">{{item.name}}</p>
         </div>
       </div>
       <div class="col1">
         <a>
-          <img class="bg" src="@/assets/img/catelogy_list/生鲜.jpg">
+          <img class="bg" :src="item.image">
         </a>
-        <div class="c-cards">
-          <ul class="clearfix">
-            <li><a>新鲜蔬菜</a></li>
-            <li><a>新鲜肉类</a></li>
-            <li><a>新鲜海鲜</a></li>
-            <li><a>新鲜水果</a></li>
-          </ul>
-        </div>
+<!--        <div class="c-cards">-->
+<!--          <ul class="clearfix">-->
+<!--            <li><a>新鲜蔬菜</a></li>-->
+<!--            <li><a>新鲜肉类</a></li>-->
+<!--            <li><a>新鲜海鲜</a></li>-->
+<!--            <li><a>新鲜水果</a></li>-->
+<!--          </ul>-->
+<!--        </div>-->
       </div>
 
       <div class="col2">
         <ul class="clearfix">
-          <li v-for="(item,index) in catelogy_list" :key="index">
+          <li v-for="(items,indexs) in item.goods_catelogy" :key="indexs">
             <a href="#">
-              <img :src="item.img">
-              <p class="name">{{item.name}}</p>
+
+              <img :src="items.images[0].image">
+              <p class="name">{{items.name}}</p>
               <p class="price">
                 ¥&nbsp;
-                <strong>{{item.price}}</strong>
+                <strong>{{items.specification[0].shop_price}}</strong>
               </p>
             </a>
             <a class="cartBtn"></a>
           </li>
         </ul>
       </div>
+
+    </div>
     </div>
   </div>
 </template>
 
 <script>
-    export default {
+  import {catelogy} from "../../api/goods";
+
+  export default {
         name: "catelogy",
       data(){
           return{
-            catelogy_list:[
-              {
-                id:1,
-                img:require('@/assets/img/catelogy_list/01.jpg'),
-                name:'新虹宝 南美白虾仁（中号）200g/袋 22-26只 海鲜水产',
-                price:23
-              },
-              {
-                id:2,
-                img:require('@/assets/img/catelogy_list/02.jpg'),
-                name:'三全 速冻素水饺韭菜鸡蛋口味 450g（30只左右）蔬菜饺子清淡早晚餐皮薄馅大方便食品',
-                price:10.9
-              },
-              {
-                id:3,
-                img:require('@/assets/img/catelogy_list/03.jpg'),
-                name:'春雪食品 爆汁鸡米花500g/袋装 国产出口日本级 清真食品 鸡肉块 盐酥鸡 鸡米花',
-                price:19.8
-              },
-              {
-                id:4,
-                img:require('@/assets/img/catelogy_list/04.png'),
-                name:'纯色本味 冷冻舟山精品带鱼段 纯中段 无内脏 500g 海鲜水产',
-                price:24.8
-              },{
-                id:5,
-                img:require('@/assets/img/catelogy_list/05.jpg'),
-                name:'新虹宝 精选青虾滑（96%虾仁）200g/袋 海鲜水产 火锅食材',
-                price:23.6
-              },{
-                id:6,
-                img:require('@/assets/img/catelogy_list/06.jpg'),
-                name:'【第2件半价 5件更优惠】濠礼記 广味腊肠 200g 自制7分瘦广东特产腊肠正宗甜味香肠',
-                price:19.8
-              },{
-                id:7,
-                img:require('@/assets/img/catelogy_list/07.png'),
-                name:'【天府生鲜】云南水果玉米 9斤 箱装 香甜可口 可以生吃的玉米 时令水果蔬菜 奥奇健',
-                price:29.9
-              },{
-                id:8,
-                img:require('@/assets/img/catelogy_list/08.jpg'),
-                name:'【新鲜采摘 甜糯可口】山东烟薯地瓜红心小香薯单果约100g以上5斤装',
-                price:15.9
-              },
-            ]
+            catelogy_list:[]
           }
-      }
+      },
+    created() {
+      catelogy().then(res=>{
+        console.log(res)
+        for(let i of res){
+          // console.log(i)
+          if(i.image != null){
+            console.log(i)
+            this.catelogy_list = res
+          }
+        }
+      })
     }
+  }
 </script>
 
 <style scoped>
