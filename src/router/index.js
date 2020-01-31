@@ -5,6 +5,12 @@ const detail =()=>import('../views/detail')
 const search =()=>import('../views/search')
 const cart =()=>import('../views/cart')
 const login =()=>import('../views/login')
+const user =()=>import('../views/User/User')
+const MsgCenter =()=>import('../views/User/MsgCenter')
+const address =()=>import('../views/User/Address')
+const UserCollection =()=>import('../views/User/UserCollection')
+const UserOrder =()=>import('../views/User/UserOrder')
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -32,7 +38,30 @@ const routes = [
     path:'/login',
     name:'login',
     component:login
-  }
+  },
+  {
+    path:'/user',
+    name:'user',
+    component:user
+  },
+  {
+    path:'/msgCenter',
+    name:'msgCenter',
+    component:MsgCenter
+  },
+  {
+    path:'/address',
+    name:'address',
+    component:address
+  },
+  {
+    path:'/userCollection',
+    name:'userCollection',
+    component:UserCollection
+  },
+  { path: '/userOrder',
+    name: 'userOrder',
+    component:UserOrder},
 ]
 
 const router = new VueRouter({

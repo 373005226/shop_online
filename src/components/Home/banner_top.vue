@@ -45,5 +45,6 @@
   .el-col-3:hover {
     color: #EDB424;
     transition: all 0.25s;
+    cursor: pointer;
   }
 </style>
