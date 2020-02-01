@@ -12,16 +12,17 @@
             <div class="slide">
               <div class="picsWrap">
                 <div class="view">
-                  <div class="smallPic">
-                    <img class="thumbImg" :src="imgs[imgInit]" alt="">
+                  <div class="smallPic" v-for="(item,index) in this.goods_detail.images" :key="index">
+<!--                    <img class="thumbImg" :src="imgs[imgInit]" alt="">-->
+                    <img class="thumbImg" :src="item.image" alt="">
                   </div>
                 </div>
               </div>
               <div class="list">
                 <ul>
-                  <li @click="imgInit = index" :class="index == imgInit? 'active' : ''" v-for="(item,index) in imgs" :key='index'>
+                  <li @click="imgInit = index" :class="index == imgInit? 'active' : ''" v-for="(item,index) in this.goods_detail.images" :key="index">
                     <a href="javascript:;">
-                      <img :src="item" alt="">
+                      <img :src="item.image" alt="">
                     </a>
                   </li>
                 </ul>
@@ -30,8 +31,8 @@
             <div class="info">
               <div class="intro">
                 <div class="nameInfo">
-                  <div class="name">男式基础休闲牛津纺长袖衬衫</div>
-                  <div class="desc">用休闲姿态穿出品质生活</div>
+                  <div class="name">{{this.goods_detail.name}}</div>
+                  <div class="desc">{{this.goods_detail.goods_brief}}</div>
                 </div>
                 <div class="comm">
                   <div class="num">99.7%</div>
@@ -46,7 +47,7 @@
                   <span class="label">价格</span>
                   <div class="data">
                     <span class="text">￥</span>
-                    <span class="num">99.9</span>
+                    <span class="num" v-if="this.goods_detail.specification !== undefined &&  this.goods_detail.specification.length > 0 ">{{this.goods_detail.specification[0].shop_price}}</span>
                   </div>
                 </div>
                 <div class="field">
@@ -63,26 +64,26 @@
               </div>
               <div class="">
                 <div class="parampicker">
+<!--                  <div class="specProp">-->
+<!--                    <span class="type">颜色</span>-->
+<!--                    <div class="cont">-->
+<!--                      <ul class="tabs">-->
+<!--                        <li @click="colorInit = index" class="tab-con tab tab-pic" v-for="(item,index) in colors" :key='index'>-->
+<!--                          <a :class="index == colorInit ? 'tab-sel' : ''"  class="tab-pic" href="javascript:;">-->
+<!--                            <img :src="item.img" alt="">-->
+<!--                            <i class="icon-normal"></i>-->
+<!--                          </a>-->
+<!--                        </li>-->
+<!--                      </ul>-->
+<!--                    </div>-->
+<!--                  </div>-->
                   <div class="specProp">
-                    <span class="type">颜色</span>
+                    <span class="type">规格</span>
                     <div class="cont">
                       <ul class="tabs">
-                        <li @click="colorInit = index" class="tab-con tab tab-pic" v-for="(item,index) in colors" :key='index'>
-                          <a :class="index == colorInit ? 'tab-sel' : ''"  class="tab-pic" href="javascript:;">
-                            <img :src="item.img" alt="">
-                            <i class="icon-normal"></i>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="specProp">
-                    <span class="type">尺码</span>
-                    <div class="cont">
-                      <ul class="tabs">
-                        <li @click="cmInit = index" class="tab  tab-con" v-for="(item,index) in cms" :key='index'>
+                        <li @click="cmInit = index" class="tab  tab-con" v-for="(item,index) in this.goods_detail.specification" :key='index'>
                           <a :class="index == cmInit ? 'tab-sel' : ''"  class=' tab-txt ' href="javascript:;">
-                            <span>{{item.text}}</span>
+                            <span>{{item.specification_text}}</span>
                           </a>
                         </li>
                       </ul>
@@ -193,6 +194,7 @@
       data(){
         return{
           imgInit:0,
+          goods_detail:[],
           imgs:[
             '//imgservice.suning.cn/uimg1/b2c/image/H-ybAAwUE1JVQD91xY_zlg.jpg_800w_800h_4e',
             '//imgservice.suning.cn/uimg1/b2c/image/66jxuFpIDQPWI3Sb5YWXhg.jpg_800w_800h_4e ',
@@ -213,10 +215,6 @@
           cmInit:0,
           cms:[
             {id:0,text:'S*（165/84A）'},
-            {id:1,text:'M*（170/88A）'},
-            {id:2,text:'L*（175/92A）'},
-            {id:3,text:'XL*（180/96A）'},
-            {id:4,text:'XXL*（185/100A）'},
           ],
           // 数量
           number:1,
@@ -229,7 +227,6 @@
             'https://yanxuan-item.nosdn.127.net/9c866dd74ed282a6516a7557aff27cad.jpg',
             'https://yanxuan-item.nosdn.127.net/ef92646728bad4d1f402a56895b19a81.jpg'
           ],
-
           comments:[
             {text:'质量上乘'},
             {text:'性价比高'},
@@ -246,6 +243,7 @@
         _getdetailgoods(id){
           detail(id).then(res=>{
             console.log(res)
+            this.goods_detail = res
           })
         },
         // 去评论
@@ -278,7 +276,8 @@
       },
       created() {
         console.log(this.$route.query.id)
-        this._getdetailgoods(3)
+        this._getdetailgoods(this.$route.query.id)
+        console.log(this.$route)
       }
     }
 </script>
@@ -468,7 +467,9 @@
               .cont{
                 position: relative;
                 width: 550px;
+                margin-top: 9px;
                 .tabs{
+                  /*margin-top: 8px;*/
                   .tab-txt {
                     padding: 0 16px;
                     line-height: 28px;

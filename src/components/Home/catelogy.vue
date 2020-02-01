@@ -30,15 +30,14 @@
       <div class="col2">
         <ul class="clearfix">
           <li v-for="(items,indexs) in item.goods_catelogy" :key="indexs">
-            <a href="#">
-
+            <router-link :to="{path:'/detail',query:{id:items.id}}">
               <img :src="items.images[0].image">
               <p class="name">{{items.name}}</p>
               <p class="price">
                 ¥&nbsp;
                 <strong>{{items.specification[0].shop_price}}</strong>
               </p>
-            </a>
+            </router-link>
             <a class="cartBtn"></a>
           </li>
         </ul>

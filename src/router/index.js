@@ -21,7 +21,7 @@ const routes = [
   },
   {
     path: '/detail',
-    name:'detail',
+    name:'商品详情',
     component:detail
   },
   {
