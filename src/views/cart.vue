@@ -3,6 +3,7 @@
       <my-header></my-header>
       <div class="cart">
         <div class="row">
+          <crumbs></crumbs>
           <div class="cartHead">
             <div class="checkbox">
               <input type="checkbox">
@@ -34,17 +35,24 @@
               </div>
               <div class="price">¥39.90</div>
               <div class="number">
-                <span :class="number <= 1? 'noActive' :''" @click="numReduce" class="jian icon icon-reduce"></span>
-
-                <input type="text" v-model="number">
-                <span @click="number++" class="jia icon icon-add"></span>
+<!--                <span :class="number <= 1? 'noActive' :''" @click="numReduce" class="iconfont icon-jian click"></span>-->
+<!--                <input type="text" v-model="number">-->
+<!--                <span @click="number++" class="iconfont icon-jia click"></span>-->
+                <el-input-number v-model="number" :min="1" :max="10" label="描述文字" size="mini"></el-input-number>
               </div>
               <div class="total">
                 ¥99.90
               </div>
               <div class="sets">
-                <a href="javascript:;" class="addColl">加入收藏夹</a>
-                <a href="javascript:;" class="delete">删除</a>
+                <el-row>
+                  <el-button type="primary" size="mini" plain class="sets_button">
+                    <i class="el-icon-star-on"></i> 收藏</el-button>
+                  <el-button type="danger" size="mini" plain class="sets_button">移除</el-button>
+                </el-row>
+<!--                <el-link icon="el-icon-star-on" :underline="false">加入收藏夹</el-link>-->
+<!--                <el-link type="danger" :underline="false">删除</el-link>-->
+<!--                <a href="javascript:;" class="addColl">加入收藏夹</a>-->
+<!--                <a href="javascript:;" class="delete">删除</a>-->
               </div>
             </div>
           </div>
@@ -86,11 +94,13 @@
 </template>
 
 <script>
-  import MyHeader from "../common/header/MyHeader";
+  import  MyHeader from "../common/header/MyHeader";
   import MyFooter from "../common/footer/MyFooter";
+  import Crumbs from "../common/crumbs";
     export default {
         name: "cart",
       components:{
+        Crumbs,
           MyHeader,
           MyFooter
       },
@@ -113,6 +123,16 @@
 </script>
 
 <style scoped lang="scss">
+  .row{
+    width: 1220px;
+  }
+  .sets_button{
+    width: 75px;
+  }
+  .click:hover{
+    color: #9AD7FD;
+    cursor: pointer;
+  }
   .cart{
     padding: 20px 0 0;
     .cartHead{
@@ -135,13 +155,14 @@
         .all{margin-left: 20px;}
       }
       .goodInfo{width: 300px;text-align: left;padding-left: 20px;}
-      .price{width: 180px;}
-      .number{width: 170px}
-      .total{width: 150px;}
-      .sets{width: 130px}
+      .price{width: 230px;}
+      .number{width: 120px}
+      .total{width: 195px;}
+      .sets{width: 235px}
     }
     .cartMain{
       border: 1px solid #ddd;
+      padding-left: 20px;
       .item{
         padding: 20px 0;
         display: flex;
@@ -192,7 +213,8 @@
         }
         .price{
           width: 155px;
-          text-align: center;
+          /*text-align: center;*/
+          padding: 36px;
           position: relative;
           color: #999;
         }
@@ -219,20 +241,17 @@
         }
         .total{
           text-align: center;
+
           position: relative;
           color: #999;
           width: 150px;
         }
         .sets{
-          position: relative;
-          color: #999;
+          /*position: relative;*/
+          /*color: #999;*/
           text-align: center;
-          width: 125px;
-          a{
-            display: block;
-            color: #666;
-            font-size: 14px;
-          }
+          width: 235px;
+          padding-left: 75px;
         }
       }
     }
@@ -310,8 +329,11 @@
           line-height: 50px;
           font-size: 18px;
           color: #fff;
-          border: 1px solid #b4a078;
-          background-color: #b4a078;
+          border: 1px solid #35AFFB;
+          background-color: #35AFFB;
+          &:hover{
+            background-color: #3A88FD;
+          }
         }
       }
     }

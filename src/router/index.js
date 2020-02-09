@@ -26,12 +26,12 @@ const routes = [
   },
   {
     path:'/search',
-    name:'search',
+    name:'搜索',
     component:search
   },
   {
     path:'/cart',
-    name:'cart',
+    name:'购物车',
     component: cart
   },
   {

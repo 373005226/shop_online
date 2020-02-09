@@ -1,6 +1,6 @@
 <template>
     <div>
-        <MyHeader :headType="false" title="个人中心" />
+      <my-header></my-header>
         <div class="row">
             <!-- 侧栏 -->
             <UserSide />
@@ -74,7 +74,7 @@ import MyFooter from "@/common/footer/MyFooter.vue";
 // import Recom from "@/components/Recom/Recom.vue";
 import UserSide from "@/common/UserSide.vue";
 export default{
-  components: {  MyHeader, MyFooter ,UserSide},
+  components: {MyHeader, MyFooter ,UserSide},
     name:"User",
     data(){
         return{
@@ -96,6 +96,7 @@ export default{
 <style lang="scss" scoped>
     .row{
         display: flex;
+      margin-top: 52px;
     }
     .main{
         position: relative;

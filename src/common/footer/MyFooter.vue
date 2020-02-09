@@ -170,7 +170,7 @@ export default {
                   margin-left: 29px;
                 }
                 &:hover{
-                  color: #b4a078;
+                  color: #FAB677;
                 }
               }
           }
@@ -235,7 +235,7 @@ export default {
                 height: 104px;
               }
               .tip{
-                color: #b4a078;
+                color: #FAB677;
                 font-size: 12px;
                 margin-top: 3px;
               }

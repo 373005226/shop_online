@@ -93,11 +93,11 @@
                                 line-height: 18px;
                                 margin: 16px 0;
                                 &:hover{
-                                    color: #b4a078;
+                                    color: #35AFFB;
                                 }
                                 &.active{
-                                    color: #b4a078;
-                                    border-left-color: #BEA988;
+                                    color: #35AFFB;
+                                    border-left-color: #35AFFB;
                                 }
                             }
                         }

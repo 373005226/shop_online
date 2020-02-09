@@ -161,14 +161,13 @@ export default {
           z-index: 4;
           border-radius: 19px;
           &:hover {
-            background-color: #F5F3EF;
+            background-color: #F2F6FC;
           }
           .cartEnter {
             display: inline-block;
             position: relative;
             cursor: pointer;
             width: 134px;
-            height: 38px;
             border: 1px solid #B4A078;
             border-radius: 19px;
             padding: 8px 0;
@@ -181,7 +180,7 @@ export default {
               width: 18px;
             }
             .cartName{
-              color: #B4A078;
+              color: #FF0000;
               margin-left: 5px;
               margin-top: -1px;
               font-size: 14px;
@@ -341,7 +340,7 @@ export default {
             line-height: 38px;
             padding-top: 2px;
             padding-bottom: 2px;
-            border: 1px solid #B4A078;
+            border: 1px solid #35AFFB;
             border-bottom-left-radius: 19px;
             border-top-left-radius: 19px;
             font-size: 14px;
@@ -374,7 +373,7 @@ export default {
         .searchButton{
           width: 90px;
           height: 38px;
-          background-color: #B4A078;
+          background-color: #35AFFB;
           border-top-right-radius: 19px;
           border-bottom-right-radius: 19px;
           cursor: pointer;
@@ -385,6 +384,9 @@ export default {
           font-size: 16px;
           letter-spacing: 1px;
           box-sizing: border-box;
+          &:hover {
+            background-color: #3A88FD;
+          }
         }
         .hotKeywordListWrap{
           margin-top: 46px;

@@ -85,10 +85,10 @@
             color: #333;
             margin-bottom: -2px;
             &.active{
-              border-bottom: 2px solid #b4a078;
+              border-bottom: 2px solid #FAB677;
             }
             &.active a {
-              color: #b4a078;
+              color: #FAB677;
             }
             &:first-child a {
               border: none;

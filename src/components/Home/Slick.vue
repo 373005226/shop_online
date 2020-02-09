@@ -69,7 +69,7 @@
     .prev, .next {
       display: inline-block;
       vertical-align: middle;
-      background-color: @thirdColor;
+      background-color: #FAB677;
       border-radius: 50%;
       text-align: center;
       position: relative;

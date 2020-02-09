@@ -155,7 +155,7 @@ export default {
         font-size: 24px;
         line-height: 24px;
         font-weight: 400;
-        color: #b4a078;
+        color: #FAB677;
         border-left: 1px solid #b4a078;
         vertical-align: middle;
       }
