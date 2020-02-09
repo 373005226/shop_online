@@ -5,6 +5,7 @@ const detail =()=>import('../views/detail')
 const search =()=>import('../views/search')
 const cart =()=>import('../views/cart')
 const login =()=>import('../views/login')
+const register =()=>import('../views/register')
 const user =()=>import('../views/User/User')
 const MsgCenter =()=>import('../views/User/MsgCenter')
 const address =()=>import('../views/User/Address')
@@ -40,6 +41,11 @@ const routes = [
     component:login
   },
   {
+    path:'/register',
+    name:'register',
+    component:register
+  },
+  {
     path:'/user',
     name:'user',
     component:user
@@ -61,7 +67,8 @@ const routes = [
   },
   { path: '/userOrder',
     name: 'userOrder',
-    component:UserOrder},
+    component:UserOrder
+  },
 ]
 
 const router = new VueRouter({

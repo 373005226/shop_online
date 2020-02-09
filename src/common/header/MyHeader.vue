@@ -25,7 +25,7 @@
                 <div v-if="$store.state.login  == false">
                   <a class="siteNavItem" @click="Login">登录</a>
                   <span class="siteNavItem">/</span>
-                  <a class="siteNavItem">注册</a>
+                  <a class="siteNavItem" @click="register">注册</a>
                 </div>
               </div>
             </div>
@@ -110,6 +110,9 @@ export default {
     // 显示login
     Login(){
       this.$router.push('/login')
+    },
+    register(){
+      this.$router.push('/register')
     },
     // 隐藏 login
     closeLogin(){
