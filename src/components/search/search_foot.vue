@@ -2,14 +2,18 @@
   <div class="nav-sub fixed">
     <div class="nav-sub-wrapper fixed">
       <div>
-        <ul class="nav-list2">
-          <li>
-            <router-link :to="{name: 'home'}">首页</router-link>
-          </li>
-          <li style="font-weight: bold;">
-            搜索"苹果"共5条结果
-          </li>
-        </ul>
+        <div class="nav-list2">
+          <div class="home">
+            首页
+          </div>
+          <div class="search">
+            搜索
+            <strong>"苹果"</strong>
+            共
+            <strong>5条</strong>
+            结果
+          </div>
+        </div>
         <div></div>
       </div>
     </div>
@@ -23,6 +27,16 @@
 </script>
 
 <style scoped lang="scss">
+  .search{
+    padding-left: 20px;
+  }
+  .home{
+    padding-left: 20px;
+    cursor: pointer;
+    &:hover{
+      color: #95C3ED;
+    }
+  }
   .nav-sub {
     position: relative;
     z-index: 20;
@@ -74,33 +88,6 @@
       display: flex;
       align-items: center;
       height: 100%;
-
-      li{
-        list-style: none;
-      }
-
-      li:first-child {
-        padding-left: 0;
-        a {
-          padding-left: 10px;
-        }
-      }
-       li {
-        position: relative;
-        float: left;
-        padding-left: 2px;
-        a {
-          display: block;
-          padding: 0 10px;
-          color: #666;
-          &.active {
-            font-weight: bold;
-          }
-        }
-        a:hover {
-          color: #5683EA;
-        }
-      }
       li:before {
         content: ' ';
         position: absolute;
