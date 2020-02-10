@@ -37,7 +37,7 @@ export default {
 <style scoped lang="less">
 @import "../../assets/css/var.less";
 .SectionHeader{
-  width: 100%;
+  width: 1080px;
   height: 66px;
   .left{
     display: inline-block;

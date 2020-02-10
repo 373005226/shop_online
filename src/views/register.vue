@@ -60,13 +60,15 @@
           <div class="rgisterphone" v-if="is_show2" >
             <el-form :model="phoneForm" status-icon :rules="phonerules" ref="phoneForm" label-width="100px">
               <el-form-item label="手机号:" prop="phone">
-                <el-input type="text" v-model="phoneForm.phone" autocomplete="off"></el-input>
+                <el-input type="text" v-model="phoneForm.phone" autocomplete="off">
+                  <template slot="prepend">中国大陆 +86:</template>
+                </el-input>
               </el-form-item>
 
 
               <el-form-item label="验证码:" prop="code">
                 <el-input type="text" v-model="phoneForm.code" autocomplete="off" class="codeinput"></el-input>
-                <el-button type="primary">发送验证码</el-button>
+                <el-button type="primary" @click="sendMessage" :disabled="btnDisabled">{{btnText}}</el-button>
               </el-form-item>
 
               <el-form-item>
@@ -80,13 +82,17 @@
         <transition name="el-fade-in">
           <div class="registerinformation" v-if="is_show3" >
             <el-form :model="informationForm" status-icon :rules="informationrules" ref="informationForm" label-width="100px">
+              <el-form-item label="手机号:" prop="phone">
+                <el-input type="text" v-model="informationForm.phone" autocomplete="off" disabled></el-input>
+              </el-form-item>
+
               <el-form-item label="用户名:" prop="phone">
-                <el-input type="text" v-model="informationForm.phone" autocomplete="off"></el-input>
+                <el-input type="text" v-model="informationForm.username" autocomplete="off"></el-input>
               </el-form-item>
 
 
               <el-form-item label="密码:" prop="code">
-                <el-input type="password" v-model="informationForm.code" autocomplete="off"></el-input>
+                <el-input type="password" v-model="informationForm.password" autocomplete="off"></el-input>
               </el-form-item>
 
               <el-form-item label="确认密码" prop="checkPass">
@@ -159,6 +165,9 @@
         active1:true,
         active2:false,
         active3:false,
+        btnText:'发送验证码',
+        btnDisabled:false,
+        totalTime: 60,
         phoneForm:{
           phone:'',
           code:''
@@ -172,6 +181,7 @@
           ]
         },
         informationForm:{
+          phone:'',
           username:'',
           password:'',
           checkPass:''
@@ -201,6 +211,32 @@
         this.active2 = false
         this.is_show3 = true
         this.active3 = true
+      },
+
+      sendMessage() {
+        if (this.btnDisabled) {
+          return;
+        }
+        this.getSecond(60);
+      },
+
+      //发送验证码
+      getSecond(wait){
+        let _this=this;
+        let _wait = wait;
+        if(wait == 0) {
+          this.btnDisabled=false;
+          this.btnText="获取验证码"
+          wait = _wait;
+        } else {
+          this.btnDisabled=true;
+          this.btnText="(" + wait + "s)后重新发送验证码"
+          wait--;
+          setTimeout(function() {
+              _this.getSecond(wait);
+            },
+            1000);
+        }
       }
     }
   }
@@ -208,7 +244,7 @@
 
 <style scoped lang="scss">
   .codeinput{
-    width: 56%;
+    width: 46%;
   }
   .register{
     width: 1020px;
@@ -317,7 +353,7 @@
   }
 
   .rgisterphone{
-    width: 360px;
+    width: 450px;
     margin: 0 auto;
   }
   .registerinformation{

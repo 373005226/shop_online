@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="main">
       <div class="main-title">
         <p class="lg">销售排行榜</p>
         <p class="sm">RANKING LIST</p>
@@ -151,6 +151,10 @@
 </script>
 
 <style scoped lang="less">
+  .main{
+    width: 1220px;
+    margin: 0 auto;
+  }
   .main-title{
     position: relative;
     width: 1190px;

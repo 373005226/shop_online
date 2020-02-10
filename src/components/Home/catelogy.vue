@@ -175,6 +175,7 @@
     font: 12px/24px "Microsoft Yahei",tahoma,arial,"Hiragino Sans GB";
     overflow: hidden;
   }
+
 /*  显示图片右边的分类*/
   .c-comm-floor .col2 {
     float: left;

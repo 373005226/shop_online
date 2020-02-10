@@ -25,7 +25,11 @@
               <button type="sub mit" class="login">
                 登录
               </button>
-              <h6 class="register">立即注册</h6>
+              <h6 class="register">
+                <router-link :to="{path:'register'}">
+                  立即注册
+                </router-link>
+              </h6>
               <h6 class="forget">忘记密码</h6>
               <div class="bottom">
                 <a href="#" class="wechat">

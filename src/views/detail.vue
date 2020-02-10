@@ -91,23 +91,36 @@
                   </div>
                   <div class="specProp">
                     <span class="type">数量</span>
+<!--                    <div class="number cont">-->
+<!--                      <span :class="number <= 1? 'noActive' :''" @click="numReduce" class="el-icon-minus"></span>-->
+<!--                      <span class="number">{{number}}</span>-->
+<!--                      <span @click="number++" class="el-icon-plus"></span>-->
+<!--                    </div>-->
                     <div class="number cont">
-                      <span :class="number <= 1? 'noActive' :''" @click="numReduce" class="el-icon-minus"></span>
-                      <span class="number">{{number}}</span>
-                      <span @click="number++" class="el-icon-plus"></span>
+                      <el-input-number v-model="num" :min="1" :max="10" label="描述文字" size="small"></el-input-number>
+
                     </div>
                   </div>
                 </div>
               </div>
 
+<!--              <div class="btns">-->
+<!--                <a @click="handleBuy" href="javascript:;" class="button ghost">立即购买</a>-->
+<!--                <a href="javascript:;" class="button addCart"><span class="icon icon-gouwuche"></span> 加入购物车</a>-->
+<!--                <div class="addSc">-->
+<!--                  <div class="icon el-icon-star-off"></div>-->
+<!--                  <div class="text">收藏</div>-->
+<!--                </div>-->
+<!--              </div>-->
+
               <div class="btns">
-                <a @click="handleBuy" href="javascript:;" class="button ghost">立即购买</a>
-                <a href="javascript:;" class="button addCart"><span class="icon icon-gouwuche"></span> 加入购物车</a>
-                <div class="addSc">
-                  <div class="icon el-icon-star-off"></div>
-                  <div class="text">收藏</div>
-                </div>
+                <el-row>
+                  <el-button type="danger">加入购物车</el-button>
+                  <el-button icon="el-icon-star-on" class="collection">收藏</el-button>
+                </el-row>
               </div>
+
+
             </div>
           </div>
           <!-- 详情 -->
@@ -193,6 +206,7 @@
       },
       data(){
         return{
+          num:1,
           imgInit:0,
           goods_detail:[],
           imgs:[
@@ -283,6 +297,16 @@
 </script>
 
 <style scoped lang="scss">
+  .collection{
+    background: #FAB677;
+    border-color: #FAB677;
+    color: #FFF;
+
+    &:hover{
+      background: orange;
+      border-color: orange;
+    }
+  }
   .detailBox{
     .content{
       padding: 0 0 80px;
@@ -325,7 +349,7 @@
                 }
                 &.active a {
                   margin: 0;
-                  border: 2px solid #b4a078;
+                  border: 2px solid #35AFFB;
                 }
                 a{
                   box-sizing: border-box;
@@ -497,7 +521,7 @@
                   }
                   .tab-sel {
                     line-height: 26px;
-                    border: 2px solid #b4a078;
+                    border: 2px solid #35AFFB;
                     color: #333;
                     margin-left: -1px;
                     margin-right: -1px;

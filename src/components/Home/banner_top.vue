@@ -1,13 +1,18 @@
 <template>
-  <div>
-    <el-row class="banner_top">
-      <el-col :span="3" :offset="3" class="active_banner_top">
-        首页
-      </el-col>
-      <el-col :span="3" v-for="(item,index) in catelogy" :key="index">
+  <div style="background: #EDEDED">
+    <div class="banner_top">
+      <div class="el-col-3" v-for="(item,index) in catelogy" :key="index">
         {{item.name}}
-      </el-col>
-    </el-row>
+      </div>
+    </div>
+<!--    <el-row class="banner_top">-->
+<!--      <el-col :span="3" :offset="3" class="active_banner_top">-->
+<!--        首页-->
+<!--      </el-col>-->
+<!--      <el-col :span="3" v-for="(item,index) in catelogy" :key="index">-->
+<!--        {{item.name}}-->
+<!--      </el-col>-->
+<!--    </el-row>-->
   </div>
 </template>
 
@@ -37,6 +42,8 @@
     /*background-color: #ff6700;*/
     /*background-image: linear-gradient(62deg, #ff6700 0%, #F7CE68 100%);*/
     color: #606266;
+    width: 1155px;
+    margin: 0 auto;
     height: 40px;
     line-height: 40px;
     text-align: center;
@@ -46,5 +53,8 @@
     color: #EDB424;
     transition: all 0.25s;
     cursor: pointer;
+  }
+  .el-col-3{
+    padding-left: 60px;
   }
 </style>

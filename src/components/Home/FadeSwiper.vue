@@ -94,8 +94,9 @@
 .FadeSwiper{
   position: relative;
   overflow: hidden;
+  width: 1536px;
   .swiperWrapper{
-    width: 100%;
+    width: 1536px;
     height: 100%;
     position: absolute;
     top: 0;

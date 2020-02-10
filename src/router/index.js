@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 const Home =()=>import('../views/Home.vue')
 const detail =()=>import('../views/detail')
+const catelogy =()=>import('../views/catelogy')
 const search =()=>import('../views/search')
 const cart =()=>import('../views/cart')
 const login =()=>import('../views/login')
@@ -19,6 +20,11 @@ const routes = [
     path: '/',
     name: 'home',
     component: Home,
+  },
+  {
+    path: '/goods',
+    name: 'goods',
+    component: catelogy,
   },
   {
     path: '/detail',

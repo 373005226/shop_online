@@ -1,12 +1,11 @@
 <template>
-  <div>
-    <el-row>
-      <el-col :offset="3" :span="20">
+  <div class="main">
         <div class="main-nav">
             <div class="nav-first" @mouseenter="isNavEnter = true" @mouseleave="isNavEnter = false">
               <ul>
                 <li v-for="(item,index) in navFirst" :key="index"
                     :class="{active: item.type === selected}"
+                    @click="togoods"
                     @mouseenter="selected = item.type">
                   <p>
                     <span>{{item.name}}</span>
@@ -31,8 +30,6 @@
             </div>
         </div>
 
-      </el-col>
-    </el-row>
   </div>
 </template>
 
@@ -89,6 +86,11 @@
         }
       }
     },
+    methods:{
+      togoods(){
+        this.$router.push({path:'/goods'})
+      }
+    },
     created() {
       catelogy().then(res=>{
         console.log(res)
@@ -101,6 +103,10 @@
 </script>
 
 <style lang="scss" scoped>
+  .main{
+    width: 1220px;
+    margin: 0 auto;
+  }
   .main-nav {
     font-size: 14px;
     width: 1226px;
@@ -112,7 +118,7 @@
 
     > .nav-first {
       /*width: 215px;*/
-      width: 12vw;
+      width: 180px;
       text-align: center;
       /*height: 458px;*/
       position: relative;

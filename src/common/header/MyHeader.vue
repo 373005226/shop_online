@@ -81,7 +81,7 @@ export default {
     return{
       isShowTitle:this.headType,
       siteNavList :[
-        {text:'我的订单',url:'/login'},
+        {text:'我的订单',url:'/userOrder'},
         {text:'会员中心',url:'/user'},
         // {text:'企业采购通道',url:'',
         //   more:[

@@ -136,7 +136,7 @@ export default {
     .funcTab{
       position: relative;
       height: 140px;
-      background-color: #fff;
+      background-color: #F5F5F5;
       box-shadow: 0 0 3px 0 rgba(0,0,0,.2);
       .tabLogo {
         position: absolute;
