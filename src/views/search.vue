@@ -3,7 +3,7 @@
       <my-header></my-header>
       <search_foot></search_foot>
 
-      <goods></goods>
+      <goods style="padding-bottom: 20px;"></goods>
 
 
       <my-footer></my-footer>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <my-header></my-header>
-    <goods></goods>
+    <goods style="padding-bottom: 20px"></goods>
     <my-footer></my-footer>
   </div>
 </template>

@@ -1,6 +1,8 @@
 <template>
   <div style="background: #EDEDED">
     <div class="main">
+      <crumbs></crumbs>
+
       <div class="nav">
         <div>
           <a href="#" class="active">综合排序</a>
@@ -38,8 +40,10 @@
 
 <script>
 
+  import Crumbs from "./crumbs";
   export default {
     name: "Goods",
+    components: {Crumbs},
     data() {
       return {
         min: '',

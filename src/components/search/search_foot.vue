@@ -4,7 +4,9 @@
       <div>
         <div class="nav-list2">
           <div class="home">
-            首页
+            <router-link :to="{name:'home'}">
+              首页
+            </router-link>
           </div>
           <div class="search">
             搜索

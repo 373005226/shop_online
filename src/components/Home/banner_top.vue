@@ -1,6 +1,9 @@
 <template>
   <div style="background: #EDEDED">
     <div class="banner_top">
+      <div class="el-col-3">
+        首页
+      </div>
       <div class="el-col-3" v-for="(item,index) in catelogy" :key="index">
         {{item.name}}
       </div>

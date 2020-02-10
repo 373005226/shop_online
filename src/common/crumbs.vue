@@ -2,7 +2,7 @@
     <div class="crumbs">
       <router-link  to="/">首页</router-link>
       <div class="el-icon-arrow-right"></div>
-      <span class="">{{$route.name}}</span>
+      <span class="">{{$route.query}}</span>
     </div>
 </template>
 
