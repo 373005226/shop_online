@@ -195,7 +195,7 @@
   .c-rank .c-rank-nav ul li {
     margin: 0 11px;
     float: left;
-    width: 97px;
+    width: 110px;
     height: 86px;
     background: #fff;
     /*border: 1px solid #fff;*/

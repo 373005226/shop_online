@@ -135,8 +135,8 @@
 
         li {
           padding-left: 30px;
-          height: 41px;
-          line-height: 41px;
+          height: 45.5px;
+          line-height: 45.5px;
           cursor: pointer;
 
           &:hover {
