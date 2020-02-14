@@ -119,7 +119,7 @@ export default {
   @import "../../assets/css/main.css";
     .footer{
       clear: both;
-      width: 1520px;
+    //   width: 1520px;
       /*padding-top: 50px;*/
       .ft1{
         height: 265px;
