@@ -29,13 +29,14 @@
 <script>
   import SectionHeader from "./SectionHeader";
   import Slick from "./Slick";
-  import {goods} from "../../api/goods";
+  import {newgoods} from "../../api/goods";
 
   export default {
       name: "new_goodslsit",
       data() {
         return {
           widths: '',
+          page:1,
           goodsList: [
             // {
             //   id:1,
@@ -83,9 +84,16 @@
       created() {
         this.widths = document.body.clientWidth
         // console.log(this.widths)
-        goods().then(res=>{
+        newgoods(this.page).then(res=>{
           console.log(res)
-          this.goodsList = res
+          this.goodsList = res.results
+          // if(res.next!=null){
+          //   console.log(res)
+          //   this.page+=1
+          //   newgoods(this.page).then(res=>{
+          //     console.log(res)
+          //   })
+          // }
         })
       }
     }

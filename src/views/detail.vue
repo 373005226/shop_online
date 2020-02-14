@@ -97,7 +97,7 @@
 <!--                      <span @click="number++" class="el-icon-plus"></span>-->
 <!--                    </div>-->
                     <div class="number cont">
-                      <el-input-number v-model="num" :min="1" :max="10" label="描述文字" size="small"></el-input-number>
+                      <el-input-number v-model="num" :min="1" :max="goodtotal" label="描述文字" size="small"></el-input-number>
 
                     </div>
                   </div>
@@ -169,11 +169,13 @@
                       </div>
                     </div>
                   </div>
+
                   <el-pagination style="text-align: center"
                     background
                     layout="prev, pager, next"
-                    :total="1000">
+                    :total="100">
                   </el-pagination>
+
                 </div>
               </div>
             </div>
@@ -206,6 +208,7 @@
       },
       data(){
         return{
+          goodtotal:20,
           num:1,
           imgInit:0,
           goods_detail:[],
@@ -258,6 +261,7 @@
           detail(id).then(res=>{
             console.log(res)
             this.goods_detail = res
+            this.goodtotal = res.goods_num
           })
         },
         // 去评论

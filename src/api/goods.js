@@ -6,8 +6,8 @@ export const catelogy =(params)=>{
 }
 
 //获取商品数据
-export const goods =(params)=>{
-  return http.fetchGet('goods/',params)
+export const newgoods =(page)=>{
+  return http.fetchGet('goods/?is_news=true&page='+page)
 }
 
 //获取商品详情数据

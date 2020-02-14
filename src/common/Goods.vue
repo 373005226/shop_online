@@ -30,6 +30,7 @@
 
       <div class="page">
         <el-pagination
+          @current-change="handleCurrentChange"
           :hide-on-single-page="false"
           background
           layout="prev, pager, next"
@@ -86,6 +87,15 @@
             price: 34.2
           }
         ]
+      }
+    },
+    methods:{
+      handleCurrentChange(value){
+        console.log(value)
+        catelogygoods(this.$route.query.goodid,value).then(res=>{
+          console.log(res)
+          this.goodsList = res.results
+        })
       }
     },
     created() {
