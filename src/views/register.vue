@@ -114,6 +114,7 @@
 <script>
   import MyHeader from "../common/header/MyHeader";
   import MyFooter from "../common/footer/MyFooter";
+  import {sendcode} from "@/api/index"
   export default {
     name: "register",
     components: {MyFooter, MyHeader},
@@ -217,6 +218,9 @@
         if (this.btnDisabled) {
           return;
         }
+        sendcode().then(res=>{
+          console.log(res)
+        })
         this.getSecond(60);
       },
 
