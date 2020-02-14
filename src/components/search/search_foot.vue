@@ -10,9 +10,9 @@
           </div>
           <div class="search">
             搜索
-            <strong>"苹果"</strong>
+            <strong>"{{$route.query.keys}}"</strong>
             共
-            <strong>5条</strong>
+            <strong>{{searchnum}}条</strong>
             结果
           </div>
         </div>
@@ -23,8 +23,20 @@
 </template>
 
 <script>
+import {searchgood} from "@/api/goods"
   export default {
-    name: "search_foot"
+    name: "search_foot",
+    data(){
+      return{
+        searchnum:0,
+      }
+    },
+    created() {
+      searchgood(this.$route.query.keys).then(res=>{
+        console.log(res.count)
+        this.searchnum = res.count
+      })
+    }
   }
 </script>
 

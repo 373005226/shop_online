@@ -82,6 +82,7 @@ export default {
     return{
 
       showNavTop:false,
+      value:'',
       // search
       isShowInfo:true,
       searchValue:'搜索你想要的商品',
@@ -109,6 +110,8 @@ export default {
       let value = e.target.value;
       this.searchValue = value;
       this.isShowInfo = value == '' ? true : false;
+      this.value = value
+      console.log(value)
     },
     handleHot(e){
       this.searchValue = e;
@@ -116,7 +119,12 @@ export default {
     },
     // 点击搜索
     handleSearch(){
-      this.$router.push(`/search`)
+      this.$router.push({
+        path:`/search`,
+        query:{
+          keys:this.value
+        }
+      })
     },
     handleScroll() {
       let top = document.documentElement.scrollTop;

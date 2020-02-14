@@ -19,3 +19,8 @@ export const detail =(params)=>{
 export const catelogygoods=(params,page)=>{
   return http.fetchGet('goods/?category_type='+params+'&page='+page)
 }
+
+//搜索商品名称
+export const searchgood=(params)=>{
+  return http.fetchGet('goods/?search='+params)
+}

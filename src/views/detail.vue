@@ -301,6 +301,18 @@
 </script>
 
 <style scoped lang="scss">
+.view{
+  width: 412px;
+  height: 428px;
+  overflow: hidden;
+  display: inline-block;
+
+  img{
+    width: 412px;
+    height: 428px;
+  }
+}
+
   .collection{
     background: #FAB677;
     border-color: #FAB677;
