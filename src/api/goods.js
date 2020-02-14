@@ -14,3 +14,8 @@ export const goods =(params)=>{
 export const detail =(params)=>{
   return http.fetchGet('goods/'+params)
 }
+
+// 获取当前类别的所有数据
+export const catelogygoods=(params,page)=>{
+  return http.fetchGet('goods/?category_type='+params+'&page='+page)
+}

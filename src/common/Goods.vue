@@ -19,18 +19,21 @@
 
       <div class="goods">
         <div class="col" v-for="(item,index) in goodsList" :key="index">
-          <img :src="item.img">
-          <p class="name">{{item.name}}</p>
-          <p class="price"> ￥ <strong>{{item.price}}</strong></p>
-          <a class="cartBtn"></a>
+          <router-link :to="{path:'/detail',query:{id:item.id}}">
+            <img :src="item.images[0].image" v-if="item.images !== undefined &&  item.images.length > 0 ">
+            <p class="name">{{item.name}}</p>
+            <p class="price"> ￥ <strong  v-if="item.specification !== undefined &&  item.specification.length > 0 ">{{item.specification[0].shop_price}}</strong></p>
+            <a class="cartBtn"></a>
+           </router-link>
         </div>
       </div>
 
       <div class="page">
         <el-pagination
+          :hide-on-single-page="false"
           background
           layout="prev, pager, next"
-          :total="100">
+          :total="total">
         </el-pagination>
       </div>
     </div>
@@ -41,6 +44,7 @@
 <script>
 
   import Crumbs from "./crumbs";
+  import {catelogygoods} from "@/api/goods"
   export default {
     name: "Goods",
     components: {Crumbs},
@@ -48,6 +52,8 @@
       return {
         min: '',
         max: '',
+        total:1,
+        page:1,
         goodsList: [
           {
             img: require('@/assets/img/food/好丽友薯片.jpg'),
@@ -81,6 +87,13 @@
           }
         ]
       }
+    },
+    created() {
+      catelogygoods(this.$route.query.goodid,this.page).then(res=>{
+        console.log(res)
+        this.goodsList = res.results
+        this.total = res.count
+      })
     }
   }
 </script>

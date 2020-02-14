@@ -37,36 +37,42 @@
         return {
           widths: '',
           goodsList: [
-            {
-              img: require('@/assets/img/food/好丽友薯片.jpg'),
-              name: '好丽友薯片',
-              price: 16
-            },
-            {
-              img: require('@/assets/img/food/奥利奥冰淇淋味夹心饼干22.8.jpg'),
-              name: '奥利奥冰淇淋味夹心饼干',
-              price: 22.8
-            },
-            {
-              img: require('@/assets/img/food/奥利奥蓝莓味夹心饼干.jpg'),
-              name: '奥利奥蓝莓味夹心饼干',
-              price: 26
-            },
-            {
-              img: require('@/assets/img/food/稻香村糕点礼盒53.jpg'),
-              name: '稻香村糕点礼盒',
-              price: 22.8
-            },
-            {
-              img: require('@/assets/img/food/费列罗巧克力81.5.jpg'),
-              name: '费列罗巧克力',
-              price: 81.5
-            },
-            {
-              img: require('@/assets/img/food/达利园糕点34.2.jpg'),
-              name: '达利园糕点',
-              price: 34.2
-            }
+            // {
+            //   id:1,
+            //   img: require('@/assets/img/food/好丽友薯片.jpg'),
+            //   name: '好丽友薯片',
+            //   price: 16
+            // },
+            // {
+            //   id:2,
+            //   img: require('@/assets/img/food/奥利奥冰淇淋味夹心饼干22.8.jpg'),
+            //   name: '奥利奥冰淇淋味夹心饼干',
+            //   price: 22.8
+            // },
+            // {
+            //   id:3,
+            //   img: require('@/assets/img/food/奥利奥蓝莓味夹心饼干.jpg'),
+            //   name: '奥利奥蓝莓味夹心饼干',
+            //   price: 26
+            // },
+            // {
+            //   id:4,
+            //   img: require('@/assets/img/food/稻香村糕点礼盒53.jpg'),
+            //   name: '稻香村糕点礼盒',
+            //   price: 22.8
+            // },
+            // {
+            //   id:5,
+            //   img: require('@/assets/img/food/费列罗巧克力81.5.jpg'),
+            //   name: '费列罗巧克力',
+            //   price: 81.5
+            // },
+            // {
+            //   id:6,
+            //   img: require('@/assets/img/food/达利园糕点34.2.jpg'),
+            //   name: '达利园糕点',
+            //   price: 34.2
+            // }
           ],
         }
       },

@@ -5,7 +5,7 @@
               <ul>
                 <li v-for="(item,index) in navFirst" :key="index"
                     :class="{active: item.type === selected}"
-                    @click="togoods"
+                    @click="togoods(item.id,item.name)"
                     @mouseenter="selected = item.type">
                   <p>
                     <span>{{item.name}}</span>
@@ -44,16 +44,16 @@
         isNavEnter: false,
         isMenuEnter: false,
         navFirst: [
-          {name: '水果蔬菜', type: 'phone'},
-          {name: '肉类、海鲜', type: 'live'},
-          {name: '酒水、饮料、冲饮', type: 'pad'},
-          {name: '粮油、零食、宠物', type: 'tv'},
-          {name: '美妆个护', type: 'charger'} ,
-          {name: '医疗保健', type: 'earphone'},
-          {name: '家电、家居产品', type: 'protect'},
-          {name: '五金工具', type: 'card'},
-          {name: '办公文具 ', type: 'bag'},
-          {name: '服饰', type: 'bag'}
+          {id:1,name: '水果蔬菜', type: 'phone'},
+          {id:2,name: '肉类、海鲜', type: 'live'},
+          {id:3,name: '酒水、饮料、冲饮', type: 'pad'},
+          {id:4,name: '粮油、零食、宠物', type: 'tv'},
+          {id:5,name: '美妆个护', type: 'charger'} ,
+          {id:6,name: '医疗保健', type: 'earphone'},
+          {id:7,name: '家电、家居产品', type: 'protect'},
+          {id:8,name: '五金工具', type: 'card'},
+          {id:9,name: '办公文具 ', type: 'bag'},
+          {id:10,name: '服饰', type: 'bag'}
         ],
         navSec: {
           phone: [
@@ -87,8 +87,11 @@
       }
     },
     methods:{
-      togoods(){
-        this.$router.push({path:'/goods'})
+      togoods(goodid,name){
+        this.$router.push({
+          path:'/goods',
+          query:{goodid:goodid,goodname:name}
+          })
       }
     },
     created() {

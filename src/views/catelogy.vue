@@ -12,7 +12,7 @@
   import Goods from "../common/Goods";
   export default {
     name: "catelogy",
-    components: {Goods, MyFooter, MyHeader}
+    components: {Goods, MyFooter, MyHeader},
   }
 </script>
 
