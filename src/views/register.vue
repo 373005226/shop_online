@@ -212,13 +212,15 @@
         this.active2 = false
         this.is_show3 = true
         this.active3 = true
+
+        this.informationForm.phone = this.phoneForm.phone
       },
 
       sendMessage() {
         if (this.btnDisabled) {
           return;
         }
-        sendcode().then(res=>{
+        sendcode({mobile:this.phoneForm.phone}).then(res=>{
           console.log(res)
         })
         this.getSecond(60);
