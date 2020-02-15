@@ -54,15 +54,15 @@
 
         <transition name="el-fade-in">
           <div class="rgisterphone" v-if="is_show2" >
-            <el-form :model="phoneForm" status-icon :rules="phonerules" ref="phoneForm" label-width="100px">
+            <el-form :model="phoneForm" status-icon  ref="phoneForm" label-width="100px">
               <el-form-item label="手机号:" prop="phone">
-                <el-input type="text" v-model="phoneForm.phone" autocomplete="off">
+                <el-input type="text" v-model="phoneForm.userphone" autocomplete="off">
                   <template slot="prepend">中国大陆 +86:</template>
                 </el-input>
               </el-form-item>
 
               <el-form-item label="验证码:" prop="code">
-                <el-input type="text" v-model="phoneForm.code" autocomplete="off" class="codeinput"></el-input>
+                <el-input type="text" v-model="phoneForm.phonecode" autocomplete="off" class="codeinput"></el-input>
                 <el-button type="primary" @click="sendMessage" :disabled="btnDisabled">{{btnText}}</el-button>
               </el-form-item>
 
@@ -71,7 +71,7 @@
               </el-form-item>
 
               <el-form-item>
-                <el-button type="primary" @click="submitForm">提交</el-button>
+                <el-button type="primary" @click="submitForm(phoneForm)">提交</el-button>
                 <el-button @click="resetForm('phoneForm')">重置</el-button>
               </el-form-item>
             </el-form>
@@ -87,6 +87,7 @@
   import MyHeader from "../common/header/MyHeader";
   import MyFooter from "../common/footer/MyFooter";
   import {sendcode} from "@/api/index"
+  import {userregister} from "@/api/index"
   export default {
     name: "register",
     components: {MyFooter, MyHeader},
@@ -102,8 +103,8 @@
         btnDisabled:false,
         totalTime: 60,
         phoneForm:{
-          phone:'',
-          code:'',
+          userphone:'',
+          phonecode:'',
           checkPass:''
         }
       }
@@ -118,15 +119,23 @@
       resetForm(formName) {
         this.$refs[formName].resetFields()
       },
-      submitForm(){
-
+      submitForm(phoneForm){
+        console.log(phoneForm)
+        userregister({username:phoneForm.userphone,code:phoneForm.phonecode,mobile:phoneForm.userphone,password:phoneForm.checkPass}).then(res=>{
+          console.log(res)
+          this.$store.state.mobile = res.mobile
+          this.$store.state.token = res.token
+          this.$router.push({
+            path:'/'
+          })
+        })
       },
 
       sendMessage() {
         if (this.btnDisabled) {
           return;
         }
-        sendcode({mobile:this.phoneForm.phone}).then(res=>{
+        sendcode({mobile:this.phoneForm.userphone}).then(res=>{
           console.log(res)
         })
         this.getSecond(60);
@@ -156,7 +165,7 @@
 
 <style scoped lang="scss">
   .codeinput{
-    width: 68%;
+    width: 46%;
   }
   .register{
     width: 1020px;

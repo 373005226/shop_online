@@ -21,7 +21,7 @@ export default {
       }).catch(error => {
         reject(error)
       })
-    })
+    })  
   },
   fetchPut (url, params = {}) {
     return new Promise((resolve, reject) => {

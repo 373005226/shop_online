@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    login:false,    //用户是否登录
+    mobile:'',    //用户名
     token:'',       //token
     cartList: [],   // 购物车列表
     userInfo: null, // 用户信息

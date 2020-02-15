@@ -22,10 +22,13 @@
           <div class="siteNav-r">
             <div class="siteNavItem">
               <div class="siteNavItemHd">
-                <div v-if="$store.state.login  == false">
+                <div v-if="$store.state.mobile=''">
                   <a class="siteNavItem" @click="Login">登录</a>
                   <span class="siteNavItem">/</span>
                   <a class="siteNavItem" @click="register">注册</a>
+                </div>
+                <div v-else>
+                  {{username}}
                 </div>
               </div>
             </div>
@@ -102,7 +105,7 @@ export default {
     }
   },
   created(){
-
+    console.log(this.$store.state)
   },
   mounted(){
   },
@@ -119,6 +122,11 @@ export default {
       this.$refs.login.close()
     }
   },
+  computed:{
+      username(){
+      return this.$store.state.mobile
+    }
+  }
 }
 </script>
 
