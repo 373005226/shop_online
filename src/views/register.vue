@@ -10,10 +10,6 @@
             </li>
             <li :class="{active:active2}">
               <i class="step-icon">2</i>
-              验证手机号
-            </li>
-            <li :class="{active:active3}">
-              <i class="step-icon">3</i>
               填写用户信息
             </li>
           </ol>
@@ -65,47 +61,23 @@
                 </el-input>
               </el-form-item>
 
-
               <el-form-item label="验证码:" prop="code">
                 <el-input type="text" v-model="phoneForm.code" autocomplete="off" class="codeinput"></el-input>
                 <el-button type="primary" @click="sendMessage" :disabled="btnDisabled">{{btnText}}</el-button>
               </el-form-item>
 
+              <el-form-item label="确认密码" prop="checkPass">
+                <el-input type="password" v-model="phoneForm.checkPass" autocomplete="off"></el-input>
+              </el-form-item>
+
               <el-form-item>
                 <el-button type="primary" @click="submitForm">提交</el-button>
-                <el-button @click="resetForm('ruleForm')">重置</el-button>
+                <el-button @click="resetForm('phoneForm')">重置</el-button>
               </el-form-item>
             </el-form>
           </div>
         </transition>
 
-        <transition name="el-fade-in">
-          <div class="registerinformation" v-if="is_show3" >
-            <el-form :model="informationForm" status-icon :rules="informationrules" ref="informationForm" label-width="100px">
-              <el-form-item label="手机号:" prop="phone">
-                <el-input type="text" v-model="informationForm.phone" autocomplete="off" disabled></el-input>
-              </el-form-item>
-
-              <el-form-item label="用户名:" prop="phone">
-                <el-input type="text" v-model="informationForm.username" autocomplete="off"></el-input>
-              </el-form-item>
-
-
-              <el-form-item label="密码:" prop="code">
-                <el-input type="password" v-model="informationForm.password" autocomplete="off"></el-input>
-              </el-form-item>
-
-              <el-form-item label="确认密码" prop="checkPass">
-                <el-input type="password" v-model="informationForm.checkPass" autocomplete="off"></el-input>
-              </el-form-item>
-
-              <el-form-item>
-                <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
-                <el-button @click="resetForm('informationForm')">重置</el-button>
-              </el-form-item>
-            </el-form>
-          </div>
-        </transition>
       </div>
     <my-footer></my-footer>
   </div>
@@ -119,46 +91,6 @@
     name: "register",
     components: {MyFooter, MyHeader},
     data(){
-        var validatephone = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('请输入手机号'));
-        } else {
-          if (this.phoneForm.phone !== '') {
-            this.$refs.phoneForm.validateField('phone');
-          }
-          callback();
-        }
-      };
-      var validatecode = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('请输入验证码'));
-        } else {
-          if (this.phoneForm.code !== '') {
-            this.$refs.phoneForm.validateField('code');
-          }
-          callback();
-        }
-      };
-
-      var validatePass = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('请输入密码'));
-        } else {
-          if (this.informationForm.checkPass !== '') {
-            this.$refs.informationForm.validateField('checkPass');
-          }
-          callback();
-        }
-      };
-      var validatePass2 = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('请再次输入密码'));
-        } else if (value !== this.informationForm.pass) {
-          callback(new Error('两次输入密码不一致!'));
-        } else {
-          callback();
-        }
-      };
       return{
         is_show1:true,
         is_show2:false,
@@ -171,29 +103,8 @@
         totalTime: 60,
         phoneForm:{
           phone:'',
-          code:''
-        },
-        phonerules:{
-          checkphone:[
-            { validator: validatephone, trigger: 'blur' }
-          ],
-          checkcode:[
-            { vallidator: validatecode,trigger: 'blur' }
-          ]
-        },
-        informationForm:{
-          phone:'',
-          username:'',
-          password:'',
+          code:'',
           checkPass:''
-        },
-        informationrules:{
-          pass: [
-            { validator: validatePass, trigger: 'blur' }
-          ],
-          checkPass: [
-            { validator: validatePass2, trigger: 'blur' }
-          ]
         }
       }
     },
@@ -205,15 +116,10 @@
         this.active2 = true
       },
       resetForm(formName) {
-        this.$refs[formName].resetFields();
+        this.$refs[formName].resetFields()
       },
       submitForm(){
-        this.is_show2 = false
-        this.active2 = false
-        this.is_show3 = true
-        this.active3 = true
 
-        this.informationForm.phone = this.phoneForm.phone
       },
 
       sendMessage() {
@@ -250,7 +156,7 @@
 
 <style scoped lang="scss">
   .codeinput{
-    width: 46%;
+    width: 68%;
   }
   .register{
     width: 1020px;
