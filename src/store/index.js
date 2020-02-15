@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
+import actions from './action'
+import mutations from './mutations'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -16,10 +17,6 @@ export default new Vuex.Store({
       {user_name:'景冰川',province:'山西省',city:'太原市',area:'小店区',detailed:'test',user_phone:'1388888888',isDefault:true},
     ]               //用户地址
   },
-  mutations: {
-  },
-  actions: {
-  },
-  modules: {
-  }
+  mutations,
+  actions
 })
