@@ -22,13 +22,13 @@
           <div class="siteNav-r">
             <div class="siteNavItem">
               <div class="siteNavItemHd">
-                <div v-if="$store.state.mobile=''">
+                <div v-if="$store.state.mobile == ''">
                   <a class="siteNavItem" @click="Login">登录</a>
                   <span class="siteNavItem">/</span>
                   <a class="siteNavItem" @click="register">注册</a>
                 </div>
                 <div v-else>
-                  {{username}}
+                  <a class="siteNavItem">尊敬的用户 {{$store.state.mobile}} </a>
                 </div>
               </div>
             </div>

@@ -123,8 +123,9 @@
         console.log(phoneForm)
         userregister({username:phoneForm.userphone,code:phoneForm.phonecode,mobile:phoneForm.userphone,password:phoneForm.checkPass}).then(res=>{
           console.log(res)
-          this.$store.state.mobile = res.mobile
-          this.$store.state.token = res.token
+          this.$store.commit('login',res)
+          // this.$store.state.mobile = res.mobile
+          // this.$store.state.token = res.token
           this.$router.push({
             path:'/'
           })
