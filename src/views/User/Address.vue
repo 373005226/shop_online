@@ -32,7 +32,7 @@
                                     <td >{{item.province}}{{item.city}}{{item.area}}{{item.detailed}}</td>
                                     <td>{{item.user_phone}}</td>
                                     <td>
-                                        <a class="update" href="javascript:;">编辑</a>
+                                        <a class="update" href="javascript:;" @click="showForm">编辑</a>
                                         <a class="delete" href="javascript:;">删除</a>
                                     </td>
                                     <td>
