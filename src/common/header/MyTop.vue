@@ -150,6 +150,7 @@ export default {
         position: absolute;
         top: 24px;
         left: 0;
+
         // logo
         .logo{
           font-style: normal;

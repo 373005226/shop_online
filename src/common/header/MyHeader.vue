@@ -31,18 +31,11 @@
                   <span style="float:left;">尊敬的用户 </span>
                   <div class="siteNavItemuser">
                     <div class="mobile">
-                        <el-popover
-                          placement="bottom"
-                          width="200"
-                          trigger="click">
-                          <p>确认退出账号吗？</p>
-                            <div style="text-align: right; margin: 0">
-                              <el-button size="mini" type="text" @click="visible = false">取消</el-button>
-                              <el-button type="primary" size="mini" @click="visible = false">确定</el-button>
-                            </div>
-                          <el-link slot="reference">{{$store.state.mobile}}</el-link>
-                        </el-popover>
-                      </div>
+                      {{mobilephone}}
+                        <!-- {{$store.state.mobile}} -->
+                        <span style="margin-left: 10px;">|</span>
+                        <span style="margin-left:10px;">退出登录</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -98,6 +91,7 @@ export default {
   data(){
     return{
       isShowTitle:this.headType,
+      str:'',
       siteNavList :[
         {text:'我的订单',url:'/userOrder'},
         {text:'会员中心',url:'/user'},
@@ -123,6 +117,7 @@ export default {
     console.log(this.$store.state)
   },
   mounted(){
+
   },
   methods:{
     // 显示login
@@ -135,11 +130,13 @@ export default {
     // 隐藏 login
     closeLogin(){
       this.$refs.login.close()
-    }
+    },
+
   },
   computed:{
-      username(){
-      return this.$store.state.mobile
+    mobilephone:function(){
+      let phone = this.$store.state.mobile
+      return phone.replace( /([0-9]{3})([0-9]{4})([0-9]{4})/,"$1****$3")
     }
   }
 }
@@ -242,15 +239,24 @@ export default {
             margin-left: 10px;
             position: relative;
             color: #ccc;
-            cursor: pointer;
+            // cursor: pointer;
             &:hover .siteNavItemBd{
               display: block;
             }
             .siteNavItemuser{
               float: left;
-              margin-left: 10px;
+              margin-right: 15px;
               position: relative;
               color: #ccc;
+
+              .mobile{
+                margin-left: 15px;
+                cursor: pointer;
+              }
+
+              .logout{
+                float: left;
+              }
             }
 
             .pipe:before {
@@ -267,7 +273,7 @@ export default {
               font-size: 12px;
               height: 36px;
               line-height: 36px;
-              // cursor: pointer;
+              cursor: pointer;
             }
             .siteNavItemBd{
               display: none;
