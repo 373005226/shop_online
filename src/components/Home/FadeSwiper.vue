@@ -95,12 +95,15 @@
   position: relative;
   overflow: hidden;
   width: 1536px;
+  margin: 0 auto;
   .swiperWrapper{
-    width: 1536px;
+    /*width: 1536px;*/
+    /*width: 100%;*/
     height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
+    margin: 0 auto;
+    /*position: absolute;*/
+    /*top: 0;*/
+    /*left: 0;*/
     .swiperItem{
       width: 100%;
       height: 100%;
