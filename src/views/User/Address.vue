@@ -77,7 +77,9 @@ export default{
         }
     },
     created(){
-
+      this.$store.state.mobile = localStorage.getItem('mobile')
+      this.$store.state.token = localStorage.getItem('token')
+      console.log(localStorage.getItem('token'))
     },
     mounted(){
 

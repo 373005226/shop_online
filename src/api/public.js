@@ -14,14 +14,14 @@ export default {
       })
     })
   },
-  fetchPost (url, params = {}) {
+  fetchPost (url, params = {},headers = {}) {
     return new Promise((resolve, reject) => {
-      axios.post(url, params).then(res => {
+      axios.post(url, params,headers).then(res => {
         resolve(res.data)
       }).catch(error => {
         reject(error)
       })
-    })  
+    })
   },
   fetchPut (url, params = {}) {
     return new Promise((resolve, reject) => {

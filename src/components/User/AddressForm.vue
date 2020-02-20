@@ -58,6 +58,8 @@
 
 <script>
   import { regionData } from 'element-china-area-data'
+  import {CodeToText} from 'element-china-area-data'
+  import { useraddress } from '@/api/index'
   export default {
     name: 'AddressForm',
     data(){
@@ -68,29 +70,34 @@
           detail:'',
           username:'',
           phone:''
-        },
-          selected:[
-          "440000",
-          "440300",
-          "440305"
-          ],
+        }
       }
     },
-  mounted(){
-
+  created(){
+    this.$store.state.token = 'JWT '+localStorage.getItem('token')
+    console.log(this.$store.state.token)
   },
-  methods:{
+    methods:{
       // 关闭 弹框
       calse(){
           this.$emit('calse')
       },
       handleChange (value) {
         console.log(value)
+        console.log(CodeToText[value[0]]+CodeToText[value[1]]+CodeToText[value[2]])
       },
-    submitForm(FormName){
-        console.log(FormName)
-        this.$emit('calse')
-    }
+      submitForm(FormName){
+          console.log(FormName)
+        console.log(CodeToText[FormName.selectedOptions[0]]+CodeToText[FormName.selectedOptions[1]]+CodeToText[FormName.selectedOptions[2]])
+        console.log(this.$store.state.token)
+
+        useraddress({province:CodeToText[FormName.selectedOptions[0]],city:CodeToText[FormName.selectedOptions[1]],district:CodeToText[FormName.selectedOptions[2]],address:FormName.detail,signer_name:FormName.username,signer_mobile:FormName.phone},{Authorization:this.$store.state.token}).then(res=>{
+          console.log(res)
+        }).catch(error=>{
+          console.log(error)
+        })
+          this.$emit('calse')
+      }
   }
 }
 </script>
