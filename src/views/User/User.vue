@@ -10,12 +10,12 @@
                     <div class="info">
                         <div class="infoWrap">
                             <router-link to="/" class="avatar">
-                                <img src="//yanxuan.nosdn.127.net/c3a03895c73694d922310c76e4915cdb.png?imageView&thumbnail=76x76&quality=95" alt="">
+                                <img src="@/assets/img/userimg.png" alt="">
                             </router-link>
                             <div class="name">
                                 <div class="nickname">
                                     <router-link to="/">
-                                        18434367522
+                                        {{$store.state.mobile}}
                                     </router-link>
                                 </div>
                             </div>
@@ -89,7 +89,10 @@ export default{
                 {text:'待领礼包',number:'0.00',type:0,company:'个',url:''},
             ]
         }
-    }
+    },
+  created() {
+    this.$store.state.mobile = localStorage.getItem('mobile')
+  }
 }
 </script>
 

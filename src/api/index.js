@@ -14,3 +14,8 @@ export const sendcode =(params)=>{
 export const userregister =(params)=>{
   return http.fetchPost('user/',params)
 }
+
+//收货地址功能
+export const useraddress = (params)=>{
+  return http.fetchPost('address/',params)
+}

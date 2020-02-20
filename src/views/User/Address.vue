@@ -26,7 +26,7 @@
                                     <th></th>
                                 </tr>
                             </tbody>
-                            <tbody>
+                            <tbody v-if="$store.state.addressList.length !=0">
                                 <tr v-for="(item,index) in $store.state.addressList" :key='index'>
                                     <td >{{item.user_name}}</td>
                                     <td >{{item.province}}{{item.city}}{{item.area}}{{item.detailed}}</td>
@@ -42,6 +42,9 @@
                                 </tr>
                             </tbody>
                         </table>
+                      <div v-if="$store.state.addressList.length ==0" class="none">
+                        <img src="@/assets/img/nosearch.png">
+                      </div>
                     </div>
                 </div>
             </div>
@@ -91,6 +94,14 @@ export default{
 </script>
 
 <style lang="scss" scoped>
+  .none{
+    text-align: center ;
+
+    img{
+      height: 350px;
+      margin-top: 150px;
+    }
+  }
     .addressBox{
         .content{
             display: flex;
