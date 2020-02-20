@@ -1,12 +1,20 @@
 <template>
   <div class="addr" >
+    <el-form :model="formInline">
+
       <div class="row-addr">
           <div class="label">
               <span>*</span>
               <span class="text">所在地区 :</span>
           </div>
           <div class="data">
-              <v-distpicker province="" city="" area=""></v-distpicker>
+<!--              <v-distpicker province="" city="" area=""></v-distpicker>-->
+            <el-cascader
+              size="large"
+              :options="options"
+              v-model="formInline.selectedOptions"
+              @change="handleChange">
+            </el-cascader>
           </div>
       </div>
       <div class="row-addr">
@@ -15,7 +23,7 @@
               <span class="text">详细地址 :</span>
           </div>
           <div class="data">
-              <textarea placeholder="详细地址，街道、门牌号等" name="address" id="" cols="30" rows="10" tabindex="6" class="w-textarea" ></textarea>
+              <textarea placeholder="详细地址，街道、门牌号等" name="address" id="" cols="30" rows="10" tabindex="6" class="w-textarea" v-model="formInline.detail" ></textarea>
           </div>
       </div>
       <div class="row-addr inp">
@@ -25,7 +33,7 @@
                 <span class="text">收货人 :</span>
             </div>
             <div class="data">
-                <input type="text" class="w-ipt" name="name" value="" tabindex="1" >
+                <input type="text" class="w-ipt" name="name" value="" tabindex="1" v-model="formInline.username" >
             </div>
           </div>
           <div class="col-2">
@@ -34,31 +42,40 @@
                 <span class="text">手机号码 :</span>
             </div>
             <div class="data">
-                <input type="text" class="w-ipt" name="phone" value="" tabindex="1" >
+                <input type="text" class="w-ipt" name="phone" value="" tabindex="1"  v-model="formInline.phone">
             </div>
           </div>
 
       </div>
       <div class="btns">
-          <button class="submit">确定</button>
-          <button @click="calse" class="cancel">取消</button>
+           <el-button type="primary" plain @click="submitForm(formInline)">提交</el-button>
+           <el-button type="danger" plain @click="calse">取消</el-button>
       </div>
+
+    </el-form>
   </div>
 </template>
 
 <script>
-
-export default {
-  name: 'AddressForm',
-  data(){
-    return{
-        selected:[
-        "440000",
-        "440300",
-        "440305"
-        ],
-    }
-  },
+  import { regionData } from 'element-china-area-data'
+  export default {
+    name: 'AddressForm',
+    data(){
+      return{
+        options: regionData,
+        formInline:{
+          selectedOptions: [],
+          detail:'',
+          username:'',
+          phone:''
+        },
+          selected:[
+          "440000",
+          "440300",
+          "440305"
+          ],
+      }
+    },
   mounted(){
 
   },
@@ -66,7 +83,14 @@ export default {
       // 关闭 弹框
       calse(){
           this.$emit('calse')
-      }
+      },
+      handleChange (value) {
+        console.log(value)
+      },
+    submitForm(FormName){
+        console.log(FormName)
+        this.$emit('calse')
+    }
   }
 }
 </script>
@@ -133,8 +157,10 @@ export default {
         }
         .btns{
             display: flex;
-            justify-content: flex-end;
-            margin: 20px 20px 0 0;
+            /*justify-content: flex-end;*/
+            /*margin: 20px 20px 0 0;*/
+            width: 255px;
+            margin: 20px auto;
             button{
                 outline: none;
                 cursor: pointer;
@@ -146,23 +172,12 @@ export default {
                 line-height: 26px;
                 font-size: 12px;
                 text-align: center;
-                color: #333;
-                border: 1px solid #ccc;
-                background-color: #f5f5f5;
+                /*color: #333;*/
+                /*border: 1px solid #ccc;*/
+                /*background-color: #f5f5f5;*/
                 height: 42px;
                 line-height: 40px;
                 font-size: 16px;
-                &.submit{
-                    color: #fff;
-                    border: 1px solid #b4a078;
-                    background-color: #b4a078;
-                }
-                &.cancel{
-                    color: #b4a078;
-                    border: 1px solid #b4a078;
-                    background-color: #f5f3ef;
-                       margin-left: 10px;
-                }
             }
         }
     }
