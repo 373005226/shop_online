@@ -21,6 +21,11 @@ export const useraddress = (params)=>{
 }
 
 //查看收货地址
-export  const  getuseraddress =(params)=>{
+export const getuseraddress =(params)=>{
   return http.getinformation('address/',params)
+}
+
+//删除收货地址
+export const deleteaddress =(params)=>{
+  return http.fetchDelete('address/'+params)
 }

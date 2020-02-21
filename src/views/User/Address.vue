@@ -33,7 +33,7 @@
                                     <td>{{item.signer_mobile}}</td>
                                     <td>
                                         <a class="update" href="javascript:;" @click="showForm">编辑</a>
-                                        <a class="delete" href="javascript:;">删除</a>
+                                        <a class="delete" href="javascript:;" @click="deleteinformation(item.id)">删除</a>
                                     </td>
                                     <td>
                                         <span v-if="item.isDefault" class="ghost">{{item.isDefault ? '默认地址' :''}}</span>
@@ -68,7 +68,7 @@ import MyFooter from "@/common/footer/MyFooter.vue";
 import UserSide from "@/common/UserSide.vue";
 import AddressForm from "@/components/User/AddressForm.vue";
 import Popup from "@/components/User/Popup.vue"
-import {getuseraddress} from "@/api/index"
+import {getuseraddress,deleteaddress} from "@/api/index"
 
 export default{
   components: {  MyHeader,  MyFooter ,UserSide,AddressForm,Popup},
@@ -95,7 +95,13 @@ export default{
         },
         calse(){
             this.$refs.addressForm.close()
-        }
+        },
+      deleteinformation(id){
+        deleteaddress(id).then(res=>{
+          console.log(res)
+          location.reload()
+        })
+      }
     },
 }
 </script>

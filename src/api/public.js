@@ -41,7 +41,7 @@ export default {
   },
   fetchDelete (url, params = {}) {
     return new Promise((resolve, reject) => {
-      axios.delete(url, params).then(res => {
+      instance.delete(url, params).then(res => {
         resolve(res.data)
       }).catch(error => {
         reject(error)
