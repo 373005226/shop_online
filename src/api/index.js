@@ -15,7 +15,7 @@ export const userregister =(params)=>{
   return http.fetchPost('user/',params)
 }
 
-//收货地址功能
+//添加收货地址功能
 export const useraddress = (params)=>{
   return http.sendPost('address/',params)
 }
@@ -28,4 +28,9 @@ export const getuseraddress =(params)=>{
 //删除收货地址
 export const deleteaddress =(params)=>{
   return http.fetchDelete('address/'+params)
+}
+
+//修改收货地址功能
+export const changeaddress =(params)=>{
+  return http.fetchPut('address/'+params)
 }

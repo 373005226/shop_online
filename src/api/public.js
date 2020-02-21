@@ -32,7 +32,7 @@ export default {
   },
   fetchPut (url, params = {}) {
     return new Promise((resolve, reject) => {
-      axios.put(url, params).then(res => {
+      instance.put(url, params).then(res => {
         resolve(res.data)
       }).catch(error => {
         reject(error)

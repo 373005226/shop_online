@@ -12,8 +12,7 @@
             <el-cascader
               size="large"
               :options="options"
-              v-model="formInline.selectedOptions"
-              @change="handleChange">
+              v-model="formInline.selectedOptions">
             </el-cascader>
           </div>
       </div>
@@ -58,7 +57,7 @@
 
 <script>
   import { regionData } from 'element-china-area-data'
-  import {CodeToText} from 'element-china-area-data'
+  import { CodeToText } from 'element-china-area-data'
   import { useraddress } from '@/api/index'
   export default {
     name: 'AddressForm',
@@ -80,22 +79,14 @@
       calse(){
           this.$emit('calse')
       },
-      handleChange (value) {
-        console.log(value)
-        console.log(CodeToText[value[0]]+CodeToText[value[1]]+CodeToText[value[2]])
-      },
       submitForm(FormName){
         console.log(FormName)
-        // useraddress({province:CodeToText[FormName.selectedOptions[0]],city:CodeToText[FormName.selectedOptions[1]],district:CodeToText[FormName.selectedOptions[2]],address:FormName.detail,signer_name:FormName.username,signer_mobile:FormName.phone}).then(res=>{
-        //   console.log(res)
-        // }).catch(error=>{
-        //   console.log(error)
-        // })
         useraddress({province:CodeToText[FormName.selectedOptions[0]],city:CodeToText[FormName.selectedOptions[1]],district:CodeToText[FormName.selectedOptions[2]],address:FormName.detail,signer_name:FormName.username,signer_mobile:FormName.phone}).then(res=>{
           console.log(res)
         })
           this.$emit('calse')
-      }
+      },
+
   },
     computed:{
     }
