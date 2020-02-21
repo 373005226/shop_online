@@ -87,25 +87,21 @@
         console.log(CodeToText[value[0]]+CodeToText[value[1]]+CodeToText[value[2]])
       },
       submitForm(FormName){
-        console.log(CodeToText[FormName.selectedOptions[0]])
-        console.log(CodeToText[FormName.selectedOptions[1]])
-        console.log(CodeToText[FormName.selectedOptions[2]])
-        console.log(FormName.detail)
-        console.log(FormName.username)
-        console.log(FormName.phone)
-        useraddress({province:CodeToText[FormName.selectedOptions[0]]},{Authorization:this.$store.state.token}).then(res=>{
-          console.log(res)
-        }).catch(error=>{
-          console.log(error)
-        })
-        // useraddress({province:CodeToText[FormName.selectedOptions[0]],city:CodeToText[FormName.selectedOptions[1]],district:CodeToText[FormName.selectedOptions[2]],address:FormName.detail,signer_name:FormName.username,signer_mobile:FormName.phone,province:CodeToText[FormName.selectedOptions[0]],city:CodeToText[FormName.selectedOptions[1]],district:CodeToText[FormName.selectedOptions[2]],address:FormName.detail,signer_name:FormName.username,signer_mobile:FormName.phone},{Authorization:this.$store.state.token}).then(res=>{
+        console.log(FormName)
+        // useraddress({province:CodeToText[FormName.selectedOptions[0]],city:CodeToText[FormName.selectedOptions[1]],district:CodeToText[FormName.selectedOptions[2]],address:FormName.detail,signer_name:FormName.username,signer_mobile:FormName.phone}).then(res=>{
         //   console.log(res)
         // }).catch(error=>{
         //   console.log(error)
         // })
+        useraddress({province:CodeToText[FormName.selectedOptions[0]],city:CodeToText[FormName.selectedOptions[1]],district:CodeToText[FormName.selectedOptions[2]],address:FormName.detail,signer_name:FormName.username,signer_mobile:FormName.phone}).then(res=>{
+          console.log(res)
+        })
           this.$emit('calse')
       }
-  }
+  },
+    computed:{
+      
+    }
 }
 </script>
 

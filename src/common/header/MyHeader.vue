@@ -22,7 +22,7 @@
           <div class="siteNav-r">
             <div class="siteNavItem">
               <div class="siteNavItemHd">
-                <div v-if="$store.state.mobile == ''">
+                <div v-if="$store.state.mobile == '' || $store.state.mobile == null">
                   <a class="siteNavItem" @click="Login">登录</a>
                   <span class="siteNavItem">/</span>
                   <a class="siteNavItem" @click="register">注册</a>
@@ -31,10 +31,10 @@
                   <span style="float:left;">尊敬的用户 </span>
                   <div class="siteNavItemuser">
                     <div class="mobile">
-                      {{mobilephone}}
-                        <!-- {{$store.state.mobile}} -->
+<!--                      {{mobilephone}}-->
+                         {{$store.state.mobile}}
                         <span style="margin-left: 10px;">|</span>
-                        <span style="margin-left:10px;">退出登录</span>
+                        <span style="margin-left:10px;" @click="Logout">退出登录</span>
                     </div>
                   </div>
                 </div>
@@ -125,6 +125,11 @@ export default {
     Login(){
       this.$router.push('/login')
     },
+    Logout(){
+      localStorage.removeItem('mobile')
+      localStorage.removeItem('token')
+      location.reload()
+    },
     register(){
       this.$router.push('/register')
     },
@@ -135,10 +140,10 @@ export default {
 
   },
   computed:{
-    mobilephone:function(){
-      let phone = this.$store.state.mobile
-      return phone.replace( /([0-9]{3})([0-9]{4})([0-9]{4})/,"$1****$3")
-    }
+    // mobilephone:function(){
+    //   let phone = this.$store.state.mobile
+    //   return phone.replace( /([0-9]{3})([0-9]{4})([0-9]{4})/,"$1****$3")
+    // }
   }
 }
 </script>

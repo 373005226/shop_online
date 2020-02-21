@@ -17,5 +17,10 @@ export const userregister =(params)=>{
 
 //收货地址功能
 export const useraddress = (params)=>{
-  return http.fetchPost('address/',params)
+  return http.sendPost('address/',params)
+}
+
+//查看收货地址
+export  const  getuseraddress =(params)=>{
+  return http.getinformation('address/',params)
 }

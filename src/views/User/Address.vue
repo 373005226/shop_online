@@ -26,11 +26,11 @@
                                     <th></th>
                                 </tr>
                             </tbody>
-                            <tbody v-if="$store.state.addressList.length !=0">
-                                <tr v-for="(item,index) in $store.state.addressList" :key='index'>
-                                    <td >{{item.user_name}}</td>
-                                    <td >{{item.province}}{{item.city}}{{item.area}}{{item.detailed}}</td>
-                                    <td>{{item.user_phone}}</td>
+                            <tbody v-if="information.length !=0">
+                                <tr v-for="(item,index) in information" :key='index'>
+                                    <td >{{item.signer_name}}</td>
+                                    <td >{{item.province}}{{item.city}}{{item.district}}{{item.address}}</td>
+                                    <td>{{item.signer_mobile}}</td>
                                     <td>
                                         <a class="update" href="javascript:;" @click="showForm">编辑</a>
                                         <a class="delete" href="javascript:;">删除</a>
@@ -42,7 +42,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                      <div v-if="$store.state.addressList.length ==0" class="none">
+                      <div v-if="information.length == 0 ||information ==null" class="none">
                         <img src="@/assets/img/nosearch.png">
                       </div>
                     </div>
@@ -68,18 +68,24 @@ import MyFooter from "@/common/footer/MyFooter.vue";
 import UserSide from "@/common/UserSide.vue";
 import AddressForm from "@/components/User/AddressForm.vue";
 import Popup from "@/components/User/Popup.vue"
+import {getuseraddress} from "@/api/index"
 
 export default{
   components: {  MyHeader,  MyFooter ,UserSide,AddressForm,Popup},
     name:"Address",
     data(){
         return{
+          information:[]
         }
     },
     created(){
       this.$store.state.mobile = localStorage.getItem('mobile')
       this.$store.state.token = localStorage.getItem('token')
       console.log(localStorage.getItem('token'))
+      getuseraddress().then(res=>{
+        console.log(res)
+        this.information = res
+      })
     },
     mounted(){
 
