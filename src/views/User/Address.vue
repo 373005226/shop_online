@@ -60,11 +60,11 @@
     </Popup>
 
     <!-- 修改地址 -->
-    <Popup ref="changeaddressform" :custom="false" :maskClick="false" type="center">
+    <Popup ref="changeaddressform" :custom="false" :maskClick="false" type="center" :information="information">
       <div class="Form">
         <div class="FormHead">修改地址</div>
         <div @click="calsechange" class="icon icon-close"></div>
-        <changeAddressForm @calsechange='calsechange'/>
+        <changeAddressForm @calsechange='calsechange' :information="this.$refs" />
       </div>
     </Popup>
   </div>
@@ -84,7 +84,8 @@
     name: "Address",
     data() {
       return {
-        information: []
+        information: [],
+        changeinformation:[]
       }
     },
     created() {

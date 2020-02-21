@@ -1,7 +1,6 @@
 <template>
   <div class="addr" >
     <el-form :model="formInline">
-
       <div class="row-addr">
         <div class="label">
           <span>*</span>
@@ -59,11 +58,15 @@
 <script>
   import { regionData } from 'element-china-area-data'
   import { CodeToText } from 'element-china-area-data'
+  import {TextToCode } from 'element-china-area-data'
+  import axios from 'axios'
   export default {
     name: 'changeAddressForm',
+    props:['information'],
     data(){
       return{
         options: regionData,
+        id:'',
         formInline:{
           selectedOptions: [],
           detail:'',
@@ -73,6 +76,22 @@
       }
     },
     created(){
+      console.log(this.information.changeaddressform.$attrs.information[0])
+      // console.log(TextToCode[this.information.changeaddressform.$attrs.information[0].province].code)
+      // console.log(TextToCode[this.information.changeaddressform.$attrs.information[0].province][this.information.changeaddressform.$attrs.information[0].city].code)
+      // console.log(TextToCode[this.information.changeaddressform.$attrs.information[0].province][this.information.changeaddressform.$attrs.information[0].city][this.information.changeaddressform.$attrs.information[0].district].code)
+      // console.log(this.information.changeaddressform.$attrs.information[0].address)
+      // console.log(this.information.changeaddressform.$attrs.information[0].signer_name)
+      // console.log(this.information.changeaddressform.$attrs.information[0].signer_mobile)
+      this.id = this.information.changeaddressform.$attrs.information[0].id
+      this.formInline.selectedOptions[0] = TextToCode[this.information.changeaddressform.$attrs.information[0].province].code
+      this.formInline.selectedOptions[1] = TextToCode[this.information.changeaddressform.$attrs.information[0].province][this.information.changeaddressform.$attrs.information[0].city].code
+      this.formInline.selectedOptions[2] = TextToCode[this.information.changeaddressform.$attrs.information[0].province][this.information.changeaddressform.$attrs.information[0].city][this.information.changeaddressform.$attrs.information[0].district].code
+      this.formInline.detail = this.information.changeaddressform.$attrs.information[0].address
+      this.formInline.username = this.information.changeaddressform.$attrs.information[0].signer_name
+      this.formInline.phone = this.information.changeaddressform.$attrs.information[0].signer_mobile
+
+
     },
     methods:{
       // 关闭 弹框
@@ -85,6 +104,28 @@
       },
       submitForm(FormName){
         console.log(FormName)
+        axios({
+          method: 'put',
+          url:'http://127.0.0.1:8000/address/'+ this.id +'/',
+          data:{
+            id:this.id,
+            province:CodeToText[FormName.selectedOptions[0]],
+            city:CodeToText[FormName.selectedOptions[1]],
+            district:CodeToText[FormName.selectedOptions[2]],
+            address:FormName.detail,
+            signer_name:FormName.username,
+            signer_mobile:FormName.phone
+          },
+          headers:{
+            'Authorization' : 'JWT '+localStorage.getItem('token')
+          },
+          timeout:1000
+        }).then(res=>{
+          console.log(res)
+        }).catch(error =>{
+          console.log(error)
+        })
+
         this.$emit('calsechange')
       }
     },
