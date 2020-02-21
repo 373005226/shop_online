@@ -3,7 +3,6 @@
       <my-header></my-header>
       <div class="cart">
         <div class="row">
-          <crumbs></crumbs>
           <div class="cartHead">
             <div class="checkbox">
               <input type="checkbox">
@@ -96,11 +95,9 @@
 <script>
   import  MyHeader from "../common/header/MyHeader";
   import MyFooter from "../common/footer/MyFooter";
-  import Crumbs from "../common/crumbs";
     export default {
         name: "cart",
       components:{
-        Crumbs,
           MyHeader,
           MyFooter
       },
