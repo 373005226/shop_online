@@ -13,7 +13,7 @@
                     <UserSide />
                     <div class="addressContent">
                         <div class="addressHeader">
-                            <div class="leftInfo">已保存收货地址(地址最多20条，还能保存19条)</div>
+                            <div class="leftInfo">已保存收货地址(地址最多20条，还能保存{{addresslength}}条)</div>
                             <a @click="showForm" class="rightInfo" href="javascript:;">+新建地址</a>
                         </div>
                         <table class="addressList">
@@ -79,16 +79,15 @@ export default{
         }
     },
     created(){
-      this.$store.state.mobile = localStorage.getItem('mobile')
-      this.$store.state.token = localStorage.getItem('token')
-      console.log(localStorage.getItem('token'))
       getuseraddress().then(res=>{
         console.log(res)
         this.information = res
       })
     },
-    mounted(){
-
+    computed:{
+      addresslength:function () {
+        return 20 - this.information.length
+      }
     },
     methods:{
         showForm(){

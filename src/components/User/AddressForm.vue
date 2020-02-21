@@ -74,8 +74,6 @@
       }
     },
   created(){
-    this.$store.state.token = 'JWT '+localStorage.getItem('token')
-    console.log(this.$store.state.token)
   },
     methods:{
       // 关闭 弹框
@@ -100,7 +98,6 @@
       }
   },
     computed:{
-      
     }
 }
 </script>
