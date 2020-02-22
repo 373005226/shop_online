@@ -42,5 +42,5 @@ export const getallfav =(params)=>{
 
 //删除用户收藏的商品
 export const deletefav =(params)=>{
-  return http.fetchDelete('userfavs/'+params)
+  return http.fetchDelete('userfavs/'+params+'/')
 }

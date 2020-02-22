@@ -119,7 +119,7 @@
                   <el-button type="primary" class="sets_button" @click="addfav(id)" v-if="isfav == false">
                     收藏
                   </el-button>
-                  <el-button type="primary" class="sets_button" @click="addfav(id)" v-else>
+                  <el-button type="primary" class="sets_button" @click="delfav(id)" v-else>
                     已收藏
                   </el-button>
                 </el-row>
@@ -273,8 +273,11 @@
             console.log(error)
           })
         },
-        delfav(){
-
+        delfav(id){
+          deletefav(id).then(res=>{
+            console.log(res)
+            location.reload()
+          })
         },
         // 去评论
         goComm(){
@@ -305,14 +308,12 @@
         }
       },
       created() {
-        console.log(this.$route.query.id)
         detail(this.$route.query.id).then(res=>{
           console.log(res)
           this.id = res.id
           this.goods_detail = res
           this.goodtotal = res.goods_num
         })
-        console.log(this.$route)
 
         getallfav().then(res=>{
           for(let i of res){
