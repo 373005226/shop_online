@@ -14,7 +14,7 @@
 </template>
 
 <script>
-  import {banner} from "../../api";
+  import {banner} from "@/api/goods";
 
   export default {
   name: 'FadeSwiper',

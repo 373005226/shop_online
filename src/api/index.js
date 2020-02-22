@@ -1,10 +1,5 @@
 import http from './public'
 
-// 获取首页轮播图
-export const banner =(params)=>{
-  return http.fetchGet('banner/',params)
-}
-
 // 手机发送验证码功能
 export const sendcode =(params)=>{
   return http.fetchPost('codes/',params)
@@ -33,4 +28,9 @@ export const getuseraddress =(params)=>{
 //删除收货地址
 export const deleteaddress =(params)=>{
   return http.fetchDelete('address/'+params)
+}
+
+//用户收藏商品功能
+export const adduserfavs =(params)=>{
+  return http.fetchPost('userfavs/'+params)
 }

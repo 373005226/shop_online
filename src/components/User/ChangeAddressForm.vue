@@ -90,8 +90,6 @@
       this.formInline.detail = this.information.changeaddressform.$attrs.information[0].address
       this.formInline.username = this.information.changeaddressform.$attrs.information[0].signer_name
       this.formInline.phone = this.information.changeaddressform.$attrs.information[0].signer_mobile
-
-
     },
     methods:{
       // 关闭 弹框

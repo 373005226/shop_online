@@ -1,5 +1,10 @@
 import http from './public'
 
+// 获取首页轮播图
+export const banner =(params)=>{
+  return http.fetchGet('banner/',params)
+}
+
 //获取分类数据
 export const catelogy =(params)=>{
   return http.fetchGet('catelogy/',params)
