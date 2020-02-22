@@ -12,18 +12,18 @@ const instance = axios.create({
 })
 
 export default {
-  fetchGet (url, params = {}) {
+  fetchGet (url, params = {},config = {}) {
     return new Promise((resolve, reject) => {
-      axios.get(url, params).then(res => {
+      axios.get(url,params,config).then(res => {
         resolve(res.data)
       }).catch(error => {
         reject(error)
       })
     })
   },
-  fetchPost (url, params = {}) {
+  fetchPost (url, params = {}, config = {}) {
     return new Promise((resolve, reject) => {
-      axios.post(url, params).then(res => {
+      axios.post(url, params , config).then(res => {
         resolve(res.data)
       }).catch(error => {
         reject(error)
@@ -39,25 +39,6 @@ export default {
       })
     })
   },
-  sendPost (url, params = {}) {
-    return new Promise((resolve, reject) => {
-      instance.post(url, params).then(res => {
-        resolve(res.data)
-      }).catch(error => {
-        reject(error)
-      })
-    })
-  },
-  getinformation (url, params = {}) {
-    return new Promise((resolve, reject) => {
-      instance.get(url, params).then(res => {
-        resolve(res.data)
-      }).catch(error => {
-        reject(error)
-      })
-    })
-  },
-
 }
 
 

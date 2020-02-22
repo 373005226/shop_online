@@ -16,13 +16,13 @@ export const userlogin =(params)=>{
 }
 
 //添加收货地址功能
-export const useraddress = (params)=>{
-  return http.sendPost('address/',params)
+export const useraddress = (params,config)=>{
+  return http.fetchPost('address/',params,config)
 }
 
 //查看收货地址
-export const getuseraddress =(params)=>{
-  return http.getinformation('address/',params)
+export const getuseraddress =(params,config)=>{
+  return http.fetchGet('address/',params,config)
 }
 
 //删除收货地址
@@ -31,13 +31,13 @@ export const deleteaddress =(params)=>{
 }
 
 //用户收藏商品功能
-export const adduserfavs =(params)=>{
-  return http.sendPost('userfavs/', params)
+export const adduserfavs =(params,config)=>{
+  return http.fetchPost('userfavs/', params,config)
 }
 
 //查询用户收藏的所有商品
-export const getallfav =(params)=>{
-  return http.getinformation('userfavs/',params)
+export const getallfav =(params,config)=>{
+  return http.fetchGet('userfavs/',params,config)
 }
 
 //删除用户收藏的商品

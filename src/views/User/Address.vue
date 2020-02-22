@@ -89,7 +89,11 @@
       }
     },
     created() {
-      getuseraddress().then(res => {
+      getuseraddress({
+        headers: {
+          Authorization: 'JWT '+localStorage.getItem('token')
+        }
+      }).then(res => {
         console.log(res)
         this.information = res
       })

@@ -266,7 +266,11 @@
       },
       methods:{
         addfav(id){
-          adduserfavs({goods:id}).then(res=>{
+          adduserfavs({goods:id},{
+            headers: {
+              Authorization: 'JWT '+localStorage.getItem('token')
+            }
+          }).then(res=>{
             console.log(res)
             location.reload()
           }).catch(error=>{
@@ -315,7 +319,11 @@
           this.goodtotal = res.goods_num
         })
 
-        getallfav().then(res=>{
+        getallfav({
+          headers: {
+            Authorization: 'JWT '+localStorage.getItem('token')
+          }
+        }).then(res=>{
           for(let i of res){
             console.log(i.goods.id)
             if (i.goods.id == this.id){
