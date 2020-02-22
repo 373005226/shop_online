@@ -105,6 +105,7 @@
       },
       calse() {
         this.$refs.addressForm.close()
+        location.reload()
       },
       changeForm(){
         console.log(this.$refs)
@@ -113,6 +114,7 @@
       calsechange() {
         console.log(this.$refs)
         this.$refs.changeaddressform.close()
+        location.reload()
       },
       deleteinformation(id) {
         deleteaddress(id).then(res => {
