@@ -116,7 +116,12 @@
               <div class="btns">
                 <el-row>
                   <el-button type="danger">加入购物车</el-button>
-                  <el-button icon="el-icon-star-on" class="collection">收藏</el-button>
+                  <el-button type="primary" class="sets_button" @click="addfav(id)" v-if="isfav == false">
+                    收藏
+                  </el-button>
+                  <el-button type="primary" class="sets_button" @click="addfav(id)" v-else>
+                    已收藏
+                  </el-button>
                 </el-row>
               </div>
 
@@ -197,7 +202,8 @@
   import MyHeader from "../common/header/MyHeader";
   import MyFooter from "../common/footer/MyFooter";
   import crumbs from "../common/crumbs";
-  import {detail} from "../api/goods";
+  import {detail} from "@/api/goods";
+  import {adduserfavs ,getallfav ,deletefav} from "@/api/index"
 
   export default {
       name: "detail",
@@ -208,6 +214,8 @@
       },
       data(){
         return{
+          id:'',
+          isfav:false,
           goodtotal:20,
           num:1,
           imgInit:0,
@@ -257,12 +265,16 @@
         }
       },
       methods:{
-        _getdetailgoods(id){
-          detail(id).then(res=>{
+        addfav(id){
+          adduserfavs({goods:id}).then(res=>{
             console.log(res)
-            this.goods_detail = res
-            this.goodtotal = res.goods_num
+            location.reload()
+          }).catch(error=>{
+            console.log(error)
           })
+        },
+        delfav(){
+
         },
         // 去评论
         goComm(){
@@ -294,8 +306,25 @@
       },
       created() {
         console.log(this.$route.query.id)
-        this._getdetailgoods(this.$route.query.id)
+        detail(this.$route.query.id).then(res=>{
+          console.log(res)
+          this.id = res.id
+          this.goods_detail = res
+          this.goodtotal = res.goods_num
+        })
         console.log(this.$route)
+
+        getallfav().then(res=>{
+          for(let i of res){
+            console.log(i.goods.id)
+            if (i.goods.id == this.id){
+              this.isfav = true
+              console.log('已收藏')
+              break
+              // location.reload()
+            }
+          }
+        })
       }
     }
 </script>

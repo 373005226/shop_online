@@ -32,5 +32,15 @@ export const deleteaddress =(params)=>{
 
 //用户收藏商品功能
 export const adduserfavs =(params)=>{
-  return http.fetchPost('userfavs/'+params)
+  return http.sendPost('userfavs/', params)
+}
+
+//查询用户收藏的所有商品
+export const getallfav =(params)=>{
+  return http.getinformation('userfavs/',params)
+}
+
+//删除用户收藏的商品
+export const deletefav =(params)=>{
+  return http.fetchDelete('userfavs/'+params)
 }
