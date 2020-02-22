@@ -1,10 +1,7 @@
 <template>
   <div class="nodata">
-    <div class="nodataImg" :style="{'background-position':position}">
+    <div class="nodataImg">
 
-    </div>
-    <div class="nodataText">
-      {{nodataText}}
     </div>
   </div>
 </template>
@@ -32,7 +29,7 @@
     .nodataImg{
       height: 180px;
       width: 180px;
-      background-image: url(../../assets/img/nodata.png);
+      background: url("../../assets/img/none.png");
       background-repeat: no-repeat;
       background-size: cover;
       margin: 0 auto;

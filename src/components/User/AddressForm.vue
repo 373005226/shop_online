@@ -81,7 +81,7 @@
       },
       submitForm(FormName){
         console.log(FormName)
-        useraddress({province:CodeToText[FormName.selectedOptions[0]],city:CodeToText[FormName.selectedOptions[1]],district:CodeToText[FormName.selectedOptions[2]],address:FormName.detail,signer_name:FormName.username,signer_mobile:FormName.phone},{headers:{Authorization:'JWT '+localStorage.getItem('token')}}).then(res=>{
+        useraddress({province:CodeToText[FormName.selectedOptions[0]],city:CodeToText[FormName.selectedOptions[1]],district:CodeToText[FormName.selectedOptions[2]],address:FormName.detail,signer_name:FormName.username,signer_mobile:FormName.phone}, {headers: {Authorization: 'JWT ' + localStorage.getItem('token')}}).then(res=>{
           console.log(res)
         })
           this.$emit('calse')

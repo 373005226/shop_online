@@ -125,7 +125,7 @@
         location.reload()
       },
       deleteinformation(id) {
-        deleteaddress(id).then(res => {
+        deleteaddress(id,{headers: {Authorization: 'JWT ' + localStorage.getItem('token')}}).then(res => {
           console.log(res)
           location.reload()
         })

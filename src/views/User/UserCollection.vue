@@ -12,35 +12,36 @@
                 <div class="content">
                     <UserSide />
                     <div v-if="collectionList.length != 0" class="collectionContent">
-                        <div class="item" v-for="(item,index) in collectionList" :key='index'>
+                        <div class="item" v-for="(item,index) in collectionList" :key=index>
                             <div class="main">
-                                <div @click="handleClose(item,index)" class="close icon icon-close"></div>
-                                <router-link :to="'/detail?id='+item.id">
-                                    <img :src="item.img" alt="item.name" />
-                                </router-link>
-                                <router-link :to="'/detail?id='+item.id" class="name">
-                                    {{item.name}}
-                                </router-link>
+<!--                                <div @click="handleClose(item,index)" class="close icon icon-close"></div>-->
+                              <div  @click="todetail(item.goods.id)">
+                                <img :src="item.goods.images[0].image" v-if="item.goods.images !== undefined &&  item.goods.images.length > 0 ">
+                                {{item.goods.name}}
+                              </div>
+
                                 <div class="price">
-                                    ￥{{item.price}}
+                                    ￥<strong  v-if="item.goods.specification !== undefined &&  item.goods.specification.length > 0 ">{{item.goods.specification[0].shop_price}}</strong>
                                 </div>
                                 <div class="btns">
-                                    <a href="javascript:;">找相似</a>
+                                    <a href="javascript:;" @click="cancelfav(item.goods.id)">取消收藏</a>
                                     <a href="javascript:;">加入购物车</a>
                                 </div>
                             </div>
                         </div>
 <!--                        <VuePage :cur="cur" :all="all" :callback="callback" />-->
-                      <div class="page">
-                        <el-pagination style="text-align: center"
-                                       background
-                                       layout="prev, pager, next"
-                                       :total="1000"
-                        >
-                        </el-pagination>
-                      </div>
+<!--                      <div class="page">-->
+<!--                        <el-pagination style="text-align: center"-->
+<!--                                       background-->
+<!--                                       layout="prev, pager, next"-->
+<!--                                       :total="1000"-->
+<!--                        >-->
+<!--                        </el-pagination>-->
+<!--                      </div>-->
                     </div>
-                    <NoData v-else position="0 -760px" />
+                  <div class="none" v-else>
+                    <img src="@/assets/img/none.png">
+                  </div>
                 </div>
             </div>
         </div>
@@ -51,35 +52,57 @@
 import MyHeader from "@/common/header/MyHeader.vue";
 import MyFooter from "@/common/footer/MyFooter.vue";
 import UserSide from "@/common/UserSide.vue";
-import NoData from "@/components/User/navTab.vue"
+import {getallfav ,deletefav} from '@/api/index'
 // import VuePage from "@/components/page/page.vue"
 
 export default{
-  components: {  MyHeader,  MyFooter ,UserSide,NoData},
+  components: {  MyHeader,  MyFooter ,UserSide},
     name:"UserCollection",
     data(){
         return{
             cur: 1,
             all: 8,
             collectionList:[
-                {name:'男/女 轻柔色纺纱家居拖鞋',img:'https://yanxuan-item.nosdn.127.net/072a79db3d9e3f4a1d652f498311e102.png?quality=95&thumbnail=200x200&imageView',price:'43.9',id:0},
-                {name:'男/女 轻柔色纺纱家居拖鞋',img:'https://yanxuan-item.nosdn.127.net/072a79db3d9e3f4a1d652f498311e102.png?quality=95&thumbnail=200x200&imageView',price:'43.9',id:1},
-                {name:'男/女 轻柔色纺纱家居拖鞋',img:'https://yanxuan-item.nosdn.127.net/072a79db3d9e3f4a1d652f498311e102.png?quality=95&thumbnail=200x200&imageView',price:'43.9',id:0},
-                {name:'男/女 轻柔色纺纱家居拖鞋',img:'https://yanxuan-item.nosdn.127.net/072a79db3d9e3f4a1d652f498311e102.png?quality=95&thumbnail=200x200&imageView',price:'43.9',id:1},
-                {name:'男/女 轻柔色纺纱家居拖鞋',img:'https://yanxuan-item.nosdn.127.net/072a79db3d9e3f4a1d652f498311e102.png?quality=95&thumbnail=200x200&imageView',price:'43.9',id:0},
-                {name:'男/女 轻柔色纺纱家居拖鞋',img:'https://yanxuan-item.nosdn.127.net/072a79db3d9e3f4a1d652f498311e102.png?quality=95&thumbnail=200x200&imageView',price:'43.9',id:1},
-                {name:'男/女 轻柔色纺纱家居拖鞋',img:'https://yanxuan-item.nosdn.127.net/072a79db3d9e3f4a1d652f498311e102.png?quality=95&thumbnail=200x200&imageView',price:'43.9',id:0},
-                {name:'男/女 轻柔色纺纱家居拖鞋',img:'https://yanxuan-item.nosdn.127.net/072a79db3d9e3f4a1d652f498311e102.png?quality=95&thumbnail=200x200&imageView',price:'43.9',id:1},
+                // {name:'男/女 轻柔色纺纱家居拖鞋',img:'https://yanxuan-item.nosdn.127.net/072a79db3d9e3f4a1d652f498311e102.png?quality=95&thumbnail=200x200&imageView',price:'43.9',id:0},
+                // {name:'男/女 轻柔色纺纱家居拖鞋',img:'https://yanxuan-item.nosdn.127.net/072a79db3d9e3f4a1d652f498311e102.png?quality=95&thumbnail=200x200&imageView',price:'43.9',id:1},
+                // {name:'男/女 轻柔色纺纱家居拖鞋',img:'https://yanxuan-item.nosdn.127.net/072a79db3d9e3f4a1d652f498311e102.png?quality=95&thumbnail=200x200&imageView',price:'43.9',id:0},
+                // {name:'男/女 轻柔色纺纱家居拖鞋',img:'https://yanxuan-item.nosdn.127.net/072a79db3d9e3f4a1d652f498311e102.png?quality=95&thumbnail=200x200&imageView',price:'43.9',id:1},
+                // {name:'男/女 轻柔色纺纱家居拖鞋',img:'https://yanxuan-item.nosdn.127.net/072a79db3d9e3f4a1d652f498311e102.png?quality=95&thumbnail=200x200&imageView',price:'43.9',id:0},
+                // {name:'男/女 轻柔色纺纱家居拖鞋',img:'https://yanxuan-item.nosdn.127.net/072a79db3d9e3f4a1d652f498311e102.png?quality=95&thumbnail=200x200&imageView',price:'43.9',id:1},
+                // {name:'男/女 轻柔色纺纱家居拖鞋',img:'https://yanxuan-item.nosdn.127.net/072a79db3d9e3f4a1d652f498311e102.png?quality=95&thumbnail=200x200&imageView',price:'43.9',id:0},
+                // {name:'男/女 轻柔色纺纱家居拖鞋',img:'https://yanxuan-item.nosdn.127.net/072a79db3d9e3f4a1d652f498311e102.png?quality=95&thumbnail=200x200&imageView',price:'43.9',id:1},
             ]
         }
     },
     created(){
-
+      getallfav({
+        headers: {
+          Authorization: 'JWT '+localStorage.getItem('token')
+        }
+      }).then(res=>{
+        console.log(res)
+        this.collectionList = res
+      })
     },
     mounted(){
 
     },
     methods:{
+      cancelfav(id){
+        console.log(id)
+        deletefav(id,{headers: {Authorization: 'JWT ' + localStorage.getItem('token')}}).then(res=>{
+          console.log(res)
+          location.reload()
+        })
+      },
+      todetail(id){
+        console.log(id)
+        this.$router.push(
+          {
+            path:'/detail',query:{id:id}
+          }
+          )
+      },
         callback(data) {
           this.cur = data;
         },
@@ -91,6 +114,14 @@ export default{
 </script>
 
 <style lang="scss" scoped>
+  .none {
+    width: 100px;
+    margin: 0 auto;
+    img {
+      height: 350px;
+      margin-top: 150px;
+    }
+  }
     .collectionBox{
         .content{
             display: flex;
@@ -115,6 +146,7 @@ export default{
                     .main{
                         width: 100%;
                         height: 100%;
+                        cursor: pointer;
                         position: relative;
                         text-align: center;
                         font-size: 14px;

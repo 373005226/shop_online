@@ -334,7 +334,6 @@
               this.isfav = true
               console.log('已收藏')
               break
-              // location.reload()
             }
           }
         })

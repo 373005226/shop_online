@@ -26,8 +26,8 @@ export const getuseraddress =(params,config)=>{
 }
 
 //删除收货地址
-export const deleteaddress =(params)=>{
-  return http.fetchDelete('address/'+params)
+export const deleteaddress =(params,config)=>{
+  return http.fetchDelete('address/'+params,config)
 }
 
 //修改购物车地址功能
@@ -47,5 +47,5 @@ export const getallfav =(params,config)=>{
 
 //删除用户收藏的商品
 export const deletefav =(params,config)=>{
-  return http.fetchDelete('userfavs/'+params+'/',config)
+  return http.fetchDelete('userfavs/'+params+'/' ,config)
 }

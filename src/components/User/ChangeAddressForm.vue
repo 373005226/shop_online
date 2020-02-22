@@ -86,7 +86,6 @@
       // console.log(this.information.changeaddressform.$attrs.information[0].signer_mobile)
       this.id = this.information.changeaddressform.$attrs.addressid
       for(let i of this.information.changeaddressform.$attrs.information){
-        console.log(i.id)
         if(this.id == i.id){
           this.formInline.selectedOptions[0] = TextToCode[i.province].code
           this.formInline.selectedOptions[1] = TextToCode[i.province][i.city].code
@@ -138,18 +137,19 @@
         })
 
         // changeaddress(this.id,{
-        //   data:{
-        //         id:this.id,
-        //         province:CodeToText[FormName.selectedOptions[0]],
-        //         city:CodeToText[FormName.selectedOptions[1]],
-        //         district:CodeToText[FormName.selectedOptions[2]],
-        //         address:FormName.detail,
-        //         signer_name:FormName.username,
-        //         signer_mobile:FormName.phone
-        //   },
-        //   headers:{
-        //     Authorization : 'JWT '+localStorage.getItem('token')
-        //   }}).then(res=>{
+        //     data:{
+        //       id:this.id,
+        //       province:CodeToText[FormName.selectedOptions[0]],
+        //       city:CodeToText[FormName.selectedOptions[1]],
+        //       district:CodeToText[FormName.selectedOptions[2]],
+        //       address:FormName.detail,
+        //       signer_name:FormName.username,
+        //       signer_mobile:FormName.phone
+        //     },
+        //     headers:{
+        //       Authorization : 'JWT '+localStorage.getItem('token')
+        //     }
+        // }).then(res=>{
         //     console.log(res)
         // }).catch(error=>{
         //   console.log(error)

@@ -110,7 +110,6 @@ export default{
         z-index: 1;
         .userInfo{
             display: flex;
-            background: url(//yanxuan.nosdn.127.net/74349c4….png) no-repeat;
             padding: 40px 0;
             border: 1px solid #eaeaea;
             font-size: 14px;

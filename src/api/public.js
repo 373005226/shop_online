@@ -1,4 +1,5 @@
 import axios from 'axios'
+
 axios.defaults.timeout = 5000
 axios.defaults.baseURL = 'http://127.0.0.1:8000/'
 axios.defaults.headers['Content-Type'] = 'application/json'
@@ -6,42 +7,42 @@ axios.defaults.headers['Content-Type'] = 'application/json'
 
 
 export default {
-  fetchGet (url, params = {},config = {}) {
+  fetchGet(url, params = {}, config = {}) {
     return new Promise((resolve, reject) => {
-      axios.get(url,params,config).then(res => {
+      axios.get(url, params, config).then(res => {
         resolve(res.data)
       }).catch(error => {
         reject(error)
       })
     })
   },
-  fetchPost (url, params = {}, config = {}) {
+  fetchPost(url, data = {}, config = {}) {
     return new Promise((resolve, reject) => {
-      axios.post(url, params , config).then(res => {
+      axios.post(url, data, config).then(res => {
         resolve(res.data)
       }).catch(error => {
         reject(error)
       })
     })
   },
-  fetchDelete (url, params = {},config={}) {
+  fetchDelete(url, data = {}, config = {}) {
     return new Promise((resolve, reject) => {
-      axios.delete(url, params,config).then(res => {
+      axios.delete(url, data, config).then(res => {
         resolve(res.data)
       }).catch(error => {
         reject(error)
       })
     })
   },
-  fetchPut (url, params = {},config={}) {
+  fetchPut(url , data = {}, config = {}) {
     return new Promise((resolve, reject) => {
-      axios.put(url, params,config).then(res => {
+      axios.put(url , data, config).then(res => {
         resolve(res.data)
       }).catch(error => {
         reject(error)
       })
     })
-  },
+  }
 }
 
 
