@@ -32,7 +32,7 @@
                 <td>{{item.province}}{{item.city}}{{item.district}}{{item.address}}</td>
                 <td>{{item.signer_mobile}}</td>
                 <td>
-                  <a class="update" href="javascript:;" @click="changeForm">编辑</a>
+                  <a class="update" href="javascript:;" @click="changeForm(item.id)">编辑</a>
                   <a class="delete" href="javascript:;" @click="deleteinformation(item.id)">删除</a>
                 </td>
                 <td>
@@ -50,6 +50,7 @@
       </div>
     </div>
     <MyFooter/>
+
     <!--添加地址-->
     <Popup ref="addressForm" :custom="false" :maskClick="false" type="center">
       <div class="Form">
@@ -60,7 +61,7 @@
     </Popup>
 
     <!-- 修改地址 -->
-    <Popup ref="changeaddressform" :custom="false" :maskClick="false" type="center" :information="information">
+    <Popup ref="changeaddressform" :custom="false" :maskClick="false" type="center" :information="information" :addressid="id">
       <div class="Form">
         <div class="FormHead">修改地址</div>
         <div @click="calsechange" class="icon icon-close"></div>
@@ -84,6 +85,7 @@
     name: "Address",
     data() {
       return {
+        id:'',
         information: [],
         changeinformation:[]
       }
@@ -111,8 +113,10 @@
         this.$refs.addressForm.close()
         location.reload()
       },
-      changeForm(){
-        console.log(this.$refs)
+      changeForm(id){
+        this.id = id
+        console.log(this.id)
+        // this.$refs.changeinformation.id = id
         this.$refs.changeaddressform.open()
       },
       calsechange() {

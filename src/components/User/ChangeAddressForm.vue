@@ -59,14 +59,14 @@
   import { regionData } from 'element-china-area-data'
   import { CodeToText } from 'element-china-area-data'
   import {TextToCode } from 'element-china-area-data'
+  // import {changeaddress} from "@/api/index"
   import axios from 'axios'
   export default {
     name: 'changeAddressForm',
-    props:['information'],
+    props:['information','addressid'],
     data(){
       return{
         options: regionData,
-        id:'',
         formInline:{
           selectedOptions: [],
           detail:'',
@@ -76,20 +76,33 @@
       }
     },
     created(){
-      console.log(this.information.changeaddressform.$attrs.information[0])
+      console.log(this.information.changeaddressform.$attrs.addressid)
+      console.log(this.information.changeaddressform.$attrs.information)
       // console.log(TextToCode[this.information.changeaddressform.$attrs.information[0].province].code)
       // console.log(TextToCode[this.information.changeaddressform.$attrs.information[0].province][this.information.changeaddressform.$attrs.information[0].city].code)
       // console.log(TextToCode[this.information.changeaddressform.$attrs.information[0].province][this.information.changeaddressform.$attrs.information[0].city][this.information.changeaddressform.$attrs.information[0].district].code)
       // console.log(this.information.changeaddressform.$attrs.information[0].address)
       // console.log(this.information.changeaddressform.$attrs.information[0].signer_name)
       // console.log(this.information.changeaddressform.$attrs.information[0].signer_mobile)
-      this.id = this.information.changeaddressform.$attrs.information[0].id
-      this.formInline.selectedOptions[0] = TextToCode[this.information.changeaddressform.$attrs.information[0].province].code
-      this.formInline.selectedOptions[1] = TextToCode[this.information.changeaddressform.$attrs.information[0].province][this.information.changeaddressform.$attrs.information[0].city].code
-      this.formInline.selectedOptions[2] = TextToCode[this.information.changeaddressform.$attrs.information[0].province][this.information.changeaddressform.$attrs.information[0].city][this.information.changeaddressform.$attrs.information[0].district].code
-      this.formInline.detail = this.information.changeaddressform.$attrs.information[0].address
-      this.formInline.username = this.information.changeaddressform.$attrs.information[0].signer_name
-      this.formInline.phone = this.information.changeaddressform.$attrs.information[0].signer_mobile
+      this.id = this.information.changeaddressform.$attrs.addressid
+      for(let i of this.information.changeaddressform.$attrs.information){
+        console.log(i.id)
+        if(this.id == i.id){
+          this.formInline.selectedOptions[0] = TextToCode[i.province].code
+          this.formInline.selectedOptions[1] = TextToCode[i.province][i.city].code
+          this.formInline.selectedOptions[2] = TextToCode[i.province][i.city][i.district].code
+          this.formInline.detail =i.address
+          this.formInline.username = i.signer_name
+          this.formInline.phone = i.signer_mobile
+          break
+        }
+      }
+      // this.formInline.selectedOptions[0] = TextToCode[this.information.changeaddressform.$attrs.information[0].province].code
+      // this.formInline.selectedOptions[1] = TextToCode[this.information.changeaddressform.$attrs.information[0].province][this.information.changeaddressform.$attrs.information[0].city].code
+      // this.formInline.selectedOptions[2] = TextToCode[this.information.changeaddressform.$attrs.information[0].province][this.information.changeaddressform.$attrs.information[0].city][this.information.changeaddressform.$attrs.information[0].district].code
+      // this.formInline.detail = this.information.changeaddressform.$attrs.information[0].address
+      // this.formInline.username = this.information.changeaddressform.$attrs.information[0].signer_name
+      // this.formInline.phone = this.information.changeaddressform.$attrs.information[0].signer_mobile
     },
     methods:{
       // 关闭 弹框
@@ -123,6 +136,24 @@
         }).catch(error =>{
           console.log(error)
         })
+
+        // changeaddress(this.id,{
+        //   data:{
+        //         id:this.id,
+        //         province:CodeToText[FormName.selectedOptions[0]],
+        //         city:CodeToText[FormName.selectedOptions[1]],
+        //         district:CodeToText[FormName.selectedOptions[2]],
+        //         address:FormName.detail,
+        //         signer_name:FormName.username,
+        //         signer_mobile:FormName.phone
+        //   },
+        //   headers:{
+        //     Authorization : 'JWT '+localStorage.getItem('token')
+        //   }}).then(res=>{
+        //     console.log(res)
+        // }).catch(error=>{
+        //   console.log(error)
+        // })
 
         this.$emit('calsechange')
       }

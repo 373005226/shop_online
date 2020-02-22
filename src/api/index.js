@@ -30,6 +30,11 @@ export const deleteaddress =(params)=>{
   return http.fetchDelete('address/'+params)
 }
 
+//修改购物车地址功能
+export const changeaddress=(params,config)=>{
+  return http.fetchPut('address/'+params+'/',config)
+}
+
 //用户收藏商品功能
 export const adduserfavs =(params,config)=>{
   return http.fetchPost('userfavs/', params,config)
@@ -41,6 +46,6 @@ export const getallfav =(params,config)=>{
 }
 
 //删除用户收藏的商品
-export const deletefav =(params)=>{
-  return http.fetchDelete('userfavs/'+params+'/')
+export const deletefav =(params,config)=>{
+  return http.fetchDelete('userfavs/'+params+'/',config)
 }

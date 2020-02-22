@@ -278,7 +278,11 @@
           })
         },
         delfav(id){
-          deletefav(id).then(res=>{
+          deletefav(id,{
+            headers: {
+              Authorization: 'JWT '+localStorage.getItem('token')
+            }
+          }).then(res=>{
             console.log(res)
             location.reload()
           })
