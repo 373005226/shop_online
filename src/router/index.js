@@ -5,6 +5,7 @@ const detail =()=>import('../views/detail')
 const catelogy =()=>import('../views/catelogy')
 const search =()=>import('../views/search')
 const cart =()=>import('../views/cart')
+const shoppingcart =()=>import('../views/shoppingcart')
 const login =()=>import('../views/login')
 const register =()=>import('../views/register')
 const user =()=>import('../views/User/User')
@@ -80,6 +81,10 @@ const routes = [
     path:'/order',
     name:Order,
     component: Order
+  },
+  {
+    path:'/shoppingcart',
+    component:shoppingcart
   }
 ]
 

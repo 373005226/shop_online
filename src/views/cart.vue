@@ -1,202 +1,318 @@
 <template>
-    <div>
-      <my-header></my-header>
-      <div class="cart">
-        <div class="row">
-          <div class="cartHead">
-            <div class="checkbox">
-              <input type="checkbox">
-              <span class="all" >全选</span>
-            </div>
-            <div class="goodInfo">商品信息</div>
-            <div class="price">单价</div>
-            <div class="number">数量</div>
-            <div class="total">小计</div>
-            <div class="sets">操作</div>
+  <div>
+    <my-header></my-header>
+    <div class="cart">
+      <div class="row">
+        <div class="cartHead">
+          <div class="checkbox">
           </div>
-          <div class="cartMain">
-            <div class="item">
-              <div class="checkout">
-                <input type="checkbox" class="" title="" >
-              </div>
-              <div class="goodInfo">
+          <div class="goodInfo">商品信息</div>
+          <div class="price">单价</div>
+          <div class="number">数量</div>
+          <div class="total">小计</div>
+          <div class="sets">操作</div>
+        </div>
+        <div class="cartMain">
+          <div class="item" v-for="(item,index) in productList" :key="index">
+            <div class="checkout">
+              <input type="checkbox" :checked="item.selected">
+            </div>
+            <div class="goodInfo">
+              <router-link :to="'/detail?id=0'">
                 <div class="pic">
-                  <router-link :to="'/detail?id=0'">
-                    <img src="https://yanxuan-item.nosdn.127.net/cef7e9cd82275612028abaed71b19fd0.png?quality=95&thumbnail=200x200&imageView" alt="">
-                  </router-link>
+                  <img :src="item.goods.images[0].image"
+                       v-if="item.goods.images !== undefined &&  item.goods.images.length > 0 ">
                 </div>
                 <div class="nameCon">
-                  <router-link :to="'/detail?id=0'">
-                    男/女 清雅云端家居拖鞋
-                  </router-link>
-                  <div class="type">米色 M（38-39）</div>
+                  {{item.goods.name}}
+                  <div class="type">{{item.goods.specification[0].specification_text}}</div>
                 </div>
-              </div>
-              <div class="price">¥39.90</div>
-              <div class="number">
-<!--                <span :class="number <= 1? 'noActive' :''" @click="numReduce" class="iconfont icon-jian click"></span>-->
-<!--                <input type="text" v-model="number">-->
-<!--                <span @click="number++" class="iconfont icon-jia click"></span>-->
-                <el-input-number v-model="number" :min="1" :max="10" label="描述文字" size="mini"></el-input-number>
-              </div>
-              <div class="total">
-                ¥99.90
-              </div>
-              <div class="sets">
-                <el-row>
-                  <el-button type="danger" size="mini" plain class="sets_button">移除</el-button>
-                </el-row>
-<!--                <el-link icon="el-icon-star-on" :underline="false">加入收藏夹</el-link>-->
-<!--                <el-link type="danger" :underline="false">删除</el-link>-->
-<!--                <a href="javascript:;" class="addColl">加入收藏夹</a>-->
-<!--                <a href="javascript:;" class="delete">删除</a>-->
-              </div>
+              </router-link>
             </div>
-          </div>
-          <div class="cart-total">
-            <div class="w-chkbox">
-              <input type="checkbox">
-              <span>已选（0）</span>
-              <a href="javascript:;">批量删除</a>
-              <a href="javascript:;">清空失效商品</a>
+            <div class="price" v-if="item.goods.specification !== undefined &&  item.goods.specification.length > 0 ">
+              ¥{{item.goods.specification[0].shop_price}}
             </div>
-            <div class="textInfo">
-              <div class="leftInfo">
-                <div class="itemsPrice">
-                  <div class="linetext">
-                    <span>商品合计 : </span>
-                    <span>¥39.90</span>
-                  </div>
-                  <div class="linetext">
-                    <span>已优惠 :  </span>
-                    <span>-¥0.00</span>
-                  </div>
-                </div>
-              </div>
-              <div class="rightInfo">
-                <div class="shouldPayMoney">
-                  <span>应付总额：</span>
-                  <span>¥ 39.90</span>
-                </div>
-              </div>
+
+            <div class="number">
+              <el-input-number v-model="item.nums" :min="1" :max="item.goods.goods_num" label="描述文字"
+                               size="mini"></el-input-number>
             </div>
-            <div class="info">
-              <button @click="toorder">下单</button>
+            <div class="total">
+              ¥{{item.goods.specification[0].shop_price*item.nums}}
+            </div>
+            <div class="sets">
+              <el-row>
+                <el-button type="danger" size="mini" plain class="sets_button">移除</el-button>
+              </el-row>
             </div>
           </div>
         </div>
+        <div class="cart-total">
+          <div class="w-chkbox">
+            <input type="checkbox" @click="checkedAll(checkedAllFlag)" :checked="checkedAllFlag">
+            <span>全选</span>
+          </div>
+          <div class="textInfo">
+            <div class="leftInfo">
+              <div class="itemsPrice">
+                <div class="linetext">
+                  <span>商品合计 : </span>
+                  <span>¥{{total}}</span>
+                </div>
+                <div class="linetext">
+                  <span>已优惠 :  </span>
+                  <span>-¥0.00</span>
+                </div>
+              </div>
+            </div>
+            <div class="rightInfo">
+              <div class="shouldPayMoney">
+                <span>应付总额：</span>
+                <span>¥ {{alltotal}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="info">
+            <button @click="toorder">下单</button>
+          </div>
+        </div>
       </div>
-      <my-footer></my-footer>
     </div>
+    <my-footer></my-footer>
+  </div>
 </template>
 
 <script>
-  import  MyHeader from "../common/header/MyHeader";
+  import MyHeader from "../common/header/MyHeader";
   import MyFooter from "../common/footer/MyFooter";
-    export default {
-        name: "cart",
-      components:{
-          MyHeader,
-          MyFooter
-      },
-      data(){
-        return{
-          number:1
-        }
+  import {getcart,putcart} from '@/api/index'
+
+  export default {
+    name: "cart",
+    components: {
+      MyHeader,
+      MyFooter
     },
-      methods:{
-        // 数量减
-        numReduce(){
-          if(this.number <= 1){
-            this.number = 1
-            return
+    data() {
+      return {
+        totalMoney: 0,
+        productList: [],
+        checkedAllFlag: false
+      }
+    },
+    computed: {
+      total() {
+        let total = 0
+        for (let i of this.productList) {
+          total += i.nums * i.goods.specification[0].shop_price
+        }
+        return total
+      },
+      alltotal() {
+        return this.total - 2
+      }
+    },
+    methods: {
+      // 数量减
+      numReduce() {
+        if (this.number <= 1) {
+          this.number = 1
+          return
+        }
+        this.number--
+      },
+      toorder() {
+        // this.$router.push({
+        //   path: '/order'
+        // })
+      },
+      checkedAll(bool) {
+        if (!bool) {
+          for (let i of this.productList) {
+            console.log(i)
+            if (i.selected == false) {
+              putcart(i.goods.id,{
+                nums:i.nums,
+                goods:i.goods.id,
+                selected:true
+              },
+                {
+                  headers: {
+                    Authorization: 'JWT ' + localStorage.getItem('token')
+                  }
+                }
+              ).then(res=>{
+                console.log(res)
+              })
+            }
           }
-          this.number--
-        },
-        toorder(){
-          this.$router.push({
-            path:'/order'
-          })
+          this.checkedAllFlag = true
+          location.reload()
+        } else {
+          for (let i of this.productList) {
+            console.log(i)
+            if (i.selected == true) {
+              putcart(i.goods.id,{
+                  nums:i.nums,
+                  goods:i.goods.id,
+                  selected:false
+                },
+                {
+                  headers: {
+                    Authorization: 'JWT ' + localStorage.getItem('token')
+                  }
+                }
+              ).then(res=>{
+                console.log(res)
+              })
+              location.reload()
+
+            }
+            this.checkedAllFlag = false
+          }
         }
       }
+    },
+    created() {
+      getcart({
+        headers: {
+          Authorization: 'JWT ' + localStorage.getItem('token')
+        }
+      }).then(res => {
+        console.log(res)
+        let len = 0
+        for (let i of res) {
+          if (i.selected == true) {
+            len++
+          }
+        }
+        if (len == res.length) {
+          this.checkedAllFlag = true
+          console.log('全选了')
+        } else {
+          console.log('没有全选')
+          this.checkedAllFlag = false
+        }
+        this.productList = res
+      })
+      // this.productList = this.$store.state.cart
+      // console.log(this.productList)
     }
+  }
 </script>
 
 <style scoped lang="scss">
-  .row{
+  .row {
     width: 1220px;
   }
-  .sets_button{
+
+  .sets_button {
     width: 75px;
   }
-  .click:hover{
+
+  .click:hover {
     color: #9AD7FD;
     cursor: pointer;
   }
-  .cart{
+
+  .cart {
     padding: 20px 0 0;
-    .cartHead{
+
+    .cartHead {
       display: flex;
       text-align: center;
       border: 1px solid #ddd;
-      div{
+
+      div {
         padding: 12px 0;
         background-color: #f5f5f5;
       }
-      .checkbox{width: 138px;
+
+      .checkbox {
+        width: 138px;
         display: flex;
         align-items: center;
         justify-content: center;
-        input{
+
+        input {
           width: 18px;
           height: 18px;
-          vertical-align: middle!important;
+          vertical-align: middle !important;
         }
-        .all{margin-left: 20px;}
+
+        .all {
+          margin-left: 20px;
+        }
       }
-      .goodInfo{width: 300px;text-align: left;padding-left: 20px;}
-      .price{width: 230px;}
-      .number{width: 120px}
-      .total{width: 195px;}
-      .sets{width: 235px}
+
+      .goodInfo {
+        width: 300px;
+        text-align: left;
+        padding-left: 20px;
+      }
+
+      .price {
+        width: 230px;
+      }
+
+      .number {
+        width: 120px
+      }
+
+      .total {
+        width: 195px;
+      }
+
+      .sets {
+        width: 235px
+      }
     }
-    .cartMain{
+
+    .cartMain {
       border: 1px solid #ddd;
       padding-left: 20px;
-      .item{
+
+      .item {
         padding: 20px 0;
         display: flex;
         align-items: center;
         border-bottom: 1px dashed #eaeaea;
-        &:last-child{
+
+        &:last-child {
           border: none;
         }
-        .checkout{
+
+        .checkout {
           text-align: center;
           position: relative;
           color: #999;
           width: 60px;
-          input{
+
+          input {
             display: inline-block;
             width: 18px;
             height: 18px;
           }
         }
-        .goodInfo{
+
+        .goodInfo {
           display: flex;
-          .pic{
+
+          .pic {
             top: 50%;
             float: left;
             height: 100px;
             width: 100px;
             border: 1px solid #eaeaea;
-            img{
+
+            img {
               width: 100%;
               height: 100%;
               background-color: #f4f4f4;
             }
           }
-          .nameCon{
+
+          .nameCon {
             margin-left: 15px;
             font-size: 14px;
             padding-top: 10px;
@@ -205,25 +321,29 @@
             min-height: 100px;
             float: left;
             line-height: 1;
-            .type{
+
+            .type {
               color: #999;
               margin-top: 10px;
             }
           }
         }
-        .price{
+
+        .price {
           width: 155px;
           /*text-align: center;*/
           padding: 36px;
           position: relative;
           color: #999;
         }
-        .number{
+
+        .number {
           width: 170px;
           display: flex;
           align-items: center;
           justify-content: center;
-          span,input{
+
+          span, input {
             display: inline-block;
             width: 24px;
             height: 24px;
@@ -234,19 +354,22 @@
             box-sizing: border-box;
             outline: none;
           }
-          input{
+
+          input {
             display: inline-block;
             width: 80px;
           }
         }
-        .total{
+
+        .total {
           text-align: center;
 
           position: relative;
           color: #999;
           width: 150px;
         }
-        .sets{
+
+        .sets {
           /*position: relative;*/
           /*color: #999;*/
           text-align: center;
@@ -255,7 +378,8 @@
         }
       }
     }
-    .cart-total{
+
+    .cart-total {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -265,37 +389,45 @@
       background-color: #f5f5f5;
       border: 1px solid #ddd;
       height: 70px;
-      .w-chkbox{
+
+      .w-chkbox {
         margin-left: 20px;
-        input{
+
+        input {
           width: 18px;
           height: 18px;
-          vertical-align: middle!important;
+          vertical-align: middle !important;
         }
-        span{
+
+        span {
           margin-left: 14px;
         }
-        a{
+
+        a {
           margin-left: 30px;
         }
       }
-      .textInfo{
+
+      .textInfo {
         display: flex;
         align-content: center;
-        .leftInfo{
+
+        .leftInfo {
           .itemsPrice {
             margin: 10px 0;
             padding: 0 30px;
             border-right: 1px solid #ddd;
             line-height: 14px;
             height: 50px;
-            .linetext{
+
+            .linetext {
               display: flex;
               color: #999;
               line-height: 30px;
-              span{
-                &:first-child{
-                  width:80px;
+
+              span {
+                &:first-child {
+                  width: 80px;
                   margin-right: 20px;
                   text-align: right;
                 }
@@ -303,12 +435,15 @@
             }
           }
         }
-        .rightInfo{
-          margin-left:20px;
-          .shouldPayMoney{
+
+        .rightInfo {
+          margin-left: 20px;
+
+          .shouldPayMoney {
             line-height: 60px;
-            span{
-              &:last-child{
+
+            span {
+              &:last-child {
                 font-size: 22px;
                 font-weight: 700;
                 color: #BE4141;
@@ -317,8 +452,9 @@
           }
         }
       }
-      .info{
-        button{
+
+      .info {
+        button {
           cursor: pointer;
           outline: none;
           border-radius: 0;
@@ -331,7 +467,8 @@
           color: #fff;
           border: 1px solid #35AFFB;
           background-color: #35AFFB;
-          &:hover{
+
+          &:hover {
             background-color: #3A88FD;
           }
         }

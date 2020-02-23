@@ -114,7 +114,6 @@ export default {
     }
   },
   created(){
-    console.log(this.$store.state)
     this.$store.state.mobile = localStorage.getItem('mobile')
   },
   mounted(){

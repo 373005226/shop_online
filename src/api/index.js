@@ -49,3 +49,13 @@ export const getallfav =(params,config)=>{
 export const deletefav =(params,config)=>{
   return http.fetchDelete('userfavs/'+params+'/' ,config)
 }
+
+//获取购物车信息
+export const getcart =(params,config)=>{
+  return http.fetchGet('shopcarts/',params,config)
+}
+
+//修改购物车的信息
+export const putcart=(params,data,config)=>{
+  return http.fetchPut('shopcarts/'+params+'/',data,config)
+}
