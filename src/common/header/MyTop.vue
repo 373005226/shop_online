@@ -18,7 +18,7 @@
 <!--              <i class="icon icon-gouwuche"></i>-->
               <img src="../../assets/img/购物车.png" style="margin-left: 15px;">
               <span class="cartName">购物车</span>
-              <i class="cat-badge cart-num">{{$store.state.cartList.length}}</i>
+              <i class="cat-badge cart-num">{{cartlength}}</i>
             </router-link>
           </div>
           <!-- nav -->
@@ -76,13 +76,15 @@
 </template>
 
 <script>
-export default {
+  import { getcart} from "../../api";
+
+  export default {
   name: 'MyTop',
   data(){
     return{
-
       showNavTop:false,
       value:'',
+      res:'',
       // search
       isShowInfo:true,
       searchValue:'搜索你想要的商品',
@@ -101,8 +103,23 @@ export default {
       // ]
     }
   },
-  mounted(){
-    window.addEventListener('scroll', this.handleScroll);
+    mounted(){
+      window.addEventListener('scroll', this.handleScroll);
+    },
+    created() {
+      getcart({
+        headers: {
+          Authorization: 'JWT ' + localStorage.getItem('token')
+        }
+      }).then(res=>{
+        console.log(res)
+        this.res = res.length
+      })
+    },
+    computed: {
+    cartlength() {
+      return this.res
+    }
   },
   methods:{
     // 搜索框

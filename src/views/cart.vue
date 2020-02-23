@@ -15,7 +15,7 @@
         <div class="cartMain">
           <div class="item" v-for="(item,index) in productList" :key="index">
             <div class="checkout">
-              <input type="checkbox" @click="clickchange(item)" v-model="item.selected">
+              <input type="checkbox" @click="clickchange(item)" v-model="item.selected" :checked="item.selected">
             </div>
             <div class="goodInfo">
               <router-link :to="'/detail?id='+item.goods.id">
