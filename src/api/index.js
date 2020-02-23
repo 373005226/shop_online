@@ -50,12 +50,17 @@ export const deletefav =(params,config)=>{
   return http.fetchDelete('userfavs/'+params+'/' ,config)
 }
 
-//获取购物车信息
+//获取购物车商品信息
 export const getcart =(params,config)=>{
   return http.fetchGet('shopcarts/',params,config)
 }
 
-//修改购物车的信息
+//修改购物车的商品
 export const putcart=(params,data,config)=>{
   return http.fetchPut('shopcarts/'+params+'/',data,config)
+}
+
+//删除购物车商品
+export const deletecart =(params,config)=>{
+  return http.fetchDelete('shopcarts/'+params,config)
 }

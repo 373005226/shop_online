@@ -42,7 +42,7 @@
             </div>
             <div class="sets">
               <el-row>
-                <el-button type="danger" size="mini" plain class="sets_button">移除</el-button>
+                <el-button type="danger" size="mini" plain class="sets_button" @click="delccart(item.goods.id)">移除</el-button>
               </el-row>
             </div>
           </div>
@@ -85,7 +85,7 @@
 <script>
   import MyHeader from "../common/header/MyHeader";
   import MyFooter from "../common/footer/MyFooter";
-  import {getcart,putcart} from '@/api/index'
+  import {getcart,putcart,deletecart} from '@/api/index'
 
   export default {
     name: "cart",
@@ -142,6 +142,15 @@
         // this.$router.push({
         //   path: '/order'
         // })
+      },
+      delccart(id){
+        console.log(id)
+        deletecart(id,{
+          headers: {Authorization: 'JWT ' + localStorage.getItem('token')}
+        }).then(res=>{
+          console.log(res)
+          location.reload()
+        })
       },
       checkedAll() {
         console.log(this)
