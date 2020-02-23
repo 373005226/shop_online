@@ -1,6 +1,6 @@
 import http from './public'
 
-// 手机发送验证码功能
+// 手机发送验证码
 export const sendcode =(params)=>{
   return http.fetchPost('codes/',params)
 }
@@ -15,7 +15,7 @@ export const userlogin =(params)=>{
   return http.fetchPost('login/',params)
 }
 
-//添加收货地址功能
+//添加收货地址
 export const useraddress = (params,config)=>{
   return http.fetchPost('address/',params,config)
 }
@@ -30,12 +30,12 @@ export const deleteaddress =(params,config)=>{
   return http.fetchDelete('address/'+params,config)
 }
 
-//修改购物车地址功能
-export const changeaddress=(params,config)=>{
-  return http.fetchPut('address/'+params+'/',config)
+//修改收货地址
+export const changeaddress=(params,data,config)=>{
+  return http.fetchPut('address/'+params+'/',data,config)
 }
 
-//用户收藏商品功能
+//用户收藏商品
 export const adduserfavs =(params,config)=>{
   return http.fetchPost('userfavs/', params,config)
 }

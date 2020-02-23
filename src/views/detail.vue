@@ -328,14 +328,16 @@
             Authorization: 'JWT '+localStorage.getItem('token')
           }
         }).then(res=>{
-          for(let i of res){
-            console.log(i.goods.id)
-            if (i.goods.id == this.id){
-              this.isfav = true
-              console.log('已收藏')
-              break
-            }
-          }
+          // for(let i of res){
+          //   console.log(i.goods.id)
+          //   if (i.goods.id == this.id){
+          //     this.isfav = true
+          //     console.log('已收藏')
+          //     break
+          //   }
+          // }
+
+          this.isfav = !!(res.find(item => item.goods.id == this.id))
         })
       }
     }

@@ -34,9 +34,9 @@ export default {
       })
     })
   },
-  fetchPut(url , data = {}, config = {}) {
+  fetchPut(url ,params, data = {}, config = {}) {
     return new Promise((resolve, reject) => {
-      axios.put(url , data, config).then(res => {
+      axios.put(url , params , data, config).then(res => {
         resolve(res.data)
       }).catch(error => {
         reject(error)
