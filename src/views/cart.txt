@@ -1,0 +1,1643 @@
+<template>
+  <div class="address">
+    <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1"
+         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <defs>
+        <symbol id="icon-add" viewBox="0 0 32 32">
+          <title>add2</title>
+          <path class="path1"
+                d="M15 17h-13.664c-0.554 0-1.002-0.446-1.002-1 0-0.552 0.452-1 1.002-1h13.664v-13.664c0-0.554 0.446-1.002 1-1.002 0.552 0 1 0.452 1 1.002v13.664h13.664c0.554 0 1.002 0.446 1.002 1 0 0.552-0.452 1-1.002 1h-13.664v13.664c0 0.554-0.446 1.002-1 1.002-0.552 0-1-0.452-1-1.002v-13.664z"></path>
+        </symbol>
+        <symbol id="icon-ok" viewBox="0 0 39 32">
+          <title>ok</title>
+          <path class="path1"
+                d="M14.084 20.656l-7.845-9.282c-1.288-1.482-3.534-1.639-5.016-0.351s-1.639 3.534-0.351 5.016l10.697 12.306c1.451 1.669 4.057 1.623 5.448-0.096l18.168-22.456c1.235-1.527 0.999-3.765-0.528-5.001s-3.765-0.999-5.001 0.528l-15.573 19.337z"></path>
+        </symbol>
+        <symbol id="icon-edit" viewBox="0 0 32 32">
+          <title>edit</title>
+          <path class="path1"
+                d="M25.599 11.292l-4.892-4.892 3.825-3.825 4.892 4.892-3.825 3.825zM4.732 23.308l3.959 3.959-5.939 1.98 1.98-5.939zM10.666 26.225l-4.892-4.892 13.425-13.425 4.892 4.892-13.425 13.425zM31.687 6.713l-6.4-6.4c-0.417-0.417-1.091-0.417-1.508 0l-20.267 20.267c-0.114 0.115-0.191 0.25-0.242 0.393-0.003 0.009-0.012 0.015-0.015 0.025l-3.2 9.6c-0.128 0.383-0.029 0.806 0.257 1.091 0.203 0.204 0.476 0.313 0.754 0.313 0.112 0 0.227-0.017 0.337-0.054l9.6-3.2c0.011-0.003 0.017-0.013 0.027-0.016 0.142-0.052 0.276-0.128 0.39-0.242l20.267-20.267c0.417-0.416 0.417-1.091 0-1.508v0z"></path>
+        </symbol>
+        <symbol id="icon-del" viewBox="0 0 26 32">
+          <title>delete</title>
+          <path class="path1"
+                d="M17.723 28c0.543 0 0.984-0.448 0.984-1v-12c0-0.552-0.441-1-0.984-1s-0.985 0.448-0.985 1v12c0 0.552 0.441 1 0.985 1v0zM7.877 28c0.543 0 0.984-0.448 0.984-1v-12c0-0.552-0.441-1-0.984-1s-0.985 0.448-0.985 1v12c0 0.552 0.441 1 0.985 1v0zM12.8 28c0.543 0 0.985-0.448 0.985-1v-12c0-0.552-0.441-1-0.985-1s-0.984 0.448-0.984 1v12c0 0.552 0.441 1 0.984 1v0zM23.631 4h-5.908v-2c0-1.104-0.882-2-1.969-2h-5.908c-1.087 0-1.969 0.896-1.969 2v2h-5.908c-1.087 0-1.969 0.896-1.969 2v2c0 1.104 0.882 2 1.969 2v18c0 2.208 1.765 4 3.939 4h13.784c2.174 0 3.938-1.792 3.938-4v-18c1.087 0 1.969-0.896 1.969-2v-2c0-1.104-0.882-2-1.969-2v0zM9.846 3c0-0.552 0.441-1 0.984-1h3.938c0.544 0 0.985 0.448 0.985 1v1h-5.908v-1zM21.662 28c0 1.104-0.882 2-1.969 2h-13.784c-1.087 0-1.97-0.896-1.97-2v-18h17.723v18zM22.646 8h-19.692c-0.543 0-0.985-0.448-0.985-1s0.441-1 0.985-1h19.692c0.543 0 0.984 0.448 0.984 1s-0.441 1-0.984 1v0z"></path>
+        </symbol>
+        <symbol id="icon-clock" viewBox="0 0 32 32">
+          <title>clock</title>
+          <path class="path1"
+                d="M29.333 16c0-7.364-5.97-13.333-13.333-13.333s-13.333 5.97-13.333 13.333c0 7.364 5.97 13.333 13.333 13.333s13.333-5.97 13.333-13.333v0 0 0 0 0 0zM0 16c0-8.837 7.163-16 16-16s16 7.163 16 16c0 8.837-7.163 16-16 16s-16-7.163-16-16zM14.667 14.667v1.333h2.667v-10.667h-2.667v9.333zM24 18.667h1.333v-2.667h-10.667v2.667h9.333z"></path>
+        </symbol>
+      </defs>
+    </svg>
+
+    <div class="container">
+      <div class="checkout-addr">
+        <!-- process step -->
+        <div class="check-step">
+          <ul>
+            <li class="cur">地址确认</li>
+            <li>查看订单</li>
+            <li>支付</li>
+            <li>订单确认</li>
+          </ul>
+        </div>
+
+        <!-- address list -->
+        <div class="checkout-title">
+          <span>配送地址</span>
+        </div>
+        <div class="addr-list-wrap">
+          <div class="addr-list">
+            <ul>
+              <li v-for="(address, index) in filterAddress" :class="{'check': index === currentAddress}"
+                  @click="currentAddress = index">
+                <dl>
+                  <dt>{{address.userName}}</dt>
+                  <dd class="address">{{address.streetName}}</dd>
+                  <dd class="tel">{{address.tel}}</dd>
+                </dl>
+                <div class="addr-opration addr-edit">
+                  <a href="javascript:;" class="addr-edit-btn">
+                    <svg class="icon icon-edit">
+                      <use xlink:href="#icon-edit"></use>
+                    </svg>
+                  </a>
+                </div>
+                <div class="addr-opration addr-del">
+                  <a href="javascript:;" class="addr-del-btn">
+                    <svg class="icon icon-del">
+                      <use xlink:href="#icon-del"></use>
+                    </svg>
+                  </a>
+                </div>
+                <div class="addr-opration addr-set-default" v-if="!address.isDefault">
+                  <a href="javascript:;" class="addr-set-default-btn" @click="setDefault(address.addressId)"><i>设为默认</i></a>
+                </div>
+                <div class="addr-opration addr-default" v-if="address.isDefault">默认地址</div>
+              </li>
+
+              <li class="addr-new">
+                <div class="add-new-inner">
+                  <i class="icon-add">
+                    <svg class="icon icon-add">
+                      <use xlink:href="#icon-add"></use>
+                    </svg>
+                  </i>
+                  <p>添加新地址</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="shipping-addr-more">
+            <a class="addr-more-btn up-down-btn" href="javascript:" @click="limitNum=addressList.length">
+              more
+              <i class="i-up-down">
+                <i class="i-up-down-l"></i>
+                <i class="i-up-down-r"></i>
+              </i>
+            </a>
+          </div>
+        </div>
+
+        <!-- shipping method-->
+        <div class="checkout-title">
+          <span>配送方式</span>
+        </div>
+        <div class="shipping-method-wrap">
+          <div class="shipping-method">
+            <ul>
+              <li :class="{'check': shippingMethod === 1}" @click="shippingMethod = 1">
+                <div class="name">标准配送</div>
+                <div class="price">Free</div>
+              </li>
+              <li :class="{'check': shippingMethod === 2}" @click="shippingMethod = 2">
+                <div class="name">高级配送</div>
+                <div class="price">180</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="next-btn-wrap">
+          <a href="javascript:;" class="btn btn--red">下一步</a>
+        </div>
+        <div class="md-modal modal-msg md-modal-transition" id="showModal">
+          <div class="md-modal-inner">
+            <div class="md-top">
+              <button class="md-close">关闭</button>
+            </div>
+            <div class="md-content">
+              <div class="confirm-tips">
+                <p id="cusLanInfo">你确认删除此配送地址信息吗?</p>
+              </div>
+              <div class="btn-wrap col-2">
+                <button class="btn btn--m" id="btnModalConfirm">Yes</button>
+                <button class="btn btn--m btn--red" id="btnModalCancel">No</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="md-modal modal-msg md-modal-transition" id="showModalw">
+          <div class="md-modal-inner">
+            <div class="md-top">
+              <button class="md-close">关闭</button>
+            </div>
+            <div class="md-content">
+              <div class="confirm-tips">
+                <div class="md-form-item">
+                  <label class="md-form-item__label" style="width: 80px;">
+                    姓名
+                  </label>
+                  <div class="md-form-item__content" style="margin-left: 80px;">
+                    <div class="el-input">
+                      <input type="text" autocomplete="off" class="md-input__inner">
+                    </div>
+                  </div>
+                </div>
+                <div class="md-form-item">
+                  <label class="md-form-item__label" style="width: 80px;">
+                    地址
+                  </label>
+                  <div class="md-form-item__content" style="margin-left: 80px;">
+                    <div class="el-input">
+                      <input type="text" autocomplete="off" class="md-input__inner">
+                    </div>
+                  </div>
+                </div>
+                <div class="md-form-item">
+                  <label class="md-form-item__label" style="width: 80px;">
+                    电话号码
+                  </label>
+                  <div class="md-form-item__content" style="margin-left: 80px;">
+                    <div class="el-input">
+                      <input type="text" autocomplete="off" class="md-input__inner">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="btn-wrap col-2">
+                <button class="btn btn--s" id="btnModalConfirms">保存</button>
+                <button class="btn btn--s btn--red" id="btnModalCancels">取消</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--         <div class="md-overlay" id="showOverLay"></div>
+         -->
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+  export default {
+    name: "cart",
+    data() {
+      return {
+        addressList: [],
+        limitNum: 3,
+        currentAddress: 0,
+        shippingMethod: 1
+      }
+    },
+    computed: {
+      filterAddress() {
+        return this.addressList.slice(0, this.limitNum);
+      }
+
+    },
+    mounted() {
+      this.$nextTick(() => {
+        this.getAddressList();
+
+      });
+
+    },
+    methods: {
+      getAddressList() {
+        this.$http.get('static/data/address.json').then(response => {
+          console.log(response);
+          this.addressList = response.data.result;
+        }).catch(error => {
+          console.log(error);
+        });
+      },
+      setDefault(addressId) {
+        this.addressList.forEach((address, index) => {
+          if (address.addressId === addressId) {
+            address.isDefault = true;
+          } else {
+            address.isDefault = false;
+          }
+
+        });
+
+      }
+    }
+  }
+</script>
+
+<style lang="css" scoped>
+  .check-step {
+    padding: 5px 0;
+  }
+
+  .check-step ul {
+    display: -ms-flexbox;
+    display: flex;
+    margin: 25px 0 50px 0;
+  }
+
+  .check-step ul:after {
+    visibility: hidden;
+    display: block;
+    content: " ";
+    clear: both;
+  }
+
+  .check-step li {
+    position: relative;
+    float: left;
+    -ms-flex: 1;
+    flex: 1;
+    width: 25%;
+    line-height: 1.5em;
+    padding: 0 1em 1em 1em;
+    border-bottom: 2px solid #ccc;
+    color: #999;
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .check-step li:after {
+    position: absolute;
+    bottom: -7px;
+    left: 50%;
+    margin-left: -7px;
+    content: "";
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #ccc;
+  }
+
+  .check-step li.cur {
+    border-color: #EE7A23;
+    color: #EE7A23;
+  }
+
+  .check-step li.cur:after {
+    background: #EE7A23;
+  }
+
+  @media only screen and (max-width: 767px) {
+    .check-step ul {
+      margin: 10px 0 25px 0;
+    }
+
+    .check-step li {
+      font-size: 12px;
+    }
+  }
+
+  .addr-list ul:after {
+    visibility: hidden;
+    display: block;
+    content: " ";
+    clear: both;
+  }
+
+  .addr-list li {
+    position: relative;
+    float: left;
+    width: 23.5%;
+    height: 162px;
+    margin: 10px 2% 10px 0;
+    padding: 20px 20px 40px 20px;
+    background: #fff;
+    border: 2px solid #e9e9e9;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .addr-list li dt {
+    margin-bottom: 10px;
+    font-size: 18px;
+  }
+
+  .addr-list li dd {
+    margin-bottom: 6px;
+    line-height: 20px;
+  }
+
+  .addr-list li .address {
+    height: 40px;
+    overflow: hidden;
+  }
+
+  .addr-list li .tel {
+    color: #605F5F;
+  }
+
+  .addr-list li .addr-opration {
+    position: absolute;
+  }
+
+  .addr-list li .addr-opration .icon {
+    width: 100%;
+    height: 100%;
+  }
+
+  .addr-list li .addr-opration:hover .icon {
+    fill: #EE7A23;
+  }
+
+  .addr-list li .addr-edit {
+    display: none;
+    top: 20px;
+    right: 20px;
+    width: 20px;
+    height: 20px;
+  }
+
+  .addr-list li .addr-del {
+    display: none;
+    bottom: 20px;
+    right: 20px;
+    width: 20px;
+    height: 20px;
+  }
+
+  .addr-list li .addr-set-default, .addr-list li .addr-default {
+    bottom: 15px;
+    left: 20px;
+    color: #EE7A23;
+  }
+
+  .addr-list li .addr-set-default {
+    display: none;
+  }
+
+  .addr-list li:nth-child(4n) {
+    margin-right: 0;
+  }
+
+  .addr-list li:hover {
+    border-color: #EE7A23;
+  }
+
+  .addr-list li.addr-new {
+    color: #333;
+    text-align: center;
+  }
+
+  .addr-list li.addr-new .add-new-inner {
+    padding-top: 20px;
+  }
+
+  .addr-list li.addr-new .add-new-inner .icon-add {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+  }
+
+  .addr-list li.addr-new .add-new-inner .icon-add .icon-add {
+    width: 50px;
+    height: 50px;
+    fill: #605F5F;
+  }
+
+  .addr-list li.addr-new .add-new-inner p {
+    margin-top: 10px;
+  }
+
+  .addr-list li.check {
+    border-color: #EE7A23;
+    border-width: 2px;
+  }
+
+  .addr-list li.check .addr-opration {
+    display: block;
+  }
+
+  .shipping-addr-more {
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  @media only screen and (max-width: 991px) {
+    .addr-list {
+      padding: 0 10px;
+    }
+
+    .addr-list li {
+      width: 49%;
+      margin-right: 2%;
+    }
+
+    .addr-list li:nth-child(4n) {
+      margin-right: 2%;
+    }
+
+    .addr-list li:nth-child(2n) {
+      margin-right: 0;
+    }
+  }
+
+  @media only screen and (max-width: 767px) {
+    .addr-list {
+      padding: 0 10px;
+    }
+
+    .addr-list li {
+      width: 100%;
+      margin: 5px 0;
+    }
+  }
+
+  .cart-item {
+    display: table;
+    width: 100%;
+  }
+
+  .cart-item-head {
+    display: table-header-group;
+    width: 100%;
+  }
+
+  .cart-item-head ul {
+    display: table-row;
+    width: 100%;
+  }
+
+  .cart-item-head li {
+    display: table-cell;
+    height: 54px;
+    line-height: 54px;
+    background: #605F5F;
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .cart-item-head li:nth-child(2), .cart-item-head li:nth-child(3), .cart-item-head li:nth-child(4), .cart-item-head li:nth-child(5) {
+    width: 12%;
+    padding: 0 10px;
+  }
+
+  .cart-item-list {
+    display: table-row-group;
+  }
+
+  .cart-item-list > li {
+    position: relative;
+    display: table-row;
+    padding: 36px 0;
+  }
+
+  .cart-item-list > li > div {
+    position: relative;
+    display: table-cell;
+    text-align: center;
+    vertical-align: top;
+    border-bottom: 1px solid #e9e9e9;
+  }
+
+  .cart-item-list > li.disabled > div:after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: rgba(96, 95, 95, 0.3);
+    z-index: 5;
+  }
+
+  .cart-item-list .cart-tab-1 {
+    min-height: 72px;
+    padding: 36px 0;
+    text-align: left;
+    border-left: 1px solid #e9e9e9;
+  }
+
+  .cart-item-list .cart-tab-2 {
+    padding-top: 64px;
+  }
+
+  .cart-item-list .cart-tab-3 {
+    padding-top: 48px;
+  }
+
+  .cart-item-list .cart-tab-4 {
+    padding-top: 64px;
+  }
+
+  .cart-item-list .cart-tab-5 {
+    padding-top: 62px;
+    border-right: 1px solid #e9e9e9;
+  }
+
+  .cart-item-list .cart-item-check {
+    float: left;
+    padding: 28px 0 28px 22px;
+  }
+
+  .cart-item-list .cart-item-pic {
+    float: left;
+    width: 80px;
+    height: 72px;
+    margin-left: 22px;
+    border: 1px solid #e9e9e9;
+  }
+
+  .cart-item-list .cart-item-pic img {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+
+  .cart-item-list .cart-item-title {
+    min-height: 58px;
+    padding: 0 20px 0 160px;
+  }
+
+  .cart-item-list .cart-item-title .item-name {
+    margin: 2px 0 10px;
+    line-height: 16px;
+    color: #000;
+  }
+
+  .cart-item-list .cart-item-title .item-count-down .icon-clock {
+    width: 14px;
+    height: 14px;
+    fill: #605F5F;
+    vertical-align: middle;
+  }
+
+  .cart-item-list .cart-item-title .item-count-down .item-count-down-time {
+    display: inline-block;
+    height: 14px;
+    line-height: 14px;
+    padding: 0 5px;
+    background: #f0f0f0;
+    font-size: 12px;
+    color: #605F5F;
+  }
+
+  .cart-item-list .item-include {
+    position: relative;
+    padding-left: 160px;
+  }
+
+  .cart-item-list .item-include dl {
+    padding-right: 60px;
+  }
+
+  .cart-item-list .item-include dl dt {
+    float: left;
+    width: 65px;
+  }
+
+  .cart-item-list .item-include dl dd {
+    margin-bottom: 13px;
+    padding-left: 65px;
+    color: #999;
+  }
+
+  .cart-item-list .item-include dl:after {
+    visibility: hidden;
+    display: block;
+    content: " ";
+    clear: both;
+  }
+
+  .cart-item-list .item-include .item-include-more {
+    position: absolute;
+    right: 10px;
+    top: 0;
+  }
+
+  .cart-item-list .item-stock {
+    margin-top: 5px;
+    font-size: 12px;
+    color: #999;
+  }
+
+  .cart-item-list .item-stock-no {
+    color: #d1434a;
+  }
+
+  .cart-item-list .item-price-total {
+    color: #d1434a;
+  }
+
+  .item-check-btn {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+
+  .item-check-btn .icon-ok {
+    display: none;
+    width: 100%;
+    height: 100%;
+    fill: #fff;
+    -ms-transform: scale(0.8);
+    transform: scale(0.8);
+  }
+
+  .item-check-btn.check {
+    background: #EE7A23;
+    border-color: #EE7A23;
+  }
+
+  .item-check-btn.check .icon-ok {
+    display: inline-block;
+  }
+
+  .item-edit-btn {
+    display: inline-block;
+    width: 16px;
+    height: 20px;
+  }
+
+  .item-edit-btn .icon-del {
+    width: 100%;
+    height: 100%;
+    fill: #999;
+  }
+
+  .order-item .cart-item-list .cart-item-title, .order-item .cart-item-list .item-include {
+    padding-left: 122px;
+  }
+
+  .order-item .select-self-area .select-ipt {
+    padding: 0;
+    text-align: center;
+  }
+
+  .quantity {
+    font-weight: bold;
+  }
+
+  .quantity input {
+    width: 40%;
+    text-align: center;
+    margin: 0 10px 0 10px;
+  }
+
+  @media only screen and (max-width: 991px) {
+    .cart-item {
+      display: block;
+      background: #f0f0f0;
+    }
+
+    .cart-item-head {
+      display: none;
+    }
+
+    .cart-item-list {
+      display: block;
+    }
+
+    .cart-item-list > li {
+      position: relative;
+      display: block;
+      margin-bottom: 10px;
+      padding: 0;
+      background: #fff;
+      border-top: 1px solid #e9e9e9;
+      border-bottom: 1px solid #e9e9e9;
+    }
+
+    .cart-item-list > li > div {
+      position: static;
+      display: block;
+      border: none;
+    }
+
+    .cart-item-list > li.disabled:after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      content: "";
+      width: 100%;
+      height: 100%;
+      background: rgba(96, 95, 95, 0.3);
+      z-index: 5;
+    }
+
+    .cart-item-list > li.disabled > div:after {
+      display: none;
+    }
+
+    .cart-item-list .cart-tab-1 {
+      padding: 18px 0 0 0;
+      border: none;
+    }
+
+    .cart-item-list .cart-tab-2 {
+      display: none;
+    }
+
+    .cart-item-list .cart-tab-3 {
+      float: left;
+      width: 50%;
+      padding: 8px 0 8px 10px;
+      text-align: left;
+    }
+
+    .cart-item-list .cart-tab-4 {
+      float: right;
+      width: 50%;
+      padding: 15px 10px 14px 0;
+      text-align: right;
+    }
+
+    .cart-item-list .cart-tab-5 {
+      clear: both;
+      padding: 0;
+    }
+
+    .cart-item-list .cart-item-check {
+      padding-left: 10px;
+    }
+
+    .cart-item-list .cart-item-pic {
+      margin-left: 10px;
+    }
+
+    .cart-item-list .cart-item-title {
+      height: 72px;
+      padding: 0 10px 0 126px;
+    }
+
+    .cart-item-list .item-include {
+      clear: both;
+      margin-top: 10px;
+      padding: 0 10px 0 36px;
+      border-bottom: 1px solid #e9e9e9;
+    }
+
+    .cart-item-list .item-quantity > div {
+      display: inline-block;
+      margin-right: 3px;
+      vertical-align: middle;
+    }
+
+    .cart-item-list .item-stock {
+      margin-top: 0;
+    }
+
+    .cart-item-list .cart-item-opration {
+      position: absolute;
+      top: 60px;
+      right: 10px;
+    }
+
+    .order-item .cart-item-list .cart-item-title {
+      padding-left: 100px;
+    }
+
+    .order-item .cart-item-list .item-include {
+      padding-left: 10px;
+    }
+  }
+
+  .shipping-method {
+    text-align: center;
+  }
+
+  .shipping-method li {
+    display: inline-block;
+    width: 300px;
+    margin: 5px;
+    padding: 10px;
+    background: #fff;
+    border: 2px solid #e9e9e9;
+    font-size: 18px;
+    line-height: 26px;
+    text-align: center;
+    color: #999;
+    font-family: "Moderat";
+    cursor: pointer;
+  }
+
+  .shipping-method li .price {
+    font-weight: bold;
+  }
+
+  .shipping-method li.check {
+    border-color: #EE7A23;
+    color: #333;
+  }
+
+  .shipping-method li:hover {
+    border-color: #EE7A23;
+  }
+
+  @media only screen and (max-width: 767px) {
+    .shipping-method {
+      padding: 10px;
+    }
+
+    .shipping-method li {
+      width: 100%;
+      margin: 5px 0;
+    }
+  }
+
+  .apply-promotion {
+    font-size: 0;
+    text-align: center;
+    background: #fff;
+  }
+
+  .apply-promotion li {
+    display: inline-block;
+    font-size: 14px;
+    width: 25%;
+    min-height: 114px;
+    vertical-align: top;
+  }
+
+  .apply-promotion li p {
+    margin-top: 12px;
+    font-size: 18px;
+  }
+
+  .apply-promotion .type i {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    /*background: url(../../img/icon_sprite@2x.png) no-repeat 0 0;*/
+    background-size: 128px 122px;
+  }
+
+  .apply-promotion .type.type-cash i {
+    background-position: -68px 0;
+  }
+
+  .apply-promotion .type.type-sale i {
+    width: 66px;
+  }
+
+  .apply-promotion .type.type-off i {
+    background-position: 0 -62px;
+  }
+
+  @media only screen and (max-width: 767px) {
+    .apply-promotion li {
+      border-right: 1px solid #e9e9e9;
+    }
+
+    .apply-promotion li:last-child, .apply-promotion li:nth-child(4n) {
+      border-right: none;
+    }
+
+    .apply-promotion li .type {
+      -ms-transform: scale(0.66);
+      transform: scale(0.66);
+    }
+  }
+
+  .price-count ul {
+    display: table;
+    width: 100%;
+  }
+
+  .price-count li {
+    display: table-row;
+    font-size: 18px;
+  }
+
+  .price-count li span {
+    display: table-cell;
+    height: 36px;
+    padding-right: 10px;
+    vertical-align: top;
+    text-align: right;
+  }
+
+  .price-count li span:first-child {
+    color: #999;
+  }
+
+  .price-count li span:last-child {
+    width: 110px;
+  }
+
+  .price-count .order-total-price span:last-child {
+    color: #d1434a;
+  }
+
+  .tips_pop {
+    position: relative;
+  }
+
+  .tips_pop .i_info {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    /*background: url(../../img/info.png) no-repeat 0 0;*/
+    background-size: 100% auto;
+    border-radius: 50%;
+  }
+
+  .tips_pop .tips_pop_box {
+    position: absolute;
+    bottom: 28px;
+    left: -250px;
+    display: none;
+    width: 274px;
+    padding: 20px 10px;
+    background: #fff;
+    border: 1px solid #e9e9e9;
+    border-radius: 5px;
+  }
+
+  .tips_pop .i_down {
+    position: absolute;
+    bottom: -6px;
+    left: 250px;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-right: 1px solid #e9e9e9;
+    border-bottom: 1px solid #e9e9e9;
+    background: #fff;
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+
+  .tips_pop:hover .tips_pop_box {
+    display: block;
+  }
+
+  .tee_tips_pop {
+    display: inline-block;
+    margin-right: 44px;
+    font-size: 14px;
+    text-align: left;
+  }
+
+  .tee_tips_pop dt {
+    margin-bottom: 10px;
+    color: #333;
+  }
+
+  .tee_tips_pop .tee_pop_box em {
+    display: inline-block;
+    width: 190px;
+    vertical-align: top;
+  }
+
+  .tee_tips_pop .tee_pop_box .price {
+    width: 50px;
+    text-align: right;
+  }
+
+  .tee_tips_pop .tee_pop_box .tee_total {
+    margin-top: 13px;
+    padding-top: 13px;
+    border-top: 1px solid #f0f0f0;
+  }
+
+  .tee_tips_pop .tee_pop_box .tee_total em {
+    color: #333;
+  }
+
+  .tee_tips_pop .tee_pop_box .price {
+    color: #d1434a;
+  }
+
+  @media only screen and (max-width: 991px) {
+    .price-count li {
+      font-size: 16px;
+    }
+
+    .price-count li span {
+      height: 29px;
+    }
+  }
+
+  /*  订单成功  */
+  .order-create {
+    padding: 30px 0 40px 0;
+    background: #fff;
+    text-align: center;
+  }
+
+  .order-create-pic {
+    width: 288px;
+    margin: 0 auto;
+    margin-bottom: 18px;
+  }
+
+  .order-create-pic img {
+    width: 100%;
+  }
+
+  .order-create-main h3 {
+    margin-bottom: 18px;
+    font-size: 32px;
+    line-height: 1.5em;
+  }
+
+  .order-create-main p {
+    margin-bottom: 86px;
+    font-size: 16px;
+    line-height: 1.5em;
+    color: #666;
+  }
+
+  .order-create-main .order-create-btn-wrap {
+    max-width: 460px;
+    margin: 0 auto;
+    padding: 0 5px;
+  }
+
+  .order-create-main .order-create-btn-wrap > div {
+    float: left;
+    width: 50%;
+    padding: 0 10px;
+  }
+
+  .order-create-main .order-create-btn-wrap .btn {
+    width: 100%;
+    min-width: auto;
+  }
+
+  .order-create-main .order-create-btn-wrap:after {
+    visibility: hidden;
+    display: block;
+    content: " ";
+    clear: both;
+  }
+
+  .order-create-main .get-lecode {
+    margin-bottom: 40px;
+    padding: 0 10px;
+  }
+
+  .order-create-main .get-lecode .lecode-main {
+    max-width: 767px;
+    margin: 0 auto 10px auto;
+    padding: 37px 0;
+    border: 1px dashed #EE7A23;
+  }
+
+  .order-create-main .get-lecode .lecode-main .lecode-num {
+    margin-bottom: 20px;
+    color: #EE7A23;
+    font-size: 20px;
+  }
+
+  .order-create-main .get-lecode .get-lecode-tips {
+    color: #999;
+    line-height: 16px;
+    line-height: 18px;
+  }
+
+  @media only screen and (max-width: 767px) {
+    .order-create-pic img {
+      width: 55.55%;
+    }
+
+    .order-create-main h3 {
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+
+    .order-create-main p {
+      margin-bottom: 40px;
+    }
+
+    .order-create-main p span {
+      display: block;
+    }
+
+    .order-create-main .order-create-btn-wrap > div {
+      padding: 0 5px;
+    }
+
+    .order-create-main .order-create-btn-wrap .btn {
+      font-size: 16px;
+    }
+
+    .order-create-main .get-lecode .lecode-main {
+      width: 100%;
+    }
+  }
+
+  .checkout .btn {
+    min-width: 220px;
+  }
+
+  .checkout-title {
+    position: relative;
+    margin-bottom: 41px;
+    text-align: center;
+  }
+
+  .checkout-title span {
+    position: relative;
+    padding: 0 1em;
+    background-color: #fff;
+    font-family: "moderat", sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    color: #605F5F;
+    z-index: 1;
+  }
+
+  .checkout-title:before {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    content: "";
+    width: 100%;
+    height: 1px;
+    background: #ccc;
+    z-index: 0;
+  }
+
+  /** 确认地址 **/
+  .addr-list-wrap {
+    min-height: 300px;
+    padding-bottom: 40px;
+  }
+
+  .shipping-method-wrap {
+    padding-bottom: 65px;
+  }
+
+  .checkout-addr .next-btn-wrap {
+    padding: 62px 0;
+    border-top: 1px solid #e9e9e9;
+    text-align: center;
+  }
+
+  /** cart **/
+  .cart {
+    padding: 69px 0 54px 0;
+  }
+
+  .cart-foot-wrap {
+    height: 54px;
+    line-height: 54px;
+    margin-top: 18px;
+  }
+
+  .cart-foot-wrap .cart-foot-l {
+    float: left;
+    font-size: 16px;
+    padding: 0 22px;
+  }
+
+  .cart-foot-wrap .item-all-check {
+    float: left;
+    color: #EE7A23;
+  }
+
+  .cart-foot-wrap .item-all-check .item-check-btn {
+    margin-right: 18px;
+  }
+
+  .cart-foot-wrap .item-all-check span {
+    vertical-align: middle;
+  }
+
+  .cart-foot-wrap .item-all-del {
+    float: left;
+    margin-top: 2px;
+  }
+
+  .cart-foot-wrap .cart-foot-r {
+    float: right;
+  }
+
+  .cart-foot-wrap .item-total {
+    float: left;
+    margin-right: 31px;
+    color: #605F5F;
+    font-size: 18px;
+  }
+
+  .cart-foot-wrap .item-total .total-price {
+    margin-left: 16px;
+    color: #d1434a;
+    font-family: "moderat", sans-serif;
+  }
+
+  .cart-foot-wrap .next-btn-wrap {
+    float: right;
+  }
+
+  .cart-foot-wrap:after {
+    visibility: hidden;
+    display: block;
+    content: " ";
+    clear: both;
+  }
+
+  /** order confirm **/
+  .checkout-order {
+    padding: 69px 0 54px 0;
+  }
+
+  .confirm-item-list-wrap {
+    margin-bottom: 124px;
+  }
+
+  .redeem-coupon-wrap {
+    margin-bottom: 123px;
+    text-align: center;
+  }
+
+  .redeem-coupon-wrap .text-redeem {
+    width: 380px;
+    height: 54px;
+    line-height: 54px;
+    margin-right: 16px;
+    vertical-align: top;
+  }
+
+  .apply-promotion-wrap {
+    margin-bottom: 124px;
+  }
+
+  .price-count-wrap {
+    margin-bottom: 26px;
+    padding-top: 62px;
+    border-top: 1px solid #e9e9e9;
+  }
+
+  .order-foot-wrap .prev-btn-wrap {
+    float: left;
+  }
+
+  .order-foot-wrap .next-btn-wrap {
+    float: right;
+  }
+
+  .order-foot-wrap:after {
+    visibility: hidden;
+    display: block;
+    content: " ";
+    clear: both;
+  }
+
+  @media only screen and (max-width: 1280px) {
+    .container {
+      width: 100%;
+    }
+  }
+
+  @media only screen and (max-width: 991px) {
+    .cart {
+      padding-top: 40px;
+    }
+
+    .cart-foot-wrap .cart-foot-l {
+      padding: 0 10px;
+    }
+  }
+
+  @media only screen and (max-width: 767px) {
+    .checkout {
+      background: #f0f0f0;
+    }
+
+    .checkout-title {
+      margin: 0 10px 13px 10px;
+    }
+
+    .checkout-title span {
+      font-size: 14px;
+      background: #f0f0f0 !important;
+    }
+
+    .next-btn-wrap {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      z-index: 101;
+    }
+
+    .next-btn-wrap .btn {
+      display: block;
+      width: 100%;
+    }
+
+    .checkout-addr .next-btn-wrap {
+      padding: 0;
+      border: none;
+    }
+
+    .cart, .checkout-order {
+      padding-top: 13px;
+    }
+
+    .cart-foot-wrap {
+      height: 42px;
+      line-height: 42px;
+      margin: 0;
+    }
+
+    .cart-foot-wrap .cart-foot-l {
+      display: none;
+    }
+
+    .cart-foot-wrap .item-total {
+      float: none;
+      margin-right: 10px;
+      font-size: 16px;
+    }
+
+    .confirm-item-list-wrap, .redeem-coupon-wrap, .apply-promotion-wrap {
+      margin-bottom: 23px;
+    }
+
+    .redeem-coupon-wrap .redeem-coupon {
+      margin: 0 10px;
+    }
+
+    .redeem-coupon-wrap .text-redeem {
+      width: 100%;
+      margin-bottom: 8px;
+    }
+
+    .redeem-coupon-wrap .btn {
+      width: 100%;
+    }
+
+    .price-count-wrap {
+      margin: 0;
+      padding-top: 0;
+      border: none;
+    }
+
+    .tee_tips_pop {
+      display: none;
+    }
+
+    .order-foot-wrap .prev-btn-wrap {
+      display: none;
+    }
+
+    .addr-list-wrap {
+      padding-bottom: 23px;
+    }
+  }
+
+  .md-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 535px;
+    height: auto;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    visibility: hidden;
+    z-index: 201;
+  }
+
+  .md-modal-transition.md-show .md-modal-inner {
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+    -webkit-transition: all .5s ease-out;
+    transition: all .5s ease-out;
+  }
+
+  .md-modal-transition .md-modal-inner {
+    background: #fff;
+    -webkit-transform: translateY(20%);
+    -ms-transform: translateY(20%);
+    transform: translateY(20%);
+    opacity: 0;
+    -webkit-transition: all .3s ease-out;
+    transition: all .3s ease-out;
+  }
+
+  .md-modal .md-modal-inner {
+    padding: 60px 50px;
+  }
+
+  .md-modal .confirm-tips {
+    min-height: 5.65em;
+  }
+
+  .md-modal .confirm-tips, .md-modal .alert-tips {
+    font-size: 14px;
+    font-weight: 200;
+    text-align: center;
+  }
+
+  .md-modal .btn-wrap {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 0;
+  }
+
+  .md-modal .btn-wrap .btn {
+    width: 45%;
+    min-width: 80px;
+    margin: 0 2.5%;
+  }
+
+  .md-modal .md-close {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    width: 34px;
+    height: 34px;
+    -webkit-transform: scale(0.5);
+    -ms-transform: scale(0.5);
+    transform: scale(0.5);
+    text-indent: -8000px;
+  }
+
+  .md-modal .md-close:hover:before {
+    -webkit-transform: rotate(-135deg);
+    -ms-transform: rotate(-135deg);
+    transform: rotate(-135deg);
+  }
+
+  .md-modal .md-close:hover:before, .md-modal .md-close:hover:after {
+    -webkit-transition: -webkit-transform .3s ease-out;
+    transition: -webkit-transform .3s ease-out;
+    transition: transform .3s ease-out;
+    transition: transform .3s ease-out, -webkit-transform .3s ease-out;
+  }
+
+  .md-modal .md-close:before {
+    -webkit-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+  }
+
+  .md-modal .md-close:before, .md-modal .md-close:after {
+    position: absolute;
+    top: 16px;
+    left: -4px;
+    content: "";
+    width: 44px;
+    height: 3px;
+    background: #605f5f;
+    -webkit-transition: -webkit-transform .5s ease-out;
+    transition: -webkit-transform .5s ease-out;
+    transition: transform .5s ease-out;
+    transition: transform .5s ease-out, -webkit-transform .5s ease-out;
+  }
+
+  .md-modal .md-close:hover:after {
+    -webkit-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+  }
+
+  .md-modal .md-close:after {
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+
+  .md-show {
+    visibility: visible;
+  }
+
+  .md-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 200;
+  }
+
+  .btn {
+    display: inline-block;
+    height: 54px;
+    line-height: 54px;
+    padding: 0 1.2em;
+    text-align: center;
+    font-size: 14px;
+    font-family: "moderat", sans-serif;
+    -webkit-transition: all .3s ease-out;
+    transition: all .3s ease-out;
+    border: 1px solid #d1434a;
+    color: #d1434a;
+    text-transform: uppercase;
+    letter-spacing: .25em;
+    white-space: nowrap;
+  }
+
+  .btn--m {
+    height: 45px;
+    line-height: 45px;
+  }
+
+  .btn--s {
+
+    height: 30px;
+    line-height: 30px;
+  }
+
+  input, select, button {
+    vertical-align: middle;
+  }
+
+  .btn--m {
+    height: 45px;
+    line-height: 45px;
+  }
+
+  .btn--red {
+    background-color: #d1434a;
+    border-color: #d1434a;
+    color: #fff;
+  }
+
+  .btn:hover, .btn[href]:hover {
+    background-color: #d1434a;
+    color: #fff;
+    -webkit-transition: all .3s ease-out;
+    transition: all .3s ease-out;
+  }
+
+  .btn--red:hover {
+    background-color: #fff;
+    color: #d1434a;
+  }
+
+  button {
+    background: 0;
+    border: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    color: inherit;
+    cursor: pointer;
+    font: inherit;
+    line-height: inherit;
+    overflow: visible;
+    vertical-align: inherit;
+  }
+
+  .md-form-item {
+    margin: 10px;
+  }
+
+  .md-form-item__label {
+    text-align: right;
+    vertical-align: middle;
+    float: left;
+    font-size: 14px;
+    color: #48576a;
+    line-height: 1;
+    padding: 11px 12px 11px 0;
+    box-sizing: border-box;
+  }
+
+  .md-form-item__content {
+    line-height: 36px;
+    position: relative;
+    font-size: 14px;
+  }
+
+  .md-input__inner {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: #fff;
+    background-image: none;
+    border-radius: 4px;
+    border: 1px solid #333;
+    box-sizing: border-box;
+    color: #1f2d3d;
+    display: block;
+    font-size: inherit;
+    height: 36px;
+    line-height: 1;
+    outline: 0;
+    padding: 3px 10px;
+    transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+    width: 100%;
+  }
+
+  .md-input__inner:focus {
+    border-color: #20a0ff
+  }
+</style>

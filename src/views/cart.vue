@@ -85,7 +85,7 @@
 <script>
   import MyHeader from "../common/header/MyHeader";
   import MyFooter from "../common/footer/MyFooter";
-  import {getcart,putcart} from '@/api/index'
+  import {getcart} from '@/api/index'
 
   export default {
     name: "cart",
@@ -104,7 +104,10 @@
       total() {
         let total = 0
         for (let i of this.productList) {
-          total += i.nums * i.goods.specification[0].shop_price
+          console.log(i)
+          if (i.selected == true){
+            total += i.nums * i.goods.specification[0].shop_price
+          }
         }
         return total
       },
@@ -126,51 +129,48 @@
         //   path: '/order'
         // })
       },
-      checkedAll(bool) {
-        if (!bool) {
-          for (let i of this.productList) {
-            console.log(i)
-            if (i.selected == false) {
-              putcart(i.goods.id,{
-                nums:i.nums,
-                goods:i.goods.id,
-                selected:true
-              },
-                {
-                  headers: {
-                    Authorization: 'JWT ' + localStorage.getItem('token')
-                  }
-                }
-              ).then(res=>{
-                console.log(res)
-              })
-            }
-          }
-          this.checkedAllFlag = true
-          location.reload()
-        } else {
-          for (let i of this.productList) {
-            console.log(i)
-            if (i.selected == true) {
-              putcart(i.goods.id,{
-                  nums:i.nums,
-                  goods:i.goods.id,
-                  selected:false
-                },
-                {
-                  headers: {
-                    Authorization: 'JWT ' + localStorage.getItem('token')
-                  }
-                }
-              ).then(res=>{
-                console.log(res)
-              })
-              location.reload()
-
-            }
-            this.checkedAllFlag = false
-          }
-        }
+      checkedAll() {
+        // if (!bool) {
+        //   for (let i of this.productList) {
+        //     console.log(i)
+        //     if (i.selected == false) {
+        //       putcart(i.goods.id,{
+        //         nums:i.nums,
+        //         goods:i.goods.id,
+        //         selected:true
+        //       },
+        //         {
+        //           headers: {
+        //             Authorization: 'JWT ' + localStorage.getItem('token')
+        //           }
+        //         }
+        //       ).then(res=>{
+        //         console.log(res)
+        //       })
+        //     }
+        //   }
+        //   this.checkedAllFlag = true
+        // } else {
+        //   for (let i of this.productList) {
+        //     console.log(i)
+        //     if (i.selected == true) {
+        //       putcart(i.goods.id,{
+        //           nums:i.nums,
+        //           goods:i.goods.id,
+        //           selected:false
+        //         },
+        //         {
+        //           headers: {
+        //             Authorization: 'JWT ' + localStorage.getItem('token')
+        //           }
+        //         }
+        //       ).then(res=>{
+        //         console.log(res)
+        //       })
+        //     }
+        //     this.checkedAllFlag = false
+        //   }
+        // }
       }
     },
     created() {
