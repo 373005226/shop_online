@@ -313,6 +313,14 @@
         // 购买
         handleBuy(){
           this.$router.push('/order')
+        },
+
+        async getfav(){
+          return getallfav({
+            headers: {
+              Authorization: 'JWT '+localStorage.getItem('token')
+            }
+          })
         }
       },
       created() {
@@ -323,22 +331,19 @@
           this.goodtotal = res.goods_num
         })
 
-        getallfav({
-          headers: {
-            Authorization: 'JWT '+localStorage.getItem('token')
-          }
-        }).then(res=>{
-          // for(let i of res){
-          //   console.log(i.goods.id)
-          //   if (i.goods.id == this.id){
-          //     this.isfav = true
-          //     console.log('已收藏')
-          //     break
-          //   }
-          // }
-
+        this.getfav().then(res=>{
           this.isfav = !!(res.find(item => item.goods.id == this.id))
         })
+        // getallfav({
+        //   headers: {
+        //     Authorization: 'JWT '+localStorage.getItem('token')
+        //   }
+        // }).then(res=>{
+        //
+        //   this.isfav = !!(res.find(item => item.goods.id == this.id))
+        // })
+
+
       }
     }
 </script>
