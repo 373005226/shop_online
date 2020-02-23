@@ -15,10 +15,10 @@
         <div class="cartMain">
           <div class="item" v-for="(item,index) in productList" :key="index">
             <div class="checkout">
-              <input type="checkbox" :checked="item.selected">
+              <input type="checkbox" @click="clickchange(item)" v-model="item.selected">
             </div>
             <div class="goodInfo">
-              <router-link :to="'/detail?id=0'">
+              <router-link :to="'/detail?id='+item.goods.id">
                 <div class="pic">
                   <img :src="item.goods.images[0].image"
                        v-if="item.goods.images !== undefined &&  item.goods.images.length > 0 ">
@@ -85,7 +85,7 @@
 <script>
   import MyHeader from "../common/header/MyHeader";
   import MyFooter from "../common/footer/MyFooter";
-  import {getcart} from '@/api/index'
+  import {getcart,putcart} from '@/api/index'
 
   export default {
     name: "cart",
@@ -104,7 +104,7 @@
       total() {
         let total = 0
         for (let i of this.productList) {
-          console.log(i)
+          // console.log(i)
           if (i.selected == true){
             total += i.nums * i.goods.specification[0].shop_price
           }
@@ -112,10 +112,24 @@
         return total
       },
       alltotal() {
-        return this.total - 2
+        return this.total
       }
     },
     methods: {
+      clickchange(item){
+        console.log(item)
+        putcart(item.goods.id,{
+          nums:item.nums,
+          goods:item.goods.id,
+          selected:!item.selected
+        },{
+          headers: {
+            Authorization: 'JWT '+localStorage.getItem('token')
+          }
+        }).then(res=>{
+          console.log(res)
+        })
+      },
       // 数量减
       numReduce() {
         if (this.number <= 1) {
