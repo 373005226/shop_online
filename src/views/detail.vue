@@ -204,6 +204,7 @@
   import crumbs from "../common/crumbs";
   import {detail} from "@/api/goods";
   import {adduserfavs ,getallfav ,deletefav} from "@/api/index"
+  import {addcart} from '@/api/index'
 
   export default {
       name: "detail",
@@ -289,9 +290,20 @@
         },
 
         addcart(){
-          this.$message({
-            message: '加入购物车成功',
-            type: 'success'
+          addcart({
+            nums:1,
+            goods: this.id,
+            selected:false
+          },{
+            headers: {Authorization: 'JWT ' + localStorage.getItem('token')}
+          }).then(res=>{
+            console.log(res)
+            this.$message({
+              message: '加入购物车成功',
+              type: 'success'
+            })
+          }).catch(error=>{
+            console.log(error)
           })
         },
 
