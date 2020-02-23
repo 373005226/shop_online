@@ -15,7 +15,7 @@
             <div class="sets">操作</div>
           </div>
           <div class="cartMain">
-            <div class="item" v-for="(item,index) in 9" :key='index'>
+            <div class="item">
               <div class="checkout">
                 <input type="checkbox" class="" title="" >
               </div>
@@ -44,8 +44,6 @@
               </div>
               <div class="sets">
                 <el-row>
-                  <el-button type="primary" size="mini" plain class="sets_button">
-                    <i class="el-icon-star-on"></i> 收藏</el-button>
                   <el-button type="danger" size="mini" plain class="sets_button">移除</el-button>
                 </el-row>
 <!--                <el-link icon="el-icon-star-on" :underline="false">加入收藏夹</el-link>-->
@@ -83,7 +81,7 @@
               </div>
             </div>
             <div class="info">
-              <button>下单</button>
+              <button @click="toorder">下单</button>
             </div>
           </div>
         </div>
@@ -115,6 +113,11 @@
           }
           this.number--
         },
+        toorder(){
+          this.$router.push({
+            path:'/order'
+          })
+        }
       }
     }
 </script>

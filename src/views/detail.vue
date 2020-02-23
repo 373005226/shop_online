@@ -115,7 +115,7 @@
 
               <div class="btns">
                 <el-row>
-                  <el-button type="danger">加入购物车</el-button>
+                  <el-button type="danger" @click="addcart">加入购物车</el-button>
                   <el-button type="primary" class="sets_button" @click="addfav(id)" v-if="isfav == false">
                     收藏
                   </el-button>
@@ -287,6 +287,14 @@
             location.reload()
           })
         },
+
+        addcart(){
+          this.$message({
+            message: '加入购物车成功',
+            type: 'success'
+          })
+        },
+
         // 去评论
         goComm(){
           this.navTabInit = 1;
