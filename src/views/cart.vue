@@ -49,7 +49,7 @@
         </div>
         <div class="cart-total">
           <div class="w-chkbox">
-            <input type="checkbox" @click="checkedAll(checkedAllFlag)" :checked="checkedAllFlag">
+            <input type="checkbox" @click="checkedAll" v-model="checkedAllFlag">
             <span>全选</span>
           </div>
           <div class="textInfo">
@@ -144,47 +144,38 @@
         // })
       },
       checkedAll() {
-        // if (!bool) {
-        //   for (let i of this.productList) {
-        //     console.log(i)
-        //     if (i.selected == false) {
-        //       putcart(i.goods.id,{
-        //         nums:i.nums,
-        //         goods:i.goods.id,
-        //         selected:true
-        //       },
-        //         {
-        //           headers: {
-        //             Authorization: 'JWT ' + localStorage.getItem('token')
-        //           }
-        //         }
-        //       ).then(res=>{
-        //         console.log(res)
-        //       })
-        //     }
-        //   }
-        //   this.checkedAllFlag = true
-        // } else {
-        //   for (let i of this.productList) {
-        //     console.log(i)
-        //     if (i.selected == true) {
-        //       putcart(i.goods.id,{
-        //           nums:i.nums,
-        //           goods:i.goods.id,
-        //           selected:false
-        //         },
-        //         {
-        //           headers: {
-        //             Authorization: 'JWT ' + localStorage.getItem('token')
-        //           }
-        //         }
-        //       ).then(res=>{
-        //         console.log(res)
-        //       })
-        //     }
-        //     this.checkedAllFlag = false
-        //   }
-        // }
+        console.log(this)
+        if(this.checkedAllFlag === false){
+          for(let i of this.productList){
+            console.log(i)
+            putcart(i.goods.id,{
+              nums:i.nums,
+              goods:i.goods.id,
+              selected:true
+            },{
+              headers: {
+                Authorization: 'JWT '+localStorage.getItem('token')
+              }
+            }).then(res=>{
+              console.log(res)
+            })
+          }
+        }else{
+          for(let i of this.productList){
+            // i.selected = true
+            putcart(i.goods.id,{
+              nums:i.nums,
+              goods:i.goods.id,
+              selected:false
+            },{
+              headers: {
+                Authorization: 'JWT '+localStorage.getItem('token')
+              }
+            }).then(res=>{
+              console.log(res)
+            })
+          }
+        }
       }
     },
     created() {
