@@ -69,3 +69,13 @@ export const putcart=(params,data,config)=>{
 export const deletecart =(params,config)=>{
   return http.fetchDelete('shopcarts/'+params,config)
 }
+
+//获取所有的订单信息
+export const getorder = (params,config)=>{
+  return http.fetchGet('orders/',params,config)
+}
+
+//把购物车商品推送到订单中
+export const postorder=(params,config)=>{
+  return http.fetchPost('orders/',params,config)
+}

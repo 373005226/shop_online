@@ -16,33 +16,29 @@
             <div v-if="orderList.length != 0" class="orderContent">
               <div class="item" v-for="(item,index) in orderList" :key='index'>
                 <div class="orderMian">
-
                   <div class="itemHead">
                     <div class="textInfo">
-                      <span class="time">下单时间：{{item.time}}</span>
-                      <span class="id">订单号：{{item.id}}</span>
+                      <span class="time">下单时间：{{item.add_time}}</span>
+                      <span class="id">订单号：{{item.order_sn}}</span>
                     </div>
+                    <span style="float: right">提货方式:<span v-if="item.takegoods_status=='online'" style="padding-left: 20px;"></span>线上送货</span>
+
                     <div class="delete icon icon-shanchu"></div>
                   </div>
                   <div class="itemMain">
                     <div class="img">
-                      <router-link :to="'/detail?id='+item.goodId">
-                        <img :src="item.img" alt="">
-                      </router-link>
+                        <img :src="item.img">
                     </div>
-                    <router-link :to="'/detail?id='+item.goodId" class="name">
+                    <div>
                       {{item.name}}
-                    </router-link>
-                    <div class="number">
-                      包裹1
                     </div>
                     <div class="state">
-                      <div class="status">已取消</div>
+                      <div class="status">交易成功</div>
                       <!-- <div class="doBuy">再次购买</div> -->
                     </div>
                     <div class="price">
-                      <div class="mianPrice">￥719.20</div>
-                      <div class="otherPrice">（含运费：￥0.00元）</div>
+                      <div class="mianPrice">￥25</div>
+                      <div class="otherPrice">（含运费：￥10.00元）</div>
                     </div>
                   </div>
 
@@ -69,6 +65,7 @@
   import UserSide from "@/common/UserSide.vue";
   import NavTab from "@/components/User/navTab.vue";
   import NoData from "../../components/User/NoData";
+  import {getorder} from '@/api/index'
 
   export default{
     components: {  MyHeader,MyFooter ,UserSide,NavTab,NoData},
@@ -78,20 +75,36 @@
         cur: 1,
         all: 8,
         msg: '',
+        getmethods:'',
         tabList:['全部订单','待付款','待发货','已发货','待评价'],
         init:0,
         orderList:[
-          {goodId:0,name:'男/女 轻柔色纺纱家居拖鞋',img:'https://yanxuan-item.nosdn.127.net/072a79db3d9e3f4a1d652f498311e102.png?quality=95&thumbnail=200x200&imageView',price:'43.9',id:'92093107',time:'2019-10-22 14:55:13',},
+          {goodId:0,name:'海南红心柚子',img:'https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200224171713.png',price:'43.9',order_sn:'92093107',add_time:'2020-2.24 14:55:13',},
         ]
       }
     },
     created(){
-
+      getorder({
+        headers: {
+          Authorization: 'JWT '+localStorage.getItem('token')
+        }
+      }).then(res=>{
+        console.log(res)
+        // this.orderList = res
+      })
     },
-    mounted(){
+    computed:{
 
     },
     methods:{
+      getmethod(method){
+        if (method == 'online'){
+          return '线上送货'
+        }
+        if (method =='self_mention'){
+          return '线下自提'
+        }
+      },
       callback(data) {
         this.cur = data
         this.msg = '你点击了'+data+ '页'

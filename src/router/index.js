@@ -12,7 +12,6 @@ const MsgCenter =()=>import('../views/User/MsgCenter')
 const address =()=>import('../views/User/Address')
 const UserCollection =()=>import('../views/User/UserCollection')
 const UserOrder =()=>import('../views/User/UserOrder')
-const Order =()=>import('../views/Order')
 
 Vue.use(VueRouter)
 
@@ -75,11 +74,6 @@ const routes = [
   { path: '/userOrder',
     name: 'userOrder',
     component:UserOrder
-  },
-  {
-    path:'/order',
-    name:Order,
-    component: Order
   },
 ]
 

@@ -192,7 +192,7 @@
 <script>
   import MyHeader from "../common/header/MyHeader";
   import MyFooter from "../common/footer/MyFooter";
-  import {getcart, putcart, deletecart, getuseraddress} from '@/api/index'
+  import {getcart, putcart, deletecart, getuseraddress,postorder} from '@/api/index'
 
   export default {
     name: "cart",
@@ -244,7 +244,7 @@
         return total
       },
       alltotal() {
-        return this.total
+        return this.total+10
       }
     },
     methods: {
@@ -271,11 +271,19 @@
         this.number--
       },
       toorder() {
-        this.$router.push({
-          path: '/order',
-          query: {
-            price: this.total
+        postorder({
+          pay_status:'paying',
+          order_mount:this.alltotal,
+          takegoods_status:'online',
+          address:'天河',
+          signer_name:'刘渊',
+          singer_mobile:'15918891965'
+        },{
+          headers: {
+            Authorization: 'JWT '+localStorage.getItem('token')
           }
+        }).then(res=>{
+          console.log(res)
         })
       },
       delccart(id) {
