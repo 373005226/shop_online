@@ -75,9 +75,11 @@
           localStorage.setItem('token',res.token)
           localStorage.setItem('mobile',Form.username)
         })
-        this.$router.push({
-          path:'/'
-        })
+          this.$router.push({
+            path:'/'
+          })
+          location.reload()
+
       }
     },
     components: {
