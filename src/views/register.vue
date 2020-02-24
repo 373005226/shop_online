@@ -95,10 +95,8 @@
       return{
         is_show1:true,
         is_show2:false,
-        is_show3:false,
         active1:true,
         active2:false,
-        active3:false,
         btnText:'发送验证码',
         btnDisabled:false,
         totalTime: 60,

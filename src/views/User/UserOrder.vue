@@ -16,6 +16,7 @@
             <div v-if="orderList.length != 0" class="orderContent">
               <div class="item" v-for="(item,index) in orderList" :key='index'>
                 <div class="orderMian">
+
                   <div class="itemHead">
                     <div class="textInfo">
                       <span class="time">下单时间：{{item.time}}</span>
@@ -44,15 +45,16 @@
                       <div class="otherPrice">（含运费：￥0.00元）</div>
                     </div>
                   </div>
+
                 </div>
               </div>
             </div>
 <!--            <VuePage :cur="cur" :all="all" :callback="callback" />-->
-            <el-pagination style="text-align: center"
-                           background
-                           layout="prev, pager, next"
-                           :total="1000">
-            </el-pagination>
+<!--            <el-pagination style="text-align: center"-->
+<!--                           background-->
+<!--                           layout="prev, pager, next"-->
+<!--                           :total="1000">-->
+<!--            </el-pagination>-->
             <NoData v-if="orderList.length == 0" position="0 -760px" />
           </div>
         </div>

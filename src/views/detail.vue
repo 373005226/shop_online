@@ -334,14 +334,6 @@
         handleBuy(){
           this.$router.push('/order')
         },
-
-        async getfav(){
-          return getallfav({
-            headers: {
-              Authorization: 'JWT '+localStorage.getItem('token')
-            }
-          })
-        }
       },
       created() {
         detail(this.$route.query.id).then(res=>{
@@ -351,9 +343,14 @@
           this.goodtotal = res.goods_num
         })
 
-        this.getfav().then(res=>{
-          this.isfav = !!(res.find(item => item.goods.id == this.id))
-        })
+          getallfav({
+            headers: {
+              Authorization: 'JWT '+localStorage.getItem('token')
+            }
+          }).then(res=>{
+            this.isfav = !!(res.find(item => item.goods.id == this.id))
+          })
+
         // getallfav({
         //   headers: {
         //     Authorization: 'JWT '+localStorage.getItem('token')
