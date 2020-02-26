@@ -77,6 +77,7 @@
 
 <script>
   import { getcart} from "../../api";
+  import {searchgood} from "@/api/goods"
 
   export default {
   name: 'MyTop',
@@ -137,11 +138,22 @@
     },
     // 点击搜索
     handleSearch(){
-      this.$router.push({
-        path:`/search`,
-        query:{
-          keys:this.value
-        }
+      // this.$router.push({
+      //   path:`/search`,
+      //   query:{
+      //     keys:this.value
+      //   }
+      // })
+      searchgood(this.value).then(res=>{
+        console.log(res)
+        this.$store.commit('setsearchgoodslist',res)
+        this.$router.push({
+          path:`/search`,
+          query:{
+            keys:this.value
+          }
+        })
+        // this.goodsList = res.results
       })
     },
     handleScroll() {

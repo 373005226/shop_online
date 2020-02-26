@@ -12,7 +12,7 @@
             搜索
             <strong>"{{$route.query.keys}}"</strong>
             共
-            <strong>{{searchnum}}条</strong>
+            <strong>{{$store.state.searchlist.results.length}}条</strong>
             结果
           </div>
         </div>
@@ -23,7 +23,6 @@
 </template>
 
 <script>
-import {searchgood} from "@/api/goods"
   export default {
     name: "search_foot",
     data(){
@@ -32,10 +31,7 @@ import {searchgood} from "@/api/goods"
       }
     },
     created() {
-      searchgood(this.$route.query.keys).then(res=>{
-        console.log(res.count)
-        this.searchnum = res.count
-      })
+      
     }
   }
 </script>

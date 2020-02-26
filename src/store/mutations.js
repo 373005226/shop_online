@@ -8,5 +8,8 @@ export default{
     loginusername(state,information){
       state.mobile = information
       localStorage.setItem('mobile',information)
+    },
+    setsearchgoodslist(state,information){
+      state.searchlist = information
     }
 }
