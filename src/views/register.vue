@@ -120,10 +120,12 @@
       submitForm(phoneForm){
         console.log(phoneForm)
         userregister({username:phoneForm.userphone,code:phoneForm.phonecode,mobile:phoneForm.userphone,password:phoneForm.checkPass}).then(res=>{
-          console.log(res)
-          this.$store.commit('login',res)
-          // this.$store.state.mobile = res.mobile
-          // this.$store.state.token = res.token
+          this.$store.commit('logintoken',res.token)
+          this.$store.commit('loginusername',phoneForm.userphone)
+          this.$store.state.mobile = res.mobile
+          this.$store.state.token = res.token
+          // console.log(this.$store.state.mobile)
+          // console.log(this.$store.state.token)
           this.$router.push({
             path:'/'
           })

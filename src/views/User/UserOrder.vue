@@ -37,7 +37,7 @@
                       <!-- <div class="doBuy">再次购买</div> -->
                     </div>
                     <div class="price">
-                      <div class="mianPrice">￥25</div>
+                      <div class="mianPrice">￥46</div>
                       <div class="otherPrice">（含运费：￥10.00元）</div>
                     </div>
                   </div>
@@ -79,7 +79,7 @@
         tabList:['全部订单','待付款','待发货','已发货','待评价'],
         init:0,
         orderList:[
-          {goodId:0,name:'海南红心柚子',img:'https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200224171713.png',price:'43.9',order_sn:'92093107',add_time:'2020-2.24 14:55:13',},
+          {goodId:0,name:'草莓',img:'https://img14.360buyimg.com/n7/jfs/t25519/90/761689188/694412/a788e670/5b7bd4bbN6f5e9cdb.jpg',price:'36',order_sn:'92093107',add_time:'2020-2.24 14:55:13',},
         ]
       }
     },

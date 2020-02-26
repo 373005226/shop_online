@@ -72,14 +72,19 @@
       submitForm(Form) {
         console.log(Form)
         userlogin({username:Form.username,password: Form.password}).then(res=>{
-          localStorage.setItem('token',res.token)
-          localStorage.setItem('mobile',Form.username)
+          // this.$store.state.mobile = res.mobile
+          // this.$store.state.token = res.token
+          console.log(res)
+          this.$store.commit('logintoken',res)
+          this.$store.commit('loginusername',Form.username)
+          console.log(this.$store.state.mobile)
+          console.log(this.$store.state.token)
+          // localStorage.setItem('token',res.token)
+          // localStorage.setItem('mobile',Form.username)
         })
           this.$router.push({
             path:'/'
           })
-          location.reload()
-
       }
     },
     components: {

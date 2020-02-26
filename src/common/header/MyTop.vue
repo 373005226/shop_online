@@ -117,9 +117,10 @@
       })
     },
     computed: {
-    cartlength() {
-      return this.res
-    }
+      cartlength() {
+        console.log(this.$store.state.cartList.length)
+        return this.$store.state.cartList.length
+      }
   },
   methods:{
     // 搜索框

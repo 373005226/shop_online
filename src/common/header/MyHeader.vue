@@ -32,7 +32,8 @@
                   <div class="siteNavItemuser">
                     <div class="mobile">
 <!--                      {{mobilephone}}-->
-                      {{mobilephone}}
+                      {{ this.$store.state.mobile}}
+<!--                      {{mobilephone}}-->
                         <span style="margin-left: 10px;">|</span>
                         <span style="margin-left:10px;" @click="Logout">退出登录</span>
                     </div>
@@ -115,6 +116,7 @@ export default {
   },
   created(){
     this.$store.state.mobile = localStorage.getItem('mobile')
+    this.$store.state.token = localStorage.getItem('token')
   },
   methods:{
     // 显示login
