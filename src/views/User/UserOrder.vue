@@ -33,7 +33,9 @@
                 </div>
               </div>
 
-              <div class="item" v-for="(item,index) in orderList" :key='index'>
+              <div class="item" v-for="(item,index) in orderres" :key='index'>
+                <!--                {{item.id}}-->
+
                 <div class="orderMian">
                   <div class="itemHead">
                     <div class="textInfo">
@@ -47,39 +49,52 @@
                   </div>
 
                   <div style="display: flex;flex-direction: row;">
-                    <div class="itemMain" v-for="(items,indexs) in item.goods" :key="indexs">
-                      <div class="img">
-                        <img :src="items.goods.images[0].image">
+
+                    <div style="display: flex;flex-direction: column;">
+
+                      <div  class="itemMain" v-for="(items,indexs) in item.goods"
+                           :key="indexs">
+
+                        <div style="width: 285px;" >
+                          <div class="img">
+                            <img :src="items.goods.images[0].image"
+                                 v-if="items.goods.images[0].image!=undefined&&items.goods.images.length!=0"
+                                 style="width: 120px;height: 120px;">
+                            <div >
+                              {{items.goods.name}}
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="price"
+                             v-if="items.goods.specification[0]!=undefined&&items.goods.specification.length!=0">
+                          {{items.goods.specification[0].shop_price}}
+                        </div>
+
+                        <div class="number">
+                          <div>{{items.goods_num}}</div>
+                        </div>
+
+                        <div class="total">
+                          ￥{{items.goods.specification[0].shop_price*items.goods_num}}
+                        </div>
                       </div>
-                      <div>
-                        {{items.goods.name}}
-                      </div>
-                      <div class="price">
-                        {{items.goods.specification[0].shop_price}}
-                      </div>
-                      <div class="number">
-                        x{{items.goods_num}}
-                      </div>
-                      <div class="total">
-                        ￥{{items.goods.specification[0].shop_price*items.goods_num}}
-                      </div>
+
+
                     </div>
 
-                    <div class="itemMain">
-
-                      <div class="option">
-                        <el-button type="danger" v-if="item.pay_status =='paying'">去付款</el-button>
-                        <el-button type="warning" plain v-if="item.pay_status =='TRADE_SUCCESS'">请求退款</el-button>
-                        <el-button type="success" disabled v-if="item.pay_status =='success'">交易已完成</el-button>
-                      </div>
+                    <div class="option" style="margin:70px 120px;">
+                      <el-button type="danger" v-if="item.pay_status =='paying'">去付款</el-button>
+                      <el-button type="warning" plain v-if="item.pay_status =='TRADE_SUCCESS'">请求退款</el-button>
+                      <el-button type="success" disabled v-if="item.pay_status =='success'">交易已完成</el-button>
                     </div>
 
                   </div>
-
                 </div>
+
               </div>
             </div>
-            <NoData v-if="orderList.length == 0" position="0 -760px"/>
+            <NoData v-if="orderres.length == 0" position="0 -760px"/>
           </div>
         </div>
       </div>
@@ -94,6 +109,7 @@
   import NavTab from "@/components/User/navTab.vue";
   import NoData from "../../components/User/NoData";
   import {getorder} from '@/api/index'
+  import {getorderdetail} from '@/api/index'
 
   export default {
     components: {MyHeader, MyFooter, UserSide, NavTab, NoData},
@@ -106,6 +122,7 @@
         getmethods: '',
         tabList: ['全部订单', '待付款', '待发货', '已发货', '待评价'],
         init: 0,
+        orderres: [],
         orderList: [
           {
             goodId: 0,
@@ -117,7 +134,7 @@
             pay_status: "TRADE_SUCCESS",
             add_time: '2020-2.24 14:55:13',
           },
-        ]
+        ],
       }
     },
     created() {
@@ -126,11 +143,21 @@
           Authorization: 'JWT ' + localStorage.getItem('token')
         }
       }).then(res => {
-        console.log(res)
-        this.orderList = res
+        // console.log(res)
+        for (let i of res) {
+          // console.log(i)
+          getorderdetail(i.id, {
+            headers: {
+              Authorization: 'JWT ' + localStorage.getItem('token')
+            }
+          }).then(result => {
+            // console.log(result)
+            this.orderres.push(result)
+          })
+        }
       })
+      console.log(this.orderres)
     },
-    computed: {},
     methods: {
       getmethod(method) {
         if (method == 'online') {
@@ -158,6 +185,11 @@
 </script>
 
 <style lang="scss" scoped>
+  .row {
+    width: 1220px;
+    padding-bottom: 30px;
+  }
+
   .table-top {
     border: 1px solid #EEEEEE;
     height: 40px;
@@ -168,7 +200,7 @@
     text-align: center;
 
     .shop {
-      width: 250px;
+      width: 300px;
     }
 
     .price {
@@ -189,6 +221,7 @@
   }
 
   .orderBox {
+
     .content {
       display: flex;
 
@@ -203,7 +236,8 @@
       }
 
       .orderMain {
-        width: 890px;
+        /*width: 890px;*/
+        width: 1220px;
         margin-left: 20px;
         overflow: hidden;
 
@@ -258,7 +292,7 @@
           }
 
           .price {
-            margin-left: 155px;
+            margin-left: 85px;
           }
 
           .number {

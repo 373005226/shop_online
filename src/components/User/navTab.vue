@@ -56,7 +56,7 @@
           float: left;
           text-align: center;
           cursor: pointer;
-          width: 150px;
+          width: 200px;
           padding: 10px 0;
           height: 38px;
           font-weight: 900;

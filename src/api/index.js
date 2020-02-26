@@ -75,6 +75,11 @@ export const getorder = (params,config)=>{
   return http.fetchGet('orders/',params,config)
 }
 
+//获取订单的详情
+export const getorderdetail =(params,config)=>{
+  return http.fetchGet('orders/'+params+'/',config)
+}
+
 //把购物车商品推送到订单中
 export const postorder=(params,config)=>{
   return http.fetchPost('orders/',params,config)
