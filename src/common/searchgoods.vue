@@ -3,9 +3,9 @@
     <div class="main" v-if="this.$store.state.searchlist.results !=0">
       <div class="nav">
         <div>
-          <a href="#" class="active">综合排序</a>
-          <a href="#">综合从低到高</a>
-          <a href="#">综合从高到低</a>
+          <a href="#" :class="{active:isdefault}" @click="isdef">综合排序</a>
+          <a href="#" :class="{active:Ascending}" @click="isasc">综合从低到高</a>
+          <a href="#" :class="{active:descending}" @click="isdes">综合从高到低</a>
           <div class="price-interval">
             <input type="number" class="input" placeholder="价格" v-model="min">
             <span style="margin: 0 5px"> - </span>
@@ -54,13 +54,31 @@
         max: '',
         total:1,
         page:1,
-        goodsList: []
+        goodsList: [],
+        isdefault:true,
+        Ascending:false,
+        descending:false
       }
     },
     methods:{
       handleCurrentChange(value){
         console.log(value)
       },
+      isdef(){
+        this.isdefault = true
+        this.Ascending = false
+        this.descending = false
+      },
+      isasc(){
+        this.isdefault = false
+        this.Ascending = true
+        this.descending = false
+      },
+      isdes(){
+        this.isdefault = false
+        this.Ascending = false
+        this.descending = true
+      }
     },
     created() {
       console.log(this.$store.state.searchlist.results)
