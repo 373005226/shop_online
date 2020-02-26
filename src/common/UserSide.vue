@@ -25,23 +25,13 @@
                     {title:'帐号管理',list:[
                         {url:'/user',text:'个人中心'},
                         {url:'/msgCenter',text:'消息通知'},
-                        {url:'',text:'账号信息'},
                         {url:'/address',text:'地址管理'},
-                        {url:'',text:'账号安全'},
                         {url:'',text:'我的积分'},
                         {url:'/userCollection',text:'我的收藏'},
                         {url:'',text:'我的足迹'},
-                        {url:'',text:'我的甄选家'}
                     ]},
                     {title:'交易管理',list:[
                         {url:'/userOrder',text:'订单管理'},
-                        {url:'',text:'津贴'},
-                        {url:'',text:'回馈金'},
-                        {url:'',text:'我的红包'},
-                        {url:'',text:'优惠卷'},
-                        {url:'',text:'礼品卡'},
-                        {url:'',text:'优先购'},
-                        {url:'',text:'我的众筹'},
                     ]},
                     {title:'服务中心',list:[
                         {url:'',text:'售后记录'},
