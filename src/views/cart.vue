@@ -284,6 +284,7 @@
           }
         }).then(res=>{
           console.log(res)
+          window.location.href=res.alipay_url
         })
       },
       delccart(id) {

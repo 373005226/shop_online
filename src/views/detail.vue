@@ -116,7 +116,7 @@
               <div class="btns">
                 <el-row>
                   <el-button type="danger" @click="addcart">加入购物车</el-button>
-                  <el-button type="primary" class="sets_button" @click="addfav(id)" v-if="isfav == false">
+                  <el-button type="primary" class="sets_button" @click="addfav(id)" v-if="isfav === false">
                     收藏
                   </el-button>
                   <el-button type="primary" class="sets_button" @click="delfav(id)" v-else>
@@ -341,15 +341,22 @@
           this.id = res.id
           this.goods_detail = res
           this.goodtotal = res.goods_num
-        })
-
           getallfav({
             headers: {
               Authorization: 'JWT '+localStorage.getItem('token')
             }
           }).then(res=>{
-            this.isfav = !!(res.find(item => item.goods.id == this.id))
+            this.isfav = !!(res.find(item => item.goods.id === this.id))
           })
+        })
+
+          // getallfav({
+          //   headers: {
+          //     Authorization: 'JWT '+localStorage.getItem('token')
+          //   }
+          // }).then(res=>{
+          //   this.isfav = !!(res.find(item => item.goods.id === this.id))
+          // })
 
         // getallfav({
         //   headers: {
