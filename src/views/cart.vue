@@ -44,8 +44,8 @@
                 </a>
               </div>
               <div class="addr-opration addr-set-default" v-if="!address.isDefault">
-                <a href="javascript:;" class="addr-set-default-btn"
-                   @click="setDefault(address.addressId)"><i>设为默认</i></a>
+                <a href="javascript:;" class="addr-set-default-btn">
+                   </a>
               </div>
               <div class="addr-opration addr-default" v-if="address.isDefault">默认地址</div>
             </li>
@@ -97,10 +97,6 @@
           <li :class="{'check': payingMethod === 1}" @click="payingMethod = 1">
             <img src="@/assets/img/ali.png">
             <div class="price">支付宝</div>
-          </li>
-          <li :class="{'check': payingMethod === 2}" @click="payingMethod = 2">
-            <img src="@/assets/img/wechat.png">
-            <div class="price">微信</div>
           </li>
         </div>
       </div>
@@ -156,7 +152,7 @@
         </div>
         <div class="cart-total">
           <div class="w-chkbox">
-            <input type="checkbox" @click="checkedAll" v-model="checkedAllFlag">
+            <input type="checkbox" >
             <span>全选</span>
           </div>
           <div class="textInfo">
@@ -192,7 +188,8 @@
 <script>
   import MyHeader from "../common/header/MyHeader";
   import MyFooter from "../common/footer/MyFooter";
-  import {getcart, putcart, deletecart, getuseraddress,postorder} from '@/api/index'
+  import {getcart, deletecart, getuseraddress,postorder} from '@/api/index'
+  import {putcart} from "../api";
 
   export default {
     name: "cart",
@@ -262,6 +259,7 @@
           console.log(res)
         })
       },
+
       // 数量减
       numReduce() {
         if (this.number <= 1) {
@@ -270,6 +268,8 @@
         }
         this.number--
       },
+
+
       toorder() {
         postorder({
           pay_status:'paying',
@@ -296,40 +296,6 @@
           location.reload()
         })
       },
-      checkedAll() {
-        console.log(this)
-        if (this.checkedAllFlag === false) {
-          for (let i of this.productList) {
-            console.log(i)
-            putcart(i.goods.id, {
-              nums: i.nums,
-              goods: i.goods.id,
-              selected: true
-            }, {
-              headers: {
-                Authorization: 'JWT ' + localStorage.getItem('token')
-              }
-            }).then(res => {
-              console.log(res)
-            })
-          }
-        } else {
-          for (let i of this.productList) {
-            // i.selected = true
-            putcart(i.goods.id, {
-              nums: i.nums,
-              goods: i.goods.id,
-              selected: false
-            }, {
-              headers: {
-                Authorization: 'JWT ' + localStorage.getItem('token')
-              }
-            }).then(res => {
-              console.log(res)
-            })
-          }
-        }
-      }
     },
     created() {
       getuseraddress({
@@ -346,20 +312,23 @@
         }
       }).then(res => {
         console.log(res)
-        let len = 0
-        for (let i of res) {
-          if (i.selected == true) {
-            len++
-          }
-        }
-        if (len == res.length) {
-          this.checkedAllFlag = true
-          console.log('全选了')
-        } else {
-          console.log('没有全选')
-          this.checkedAllFlag = false
-        }
         this.productList = res
+
+        //
+        // let len = 0
+        // for (let i of res) {
+        //   if (i.selected == true) {
+        //     len++
+        //   }
+        // }
+        // if (len == res.length) {
+        //   this.checkedAllFlag = true
+        //   console.log('全选了')
+        // } else {
+        //   console.log('没有全选')
+        //   this.checkedAllFlag = false
+        // }
+
       })
       // this.productList = this.$store.state.cart
       // console.log(this.productList)

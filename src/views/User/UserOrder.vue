@@ -33,65 +33,67 @@
                 </div>
               </div>
 
-              <div class="item" v-for="(item,index) in orderres" :key='index'>
-                <!--                {{item.id}}-->
+              <div class="allorder">
+                <div class="item" v-for="(item,index) in orderres" :key='index'>
+                  <!--                {{item.id}}-->
 
-                <div class="orderMian">
-                  <div class="itemHead">
-                    <div class="textInfo">
-                      <span class="time">下单时间：{{item.add_time}}</span>
-                      <span class="id">订单号：{{item.order_sn}}</span>
+                  <div class="orderMian">
+                    <div class="itemHead">
+                      <div class="textInfo">
+                        <span class="time">下单时间：{{item.add_time}}</span>
+                        <span class="id">订单号：{{item.order_sn}}</span>
+                      </div>
+                      <span style="float: right">提货方式:<span v-if="item.takegoods_status=='online'"
+                                                            style="padding-left: 20px;"></span>线上送货</span>
+
+                      <div class="delete icon icon-shanchu"></div>
                     </div>
-                    <span style="float: right">提货方式:<span v-if="item.takegoods_status=='online'"
-                                                          style="padding-left: 20px;"></span>线上送货</span>
 
-                    <div class="delete icon icon-shanchu"></div>
-                  </div>
+                    <div style="display: flex;flex-direction: row;">
 
-                  <div style="display: flex;flex-direction: row;">
+                      <div style="display: flex;flex-direction: column;">
 
-                    <div style="display: flex;flex-direction: column;">
+                        <div  class="itemMain" v-for="(items,indexs) in item.goods"
+                              :key="indexs">
 
-                      <div  class="itemMain" v-for="(items,indexs) in item.goods"
-                           :key="indexs">
-
-                        <div style="width: 285px;" >
-                          <div class="img">
-                            <img :src="items.goods.images[0].image"
-                                 v-if="items.goods.images[0].image!=undefined&&items.goods.images.length!=0"
-                                 style="width: 120px;height: 120px;">
-                            <div >
-                              {{items.goods.name}}
+                          <div style="width: 285px;" >
+                            <div class="img">
+                              <img :src="items.goods.images[0].image"
+                                   v-if="items.goods.images[0].image!=undefined&&items.goods.images.length!=0"
+                                   style="width: 120px;height: 120px;">
+                              <div >
+                                {{items.goods.name}}
+                              </div>
                             </div>
+                          </div>
+
+                          <div class="price"
+                               v-if="items.goods.specification[0]!=undefined&&items.goods.specification.length!=0">
+                            {{items.goods.specification[0].shop_price}}
+                          </div>
+
+                          <div class="number">
+                            <div>{{items.goods_num}}</div>
+                          </div>
+
+                          <div class="total">
+                            ￥{{items.goods.specification[0].shop_price*items.goods_num}}
                           </div>
                         </div>
 
-                        <div class="price"
-                             v-if="items.goods.specification[0]!=undefined&&items.goods.specification.length!=0">
-                          {{items.goods.specification[0].shop_price}}
-                        </div>
 
-                        <div class="number">
-                          <div>{{items.goods_num}}</div>
-                        </div>
-
-                        <div class="total">
-                          ￥{{items.goods.specification[0].shop_price*items.goods_num}}
-                        </div>
                       </div>
 
+                      <div class="option" style="margin:70px 120px;">
+                        <el-button type="danger" v-if="item.pay_status =='paying'">去付款</el-button>
+                        <el-button type="warning" plain v-if="item.pay_status =='TRADE_SUCCESS'">请求退款</el-button>
+                        <el-button type="success" disabled v-if="item.pay_status =='success'">交易已完成</el-button>
+                      </div>
 
                     </div>
-
-                    <div class="option" style="margin:70px 120px;">
-                      <el-button type="danger" v-if="item.pay_status =='paying'">去付款</el-button>
-                      <el-button type="warning" plain v-if="item.pay_status =='TRADE_SUCCESS'">请求退款</el-button>
-                      <el-button type="success" disabled v-if="item.pay_status =='success'">交易已完成</el-button>
-                    </div>
-
                   </div>
-                </div>
 
+                </div>
               </div>
             </div>
             <NoData v-if="orderres.length == 0" position="0 -760px"/>
@@ -185,6 +187,11 @@
 </script>
 
 <style lang="scss" scoped>
+  .allorder{
+    height: 1000px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
   .row {
     width: 1220px;
     padding-bottom: 30px;
