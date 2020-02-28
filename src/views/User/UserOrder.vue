@@ -181,6 +181,7 @@
           return
         }
         this.init = i
+        console.log(this.init)
       }
     },
   }
