@@ -25,10 +25,9 @@
     data(){
       return{
         catelogy:[
-          {name:'秒杀商城'},
-          {name:"新品专场"},
+          {name:'折扣专场'},
+          {name:"积分商城"},
           {name:'生鲜专场'},
-          {name:'年货专场'},
         ]
       }
     }
