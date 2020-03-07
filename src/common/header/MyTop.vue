@@ -18,7 +18,7 @@
 <!--              <i class="icon icon-gouwuche"></i>-->
               <img src="../../assets/img/购物车.png" style="margin-left: 15px;">
               <span class="cartName">购物车</span>
-              <i class="cat-badge cart-num">{{cartlength}}</i>
+<!--              <i class="cat-badge cart-num">{{cartlength}}</i>-->
             </router-link>
           </div>
           <!-- nav -->
@@ -195,8 +195,8 @@
       .cartEnterWrap {
           position: relative;
           margin-top: 26px;
-          margin-left: 49px;
-          float: right;
+        margin-left: 49px;
+        float: right;
           z-index: 4;
           border-radius: 19px;
           &:hover {
@@ -206,7 +206,7 @@
             display: inline-block;
             position: relative;
             cursor: pointer;
-            width: 134px;
+            width: 110px;
             border: 1px solid #B4A078;
             border-radius: 19px;
             padding: 8px 0;

@@ -36,7 +36,7 @@
               <div v-if="orderres.length == 0" style="text-align: center;display: flex;margin: 0 410px">
                 <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200307142112.png">
               </div>
-              <div style="text-align: center">
+              <div style="text-align: center" v-if="orderres.length == 0">
                 没有相关订单哦
               </div>
               <div class="allorder">
@@ -46,7 +46,7 @@
                   <div class="orderMian">
                     <div class="itemHead">
                       <div class="textInfo">
-                        <span class="time">下单时间：{{item.add_time}}</span>
+                        <span class="time">下单时间：{{gettime(item.add_time)}}</span>
                         <span class="id">订单号：{{item.order_sn}}</span>
                       </div>
                       <span style="float: right">提货方式:<span v-if="item.takegoods_status=='online'"
@@ -171,6 +171,9 @@
       console.log(this.orderres)
     },
     methods: {
+      gettime(time){
+        return time.substring(0,10)
+      },
       getmethod(method) {
         if (method == 'online') {
           return '线上送货'
