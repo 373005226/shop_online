@@ -13,6 +13,7 @@
           <UserSide/>
           <div class="orderMain">
             <NavTab :tabList="tabList" @Click="handleClick" :init='init'/>
+
             <div v-if="orderList.length != 0" class="orderContent">
 
               <div class="table-top">
@@ -32,7 +33,12 @@
                   交易操作
                 </div>
               </div>
-
+              <div v-if="orderres.length == 0" style="text-align: center;display: flex;margin: 0 410px">
+                <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200307142112.png">
+              </div>
+              <div style="text-align: center">
+                没有相关订单哦
+              </div>
               <div class="allorder">
                 <div class="item" v-for="(item,index) in orderres" :key='index'>
                   <!--                {{item.id}}-->
@@ -53,15 +59,15 @@
 
                       <div style="display: flex;flex-direction: column;">
 
-                        <div  class="itemMain" v-for="(items,indexs) in item.goods"
-                              :key="indexs">
+                        <div class="itemMain" v-for="(items,indexs) in item.goods"
+                             :key="indexs">
 
-                          <div style="width: 285px;" >
+                          <div style="width: 285px;">
                             <div class="img">
                               <img :src="items.goods.images[0].image"
                                    v-if="items.goods.images[0].image!=undefined&&items.goods.images.length!=0"
                                    style="width: 120px;height: 120px;">
-                              <div >
+                              <div>
                                 {{items.goods.name}}
                               </div>
                             </div>
@@ -92,15 +98,16 @@
                       </div>
 
 
-
                     </div>
                   </div>
 
                 </div>
               </div>
             </div>
-            <NoData v-if="orderres.length == 0" position="0 -760px"/>
+<!--            <NoData v-if="orderres.length == 0" position="0 -760px"/>-->
+
           </div>
+
         </div>
       </div>
     </div>
@@ -112,12 +119,12 @@
   import MyFooter from "@/common/footer/MyFooter.vue";
   import UserSide from "@/common/UserSide.vue";
   import NavTab from "@/components/User/navTab.vue";
-  import NoData from "../../components/User/NoData";
+  // import NoData from "../../components/User/NoData";
   import {getorder} from '@/api/index'
   import {getorderdetail} from '@/api/index'
 
   export default {
-    components: {MyHeader, MyFooter, UserSide, NavTab, NoData},
+    components: {MyHeader, MyFooter, UserSide, NavTab},
     name: "userCollection",
     data() {
       return {
@@ -191,11 +198,12 @@
 </script>
 
 <style lang="scss" scoped>
-  .allorder{
+  .allorder {
     height: 1000px;
     overflow-x: hidden;
     overflow-y: scroll;
   }
+
   .row {
     width: 1220px;
     padding-bottom: 30px;

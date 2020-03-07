@@ -16,6 +16,7 @@
 
 
     <div v-if="active1== true">
+
       <div class="cart" v-if="productList.length!=0">
         <div class="row">
           <div class="cartHead">
@@ -30,7 +31,7 @@
           <div class="cartMain">
             <div class="item" v-for="(item,index) in productList" :key="index">
               <div class="checkout">
-                <input type="checkbox" @click="clickchange(item)" v-model="item.selected" :checked="item.selected">
+                <input type="checkbox" @click="clickchange(item)" :checked="ischeck">
               </div>
               <div class="goodInfo">
                 <router-link :to="'/detail?id='+item.goods.id">
@@ -44,7 +45,8 @@
                   </div>
                 </router-link>
               </div>
-              <div class="price" v-if="item.goods.specification !== undefined &&  item.goods.specification.length > 0 ">
+              <div class="price"
+                   v-if="item.goods.specification !== undefined &&  item.goods.specification.length > 0 ">
                 ¥{{item.goods.specification[0].shop_price}}
               </div>
 
@@ -65,7 +67,7 @@
           </div>
           <div class="cart-total">
             <div class="w-chkbox">
-              <input type="checkbox">
+              <input type="checkbox" :checked="true">
               <span>全选</span>
             </div>
             <div class="textInfo">
@@ -90,7 +92,7 @@
               </div>
             </div>
             <div class="info">
-              <button @click="tonext">下单</button>
+              <button @click="tonext">下一步</button>
             </div>
           </div>
         </div>
@@ -102,90 +104,190 @@
           <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200307101617.png">
         </div>
       </div>
-
     </div>
+
 
     <div v-if="active2 == true">
-      <div class="main">
-        <div class="title">填写并核对订单信息</div>
-        <div class="content">
+      <el-form :model="orderform">
 
-          <div class="methods">
-            <div class="content_title">
-              <div style="padding-left: 10px;">配送方式</div>
-            </div>
-            <div style="display: flex;flex-direction: row;padding-left: 10px;padding-top: 10px;cursor: pointer; ">
-              <div class="method" @click="shippingMethod = 1" :class="{'activemethods': shippingMethod === 1}">线下自提
+        <div class="main">
+          <div class="title">填写并核对订单信息</div>
+          <div class="content">
+
+            <div class="methods">
+              <div class="content_title">
+                <div style="padding-left: 10px;">配送方式</div>
               </div>
-              <div style="margin-left: 10px;" class="method" :class="{'activemethods': shippingMethod === 2}"
-                   @click="shippingMethod = 2">线上送货
-              </div>
-            </div>
-          </div>
-
-
-          <div class="methods" v-if="this.shippingMethod===1">
-            <div class="content_title">
-              <div style="padding-left: 10px;">收货地址</div>
-              <div style="padding-left: 10px;font-weight: normal;color: #3A88FD">[修改]</div>
-            </div>
-            <div class="methods_content">
-              <div>15918891965</div>
-              <div>刘生</div>
-              <div> 广东省-广州市-从化区-广州大学华软软件学院
+              <div style="display: flex;flex-direction: row;padding-left: 10px;padding-top: 10px;cursor: pointer; ">
+                <div class="method" @click="online" :class="{'activemethods': shippingMethod === 1}">
+                  线上送货
+                </div>
+                <div style="margin-left: 10px;" class="method" :class="{'activemethods': shippingMethod === 2}"
+                     @click="self_men">线下自提
+                </div>
               </div>
             </div>
-          </div>
 
 
-          <div class="methods" v-if="this.shippingMethod===1">
-            <div class="content_title">
-              <div style="padding-left: 10px;">收货时间</div>
-            </div>
-            <div class="methods_content">
-              <el-date-picker
-                v-model="value"
-                type="datetime"
-                placeholder="选择日期时间"
-                default-time="12:00:00">
-              </el-date-picker>
-            </div>
-          </div>
+            <div class="methods" style="cursor: pointer" v-if="this.shippingMethod===1">
+              <div class="content_title">
+                <div style="padding-left: 10px;">收货地址</div>
+                <div style="padding-left: 10px;font-weight: normal;color: #3A88FD">[修改]</div>
+              </div>
 
-
-          <div class="methods" v-if="this.shippingMethod===2">
-            <div class="content_title">
-              <div style="padding-left: 10px;">请选择您的自提时间</div>
-            </div>
-            <div class="methods_content">
-              <el-date-picker
-                v-model="value"
-                type="datetime"
-                placeholder="选择日期时间"
-                default-time="12:00:00">
-              </el-date-picker>
-            </div>
-          </div>
-
-          <div class="methods">
-            <div class="content_title">
-              <div style="padding-left: 10px;">支付方式</div>
-            </div>
-            <div class="methods_content">
-              <div
-                style="border: 2px solid #EE7A23;width: 120px;height: 60px;display: flex;flex-direction: row;padding-left: 5px;">
-                <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200307011420.png"
-                     style="width: 40px;height: 40px">
-                <span style="padding-top: 10px;padding-left: 5px">支付宝</span>
+              <div style="display: flex;flex-direction: row;">
+                <div class="methods_content" v-for="(item,index) in alladdress" :key="index">
+                  <div style="width: 300px;" :class="{'addressactive':addressselect[item.id]}"
+                       @click="selectaddress(item)">
+                    <div>{{item.signer_mobile}}</div>
+                    <div>{{item.signer_name}}</div>
+                    <div> {{item.province}}-{{item.city}}-{{item.district}}-{{item.address}}
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
+
+
+            <div class="methods" v-if="this.shippingMethod===1">
+              <div class="content_title">
+                <div style="padding-left: 10px;">收货时间</div>
+              </div>
+              <div class="methods_content">
+
+                <el-time-select
+                  v-model="orderform.time"
+                  :picker-options="{
+    start: starttime,
+    step: '00:15',
+    end: '19:00'
+  }"
+                  placeholder="选择时间">
+                </el-time-select>
+              </div>
+            </div>
+
+
+            <div class="methods" v-if="this.shippingMethod===2">
+              <div class="content_title">
+                <div style="padding-left: 10px;">请选择您的自提时间</div>
+              </div>
+              <div class="methods_content">
+                <el-time-select
+                  v-model="orderform.time"
+                  :picker-options="{
+    start: starttime,
+    step: '00:15',
+    end: '22:00'
+  }"
+                  placeholder="选择时间">
+                </el-time-select>
+              </div>
+            </div>
+
+            <div class="methods">
+              <div class="content_title">
+                <div style="padding-left: 10px;">支付方式</div>
+              </div>
+              <div class="methods_content">
+                <div
+                  style="border: 2px solid #EE7A23;width: 120px;height: 60px;display: flex;flex-direction: row;padding-left: 5px;">
+                  <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200307011420.png"
+                       style="width: 40px;height: 40px">
+                  <span style="padding-top: 10px;padding-left: 5px">支付宝</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="cart" v-if="productList.length!=0">
+              <div class="row">
+                <div class="cartHead">
+                  <div class="checkbox">
+                  </div>
+                  <div class="goodInfo">商品信息</div>
+                  <div class="price">单价</div>
+                  <div class="number">数量</div>
+                  <div class="total">小计</div>
+                  <div class="sets">操作</div>
+                </div>
+                <div class="cartMain">
+                  <div class="item" v-for="(item,index) in productList" :key="index">
+                    <div class="checkout">
+                      <!--                    <input type="checkbox" @click="clickchange(item)">-->
+                    </div>
+                    <div class="goodInfo">
+                      <router-link :to="'/detail?id='+item.goods.id">
+                        <div class="pic">
+                          <img :src="item.goods.images[0].image"
+                               v-if="item.goods.images !== undefined &&  item.goods.images.length > 0 ">
+                        </div>
+                        <div class="nameCon">
+                          {{item.goods.name}}
+                          <div class="type">{{item.goods.specification[0].specification_text}}</div>
+                        </div>
+                      </router-link>
+                    </div>
+                    <div class="price"
+                         v-if="item.goods.specification !== undefined &&  item.goods.specification.length > 0 ">
+                      ¥{{item.goods.specification[0].shop_price}}
+                    </div>
+
+                    <div class="number">
+                      <el-input-number v-model="item.nums" :min="1" :max="item.goods.goods_num" label="描述文字"
+                                       size="mini"></el-input-number>
+                    </div>
+                    <div class="total">
+                      ¥{{item.goods.specification[0].shop_price*item.nums}}
+                    </div>
+                    <div class="sets">
+                      <el-row>
+                        <el-button type="danger" size="mini" plain class="sets_button" @click="delccart(item.goods.id)">
+                          移除
+                        </el-button>
+                      </el-row>
+                    </div>
+                  </div>
+                </div>
+                <div class="cart-total">
+                  <div class="w-chkbox">
+                    <!--                  <input type="checkbox">-->
+                    <!--                  <span>全选</span>-->
+                  </div>
+                  <div class="textInfo">
+                    <div class="leftInfo">
+                      <div class="itemsPrice">
+                        <div class="linetext">
+                          <span>商品合计 : </span>
+
+                          <span>¥{{total}}</span>
+                        </div>
+                        <div class="linetext">
+                          <span>已优惠 :  </span>
+                          <span>-¥0.00</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="rightInfo">
+                      <div class="shouldPayMoney">
+                        <span>应付总额：</span>
+                        <span>¥ {{alltotal}}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="info">
+                    <button @click="toorder" type="button">下单</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
           </div>
         </div>
-      </div>
-
-
-      <my-footer></my-footer>
+      </el-form>
     </div>
+    <my-footer></my-footer>
+
   </div>
 </template>
 
@@ -203,45 +305,33 @@
     },
     data() {
       return {
-        value1: '',
+        value: '',
+        isallcheck: false,
         is_show1: true,
         is_show2: false,
         active1: true,
         active2: false,
+        addressselect: [],
         currentAddress: 0,
         shippingMethod: 1,
         payingMethod: 1,
         totalMoney: 0,
         productList: [],
         checkedAllFlag: false,
-        filterAddress: [
-          {
-            "addressId": "100001",
-            "userName": "JackBean",
-            "streetName": "北京市朝阳区朝阳公园1",
-            "postCode": "100001",
-            "tel": "12345678901",
-            "isDefault": true
-          },
-          {
-            "addressId": "100002",
-            "userName": "JackBean",
-            "streetName": "北京市朝阳区朝阳公园2",
-            "postCode": "100001",
-            "tel": "12345678901",
-            "isDefault": false
-          },
-        ]
+        starttime:'',
+        alladdress: [],
+        orderform: {
+          methods: '',
+          address: [],
+          time: ''
+        },
       }
     },
     computed: {
       total() {
         let total = 0
         for (let i of this.productList) {
-          // console.log(i)
-          if (i.selected == true) {
-            total += i.nums * i.goods.specification[0].shop_price
-          }
+          total += i.nums * i.goods.specification[0].shop_price
         }
         return total
       },
@@ -254,21 +344,36 @@
       }
     },
     methods: {
-      activef(){
+      selectaddress(item) {
+        this.addressselect[item.id] = true
+        console.log(item)
+        console.log(this.addressselect[item.id])
+        this.orderform.address = item
+      },
+      online() {
+        this.shippingMethod = 1
+        this.orderform.methods = 'online'
+      },
+      self_men() {
+        this.shippingMethod = 2
+        this.orderform.methods = 'self_mention'
+      },
+      activef() {
         this.active1 = true
         this.active2 = false
       },
-      activel(){
+      activel() {
         this.active1 = false
         this.active2 = true
       },
-      // alltotal() {
-      //   if (this.shippingMethod==1){
-      //     return this.total + 10
-      //   }else {
-      //     return this.total
-      //   }
-      // },
+      checkbox() {
+        if (this.isallcheck == true) {
+          this.ischeck = true
+        }
+      },
+      ischeck() {
+        return false
+      },
       clickchange(item) {
         console.log(item)
         putcart(item.goods.id, {
@@ -296,15 +401,20 @@
         this.active2 = true
         this.active1 = false
       },
-
+      totext() {
+        console.log(this.orderform)
+        console.log(this.orderform.time)
+        console.log(this.orderform.address.province +'-'+this.orderform.address.city +'-'+this.orderform.address.district +'-' +this.orderform.address.address)
+      },
       toorder() {
         postorder({
           pay_status: 'paying',
           order_mount: this.alltotal,
-          takegoods_status: 'online',
-          address: '天河',
-          signer_name: '刘渊',
-          singer_mobile: '15918891965'
+          gettime:this.orderform.time,
+          takegoods_status: this.orderform.methods,
+          address: this.orderform.address.province +'-'+this.orderform.address.city +'-'+this.orderform.address.district +'-' +this.orderform.address.address ,
+          signer_name: this.orderform.signer_name,
+          singer_mobile: this.orderform.address.signer_mobile
         }, {
           headers: {
             Authorization: 'JWT ' + localStorage.getItem('token')
@@ -324,15 +434,41 @@
         })
       },
     },
+
+
     created() {
+      this.orderform.methods = 'online'
+      let myDate = new Date()
+      let house = myDate.getHours()+1
+      let minutes = myDate.getMinutes()
+      this.starttime =house +':'+minutes
+      console.log(this.starttime)
+
+      if(this.starttime>'19:00'){
+        console.log('error')
+        this.$message.error('时间已经超过19:00，不能继续下单')
+      }else {
+        console.log('succsess')
+        this.$message({
+          message: '正在营业时间范围内，可以继续访问',
+          type: 'success'
+        });
+      }
+
+      this.orderform.time = this.starttime
+
+
       getuseraddress({
         headers: {
           Authorization: 'JWT ' + localStorage.getItem('token')
         }
       }).then(res => {
         console.log(res)
-        this.filterAddress = res
+        this.alladdress = res
+        this.addressselect[res[0].id] = true
+        this.orderform.address = res[0]
       })
+
       getcart({
         headers: {
           Authorization: 'JWT ' + localStorage.getItem('token')
@@ -340,21 +476,6 @@
       }).then(res => {
         console.log(res)
         this.productList = res
-
-        //
-        // let len = 0
-        // for (let i of res) {
-        //   if (i.selected == true) {
-        //     len++
-        //   }
-        // }
-        // if (len == res.length) {
-        //   this.checkedAllFlag = true
-        //   console.log('全选了')
-        // } else {
-        //   console.log('没有全选')
-        //   this.checkedAllFlag = false
-        // }
 
       })
       // this.productList = this.$store.state.cart
@@ -364,6 +485,12 @@
 </script>
 
 <style scoped lang="scss">
+  .addressactive {
+    border: 2px solid #E36844;
+    padding-bottom: 10px;
+    padding-left: 10px;
+  }
+
   .step {
     width: 990px;
     color: #999;
