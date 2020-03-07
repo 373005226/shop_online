@@ -2,193 +2,197 @@
   <div>
     <my-header></my-header>
     <div>
-      <ol class="step">
-        <li :class="{active:active1}">
+      <ol class="step" style="cursor: pointer;">
+        <li :class="{active:active1}" @click="activef">
           <i class="step-icon">1</i>
-          查看订单
+          查看购物车
         </li>
-        <li :class="{active:active2}">
+        <li :class="{active:active2}" @click="activel">
           <i class="step-icon">2</i>
           付款
         </li>
       </ol>
     </div>
 
-    <div>
-      <div class="checkout-title">
-        <span>配送地址</span>
-      </div>
 
-      <div class="addr-list-wrap">
-        <div class="addr-list">
-          <ul>
-            <li v-for="(address, index) in filterAddress" :class="{'check': index === currentAddress}" :key="index"
-                @click="currentAddress = index">
-              <dl>
-                <dt>{{address.signer_name}}</dt>
-                <dd class="address">{{address.province+address.city+address.district}}</dd>
-                <dd class="tel">{{address.signer_mobile}}</dd>
-              </dl>
-              <div class="addr-opration addr-edit">
-                <a href="javascript:;" class="addr-edit-btn">
-                  <svg class="icon icon-edit">
-                    <use xlink:href="#icon-edit"></use>
-                  </svg>
-                </a>
-              </div>
-              <div class="addr-opration addr-del">
-                <a href="javascript:;" class="addr-del-btn">
-                  <svg class="icon icon-del">
-                    <use xlink:href="#icon-del"></use>
-                  </svg>
-                </a>
-              </div>
-              <div class="addr-opration addr-set-default" v-if="!address.isDefault">
-                <a href="javascript:;" class="addr-set-default-btn">
-                   </a>
-              </div>
-              <div class="addr-opration addr-default" v-if="address.isDefault">默认地址</div>
-            </li>
-
-            <li class="addr-new">
-              <div class="add-new-inner">
-                <i class="icon-add">
-                  <i class="iconfont icon-jia">
-                    <use xlink:href="#icon-add"></use>
-                  </i>
-                </i>
-                <p>添加新地址</p>
-              </div>
-            </li>
-          </ul>
-        </div>
-
-      </div>
-    </div>
-
-    <div>
-      <div class="checkout-title">
-        <span>配送方式</span>
-      </div>
-
-      <div class="shipping-method-wrap">
-        <div class="shipping-method">
-          <ul>
-            <li :class="{'check': shippingMethod === 1}" @click="shippingMethod = 1">
-              <div class="name">送货到家</div>
-              <div class="price">￥10</div>
-            </li>
-            <li :class="{'check': shippingMethod === 2}" @click="shippingMethod = 2">
-              <div class="name">线下自提</div>
-              <div class="price">￥0.0</div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div>
-      <div class="checkout-title">
-        <span>付款方式</span>
-      </div>
-
-      <div class="shipping-method-wrap">
-        <div class="shipping-method">
-          <li :class="{'check': payingMethod === 1}" @click="payingMethod = 1">
-            <img src="@/assets/img/ali.png">
-            <div class="price">支付宝</div>
-          </li>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="cart">
-      <div class="row">
-        <div class="cartHead">
-          <div class="checkbox">
+    <div v-if="active1== true">
+      <div class="cart" v-if="productList.length!=0">
+        <div class="row">
+          <div class="cartHead">
+            <div class="checkbox">
+            </div>
+            <div class="goodInfo">商品信息</div>
+            <div class="price">单价</div>
+            <div class="number">数量</div>
+            <div class="total">小计</div>
+            <div class="sets">操作</div>
           </div>
-          <div class="goodInfo">商品信息</div>
-          <div class="price">单价</div>
-          <div class="number">数量</div>
-          <div class="total">小计</div>
-          <div class="sets">操作</div>
-        </div>
-        <div class="cartMain">
-          <div class="item" v-for="(item,index) in productList" :key="index">
-            <div class="checkout">
-              <input type="checkbox" @click="clickchange(item)" v-model="item.selected" :checked="item.selected">
-            </div>
-            <div class="goodInfo">
-              <router-link :to="'/detail?id='+item.goods.id">
-                <div class="pic">
-                  <img :src="item.goods.images[0].image"
-                       v-if="item.goods.images !== undefined &&  item.goods.images.length > 0 ">
-                </div>
-                <div class="nameCon">
-                  {{item.goods.name}}
-                  <div class="type">{{item.goods.specification[0].specification_text}}</div>
-                </div>
-              </router-link>
-            </div>
-            <div class="price" v-if="item.goods.specification !== undefined &&  item.goods.specification.length > 0 ">
-              ¥{{item.goods.specification[0].shop_price}}
-            </div>
+          <div class="cartMain">
+            <div class="item" v-for="(item,index) in productList" :key="index">
+              <div class="checkout">
+                <input type="checkbox" @click="clickchange(item)" v-model="item.selected" :checked="item.selected">
+              </div>
+              <div class="goodInfo">
+                <router-link :to="'/detail?id='+item.goods.id">
+                  <div class="pic">
+                    <img :src="item.goods.images[0].image"
+                         v-if="item.goods.images !== undefined &&  item.goods.images.length > 0 ">
+                  </div>
+                  <div class="nameCon">
+                    {{item.goods.name}}
+                    <div class="type">{{item.goods.specification[0].specification_text}}</div>
+                  </div>
+                </router-link>
+              </div>
+              <div class="price" v-if="item.goods.specification !== undefined &&  item.goods.specification.length > 0 ">
+                ¥{{item.goods.specification[0].shop_price}}
+              </div>
 
-            <div class="number">
-              <el-input-number v-model="item.nums" :min="1" :max="item.goods.goods_num" label="描述文字"
-                               size="mini"></el-input-number>
-            </div>
-            <div class="total">
-              ¥{{item.goods.specification[0].shop_price*item.nums}}
-            </div>
-            <div class="sets">
-              <el-row>
-                <el-button type="danger" size="mini" plain class="sets_button" @click="delccart(item.goods.id)">移除
-                </el-button>
-              </el-row>
+              <div class="number">
+                <el-input-number v-model="item.nums" :min="1" :max="item.goods.goods_num" label="描述文字"
+                                 size="mini"></el-input-number>
+              </div>
+              <div class="total">
+                ¥{{item.goods.specification[0].shop_price*item.nums}}
+              </div>
+              <div class="sets">
+                <el-row>
+                  <el-button type="danger" size="mini" plain class="sets_button" @click="delccart(item.goods.id)">移除
+                  </el-button>
+                </el-row>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="cart-total">
-          <div class="w-chkbox">
-            <input type="checkbox" >
-            <span>全选</span>
-          </div>
-          <div class="textInfo">
-            <div class="leftInfo">
-              <div class="itemsPrice">
-                <div class="linetext">
-                  <span>商品合计 : </span>
-                  <span>¥{{total}}</span>
+          <div class="cart-total">
+            <div class="w-chkbox">
+              <input type="checkbox">
+              <span>全选</span>
+            </div>
+            <div class="textInfo">
+              <div class="leftInfo">
+                <div class="itemsPrice">
+                  <div class="linetext">
+                    <!--                  <span>商品合计 : </span>-->
+
+                    <!--                  <span>¥{{total}}</span>-->
+                  </div>
+                  <!--                <div class="linetext">-->
+                  <!--                  <span>已优惠 :  </span>-->
+                  <!--                  <span>-¥0.00</span>-->
+                  <!--                </div>-->
                 </div>
-                <div class="linetext">
-                  <span>已优惠 :  </span>
-                  <span>-¥0.00</span>
+              </div>
+              <div class="rightInfo">
+                <div class="shouldPayMoney">
+                  <!--                <span>应付总额：</span>-->
+                  <!--                <span>¥ {{alltotal}}</span>-->
                 </div>
               </div>
             </div>
-            <div class="rightInfo">
-              <div class="shouldPayMoney">
-                <span>应付总额：</span>
-                <span>¥ {{alltotal}}</span>
-              </div>
+            <div class="info">
+              <button @click="tonext">下单</button>
             </div>
-          </div>
-          <div class="info">
-            <button @click="toorder">下单</button>
           </div>
         </div>
       </div>
+
+
+      <div v-else style="width: 1220px;margin: 0 auto;padding-bottom: 20px;">
+        <div style="text-align: center;">
+          <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200307101617.png">
+        </div>
+      </div>
+
     </div>
-    <my-footer></my-footer>
+
+    <div v-if="active2 == true">
+      <div class="main">
+        <div class="title">填写并核对订单信息</div>
+        <div class="content">
+
+          <div class="methods">
+            <div class="content_title">
+              <div style="padding-left: 10px;">配送方式</div>
+            </div>
+            <div style="display: flex;flex-direction: row;padding-left: 10px;padding-top: 10px;cursor: pointer; ">
+              <div class="method" @click="shippingMethod = 1" :class="{'activemethods': shippingMethod === 1}">线下自提
+              </div>
+              <div style="margin-left: 10px;" class="method" :class="{'activemethods': shippingMethod === 2}"
+                   @click="shippingMethod = 2">线上送货
+              </div>
+            </div>
+          </div>
+
+
+          <div class="methods" v-if="this.shippingMethod===1">
+            <div class="content_title">
+              <div style="padding-left: 10px;">收货地址</div>
+              <div style="padding-left: 10px;font-weight: normal;color: #3A88FD">[修改]</div>
+            </div>
+            <div class="methods_content">
+              <div>15918891965</div>
+              <div>刘生</div>
+              <div> 广东省-广州市-从化区-广州大学华软软件学院
+              </div>
+            </div>
+          </div>
+
+
+          <div class="methods" v-if="this.shippingMethod===1">
+            <div class="content_title">
+              <div style="padding-left: 10px;">收货时间</div>
+            </div>
+            <div class="methods_content">
+              <el-date-picker
+                v-model="value"
+                type="datetime"
+                placeholder="选择日期时间"
+                default-time="12:00:00">
+              </el-date-picker>
+            </div>
+          </div>
+
+
+          <div class="methods" v-if="this.shippingMethod===2">
+            <div class="content_title">
+              <div style="padding-left: 10px;">请选择您的自提时间</div>
+            </div>
+            <div class="methods_content">
+              <el-date-picker
+                v-model="value"
+                type="datetime"
+                placeholder="选择日期时间"
+                default-time="12:00:00">
+              </el-date-picker>
+            </div>
+          </div>
+
+          <div class="methods">
+            <div class="content_title">
+              <div style="padding-left: 10px;">支付方式</div>
+            </div>
+            <div class="methods_content">
+              <div
+                style="border: 2px solid #EE7A23;width: 120px;height: 60px;display: flex;flex-direction: row;padding-left: 5px;">
+                <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200307011420.png"
+                     style="width: 40px;height: 40px">
+                <span style="padding-top: 10px;padding-left: 5px">支付宝</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <my-footer></my-footer>
+    </div>
   </div>
 </template>
 
 <script>
   import MyHeader from "../common/header/MyHeader";
   import MyFooter from "../common/footer/MyFooter";
-  import {getcart, deletecart, getuseraddress,postorder} from '@/api/index'
+  import {getcart, deletecart, getuseraddress, postorder} from '@/api/index'
   import {putcart} from "../api";
 
   export default {
@@ -199,6 +203,7 @@
     },
     data() {
       return {
+        value1: '',
         is_show1: true,
         is_show2: false,
         active1: true,
@@ -241,10 +246,29 @@
         return total
       },
       alltotal() {
-        return this.total+10
+        if (this.shippingMethod == 1) {
+          return this.total + 10
+        } else {
+          return this.total
+        }
       }
     },
     methods: {
+      activef(){
+        this.active1 = true
+        this.active2 = false
+      },
+      activel(){
+        this.active1 = false
+        this.active2 = true
+      },
+      // alltotal() {
+      //   if (this.shippingMethod==1){
+      //     return this.total + 10
+      //   }else {
+      //     return this.total
+      //   }
+      // },
       clickchange(item) {
         console.log(item)
         putcart(item.goods.id, {
@@ -268,23 +292,26 @@
         }
         this.number--
       },
-
+      tonext() {
+        this.active2 = true
+        this.active1 = false
+      },
 
       toorder() {
         postorder({
-          pay_status:'paying',
-          order_mount:this.alltotal,
-          takegoods_status:'online',
-          address:'天河',
-          signer_name:'刘渊',
-          singer_mobile:'15918891965'
-        },{
+          pay_status: 'paying',
+          order_mount: this.alltotal,
+          takegoods_status: 'online',
+          address: '天河',
+          signer_name: '刘渊',
+          singer_mobile: '15918891965'
+        }, {
           headers: {
-            Authorization: 'JWT '+localStorage.getItem('token')
+            Authorization: 'JWT ' + localStorage.getItem('token')
           }
-        }).then(res=>{
+        }).then(res => {
           console.log(res)
-          window.location.href=res.alipay_url
+          window.location.href = res.alipay_url
         })
       },
       delccart(id) {
@@ -376,6 +403,59 @@
     }
   }
 
+  .main {
+    border: 5px solid #FAF6F7;
+    /*height: 1200px;*/
+    width: 1220px;
+    margin: 20px auto;
+
+    .title {
+      background: #FAF6F7;
+      padding-left: 10px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      font-weight: bold;
+      color: #999999;
+    }
+
+    .content {
+      padding-top: 10px;
+      padding-bottom: 10px;
+
+      .methods {
+        border-bottom: 10px solid #FAF6F7;
+        padding-bottom: 20px;
+      }
+
+
+      .methods_content {
+        padding-left: 10px;
+        padding-top: 20px;
+
+        div {
+          padding-top: 10px;
+        }
+      }
+
+      .content_title {
+        color: #666666;
+        font-weight: bold;
+        display: flex;
+        flex-direction: row;
+        padding-top: 20px;
+      }
+    }
+
+  }
+
+  .method {
+    padding: 5px;
+  }
+
+  .activemethods {
+    border: 2px solid #EE7A23;
+  }
+
   .checkout-title {
     position: relative;
     /*margin-bottom: 41px;*/
@@ -410,6 +490,10 @@
     min-height: 300px;
     width: 1220px;
     margin: 0 auto;
+    border: 1px solid #999999;
+    padding-left: 30px;
+    padding-top: 30px;
+    margin-top: 30px;
   }
 
   .addr-list ul:after {
@@ -844,4 +928,6 @@
     }
   }
 </style>
+
+
 

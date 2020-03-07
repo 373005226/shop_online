@@ -79,8 +79,8 @@
           this.$store.commit('loginusername',Form.username)
           console.log(this.$store.state.mobile)
           console.log(this.$store.state.token)
-          // localStorage.setItem('token',res.token)
-          // localStorage.setItem('mobile',Form.username)
+          localStorage.setItem('token',res.token)
+          localStorage.setItem('mobile',Form.username)
         })
           this.$router.push({
             path:'/'

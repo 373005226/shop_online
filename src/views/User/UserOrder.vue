@@ -79,16 +79,19 @@
                           <div class="total">
                             ￥{{items.goods.specification[0].shop_price*items.goods_num}}
                           </div>
+
+                          <div class="option" style="margin:70px 120px;">
+                            <el-button type="danger" v-if="item.pay_status =='paying'">去付款</el-button>
+                            <el-button type="warning" plain v-if="item.pay_status =='TRADE_SUCCESS'">等待收款</el-button>
+                            <el-button type="success" disabled v-if="item.pay_status =='success'">交易已完成</el-button>
+                          </div>
+
                         </div>
 
 
                       </div>
 
-                      <div class="option" style="margin:70px 120px;">
-                        <el-button type="danger" v-if="item.pay_status =='paying'">去付款</el-button>
-                        <el-button type="warning" plain v-if="item.pay_status =='TRADE_SUCCESS'">请求退款</el-button>
-                        <el-button type="success" disabled v-if="item.pay_status =='success'">交易已完成</el-button>
-                      </div>
+
 
                     </div>
                   </div>
