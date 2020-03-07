@@ -51,16 +51,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="orderList">
-                    <div class="orderListHd">
-                        <h3>
-                            <span>未完成订单</span>
-                            <router-link class="seeAllOrder" to="/userOrder">查看全部订单</router-link>
-                        </h3>
-                    </div>
-<!--                    <NoData position="0 -2000px" />-->
+<!--                <div class="orderList">-->
+<!--                    <div class="orderListHd">-->
+<!--                        <h3>-->
+<!--                            <span>未完成订单</span>-->
+<!--                            <router-link class="seeAllOrder" to="/userOrder">查看全部订单</router-link>-->
+<!--                        </h3>-->
+<!--                    </div>-->
+<!--&lt;!&ndash;                    <NoData position="0 -2000px" />&ndash;&gt;-->
 
-                </div>
+<!--                </div>-->
             </div>
         </div>
         <!-- 底部 -->

@@ -43,7 +43,7 @@
               </tbody>
             </table>
             <div v-if="information.length == 0 ||information ==null" class="none">
-              <img src="@/assets/img/none.png">
+              <img src="@/assets/img/none.png" style="width: 300px;height: 200px;">
             </div>
           </div>
         </div>

@@ -24,7 +24,7 @@
                 sideDta:[
                     {title:'帐号管理',list:[
                         {url:'/user',text:'个人中心'},
-                        {url:'/msgCenter',text:'消息通知'},
+                        // {url:'/msgCenter',text:'消息通知'},
                         {url:'/address',text:'地址管理'},
                         {url:'',text:'我的积分'},
                         {url:'/userCollection',text:'我的收藏'},
@@ -33,11 +33,11 @@
                     {title:'交易管理',list:[
                         {url:'/userOrder',text:'订单管理'},
                     ]},
-                    {title:'服务中心',list:[
-                        {url:'',text:'售后记录'},
-                        {url:'',text:'价格保护'},
-                        {url:'',text:'帮助中心'}
-                    ]},
+                    // {title:'服务中心',list:[
+                    //     {url:'',text:'售后记录'},
+                    //     {url:'',text:'价格保护'},
+                    //     {url:'',text:'帮助中心'}
+                    // ]},
                 ]
             }
         },

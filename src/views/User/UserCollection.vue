@@ -40,7 +40,7 @@
 <!--                      </div>-->
                     </div>
                   <div class="none" v-else>
-                    <img src="@/assets/img/none.png">
+                    <img src="@/assets/img/none.png" style="width: 300px;height: 200px;">
                   </div>
                 </div>
             </div>
