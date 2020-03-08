@@ -49,9 +49,9 @@
                         <span class="time">下单时间：{{gettime(item.add_time)}}</span>
                         <span class="id">订单号：{{item.order_sn}}</span>
                       </div>
-                      <span style="float: right">提货方式:<span v-if="item.takegoods_status=='online'"
-                                                            style="padding-left: 20px;"></span>线上送货</span>
-
+                      <span style="float: right">提货方式:<span
+                        style="padding-left: 20px;"></span>{{getorderinformation(item.takegoods_status)}}</span>
+                      <span>订单状态:<span style="padding-left: 20px;color: #E36844">{{getstatus(item.pay_status)}}</span></span>
                       <div class="delete icon icon-shanchu"></div>
                     </div>
 
@@ -93,10 +93,11 @@
                           </div>
 
                         </div>
-
+                        <div style="position:relative;bottom: 100px;left: 850px;color: #409EFF">
+                          <el-button round @click="showOrder(item.id)">查看物流</el-button>
+                        </div>
 
                       </div>
-
 
                     </div>
                   </div>
@@ -104,13 +105,23 @@
                 </div>
               </div>
             </div>
-<!--            <NoData v-if="orderres.length == 0" position="0 -760px"/>-->
+            <!--            <NoData v-if="orderres.length == 0" position="0 -760px"/>-->
 
           </div>
 
         </div>
       </div>
     </div>
+    <!-- 查看物流 -->
+    <Popup ref="UserOrderinformation" :custom="false" :maskClick="false" type="center" :information="orderinformation"
+           :orderid="id">
+      <div class="Form">
+        <div class="FormHead">订单信息</div>
+        <div @click="calseorder" class="icon icon-close"></div>
+        <UserOrderinformation @calseorder='calseorder' :information="this.$refs"/>
+      </div>
+    </Popup>
+
     <MyFooter/>
   </div>
 </template>
@@ -119,15 +130,17 @@
   import MyFooter from "@/common/footer/MyFooter.vue";
   import UserSide from "@/common/UserSide.vue";
   import NavTab from "@/components/User/navTab.vue";
-  // import NoData from "../../components/User/NoData";
+  import Popup from "@/components/User/Popup.vue"
   import {getorder} from '@/api/index'
   import {getorderdetail} from '@/api/index'
+  import UserOrderinformation from "../../components/User/UserOrderinformation";
 
   export default {
-    components: {MyHeader, MyFooter, UserSide, NavTab},
+    components: {MyHeader, MyFooter, UserSide, NavTab, Popup, UserOrderinformation},
     name: "userCollection",
     data() {
       return {
+        id: '',
         cur: 1,
         all: 8,
         msg: '',
@@ -135,6 +148,7 @@
         tabList: ['全部订单', '待付款', '待发货', '已发货', '待评价'],
         init: 0,
         orderres: [],
+        orderinformation: [],
         orderList: [
           {
             goodId: 0,
@@ -163,16 +177,37 @@
               Authorization: 'JWT ' + localStorage.getItem('token')
             }
           }).then(result => {
-            // console.log(result)
             this.orderres.push(result)
           })
         }
       })
       console.log(this.orderres)
+      this.orderinformation = this.orderres
     },
     methods: {
-      gettime(time){
-        return time.substring(0,10)
+      getstatus(index){
+        if(index =='TRADE_SUCCESS'){
+          return '订单已完成'
+        }else {
+          return '正在进行中'
+        }
+      },
+      getorderinformation(information) {
+        if (information == 'online') {
+          return '线上送货'
+        } else {
+          return '线下自提'
+        }
+      },
+      showOrder(id) {
+        this.id = id
+        this.$refs.UserOrderinformation.open()
+      },
+      calseorder() {
+        this.$refs.UserOrderinformation.close()
+      },
+      gettime(time) {
+        return time.substring(0, 10)
       },
       getmethod(method) {
         if (method == 'online') {
@@ -201,6 +236,39 @@
 </script>
 
 <style lang="scss" scoped>
+  .Form {
+    position: relative;
+    width: 700px;
+    /*height: 422px;*/
+    padding: 30px 40px 0;
+    min-height: 274px;
+    margin: 0 auto;
+    background-color: #fff;
+    z-index: 10;
+
+    .FormHead {
+      font-size: 18px;
+      margin-bottom: 40px;
+      line-height: 1;
+    }
+
+    .icon {
+      display: inline-block;
+      overflow: hidden;
+      vertical-align: top;
+      font-size: 12px;
+      word-spacing: normal;
+      letter-spacing: normal;
+      width: 24px;
+      font-size: 24px;
+      height: 24px;
+      right: 40px;
+      top: 20px;
+      position: absolute;
+      cursor: pointer;
+    }
+  }
+
   .allorder {
     height: 1000px;
     overflow-x: hidden;

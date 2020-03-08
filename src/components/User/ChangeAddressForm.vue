@@ -78,12 +78,6 @@
     created() {
       console.log(this.information.changeaddressform.$attrs.addressid)
       console.log(this.information.changeaddressform.$attrs.information)
-      // console.log(TextToCode[this.information.changeaddressform.$attrs.information[0].province].code)
-      // console.log(TextToCode[this.information.changeaddressform.$attrs.information[0].province][this.information.changeaddressform.$attrs.information[0].city].code)
-      // console.log(TextToCode[this.information.changeaddressform.$attrs.information[0].province][this.information.changeaddressform.$attrs.information[0].city][this.information.changeaddressform.$attrs.information[0].district].code)
-      // console.log(this.information.changeaddressform.$attrs.information[0].address)
-      // console.log(this.information.changeaddressform.$attrs.information[0].signer_name)
-      // console.log(this.information.changeaddressform.$attrs.information[0].signer_mobile)
       this.id = this.information.changeaddressform.$attrs.addressid
       for (let i of this.information.changeaddressform.$attrs.information) {
         if (this.id == i.id) {
@@ -96,12 +90,6 @@
           break
         }
       }
-      // this.formInline.selectedOptions[0] = TextToCode[this.information.changeaddressform.$attrs.information[0].province].code
-      // this.formInline.selectedOptions[1] = TextToCode[this.information.changeaddressform.$attrs.information[0].province][this.information.changeaddressform.$attrs.information[0].city].code
-      // this.formInline.selectedOptions[2] = TextToCode[this.information.changeaddressform.$attrs.information[0].province][this.information.changeaddressform.$attrs.information[0].city][this.information.changeaddressform.$attrs.information[0].district].code
-      // this.formInline.detail = this.information.changeaddressform.$attrs.information[0].address
-      // this.formInline.username = this.information.changeaddressform.$attrs.information[0].signer_name
-      // this.formInline.phone = this.information.changeaddressform.$attrs.information[0].signer_mobile
     },
     methods: {
       // 关闭 弹框
