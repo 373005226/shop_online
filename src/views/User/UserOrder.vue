@@ -86,14 +86,14 @@
                             ￥{{items.goods.specification[0].shop_price*items.goods_num}}
                           </div>
 
-                          <div class="option" style="margin:70px 120px;">
-                            <el-button type="danger" v-if="item.pay_status =='paying'">去付款</el-button>
-                            <el-button type="warning" plain v-if="item.pay_status =='TRADE_SUCCESS'">等待收款</el-button>
-                            <el-button type="success" disabled v-if="item.pay_status =='success'">交易已完成</el-button>
-                          </div>
+<!--                          <div class="option" style="margin:70px 120px;">-->
+<!--                            <el-button type="danger" v-if="item.pay_status =='paying'">去付款</el-button>-->
+<!--                            <el-button type="warning" plain v-if="item.pay_status =='TRADE_SUCCESS'">等待收款</el-button>-->
+<!--                            <el-button type="success" disabled v-if="item.pay_status =='success'">交易已完成</el-button>-->
+<!--                          </div>-->
 
                         </div>
-                        <div style="position:relative;bottom: 100px;left: 850px;color: #409EFF">
+                        <div style="position:relative;bottom: 100px;left: 850px;color: #409EFF" v-if="item.pay_status!='TRADE_SUCCESS'">
                           <el-button round @click="showOrder(item.id)">查看物流</el-button>
                         </div>
 

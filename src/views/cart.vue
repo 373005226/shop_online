@@ -160,7 +160,7 @@
                   :picker-options="{
     start: starttime,
     step: '00:15',
-    end: '19:00'
+    end: '22:00'
   }"
                   placeholder="选择时间">
                 </el-time-select>
