@@ -15,6 +15,11 @@ export const userlogin =(params)=>{
   return http.fetchPost('login/',params)
 }
 
+//个人信息接口
+export const userInfo =(params)=>{
+  return http.fetchGet('userinfo/',params)
+}
+
 //添加收货地址
 export const useraddress = (params,config)=>{
   return http.fetchPost('address/',params,config)

@@ -93,7 +93,7 @@
 <!--                          </div>-->
 
                         </div>
-                        <div style="position:relative;bottom: 100px;left: 850px;color: #409EFF" v-if="item.pay_status!='TRADE_SUCCESS'">
+                        <div style="position:relative;bottom: 100px;left: 850px;color: #409EFF" v-if="item.pay_status!='paying'">
                           <el-button round @click="showOrder(item.id)">查看物流</el-button>
                         </div>
 
@@ -188,7 +188,14 @@
       getstatus(index){
         if(index =='TRADE_SUCCESS'){
           return '订单已完成'
-        }else {
+        }
+        if(index=="trade_evaluate"){
+          return '订单已完成，等待用户评价'
+        }
+        if(index=='paying'){
+          return '订单支付中'
+        }
+        else {
           return '正在进行中'
         }
       },
@@ -208,14 +215,6 @@
       },
       gettime(time) {
         return time.substring(0, 10)
-      },
-      getmethod(method) {
-        if (method == 'online') {
-          return '线上送货'
-        }
-        if (method == 'self_mention') {
-          return '线下自提'
-        }
       },
       callback(data) {
         this.cur = data

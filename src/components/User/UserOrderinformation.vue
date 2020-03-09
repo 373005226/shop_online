@@ -9,10 +9,25 @@
         </div>
       </div>
 
+      <div style="color: #999999;padding-bottom: 70px" v-if="orderstatus=='Picking_complete'">
+        <div style="display: flex;flex-direction: row">
+          <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200308154310.png" style="width: 25px;height: 25px;">
+          <div style="padding-bottom: 30px;margin-top: 3px;margin-left: 5px;">开始由工作人员开始拣货</div>
+        </div>
+        <div style="display: flex;flex-direction: row">
+          <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200308155005.png" style="width: 25px;height: 25px;">
+          <div style="padding-bottom: 30px;margin-top: 3px;margin-left: 5px;">订单开始第二次检验</div>
+        </div>
+      </div>
+
       <div style="color: #999999;padding-bottom: 70px" v-if="orderstatus=='checkout'">
         <div style="display: flex;flex-direction: row">
           <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200308154310.png" style="width: 25px;height: 25px;">
           <div style="padding-bottom: 30px;margin-top: 3px;margin-left: 5px;">开始由工作人员开始拣货</div>
+        </div>
+        <div style="display: flex;flex-direction: row">
+          <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200308154310.png" style="width: 25px;height: 25px;">
+          <div style="padding-bottom: 30px;margin-top: 3px;margin-left: 5px;">订单开始第二次检验</div>
         </div>
         <div style="display: flex;flex-direction: row">
           <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200308155005.png" style="width: 25px;height: 25px;">
@@ -36,6 +51,29 @@
           </div>
         </div>
       </div>
+
+      <div style="color: #999999;padding-bottom: 70px" v-if="orderstatus=='trade_evaluate'">
+        <div style="display: flex;flex-direction: row">
+          <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200308154310.png" style="width: 25px;height: 25px;">
+          <div style="padding-bottom: 30px;margin-top: 3px;margin-left: 5px;">开始由工作人员开始拣货</div>
+        </div>
+        <div style="display: flex;flex-direction: row">
+          <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200308154310.png" style="width: 25px;height: 25px;">
+          <div style="padding-bottom: 30px;margin-top: 3px;margin-left: 5px;">订单已完成第二次检验</div>
+        </div>
+        <div style="display: flex;flex-direction: row">
+          <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200308154310.png" style="width: 25px;height: 25px;">
+          <div style="padding-bottom: 30px;margin-top: 3px;margin-left: 5px;">订单商品已开始送货，请留意送货人员的电话:
+            <span style="color: #409EFF">{{mobile}}</span>
+          </div>
+        </div>
+        <div style="display: flex;flex-direction: row">
+          <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200308155005.png" style="width: 25px;height: 25px;">
+          <div style="padding-bottom: 30px;margin-top: 3px;margin-left: 5px;">订单结束，祝您生活愉快
+          </div>
+        </div>
+      </div>
+
     </div>
     <div class="btns">
       <el-button type="primary" plain @click="calseorder">确定</el-button>
