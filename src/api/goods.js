@@ -30,3 +30,8 @@ export const searchgood=(params)=>{
   return http.fetchGet('goods/?search='+params)
 }
 
+//积分商品数据
+export const integralgoods=(page)=>{
+  return http.fetchGet('integralgoods/?page='+page)
+}
+

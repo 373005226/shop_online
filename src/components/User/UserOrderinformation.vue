@@ -20,7 +20,7 @@
         </div>
       </div>
 
-      <div style="color: #999999;padding-bottom: 70px" v-if="orderstatus=='checkout'">
+      <div style="color: #999999;padding-bottom: 70px" v-if="orderstatus=='checkout'&&takegoods_status=='online'">
         <div style="display: flex;flex-direction: row">
           <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200308154310.png" style="width: 25px;height: 25px;">
           <div style="padding-bottom: 30px;margin-top: 3px;margin-left: 5px;">开始由工作人员开始拣货</div>
@@ -31,11 +31,26 @@
         </div>
         <div style="display: flex;flex-direction: row">
           <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200308155005.png" style="width: 25px;height: 25px;">
-          <div style="padding-bottom: 30px;margin-top: 3px;margin-left: 5px;">订单商品可以自提，请尽快提取</div>
+          <div style="padding-bottom: 30px;margin-top: 3px;margin-left: 5px;">商品第二次检验完毕，等待送货人员送货</div>
         </div>
       </div>
 
-      <div style="color: #999999;padding-bottom: 70px" v-if="orderstatus=='Delivery'">
+      <div style="color: #999999;padding-bottom: 70px" v-if="orderstatus=='checkout'&&takegoods_status=='self_mention'">
+        <div style="display: flex;flex-direction: row">
+          <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200308154310.png" style="width: 25px;height: 25px;">
+          <div style="padding-bottom: 30px;margin-top: 3px;margin-left: 5px;">开始由工作人员开始拣货</div>
+        </div>
+        <div style="display: flex;flex-direction: row">
+          <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200308154310.png" style="width: 25px;height: 25px;">
+          <div style="padding-bottom: 30px;margin-top: 3px;margin-left: 5px;">订单第二次检验完成</div>
+        </div>
+        <div style="display: flex;flex-direction: row">
+          <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200308155005.png" style="width: 25px;height: 25px;">
+          <div style="padding-bottom: 30px;margin-top: 3px;margin-left: 5px;">商品第二次检验完毕，请尽快到商场提取</div>
+        </div>
+      </div>
+
+      <div style="color: #999999;padding-bottom: 70px" v-if="orderstatus=='Delivery'&&takegoods_status=='online'">
         <div style="display: flex;flex-direction: row">
           <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200308154310.png" style="width: 25px;height: 25px;">
           <div style="padding-bottom: 30px;margin-top: 3px;margin-left: 5px;">开始由工作人员开始拣货</div>
@@ -46,12 +61,33 @@
         </div>
         <div style="display: flex;flex-direction: row">
           <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200308154310.png" style="width: 25px;height: 25px;">
-          <div style="padding-bottom: 30px;margin-top: 3px;margin-left: 5px;">等待配送员开始配送</div>
+          <div style="padding-bottom: 30px;margin-top: 3px;margin-left: 5px;">商品第二次检验完毕，等待送货人员送货</div>
         </div>
         <div style="display: flex;flex-direction: row">
           <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200308155005.png" style="width: 25px;height: 25px;">
           <div style="padding-bottom: 30px;margin-top: 3px;margin-left: 5px;">订单商品已开始送货，请留意送货人员的电话:
             <span style="color: #409EFF">{{mobile}}</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="color: #999999;padding-bottom: 70px" v-if="orderstatus=='trade_evaluate'&&takegoods_status=='self_mention'">
+        <div style="display: flex;flex-direction: row">
+          <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200308154310.png" style="width: 25px;height: 25px;">
+          <div style="padding-bottom: 30px;margin-top: 3px;margin-left: 5px;">开始由工作人员开始拣货</div>
+        </div>
+        <div style="display: flex;flex-direction: row">
+          <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200308154310.png" style="width: 25px;height: 25px;">
+          <div style="padding-bottom: 30px;margin-top: 3px;margin-left: 5px;">订单第二次检验完成</div>
+        </div>
+        <div style="display: flex;flex-direction: row">
+          <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200308154310.png" style="width: 25px;height: 25px;">
+          <div style="padding-bottom: 30px;margin-top: 3px;margin-left: 5px;">订单商品可以自提，请尽快提取
+          </div>
+        </div>
+        <div style="display: flex;flex-direction: row">
+          <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200308155005.png" style="width: 25px;height: 25px;">
+          <div style="padding-bottom: 30px;margin-top: 3px;margin-left: 5px;">订单结束，祝您生活愉快，如有对订单有疑文请拨打<span style="color: #409EFF">{{mobile}}</span>
           </div>
         </div>
       </div>
@@ -65,21 +101,13 @@
           <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200308154310.png" style="width: 25px;height: 25px;">
           <div style="padding-bottom: 30px;margin-top: 3px;margin-left: 5px;">订单第二次检验完成</div>
         </div>
-<!--        <div style="display: flex;flex-direction: row">-->
-<!--          <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200308154310.png" style="width: 25px;height: 25px;">-->
-<!--          <div style="padding-bottom: 30px;margin-top: 3px;margin-left: 5px;">订单商品已开始送货，请留意送货人员的电话:-->
-<!--            <span style="color: #409EFF">{{mobile}}</span>-->
-<!--          </div>-->
-<!--        </div>-->
         <div style="display: flex;flex-direction: row">
           <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200308154310.png" style="width: 25px;height: 25px;">
-          <div style="padding-bottom: 30px;margin-top: 3px;margin-left: 5px;">订单商品可以自提，请尽快提取
-<!--            <span style="color: #409EFF">{{mobile}}</span>-->
-          </div>
+          <div style="padding-bottom: 30px;margin-top: 3px;margin-left: 5px;">商品第二次检验完毕，等待送货人员送货</div>
         </div>
         <div style="display: flex;flex-direction: row">
           <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200308155005.png" style="width: 25px;height: 25px;">
-          <div style="padding-bottom: 30px;margin-top: 3px;margin-left: 5px;">订单结束，祝您生活愉快
+          <div style="padding-bottom: 30px;margin-top: 3px;margin-left: 5px;">订单商品已送达，祝您购物愉快，如有对订单有疑问请拨打<span style="color: #409EFF">{{mobile}}</span>
           </div>
         </div>
       </div>
@@ -101,7 +129,8 @@
         orderinformation:[],
         id:'',
         mobile:'',
-        orderstatus:''
+        orderstatus:'',
+        takegoods_status:''
       }
     },
     created(){
@@ -114,6 +143,7 @@
           console.log(i)
           this.mobile = i.operator_phone
           this.orderstatus = i.pay_status
+          this.takegoods_status = i.takegoods_status
         }
       }
       console.log(this.mobile)

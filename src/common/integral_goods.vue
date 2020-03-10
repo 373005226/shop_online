@@ -10,9 +10,9 @@
 <!--            <p class="price"> ￥ <strong  v-if="item.specification !== undefined &&  item.specification.length > 0 ">{{item.specification[0].shop_price}}</strong></p>-->
 <!--            <a class="cartBtn"></a>-->
 <!--           </router-link>-->
-                <img :src="item.img">
+                <img :src="item.image">
                 <p class="name">{{item.name}}</p>
-                <p class="price"><strong style="padding-right: 10px">{{item.price}}</strong>积分+<strong>10元</strong></p>
+                <p class="price"><strong style="padding-right: 10px">{{item.integral}}</strong>积分</p>
                 <a class="cartBtn" @click="open"></a>
         </div>
       </div>
@@ -33,7 +33,7 @@
 
 <script>
 
-  import {catelogygoods} from "@/api/goods"
+  import {integralgoods} from "@/api/goods"
   export default {
     name: "Goods",
     data() {
@@ -72,6 +72,11 @@
             img: require('@/assets/img/food/达利园糕点34.2.jpg'),
             name: '达利园糕点',
             price: 3420
+          },
+          {
+            img: require('@/assets/img/food/费列罗巧克力81.5.jpg'),
+            name: '费列罗巧克力',
+            price: 8150
           }
         ]
       }
@@ -79,7 +84,7 @@
     methods:{
       handleCurrentChange(value){
         console.log(value)
-        catelogygoods(this.$route.query.goodid,value).then(res=>{
+        integralgoods(value).then(res=>{
           console.log(res)
           this.goodsList = res.results
         })
@@ -98,7 +103,8 @@
       }
     },
     created() {
-      catelogygoods(this.$route.query.goodid,this.page).then(res=>{
+      this.total = this.goodsList.length
+      integralgoods(this.page).then(res=>{
         console.log(res)
         this.goodsList = res.results
         this.total = res.count
