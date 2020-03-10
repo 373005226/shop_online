@@ -92,7 +92,7 @@
         </div>
       </div>
 
-      <div style="color: #999999;padding-bottom: 70px" v-if="orderstatus=='trade_evaluate'">
+      <div style="color: #999999;padding-bottom: 70px" v-if="orderstatus=='trade_evaluate'&&takegoods_status=='online'">
         <div style="display: flex;flex-direction: row">
           <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200308154310.png" style="width: 25px;height: 25px;">
           <div style="padding-bottom: 30px;margin-top: 3px;margin-left: 5px;">开始由工作人员开始拣货</div>

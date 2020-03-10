@@ -64,6 +64,24 @@
                 </el-row>
               </div>
             </div>
+
+            <div class="item" v-for="(item,index) in productList" :key="index">
+              <div class="checkout">
+<!--                <input type="checkbox" @click="clickchange(item)" :checked="ischeck">-->
+              </div>
+
+              <div class="goodInfo">
+                  <div class="pic">
+                    <img src="http://127.0.0.1:8000/media/goods/integralgoods/b188d2be3cad0ab4.jpg"
+                        >
+                  </div>
+                  <div class="nameCon">
+                    <span style="color: #F56C6C">[积分赠品]</span>黑人牙膏
+                    <div class="type">1支</div>
+                  </div>
+              </div>
+
+            </div>
           </div>
           <div class="cart-total">
             <div class="w-chkbox">
