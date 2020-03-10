@@ -27,11 +27,11 @@
         </div>
         <div style="display: flex;flex-direction: row">
           <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200308154310.png" style="width: 25px;height: 25px;">
-          <div style="padding-bottom: 30px;margin-top: 3px;margin-left: 5px;">订单开始第二次检验</div>
+          <div style="padding-bottom: 30px;margin-top: 3px;margin-left: 5px;">订单第二次检验完成</div>
         </div>
         <div style="display: flex;flex-direction: row">
           <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200308155005.png" style="width: 25px;height: 25px;">
-          <div style="padding-bottom: 30px;margin-top: 3px;margin-left: 5px;">订单已完成第二次检验，可以自提</div>
+          <div style="padding-bottom: 30px;margin-top: 3px;margin-left: 5px;">订单商品可以自提，请尽快提取</div>
         </div>
       </div>
 
@@ -42,7 +42,11 @@
         </div>
         <div style="display: flex;flex-direction: row">
           <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200308154310.png" style="width: 25px;height: 25px;">
-          <div style="padding-bottom: 30px;margin-top: 3px;margin-left: 5px;">订单已完成第二次检验</div>
+          <div style="padding-bottom: 30px;margin-top: 3px;margin-left: 5px;">订单第二次检验完成</div>
+        </div>
+        <div style="display: flex;flex-direction: row">
+          <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200308154310.png" style="width: 25px;height: 25px;">
+          <div style="padding-bottom: 30px;margin-top: 3px;margin-left: 5px;">等待配送员开始配送</div>
         </div>
         <div style="display: flex;flex-direction: row">
           <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200308155005.png" style="width: 25px;height: 25px;">
@@ -59,12 +63,18 @@
         </div>
         <div style="display: flex;flex-direction: row">
           <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200308154310.png" style="width: 25px;height: 25px;">
-          <div style="padding-bottom: 30px;margin-top: 3px;margin-left: 5px;">订单已完成第二次检验</div>
+          <div style="padding-bottom: 30px;margin-top: 3px;margin-left: 5px;">订单第二次检验完成</div>
         </div>
+<!--        <div style="display: flex;flex-direction: row">-->
+<!--          <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200308154310.png" style="width: 25px;height: 25px;">-->
+<!--          <div style="padding-bottom: 30px;margin-top: 3px;margin-left: 5px;">订单商品已开始送货，请留意送货人员的电话:-->
+<!--            <span style="color: #409EFF">{{mobile}}</span>-->
+<!--          </div>-->
+<!--        </div>-->
         <div style="display: flex;flex-direction: row">
           <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200308154310.png" style="width: 25px;height: 25px;">
-          <div style="padding-bottom: 30px;margin-top: 3px;margin-left: 5px;">订单商品已开始送货，请留意送货人员的电话:
-            <span style="color: #409EFF">{{mobile}}</span>
+          <div style="padding-bottom: 30px;margin-top: 3px;margin-left: 5px;">订单商品可以自提，请尽快提取
+<!--            <span style="color: #409EFF">{{mobile}}</span>-->
           </div>
         </div>
         <div style="display: flex;flex-direction: row">

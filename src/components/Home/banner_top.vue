@@ -1,11 +1,15 @@
 <template>
-  <div style="background: #EDEDED">
+  <div style="background: #F8F8F8">
     <div class="banner_top">
       <div class="el-col-3">
-        首页
+        <router-link to="/">
+          首页
+        </router-link>
       </div>
       <div class="el-col-3" v-for="(item,index) in catelogy" :key="index">
-        {{item.name}}
+        <router-link :to="item.url">
+          {{item.name}}
+        </router-link>
       </div>
     </div>
 <!--    <el-row class="banner_top">-->
@@ -25,16 +29,16 @@
     data(){
       return{
         catelogy:[
-          {name:'折扣专场'},
-          {name:"积分商城"},
-          {name:'生鲜专场'},
+          {name:'积分商城',url:'/Integral_mall'},
+          {name:"折扣商城",url: '/discount_mall'},
+          {name:'生鲜专场',url:'/'},
         ]
       }
     }
   }
 </script>
 
-<style scoped>
+<style scoped lang="less">
   .active_banner_top{
     /*background: rgba(0, 0, 0, 0.25);*/
     /*color: #EBEEF5;*/
@@ -49,6 +53,11 @@
     height: 40px;
     line-height: 40px;
     text-align: center;
+
+    a:hover{
+      color: #E36844;
+      transition: 0.3s all;
+    }
   }
 
   .el-col-3:hover {

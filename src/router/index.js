@@ -12,6 +12,8 @@ const MsgCenter =()=>import('../views/User/MsgCenter')
 const address =()=>import('../views/User/Address')
 const UserCollection =()=>import('../views/User/UserCollection')
 const UserOrder =()=>import('../views/User/UserOrder')
+const Integral_mall = ()=>import('../views/Integral_mall')
+const discount_mall =()=>import('../views/discount_mall')
 
 Vue.use(VueRouter)
 
@@ -75,6 +77,16 @@ const routes = [
     name: 'userOrder',
     component:UserOrder
   },
+  {
+    path:'/Integral_mall',
+    name:'积分商城',
+    component:Integral_mall
+  },
+  {
+    path:'/discount_mall',
+    name:'折扣商城',
+    component:discount_mall
+  }
 ]
 
 const router = new VueRouter({
