@@ -29,15 +29,6 @@
                                 </div>
                             </div>
                         </div>
-<!--                        <VuePage :cur="cur" :all="all" :callback="callback" />-->
-<!--                      <div class="page">-->
-<!--                        <el-pagination style="text-align: center"-->
-<!--                                       background-->
-<!--                                       layout="prev, pager, next"-->
-<!--                                       :total="1000"-->
-<!--                        >-->
-<!--                        </el-pagination>-->
-<!--                      </div>-->
                     </div>
                   <div class="none" v-else>
                     <img src="@/assets/img/none.png" style="width: 300px;height: 200px;">

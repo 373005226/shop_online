@@ -13,7 +13,7 @@
           <img :src="item.image">
           <p class="name">{{item.name}}</p>
           <p class="price"><strong style="padding-right: 10px">{{item.integral}}</strong>积分<span style="padding-left: 20px;color: #999999">库存:{{item.goods_num}}</span></p>
-          <a class="cartBtn" @click="open"></a>
+          <a class="cartBtn" @click="open(item)"></a>
         </div>
       </div>
 
@@ -34,7 +34,9 @@
 <script>
 
   import {integralgoods} from "@/api/goods"
-
+  import {userInfo} from '@/api/index'
+  import {postintegralgoods} from '@/api/index'
+  import {putuserinfo} from '@/api/index'
   export default {
     name: "Goods",
     data() {
@@ -43,10 +45,32 @@
         max: '',
         total: 1,
         page: 1,
+        integral:0,
+        member_status:'',
+        username:'',
+        gender:'',
         goodsList: []
       }
     },
     methods: {
+      getgoodList(){
+        integralgoods(this.page).then(res => {
+          console.log(res)
+          // this.goodsList = res.results
+          for(let i of res.results){
+            if(i.goods_num >0){
+              this.goodsList.push(i)
+            }
+          }
+          this.total = res.count
+        })
+      },
+      getaftergoodlist(){
+        integralgoods(this.page).then(res => {
+          console.log(res)
+          this.goodsList = res.results
+        })
+      },
       handleCurrentChange(value) {
         console.log(value)
         integralgoods(value).then(res => {
@@ -54,38 +78,79 @@
           this.goodsList = []
           for(let i of res.results){
             console.log(i)
-            if(i.integral >0){
+            if(i.goods_num >0){
               this.goodsList.push(i)
             }
             // this.goodsList=[]
             // this.goodsList.push(i)
           }
         })
+        this.page = value
       },
-      open() {
-        this.$confirm('积分商品兑换后，需要在下一次购买才能一并领取', '提示', {
-          confirmButtonText: '确认兑换',
-          cancelButtonText: '取消兑换',
-          type: 'warning'
-        }).then(() => {
-          this.$message({
-            type: 'success',
-            message: '兑换成功!'
-          });
-        })
-      }
+      open(item) {
+        console.log(item)
+        if(this.integral>item.integral){
+          this.$confirm('积分商品兑换后，需要在下一次购买才能一并领取', '提示', {
+            confirmButtonText: '确认兑换',
+            cancelButtonText: '取消兑换',
+            type: 'warning'
+          }).then(() => {
+            console.log(item.id)
+            postintegralgoods({
+              nums:1,
+              goods: item.id,
+            },{
+              headers: {
+                Authorization: 'JWT ' + localStorage.getItem('token')
+              }
+            }).then(res => {
+              console.log(res)
+              this.$message({
+                message: '兑换成功',
+                type: 'success'
+              })
+
+              putuserinfo({
+                member_status:this.member_status,
+                username:this.username,
+                integral:this.integral-item.integral,
+                gender:this.gender
+              },{
+                headers: {
+                  Authorization: 'JWT ' + localStorage.getItem('token')
+                }
+              }).then(res=>{
+                console.log(res)
+                this.$notify({
+                  title: '提示',
+                  message: '兑换成功，剩余积分为'+res.integral,
+                  offset: 100
+                })
+                this.integral = res.integral
+              })
+
+              this.getaftergoodlist()
+            })
+          })
+        }else {
+          console.log('faile')
+          this.$message.error('您的积分不够呢,您的积分为'+this.integral)
+        }
+      },
     },
     created() {
+      this.getgoodList()
       this.total = this.goodsList.length
-      integralgoods(this.page).then(res => {
-        console.log(res)
-        // this.goodsList = res.results
-        for(let i of res.results){
-          if(i.integral >0){
-            this.goodsList.push(i)
-          }
+      userInfo({
+        headers: {
+          Authorization: 'JWT ' + localStorage.getItem('token')
         }
-        this.total = res.count
+      }).then(res => {
+        console.log(res[0])
+        this.member_status = res[0].member_status
+        this.username = res[0].username
+        this.integral = res[0].integral
+        this.gender = res[0].gender
       })
     }
   }

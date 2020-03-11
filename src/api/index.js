@@ -20,6 +20,11 @@ export const userInfo =(params)=>{
   return http.fetchGet('userinfo/',params)
 }
 
+//修改个人信息接口
+export const putuserinfo =(params,data)=>{
+  return http.fetchPut('userinfo/111/',params,data)
+}
+
 //添加收货地址
 export const useraddress = (params,config)=>{
   return http.fetchPost('address/',params,config)
@@ -88,4 +93,9 @@ export const getorderdetail =(params,config)=>{
 //把购物车商品推送到订单中
 export const postorder=(params,config)=>{
   return http.fetchPost('orders/',params,config)
+}
+
+//把积分的商品加到个人积分商品上
+export const postintegralgoods=(params,config)=>{
+  return http.fetchPost('IntegralgoodsCart/',params,config)
 }

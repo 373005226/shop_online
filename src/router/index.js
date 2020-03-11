@@ -14,6 +14,7 @@ const UserCollection =()=>import('../views/User/UserCollection')
 const UserOrder =()=>import('../views/User/UserOrder')
 const Integral_mall = ()=>import('../views/Integral_mall')
 const discount_mall =()=>import('../views/discount_mall')
+const integral_goods =()=>import('../views/User/integral_goods')
 
 Vue.use(VueRouter)
 
@@ -72,6 +73,11 @@ const routes = [
     path:'/userCollection',
     name:'userCollection',
     component:UserCollection
+  },
+  {
+    path:'/integral_goods',
+    name:'兑换的积分商品',
+    component:integral_goods
   },
   { path: '/userOrder',
     name: 'userOrder',
