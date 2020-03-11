@@ -99,3 +99,8 @@ export const postorder=(params,config)=>{
 export const postintegralgoods=(params,config)=>{
   return http.fetchPost('IntegralgoodsCart/',params,config)
 }
+
+//获取用户的积分商品
+export const getintegralgoods=(config)=>{
+  return http.fetchGet('IntegralgoodsCart/',config)
+}

@@ -2,7 +2,7 @@
   <div>
     <MyHeader/>
     <div class="collectionBox">
-      <div class="row">
+      <div class="row" style="padding-bottom: 50px">
         <!-- 面包屑 -->
         <div class="crumbs">
           <router-link to="/">首页</router-link>
@@ -14,10 +14,8 @@
           <div v-if="integralgoods.length != 0" class="collectionContent">
             <div class="item" v-for="(item,index) in integralgoods" :key=index>
               <div class="main">
-                <!--                                <div @click="handleClose(item,index)" class="close icon icon-close"></div>-->
                 <div @click="todetail(item.goods.id)">
-                  <img :src="item.goods.images[0].image"
-                       v-if="item.goods.images !== undefined &&  item.goods.images.length > 0 ">
+                  <img :src="item.goods.image">
                 </div>
                 <div style="padding-top: 20px;">
                   {{item.goods.name}}
@@ -38,7 +36,7 @@
   import MyHeader from "@/common/header/MyHeader.vue";
   import MyFooter from "@/common/footer/MyFooter.vue";
   import UserSide from "@/common/UserSide.vue";
-  // import {postintegralgoods} from '@/api/index'
+  import {getintegralgoods} from '@/api/index'
   export default {
     components: {MyHeader, MyFooter, UserSide},
     name: "integral_goods",
@@ -50,21 +48,14 @@
       }
     },
     created() {
-      // postintegralgoods({
-      //   nums:1,
-      //   goods: this.id,
-      // },{
-      //   headers: {
-      //     Authorization: 'JWT ' + localStorage.getItem('token')
-      //   }
-      // }).then(res => {
-      //   console.log(res)
-      //   this.integralgoods = res
-      //   this.$message({
-      //     message: '加入购物车成功',
-      //     type: 'success'
-      //   })
-      // })
+      getintegralgoods({
+        headers: {
+          Authorization: 'JWT ' + localStorage.getItem('token')
+        }
+      }).then(res => {
+        console.log(res)
+        this.integralgoods = res
+      })
     },
     methods: {
       todetail(id) {
