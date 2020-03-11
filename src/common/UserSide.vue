@@ -27,7 +27,6 @@
                         // {url:'/msgCenter',text:'消息通知'},
                         {url:'/address',text:'地址管理'},
                         {url:'/integral_goods',text:'已兑换积分商品'},
-                        {url:'',text:'我的积分'},
                         {url:'/userCollection',text:'我的收藏'},
                         {url:'',text:'我的足迹'},
                     ]},

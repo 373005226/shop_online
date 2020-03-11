@@ -33,10 +33,10 @@
                   交易操作
                 </div>
               </div>
-              <div v-if="orderres.length == 0" style="text-align: center;display: flex;margin: 0 410px">
+              <div v-if="orderinformation.length == 0" style="text-align: center;display: flex;margin: 0 410px">
                 <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200307142112.png">
               </div>
-              <div style="text-align: center" v-if="orderres.length == 0">
+              <div style="text-align: center" v-if="orderinformation.length == 0">
                 没有相关订单哦
               </div>
               <div class="allorder">
@@ -51,7 +51,8 @@
                       </div>
                       <span style="float: right">提货方式:<span
                         style="padding-left: 20px;"></span>{{getorderinformation(item.takegoods_status)}}</span>
-                      <span>订单状态:<span style="padding-left: 20px;color: #E36844">{{getstatus(item.pay_status)}}</span></span>
+                      <span>订单状态:<span
+                        style="padding-left: 20px;color: #E36844">{{getstatus(item.pay_status)}}</span></span>
                       <div class="delete icon icon-shanchu"></div>
                     </div>
 
@@ -86,14 +87,41 @@
                             ￥{{items.goods.specification[0].shop_price*items.goods_num}}
                           </div>
 
-<!--                          <div class="option" style="margin:70px 120px;">-->
-<!--                            <el-button type="danger" v-if="item.pay_status =='paying'">去付款</el-button>-->
-<!--                            <el-button type="warning" plain v-if="item.pay_status =='TRADE_SUCCESS'">等待收款</el-button>-->
-<!--                            <el-button type="success" disabled v-if="item.pay_status =='success'">交易已完成</el-button>-->
-<!--                          </div>-->
+                          <!--                          <div class="option" style="margin:70px 120px;">-->
+                          <!--                            <el-button type="danger" v-if="item.pay_status =='paying'">去付款</el-button>-->
+                          <!--                            <el-button type="warning" plain v-if="item.pay_status =='TRADE_SUCCESS'">等待收款</el-button>-->
+                          <!--                            <el-button type="success" disabled v-if="item.pay_status =='success'">交易已完成</el-button>-->
+                          <!--                          </div>-->
 
                         </div>
-                        <div style="position:relative;bottom: 100px;left: 850px;color: #409EFF" v-if="item.pay_status!='paying'">
+                        <div class="itemMain" v-for="(items,indexs) in item.intergralgoods"
+                             :key="indexs">
+
+                          <div style="width: 285px;">
+                            <div class="img">
+                              <img :src="items.inter_goods.image"
+                                   style="width: 120px;height: 120px;">
+                              <div>
+                                {{items.inter_goods.name}}
+                                <span style="color: #F56C6C">[赠品]</span>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="price">
+                          </div>
+
+                          <div class="number">
+                            <div>{{items.goods_num}}</div>
+                          </div>
+
+                          <div class="total">
+                            ￥0
+                          </div>
+
+                        </div>
+                        <div style="position:relative;bottom: 100px;left: 850px;color: #409EFF"
+                             v-if="item.pay_status!='paying'">
                           <el-button round @click="showOrder(item.id)">查看物流</el-button>
                         </div>
 
@@ -185,17 +213,16 @@
       this.orderinformation = this.orderres
     },
     methods: {
-      getstatus(index){
-        if(index =='TRADE_SUCCESS'){
+      getstatus(index) {
+        if (index == 'TRADE_SUCCESS') {
           return '订单已完成'
         }
-        if(index=="trade_evaluate"){
+        if (index == "trade_evaluate") {
           return '订单已完成，等待用户评价'
         }
-        if(index=='paying'){
+        if (index == 'paying') {
           return '订单支付中'
-        }
-        else {
+        } else {
           return '正在进行中'
         }
       },

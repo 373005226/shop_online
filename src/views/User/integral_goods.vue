@@ -7,7 +7,7 @@
         <div class="crumbs">
           <router-link to="/">首页</router-link>
           <div class="icon icon-right_s"></div>
-          <span class="">我的收藏</span>
+          <span class="">我的积分商品</span>
         </div>
         <div class="content">
           <UserSide/>
