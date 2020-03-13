@@ -139,6 +139,14 @@
       },
     },
     created() {
+      this.$alert('选购积分商品后必须三天之内到店提取或者线上购物，否则积分商品将失效', '提示', {
+        confirmButtonText: '确定',
+      });
+      // this.$notify({
+      //   title: '提示',
+      //   message: '选购积分商品后必须三天之内到店提取或者线上购物，否则积分商品将失效',
+      //   offset: 100
+      // })
       this.getgoodList()
       this.total = this.goodsList.length
       userInfo({
