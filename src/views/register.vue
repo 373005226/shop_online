@@ -69,7 +69,6 @@
               <el-form-item label="确认密码" prop="checkPass">
                 <el-input type="password" v-model="phoneForm.checkPass" autocomplete="off"></el-input>
               </el-form-item>
-
               <el-form-item>
                 <el-button type="primary" @click="submitForm(phoneForm)">提交</el-button>
                 <el-button @click="resetForm('phoneForm')">重置</el-button>
