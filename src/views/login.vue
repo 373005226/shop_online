@@ -72,19 +72,20 @@
       submitForm(Form) {
         console.log(Form)
         userlogin({username:Form.username,password: Form.password}).then(res=>{
-          // this.$store.state.mobile = res.mobile
-          // this.$store.state.token = res.token
           console.log(res)
           this.$store.commit('logintoken',res)
           this.$store.commit('loginusername',Form.username)
-          console.log(this.$store.state.mobile)
-          console.log(this.$store.state.token)
-          localStorage.setItem('token',res.token)
-          localStorage.setItem('mobile',Form.username)
-        })
           this.$router.push({
             path:'/'
           })
+        }).catch(()=>{
+          this.$message({
+            showClose: true,
+            message: '账号或者密码错误',
+            type: 'error'
+          })
+        })
+
       }
     },
     components: {
