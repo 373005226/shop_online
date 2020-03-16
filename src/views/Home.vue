@@ -15,6 +15,7 @@
 
 <script>
   // @ is an alias to /src
+  import {addvisitor} from '../api/information'
   import MyHeader from "../common/header/MyHeader";
   import banner_top from "../components/Home/banner_top";
   import MainNav from "../components/Home/MainNav";
@@ -34,6 +35,11 @@
       Ranking,
       catelogy,
       MyFooter
+    },
+    created() {
+      addvisitor({count:1}).then(()=>{
+        console.log('访问量+1')
+      })
     }
   }
 </script>
