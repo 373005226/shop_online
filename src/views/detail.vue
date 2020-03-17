@@ -34,13 +34,13 @@
                   <div class="name">{{this.goods_detail.name}}</div>
                   <div class="desc">{{this.goods_detail.goods_brief}}</div>
                 </div>
-                <div class="comm">
-                  <div class="num">99.7%</div>
-                  <a class="text">
-                    <span @click="goComm">好评率</span>
-                    <span class="el-icon-arrow-right"></span>
-                  </a>
-                </div>
+<!--                <div class="comm">-->
+<!--                  <div class="num">99.7%</div>-->
+<!--                  <a class="text">-->
+<!--                    <span @click="goComm">好评率</span>-->
+<!--                    <span class="el-icon-arrow-right"></span>-->
+<!--                  </a>-->
+<!--                </div>-->
               </div>
               <div class="price">
                 <div class="field">
@@ -146,40 +146,43 @@
                   <img v-for="(item,index) in desc" :key='index' class="descImg" :src="item" alt="">
                 </div>
                 <div class="commentList" ref="comm" v-if="navTabInit == 1">
-                  <div class="navWrap">
-                    <div class="goodRates">
-                      <div class="label">好评率</div>
-                      <div class="goodRate">99.7%</div>
-                    </div>
-                    <div class="commentNav">
-                      <div class="title">大家都在说：</div>
-                      <div class="labelList">
-                        <span v-for="(item,index) in comments" :key="index">{{item.text}}</span>
-                      </div>
-                    </div>
-                  </div>
+<!--                  <div class="navWrap">-->
+<!--                    <div class="goodRates">-->
+<!--                      <div class="label">好评率</div>-->
+<!--                      <div class="goodRate">99.7%</div>-->
+<!--                    </div>-->
+<!--                  </div>-->
                   <div class="commons">
                     <div class="item" v-for="(item,index) in userCommons" :key='index'>
                       <div class="commentUser">
                         <div class="avatarWarp">
-                          <img :src="item.img" :alt="item.name">
+                          <img :src="item.user.avatar" :alt="item.name">
                         </div>
                         <div class="username">
-                          {{item.name}}
+                          {{item.user.name}}
                         </div>
                       </div>
                       <div class="commentItem">
-                        <div class="skuInfo">{{item.type}}</div>
-                        <div class="content">{{item.content}}</div>
+                        <div class="skuInfo">
+                          <span style="padding-right: 10px;padding-top: 3px;">评价</span>
+                          <el-rate
+                            v-model="item.score"
+                            disabled
+                            show-score
+                            text-color="#ff9900"
+                            score-template="{value}">
+                          </el-rate>
+                        </div>
+                        <div class="content">{{item.commenttext}}</div>
                       </div>
                     </div>
                   </div>
 
-                  <el-pagination style="text-align: center"
-                    background
-                    layout="prev, pager, next"
-                    :total="100">
-                  </el-pagination>
+<!--                  <el-pagination style="text-align: center"-->
+<!--                    background-->
+<!--                    layout="prev, pager, next"-->
+<!--                    :total="100">-->
+<!--                  </el-pagination>-->
 
                 </div>
               </div>
@@ -247,22 +250,13 @@
           // navTab
           navTabInit:0,
           detailNavTab:[
-            '详情','评价（100）',
+            '详情','评价',
           ],
           desc:[
             'https://yanxuan-item.nosdn.127.net/9c866dd74ed282a6516a7557aff27cad.jpg',
             'https://yanxuan-item.nosdn.127.net/ef92646728bad4d1f402a56895b19a81.jpg'
           ],
-          comments:[
-            {text:'质量上乘'},
-            {text:'性价比高'},
-            {text:'很舒服'}
-          ],
-
-          userCommons:[
-            {name:'1****9',img:'//yanxuan.nosdn.127.net/485ff1be6912be6ae696b6d360d1b101.png',content:'此款秋衣秋裤穿着柔软亲肤非常舒服暖和，我家人这两年都喜欢穿，以前买的纯棉的木代尔的都不穿了，现在穿的都是这款面料的是最爱了，好评！',type:'尺码:XL 颜色:藏青保暖套装',time:'2019-10-16 07:57'},
-            {name:'1****9',img:'//yanxuan.nosdn.127.net/485ff1be6912be6ae696b6d360d1b101.png',content:'此款秋衣秋裤穿着柔软亲肤非常舒服暖和，我家人这两年都喜欢穿，以前买的纯棉的木代尔的都不穿了，现在穿的都是这款面料的是最爱了，好评！',type:'尺码:XL 颜色:藏青保暖套装',time:'2019-10-16 07:57'},
-          ]
+          userCommons:[]
         }
       },
       methods:{
@@ -340,6 +334,7 @@
           this.id = res.id
           this.goods_detail = res
           this.goodtotal = res.goods_num
+          this.userCommons = res.comment
           getallfav({
             headers: {
               Authorization: 'JWT '+localStorage.getItem('token')
@@ -348,24 +343,6 @@
             this.isfav = !!(res.find(item => item.goods.id === this.id))
           })
         })
-
-          // getallfav({
-          //   headers: {
-          //     Authorization: 'JWT '+localStorage.getItem('token')
-          //   }
-          // }).then(res=>{
-          //   this.isfav = !!(res.find(item => item.goods.id === this.id))
-          // })
-
-        // getallfav({
-        //   headers: {
-        //     Authorization: 'JWT '+localStorage.getItem('token')
-        //   }
-        // }).then(res=>{
-        //
-        //   this.isfav = !!(res.find(item => item.goods.id == this.id))
-        // })
-
 
       }
     }
@@ -837,6 +814,8 @@
                   color: #999;
                   line-height: 1;
                   padding-bottom: 10px;
+                  display: flex;
+                  flex-direction: row;
                 }
                 .content{
                   line-height: 20px;

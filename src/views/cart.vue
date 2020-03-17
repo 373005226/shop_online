@@ -329,7 +329,7 @@
   import MyHeader from "../common/header/MyHeader";
   import MyFooter from "../common/footer/MyFooter";
   import {getcart, deletecart, getuseraddress, postorder} from '@/api/index'
-  import {getintegralgoods} from '@/api/index'
+  import {getintegralgoods,putuserinfo} from '@/api/index'
   import {putcart} from "../api";
 
   export default {
@@ -403,7 +403,7 @@
         this.active2 = true
       },
       checkbox() {
-        if (this.isallcheck == true) {
+        if (this.isallcheck === true) {
           this.ischeck = true
         }
       },
@@ -443,6 +443,17 @@
         console.log(this.orderform.address.province +'-'+this.orderform.address.city +'-'+this.orderform.address.district +'-' +this.orderform.address.address)
       },
       toorder() {
+        if(this.alltotal>150){
+          putuserinfo({
+            member_status:'senior'
+          },{
+            headers: {
+              Authorization: 'JWT ' + localStorage.getItem('token')
+            }
+          }).then(res=>{
+            console.log(res)
+          })
+        }
         postorder({
           pay_status: 'paying',
           order_mount: this.alltotal,

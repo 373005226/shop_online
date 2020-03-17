@@ -213,7 +213,7 @@
 
             .label {
               float: left;
-              width: 56px;
+              width: 60px;
               margin-right: 20px;
               text-align: left;
             }

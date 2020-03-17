@@ -104,3 +104,13 @@ export const postintegralgoods=(params,config)=>{
 export const getintegralgoods=(config)=>{
   return http.fetchGet('IntegralgoodsCart/',config)
 }
+
+//评论商品
+export const postcommon=(params,config)=>{
+  return http.fetchPost('common/',params,config)
+}
+
+//修改订单状态
+export const putorder=(params,data,config)=>{
+  return http.fetchPut('orders/'+params+'/',data,config)
+}
