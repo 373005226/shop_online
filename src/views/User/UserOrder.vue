@@ -122,7 +122,7 @@
                         </div>
                         <div style="position:relative;bottom: 100px;left: 850px;color: #409EFF"
                              v-if="item.pay_status!='paying'">
-                          <el-button round @click="showOrder(item.id)">查看物流</el-button>
+                          <el-button round @click="logistics(item.id)">查看物流</el-button>
                         </div>
 
                       </div>
@@ -133,22 +133,56 @@
                 </div>
               </div>
             </div>
-            <!--            <NoData v-if="orderres.length == 0" position="0 -760px"/>-->
-
           </div>
 
         </div>
       </div>
     </div>
-    <!-- 查看物流 -->
-    <Popup ref="UserOrderinformation" :custom="false" :maskClick="false" type="center" :information="orderinformation"
-           :orderid="id">
-      <div class="Form">
-        <div class="FormHead">订单信息</div>
-        <div @click="calseorder" class="icon icon-close"></div>
-        <UserOrderinformation @calseorder='calseorder' :information="this.$refs"/>
-      </div>
-    </Popup>
+    <el-dialog
+      title="提示"
+      :visible.sync="logisticsDialogVisible"
+      width="30%">
+
+      <el-timeline>
+        <el-timeline-item :timestamp="logisticsinformations.picker_time" placement="top">
+          <el-card>
+            <h4>订单开始拣货</h4>
+          </el-card>
+        </el-timeline-item>
+        <el-timeline-item :timestamp="logisticsinformations.inspecter_time" placement="top" v-if="logisticsinformations.takegoods_status==='self_mention'&&logisticsinformations.inspecter!==''">
+          <el-card>
+            <h4>订单二次检验完毕，请尽快来超市提取</h4>
+          </el-card>
+        </el-timeline-item>
+        <el-timeline-item :timestamp="logisticsinformations.inspecter_time" placement="top" v-if="logisticsinformations.takegoods_status==='online'&&logisticsinformations.inspecter!==''">
+          <el-card>
+            <h4>订单二次检验完毕，等待订单分配送货任务</h4>
+          </el-card>
+        </el-timeline-item>
+        <el-timeline-item :timestamp="logisticsinformations.distributor_time" placement="top" v-if="logisticsinformations.takegoods_status==='online'&&logisticsinformations.distributor!==''">
+          <el-card>
+            <h4>订单已经分配完毕，等待配送人员提取货品</h4>
+          </el-card>
+        </el-timeline-item>
+        <el-timeline-item :timestamp="logisticsinformations.delivery_time" placement="top" v-if="logisticsinformations.takegoods_status==='online'&&logisticsinformations.deliveryman!==''">
+          <el-card>
+            <h4>配送小哥正在配送商品，请留意配送小哥电话</h4>
+            <p>配送小哥电话：{{logisticsinformations.deliveryman_phone}}</p>
+          </el-card>
+        </el-timeline-item>
+        <el-timeline-item :timestamp="logisticsinformations.success_time" placement="top" v-if="logisticsinformations.takegoods_status==='online'&&logisticsinformations.success_time!==''">
+          <el-card>
+            <h4>订单结束，祝您购物愉快</h4>
+          </el-card>
+        </el-timeline-item>
+        <el-timeline-item :timestamp="logisticsinformations.success_time" placement="top" v-if="logisticsinformations.takegoods_status==='self_mention'&&logisticsinformations.success_time!==''">
+          <el-card>
+            <h4>自提任务订单结束，祝您购物愉快</h4>
+          </el-card>
+        </el-timeline-item>
+      </el-timeline>
+    </el-dialog>
+
 
     <MyFooter/>
   </div>
@@ -158,16 +192,32 @@
   import MyFooter from "@/common/footer/MyFooter.vue";
   import UserSide from "@/common/UserSide.vue";
   import NavTab from "@/components/User/navTab.vue";
-  import Popup from "@/components/User/Popup.vue"
   import {getorder} from '@/api/index'
   import {getorderdetail} from '@/api/index'
-  import UserOrderinformation from "../../components/User/UserOrderinformation";
 
   export default {
-    components: {MyHeader, MyFooter, UserSide, NavTab, Popup, UserOrderinformation},
+    components: {MyHeader, MyFooter, UserSide, NavTab},
     name: "userCollection",
     data() {
       return {
+        activities: [{
+          content: '支持使用图标',
+          timestamp: '2018-04-12 20:46',
+          size: 'large',
+          type: 'primary',
+          icon: 'el-icon-more'
+        }, {
+          content: '支持自定义颜色',
+          timestamp: '2018-04-03 20:46',
+          color: '#0bbd87'
+        }, {
+          content: '支持自定义尺寸',
+          timestamp: '2018-04-03 20:46',
+          size: 'large'
+        }, {
+          content: '默认样式的节点',
+          timestamp: '2018-04-03 20:46'
+        }],
         id: '',
         cur: 1,
         all: 8,
@@ -175,8 +225,10 @@
         getmethods: '',
         tabList: ['全部订单', '待付款', '待发货', '已发货', '待评价'],
         init: 0,
+        logisticsDialogVisible:false,
         orderres: [],
         orderinformation: [],
+        logisticsinformations:[],
         orderList: [
           {
             goodId: 0,
@@ -197,9 +249,7 @@
           Authorization: 'JWT ' + localStorage.getItem('token')
         }
       }).then(res => {
-        // console.log(res)
         for (let i of res) {
-          // console.log(i)
           getorderdetail(i.id, {
             headers: {
               Authorization: 'JWT ' + localStorage.getItem('token')
@@ -213,6 +263,16 @@
       this.orderinformation = this.orderres
     },
     methods: {
+      logistics(id) {
+        console.log(id)
+        this.logisticsDialogVisible = true
+        for(let i of this.orderres){
+          if(i.id === id){
+            this.logisticsinformations = i
+            console.log(this.logisticsinformations)
+          }
+        }
+      },
       getstatus(index) {
         if (index == 'TRADE_SUCCESS') {
           return '订单已完成'
