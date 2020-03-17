@@ -437,11 +437,6 @@
         this.active2 = true
         this.active1 = false
       },
-      totext() {
-        console.log(this.orderform)
-        console.log(this.orderform.time)
-        console.log(this.orderform.address.province +'-'+this.orderform.address.city +'-'+this.orderform.address.district +'-' +this.orderform.address.address)
-      },
       toorder() {
         if(this.alltotal>150){
           putuserinfo({
@@ -513,6 +508,7 @@
         console.log(res)
         this.alladdress = res
         this.addressselect[res[0].id] = true
+        this.signer_name = res.signer_name
         this.orderform.address = res[0]
       })
 

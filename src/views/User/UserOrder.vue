@@ -224,14 +224,13 @@
           </el-card>
         </el-timeline-item>
 
-        <el-timeline-item :timestamp="logisticsinformations.Picking_complete" placement="top">
+        <el-timeline-item :timestamp="logisticsinformations.Picking_complete" placement="top" v-if="logisticsinformations.pay_status==='Picking_complete'">
           <el-card>
             <h4>订单二次检验完毕，等待二次验货</h4>
           </el-card>
         </el-timeline-item>
 
-        <el-timeline-item :timestamp="logisticsinformations.inspecter_time" placement="top"
-                          v-if="logisticsinformations.takegoods_status==='self_mention'&&logisticsinformations.inspecter!==''">
+        <el-timeline-item :timestamp="logisticsinformations.inspecter_time" placement="top" v-if="logisticsinformations.takegoods_status==='self_mention'&&logisticsinformations.inspecter!==''">
           <el-card>
             <h4>订单二次检验完毕，请尽快来超市提取</h4>
           </el-card>
