@@ -2,15 +2,15 @@
   <div>
     <my-header></my-header>
     <div style="width: 1200px;margin:0 auto;margin-top: 30px;">
-      <el-steps :active="active" align-center>
+      <el-steps :active="1" align-center>
         <el-step title="购物车"></el-step>
         <el-step title="选择支付方式及地址"></el-step>
       </el-steps>
     </div>
 
-    <div v-if="active=== 1">
+    <div v-if="active== 1">
 
-      <div class="cart" v-if="productList.length!==0">
+      <div class="cart" v-if="productList.length!=0">
         <div class="row">
           <div class="cartHead">
             <div class="checkbox">
@@ -26,7 +26,6 @@
               <div class="checkout">
                 <input type="checkbox" @click="clickchange(item)" :checked="ischeck">
               </div>
-
               <div class="goodInfo">
                 <router-link :to="'/detail?id='+item.goods.id">
                   <div class="pic">
@@ -46,7 +45,7 @@
 
               <div class="number">
                 <el-input-number v-model="item.nums" :min="1" :max="item.goods.goods_num" label="描述文字"
-                                 size="mini" @change="handleChange"></el-input-number>
+                                 size="mini"></el-input-number>
               </div>
               <div class="total">
                 ¥{{item.goods.specification[0].shop_price*item.nums}}
@@ -61,17 +60,17 @@
 
             <div class="item" v-for="(item,index) in integralgoods" :key="index">
               <div class="checkout">
-                                <input type="checkbox" @click="clickchange(item)" :checked="ischeck">
+<!--                <input type="checkbox" @click="clickchange(item)" :checked="ischeck">-->
               </div>
 
               <div class="goodInfo">
-                <div class="pic">
-                  <img :src="item.goods.image">
-                </div>
-                <div class="nameCon">
-                  <span style="color: #F56C6C">[积分赠品]</span>{{item.goods.name}}
-                  <div class="type">{{item.nums}}{{item.goods.specification}}</div>
-                </div>
+                  <div class="pic">
+                    <img :src="item.goods.image">
+                  </div>
+                  <div class="nameCon">
+                    <span style="color: #F56C6C">[积分赠品]</span>{{item.goods.name}}
+                    <div class="type">{{item.nums}}{{item.goods.specification}}</div>
+                  </div>
               </div>
 
             </div>
@@ -85,20 +84,20 @@
               <div class="leftInfo">
                 <div class="itemsPrice">
                   <div class="linetext">
-                    <span>商品合计 : </span>
+                    <!--                  <span>商品合计 : </span>-->
 
-                    <span>¥{{total}}</span>
+                    <!--                  <span>¥{{total}}</span>-->
                   </div>
-                  <div class="linetext">
-                    <span>已优惠 :  </span>
-                    <span>-¥0.00</span>
-                  </div>
+                  <!--                <div class="linetext">-->
+                  <!--                  <span>已优惠 :  </span>-->
+                  <!--                  <span>-¥0.00</span>-->
+                  <!--                </div>-->
                 </div>
               </div>
               <div class="rightInfo">
                 <div class="shouldPayMoney">
-                  <span>订单总额：</span>
-                  <span>¥ {{alltotal}}</span>
+                  <!--                <span>应付总额：</span>-->
+                  <!--                <span>¥ {{alltotal}}</span>-->
                 </div>
               </div>
             </div>
@@ -112,13 +111,13 @@
 
       <div v-else style="width: 1220px;margin: 0 auto;padding-bottom: 20px;">
         <div style="text-align: center;">
-          <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200318145724.png">
+          <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200307101617.png">
         </div>
       </div>
     </div>
 
 
-    <div v-if="active ===2">
+    <div v-if="active2 == true">
       <el-form :model="orderform">
 
         <div class="main">
@@ -130,11 +129,11 @@
                 <div style="padding-left: 10px;">配送方式</div>
               </div>
               <div style="display: flex;flex-direction: row;padding-left: 10px;padding-top: 10px;cursor: pointer; ">
-                <div class="method" @click="self_men" :class="{'activemethods': shippingMethod === 2}">
-                  线下自提
+                <div class="method" @click="online" :class="{'activemethods': shippingMethod === 1}">
+                  线上送货
                 </div>
-                <div style="margin-left: 10px;" class="method" :class="{'activemethods': shippingMethod === 1}"
-                     @click="online">线上送货
+                <div style="margin-left: 10px;" class="method" :class="{'activemethods': shippingMethod === 2}"
+                     @click="self_men">线下自提
                 </div>
               </div>
             </div>
@@ -147,8 +146,8 @@
               </div>
 
               <div style="display: flex;flex-direction: row;">
-                <div class="methods_content" v-for="(item,indexs) in alladdress" :key="indexs">
-                  <div style="width: 320px;" :class="{'addressactive':addressselect[item.id]}"
+                <div class="methods_content" v-for="(item,index) in alladdress" :key="index">
+                  <div style="width: 300px;" :class="{'addressactive':addressselect[item.id]}"
                        @click="selectaddress(item)">
                     <div>{{item.signer_mobile}}</div>
                     <div>{{item.signer_name}}</div>
@@ -214,9 +213,74 @@
 
             <div class="cart" v-if="productList.length!=0">
               <div class="row">
+                <div class="cartHead">
+                  <div class="checkbox">
+                  </div>
+                  <div class="goodInfo">商品信息</div>
+                  <div class="price">单价</div>
+                  <div class="number">数量</div>
+                  <div class="total">小计</div>
+                  <div class="sets">操作</div>
+                </div>
+                <div class="cartMain">
+                  <div class="item" v-for="(item,index) in productList" :key="index">
+                    <div class="checkout">
+                      <!--                    <input type="checkbox" @click="clickchange(item)">-->
+                    </div>
+                    <div class="goodInfo">
+                      <router-link :to="'/detail?id='+item.goods.id">
+                        <div class="pic">
+                          <img :src="item.goods.images[0].image"
+                               v-if="item.goods.images !== undefined &&  item.goods.images.length > 0 ">
+                        </div>
+                        <div class="nameCon">
+                          {{item.goods.name}}
+                          <div class="type">{{item.goods.specification[0].specification_text}}</div>
+                        </div>
+                      </router-link>
+                    </div>
+                    <div class="price"
+                         v-if="item.goods.specification !== undefined &&  item.goods.specification.length > 0 ">
+                      ¥{{item.goods.specification[0].shop_price}}
+                    </div>
 
+                    <div class="number">
+                      <el-input-number v-model="item.nums" :min="1" :max="item.goods.goods_num" label="描述文字"
+                                       size="mini"></el-input-number>
+                    </div>
+                    <div class="total">
+                      ¥{{item.goods.specification[0].shop_price*item.nums}}
+                    </div>
+                    <div class="sets">
+                      <el-row>
+                        <el-button type="danger" size="mini" plain class="sets_button" @click="delccart(item.goods.id)">
+                          移除
+                        </el-button>
+                      </el-row>
+                    </div>
+                  </div>
+
+                  <div class="item" v-for="(item,index) in integralgoods" :key="index">
+                    <div class="checkout">
+                      <!--                <input type="checkbox" @click="clickchange(item)" :checked="ischeck">-->
+                    </div>
+
+                    <div class="goodInfo">
+                      <div class="pic">
+                        <img :src="item.goods.image">
+                      </div>
+                      <div class="nameCon">
+                        <span style="color: #F56C6C">[积分赠品]</span>{{item.goods.name}}
+                        <div class="type">{{item.nums}}{{item.goods.specification}}</div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
                 <div class="cart-total">
                   <div class="w-chkbox">
+                    <!--                  <input type="checkbox">-->
+                    <!--                  <span>全选</span>-->
                   </div>
                   <div class="textInfo">
                     <div class="leftInfo">
@@ -260,7 +324,7 @@
   import MyHeader from "../common/header/MyHeader";
   import MyFooter from "../common/footer/MyFooter";
   import {getcart, deletecart, getuseraddress, postorder} from '@/api/index'
-  import {getintegralgoods, putuserinfo} from '@/api/index'
+  import {getintegralgoods,putuserinfo} from '@/api/index'
   import {putcart} from "../api";
 
   export default {
@@ -276,8 +340,6 @@
         is_show1: true,
         is_show2: false,
         active:1,
-        active1: true,
-        active2: false,
         addressselect: [],
         currentAddress: 0,
         shippingMethod: 1,
@@ -285,9 +347,9 @@
         totalMoney: 0,
         productList: [],
         checkedAllFlag: false,
-        starttime: '',
+        starttime:'',
         alladdress: [],
-        integralgoods: [],
+        integralgoods:[],
         orderform: {
           methods: '',
           address: [],
@@ -304,20 +366,14 @@
         return total
       },
       alltotal() {
-        if (this.shippingMethod === 1) {
-          return this.total+10
+        if (this.shippingMethod == 1) {
+          return this.total + 10
         } else {
           return this.total
         }
       }
     },
     methods: {
-      tonext(){
-        this.active = 2
-      },
-      handleChange(value){
-        console.log(value)
-      },
       selectaddress(item) {
         this.addressselect[item.id] = true
         console.log(item)
@@ -326,9 +382,11 @@
       },
       online() {
         this.shippingMethod = 1
+        this.orderform.methods = 'online'
       },
       self_men() {
         this.shippingMethod = 2
+        this.orderform.methods = 'self_mention'
       },
       ischeck() {
         return false
@@ -357,25 +415,24 @@
         this.number--
       },
       toorder() {
-        console.log(this.orderform)
-        if (this.alltotal > 150) {
+        if(this.alltotal>150){
           putuserinfo({
-            member_status: 'senior'
-          }, {
+            member_status:'senior'
+          },{
             headers: {
               Authorization: 'JWT ' + localStorage.getItem('token')
             }
-          }).then(res => {
+          }).then(res=>{
             console.log(res)
           })
         }
         postorder({
           pay_status: 'paying',
           order_mount: this.alltotal,
-          gettime: this.orderform.time,
+          gettime:this.orderform.time,
           takegoods_status: this.orderform.methods,
-          address: this.orderform.address.province + '-' + this.orderform.address.city + '-' + this.orderform.address.district + '-' + this.orderform.address.address,
-          signer_name: this.orderform.address.signer_name,
+          address: this.orderform.address.province +'-'+this.orderform.address.city +'-'+this.orderform.address.district +'-' +this.orderform.address.address ,
+          signer_name: this.orderform.signer_name,
           singer_mobile: this.orderform.address.signer_mobile
         }, {
           headers: {
@@ -401,15 +458,15 @@
     created() {
       this.orderform.methods = 'online'
       let myDate = new Date()
-      let house = myDate.getHours() + 1
+      let house = myDate.getHours()+1
       let minutes = myDate.getMinutes()
-      this.starttime = house + ':' + minutes
+      this.starttime =house +':'+minutes
       console.log(this.starttime)
 
-      if (this.starttime > '19:00') {
+      if(this.starttime>'19:00'){
         console.log('error')
         this.$message.error('时间已经超过19:00，不能继续下单')
-      } else {
+      }else {
         console.log('succsess')
         this.$message({
           message: '正在营业时间范围内，可以继续访问',
@@ -442,7 +499,7 @@
 
       })
 
-      //  获取积分商品
+    //  获取积分商品
       getintegralgoods({
         headers: {
           Authorization: 'JWT ' + localStorage.getItem('token')
@@ -465,12 +522,11 @@
   .main {
     border: 5px solid #FAF6F7;
     /*height: 1200px;*/
-    background: #FFFFFF;
     width: 1220px;
     margin: 20px auto;
 
     .title {
-      background: #FFFFFF;
+      background: #FAF6F7;
       padding-left: 10px;
       padding-top: 10px;
       padding-bottom: 10px;
@@ -507,7 +563,6 @@
     }
 
   }
-
   .method {
     padding: 5px;
   }
@@ -737,8 +792,7 @@
 
       div {
         padding: 12px 0;
-        background-color: #fff;
-        opacity: 0.8;
+        background-color: #f5f5f5;
       }
 
       .checkbox {
@@ -784,10 +838,6 @@
     .cartMain {
       border: 1px solid #ddd;
       padding-left: 20px;
-      background: #fff;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
-      border-radius: 4px;
-      opacity: 0.8;
 
       .item {
         padding: 20px 0;
@@ -903,7 +953,7 @@
       margin: 20px 0;
       font-size: 14px;
       position: relative;
-      background-color: #fff;
+      background-color: #f5f5f5;
       border: 1px solid #ddd;
       height: 70px;
 

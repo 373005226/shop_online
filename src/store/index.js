@@ -14,6 +14,17 @@ export default new Vuex.Store({
     list: [],
     cart:[]
   },
+  getters:{
+    gettoken(state){
+      return state.token
+    },
+    getmobile(state){
+      return state.mobile
+    },
+      getusername(state){
+      return state.userInfo
+    }
+  },
   mutations,
   actions
 })

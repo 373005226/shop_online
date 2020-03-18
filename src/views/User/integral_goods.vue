@@ -18,7 +18,7 @@
                   <img :src="item.goods.image">
                 </div>
                 <div style="padding-top: 20px;">
-                  {{item.goods.name}}
+                  {{item.goods.name}} &nbsp;x {{item.nums}}
                 </div>
               </div>
             </div>
@@ -60,11 +60,6 @@
     methods: {
       todetail(id) {
         console.log(id)
-        this.$router.push(
-          {
-            path: '/detail', query: {id: id}
-          }
-        )
       },
       callback(data) {
         this.cur = data;

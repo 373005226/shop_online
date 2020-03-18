@@ -52,7 +52,6 @@
           {id:6,name: '医疗保健', type: 'earphone'},
           {id:7,name: '家电、家居产品', type: 'protect'},
           {id:8,name: '五金工具', type: 'card'},
-          {id:9,name: '办公文具 ', type: 'bag'},
           {id:10,name: '服饰', type: 'bag'}
         ],
         navSec: {

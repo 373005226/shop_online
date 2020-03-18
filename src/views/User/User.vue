@@ -1,6 +1,7 @@
 <template>
   <div>
     <my-header></my-header>
+
     <div class="row">
       <!-- 侧栏 -->
       <UserSide/>
@@ -22,28 +23,28 @@
               </div>
             </div>
             <div class="growWrap">
-<!--              <div class="growNum">-->
-<!--                                <span class="f-left">-->
-<!--                                    <a>成长值 >></a>-->
-<!--                                </span>-->
-<!--                <span class="f-right">-->
-<!--                                    <span>0</span>-->
-<!--                                    <span>-->
-<!--                                        <span>/</span>-->
-<!--                                        <span>1</span>-->
-<!--                                    </span>-->
-<!--                                </span>-->
+              <!--              <div class="growNum">-->
+              <!--                                <span class="f-left">-->
+              <!--                                    <a>成长值 >></a>-->
+              <!--                                </span>-->
+              <!--                <span class="f-right">-->
+              <!--                                    <span>0</span>-->
+              <!--                                    <span>-->
+              <!--                                        <span>/</span>-->
+              <!--                                        <span>1</span>-->
+              <!--                                    </span>-->
+              <!--                                </span>-->
+              <!--              </div>-->
+<!--              <div class="process">-->
+<!--                <div class="num" :style="{'width':0+'px'}"></div>-->
 <!--              </div>-->
-              <div class="process">
-                <div class="num" :style="{'width':0+'px'}"></div>
-              </div>
             </div>
           </div>
           <div class="assets">
             <div class="inner">
               <div class="item">
                 <div class="label">会员等级</div>
-                  <span>{{getmember_status(member_status)}}</span>
+                <span>{{getmember_status(member_status)}}</span>
               </div>
             </div>
             <div class="inner">
@@ -90,17 +91,17 @@
     data() {
       return {
         username: [],
-        member_status:'',
+        member_status: '',
         coupon: 0,
-        integral:0,
-        gift:0,
+        integral: 0,
+        gift: 0,
       }
     },
-    methods:{
-      getmember_status(index){
-        if (index =='primary'){
-          return'初级会员'
-        }else {
+    methods: {
+      getmember_status(index) {
+        if (index == 'primary') {
+          return '初级会员'
+        } else {
           return '高级会员'
         }
       }

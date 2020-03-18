@@ -42,8 +42,8 @@
               </tr>
               </tbody>
             </table>
-            <div v-if="information.length == 0 ||information ==null" class="none">
-              <img src="@/assets/img/none.png" style="width: 300px;height: 200px;">
+            <div v-if="information.length === 0 ||information ==null" class="none">
+              <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200318151446.png" style="width: 300px;height: 200px;">
             </div>
           </div>
         </div>
@@ -246,7 +246,7 @@
   .Form {
     position: relative;
     width: 697px;
-    height: 422px;
+    height: 460px;
     padding: 30px 40px 0;
     min-height: 274px;
     margin: 0 auto;
