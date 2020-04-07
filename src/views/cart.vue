@@ -147,8 +147,8 @@
               </div>
 
               <div style="display: flex;flex-direction: row;">
-                <div class="methods_content" v-for="(item,indexs) in alladdress" :key="indexs">
-                  <div style="width: 320px;" :class="{'addressactive':addressselect[item.id]}"
+                <div class="methods_content" v-for="item in alladdress" :key="item.id">
+                  <div style="width: 320px;" :class="{'addressactive':item.id===addressselect}"
                        @click="selectaddress(item)">
                     <div>{{item.signer_mobile}}</div>
                     <div>{{item.signer_name}}</div>
@@ -259,8 +259,14 @@
 <script>
   import MyHeader from "../common/header/MyHeader";
   import MyFooter from "../common/footer/MyFooter";
-  import {getcart, deletecart, getuseraddress, postorder} from '@/api/index'
-  import {getintegralgoods, putuserinfo} from '@/api/index'
+  import {getcart,
+    deletecart,
+    getuseraddress,
+    postorder
+  } from '@/api/index'
+  import {getintegralgoods,
+    putuserinfo
+  } from '@/api/index'
   import {putcart} from "../api";
 
   export default {
@@ -279,7 +285,7 @@
         active: 1,
         active1: true,
         active2: false,
-        addressselect: [],
+        addressselect: '',
         currentAddress: 0,
         shippingMethod: 1,
         payingMethod: 1,
@@ -324,18 +330,20 @@
 
       //选择收货地址
       selectaddress(item) {
-        this.addressselect[item.id] = true
         console.log(item)
-        console.log(this.addressselect[item.id])
+        this.addressselect=item.id
+        console.log(this.addressselect)
         this.orderform.address = item
       },
       //确定为线上送货
       online() {
         this.shippingMethod = 1
+        this.orderform.methods = 'online'
       },
       //确定为线下自提
       self_men() {
         this.shippingMethod = 2
+        this.orderform.methods = 'self_mention'
       },
       //反选选择框
       ischeck() {
@@ -417,14 +425,12 @@
         }).then(res => {
           this.islogin = true
           this.alladdress = res
-          this.addressselect[res[0].id] = true
+          console.log(this.alladdress)
+          // this.addressselect[res[0].id] = true
           this.signer_name = res.signer_name
           this.orderform.address = res[0]
         }).catch(error => {
-          if (error.response.status === 401) {
-            this.islogin = false
-            // this.$message.error('尊敬的用户，您尚未登录');
-          }
+          console.log(error)
         })
       },
 
@@ -496,8 +502,10 @@
       //设置时间为0.5秒，来延迟判断用户是否灯登录
       setTimeout(()=>{
         this.gettime()
+        this.orderform.time = this.starttime
+        this.addressselect = this.alladdress[0].id
+        console.log(this.addressselect)
       },500)
-      this.orderform.time = this.starttime
     }
   }
 </script>
