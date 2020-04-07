@@ -34,6 +34,10 @@
                 <div class="nameInfo">
                   <div class="name">{{this.goods_detail.name}}</div>
                   <div class="desc">{{this.goods_detail.goods_brief}}</div>
+                  <div class="data">
+                    <span>销量</span>：{{this.goods_detail.sold_num}}
+                    <span style="padding-left: 20px;">库存:{{this.goods_detail.goods_num}}</span>
+                  </div>
                 </div>
               </div>
               <div class="price">
@@ -474,6 +478,16 @@
                 font-size: 14px;
                 line-height: 20px;
                 color: #999;
+              }
+
+              .data {
+                padding-top: 20px;
+                width: 520px;
+                font-size: 14px;
+                line-height: 20px;
+                color: #606266;
+                display: flex;
+                flex-direction: row;
               }
             }
 
