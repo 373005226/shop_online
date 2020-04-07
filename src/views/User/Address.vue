@@ -35,10 +35,6 @@
                   <a class="update" href="javascript:;" @click="changeForm(item.id)">编辑</a>
                   <a class="delete" href="javascript:;" @click="deleteinformation(item.id)">删除</a>
                 </td>
-                <td>
-                  <span v-if="item.isDefault" class="ghost">{{item.isDefault ? '默认地址' :''}}</span>
-                  <a v-else href="javascript:;" class="setDefault">设为默认地址</a>
-                </td>
               </tr>
               </tbody>
             </table>
@@ -90,15 +86,8 @@
         changeinformation:[]
       }
     },
-    created() {
-      getuseraddress({
-        headers: {
-          Authorization: 'JWT '+localStorage.getItem('token')
-        }
-      }).then(res => {
-        console.log(res)
-        this.information = res
-      })
+    mounted() {
+      this.getaddress()
     },
     computed: {
       addresslength: function () {
@@ -106,12 +95,22 @@
       }
     },
     methods: {
+      getaddress(){
+        getuseraddress({
+          headers: {
+            Authorization: 'JWT '+localStorage.getItem('token')
+          }
+        }).then(res => {
+          console.log(res)
+          this.information = res
+        })
+      },
       addForm() {
         this.$refs.addressForm.open()
       },
       calse() {
         this.$refs.addressForm.close()
-        location.reload()
+        this.getaddress()
       },
       changeForm(id){
         this.id = id
@@ -122,12 +121,12 @@
       calsechange() {
         console.log(this.$refs)
         this.$refs.changeaddressform.close()
-        location.reload()
+        this.getaddress()
       },
       deleteinformation(id) {
         deleteaddress(id,{headers: {Authorization: 'JWT ' + localStorage.getItem('token')}}).then(res => {
           console.log(res)
-          location.reload()
+          this.getaddress()
         })
       }
     },

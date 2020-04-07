@@ -24,7 +24,7 @@
             </div>
           </div>
           <div class="none" v-else>
-            <img src="@/assets/img/none.png" style="width: 300px;height: 200px;">
+            <img src="@/assets/img/none.png" style="width: 400px;height: 400px;">
           </div>
         </div>
       </div>
@@ -73,13 +73,8 @@
 
 <style lang="scss" scoped>
   .none {
-    width: 100px;
+    height: 300px;
     margin: 0 auto;
-
-    img {
-      height: 350px;
-      margin-top: 150px;
-    }
   }
 
   .collectionBox {

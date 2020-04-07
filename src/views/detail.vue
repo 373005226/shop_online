@@ -42,12 +42,12 @@
                   <div class="data">
                     <span class="text">￥</span>
                     <span class="num"
-                          v-if="this.goods_detail.specification !== undefined &&  this.goods_detail.specification.length > 0 ">{{this.goods_detail.specification[0].shop_price}}</span>
+                          v-if="this.goods_detail.specification !== undefined &&  this.goods_detail.specification.length > 0 ">{{this.goods_detail.specification[cmInit].shop_price}}</span>
                   </div>
                 </div>
                 <div class="field" v-if="this.goods_detail.is_discount===false">
                   <span class="label">限制</span>
-                  <div class="pointCt">该商品不可使用优惠券</div>
+                  <div class="pointCt">该商品不可使用优惠券，不可退换货</div>
                 </div>
                 <div class="field" v-if="this.goods_detail.is_discount===true">
                   <span class="label">优惠</span>
@@ -80,9 +80,9 @@
                     <span class="type">规格</span>
                     <div class="cont">
                       <ul class="tabs">
-                        <li @click="cmInit = index" class="tab  tab-con"
-                            v-for="(item,index) in this.goods_detail.specification" :key='index'>
-                          <a :class="index == cmInit ? 'tab-sel' : ''" class=' tab-txt ' href="javascript:;">
+                        <li @click="selectspecification(index)" class="tab  tab-con"
+                            v-for="(item,index) in this.specification" :key='index'>
+                          <a :class="index === cmInit ? 'tab-sel' : ''" class=' tab-txt ' href="javascript:;">
                             <span>{{item.specification_text}}</span>
                           </a>
                         </li>
@@ -104,16 +104,6 @@
                   </div>
                 </div>
               </div>
-
-              <!--              <div class="btns">-->
-              <!--                <a @click="handleBuy" href="javascript:;" class="button ghost">立即购买</a>-->
-              <!--                <a href="javascript:;" class="button addCart"><span class="icon icon-gouwuche"></span> 加入购物车</a>-->
-              <!--                <div class="addSc">-->
-              <!--                  <div class="icon el-icon-star-off"></div>-->
-              <!--                  <div class="text">收藏</div>-->
-              <!--                </div>-->
-              <!--              </div>-->
-
               <div class="btns">
                 <el-row>
                   <el-button type="danger" @click="addcart">加入购物车</el-button>
@@ -147,46 +137,47 @@
                 <div v-if="navTabInit == 0">
                   <img v-for="(item,index) in desc" :key='index' class="descImg" :src="item" alt="">
                 </div>
-                <div class="commentList" ref="comm" v-if="navTabInit == 1">
+                <div class="commentList" ref="comm" v-if="navTabInit === 1">
                   <!--                  <div class="navWrap">-->
                   <!--                    <div class="goodRates">-->
                   <!--                      <div class="label">好评率</div>-->
                   <!--                      <div class="goodRate">99.7%</div>-->
                   <!--                    </div>-->
                   <!--                  </div>-->
-                  <div class="commons">
-                    <div class="item" v-for="(item,index) in userCommons" :key='index'>
-                      <div class="commentUser">
-                        <div class="avatarWarp">
-                          <img :src="item.user.avatar" :alt="item.name">
+                  <div class="commons" v-for="(item,index) in userCommons" :key='index'>
+                    <div class="item" v-if="item.comment!==[]">
+                        <div class="commentUser">
+                          <div class="avatarWarp">
+                            <img :src="item.user.avatar" :alt="item.name">
+                          </div>
+                          <div class="username">
+                            {{item.user.name}}
+                          </div>
                         </div>
-                        <div class="username">
-                          {{item.user.name}}
+                        <div class="commentItem">
+                          <div class="skuInfo">
+                            <span style="padding-right: 10px;padding-top: 3px;">评价</span>
+                            <el-rate
+                              v-model="item.score"
+                              disabled
+                              show-score
+                              text-color="#ff9900"
+                              score-template="{value}">
+                            </el-rate>
+                          </div>
+                          <div class="content">{{item.commenttext}}</div>
                         </div>
-                      </div>
-                      <div class="commentItem">
-                        <div class="skuInfo">
-                          <span style="padding-right: 10px;padding-top: 3px;">评价</span>
-                          <el-rate
-                            v-model="item.score"
-                            disabled
-                            show-score
-                            text-color="#ff9900"
-                            score-template="{value}">
-                          </el-rate>
-                        </div>
-                        <div class="content">{{item.commenttext}}</div>
-                      </div>
                     </div>
+
                   </div>
 
-                  <!--                  <el-pagination style="text-align: center"-->
-                  <!--                    background-->
-                  <!--                    layout="prev, pager, next"-->
-                  <!--                    :total="100">-->
-                  <!--                  </el-pagination>-->
-
+<!--                                    <el-pagination style="text-align: center"-->
+<!--                                      background-->
+<!--                                      layout="prev, pager, next"-->
+<!--                                      :total="100">-->
+<!--                                    </el-pagination>-->
                 </div>
+
               </div>
             </div>
             <!-- 右侧热销 -->
@@ -246,10 +237,15 @@
           'https://yanxuan-item.nosdn.127.net/9c866dd74ed282a6516a7557aff27cad.jpg',
           'https://yanxuan-item.nosdn.127.net/ef92646728bad4d1f402a56895b19a81.jpg'
         ],
+        specification:[],
         userCommons: []
       }
     },
     methods: {
+      selectspecification(index){
+        this.cmInit = index
+        console.log(this.cmInit)
+      },
       addfav(id) {
         adduserfavs({goods: id}, {
           headers: {
@@ -290,9 +286,8 @@
 
       addcart() {
         addcart({
-          nums: 1,
+          nums: this.num,
           goods: this.id,
-          selected: false
         }, {
           headers: {Authorization: 'JWT ' + localStorage.getItem('token')}
         }).then(res => {
@@ -324,6 +319,7 @@
           this.goods_detail = res
           this.goodtotal = res.goods_num
           this.userCommons = res.comment
+          this.specification = res.specification
         })
       }
     },

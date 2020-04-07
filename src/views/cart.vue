@@ -112,7 +112,8 @@
 
       <div v-else style="width: 1220px;margin: 0 auto;padding-bottom: 20px;">
         <div style="text-align: center;">
-          <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200318145724.png">
+          <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200318145724.png"
+               style="width: 300px;height: 350px;">
         </div>
       </div>
     </div>
@@ -259,12 +260,14 @@
 <script>
   import MyHeader from "../common/header/MyHeader";
   import MyFooter from "../common/footer/MyFooter";
-  import {getcart,
+  import {
+    getcart,
     deletecart,
     getuseraddress,
     postorder
   } from '@/api/index'
-  import {getintegralgoods,
+  import {
+    getintegralgoods,
     putuserinfo
   } from '@/api/index'
   import {putcart} from "../api";
@@ -331,7 +334,7 @@
       //选择收货地址
       selectaddress(item) {
         console.log(item)
-        this.addressselect=item.id
+        this.addressselect = item.id
         console.log(this.addressselect)
         this.orderform.address = item
       },
@@ -412,7 +415,11 @@
           headers: {Authorization: 'JWT ' + localStorage.getItem('token')}
         }).then(res => {
           console.log(res)
-          location.reload()
+          this.getcartres()
+          this.$message({
+            message: '取消收藏商品成功',
+            type: 'success'
+          });
         })
       },
 
@@ -468,7 +475,7 @@
 
       //  获取当前的时间状态
       gettime() {
-        if(this.islogin===true){
+        if (this.islogin === true) {
           this.orderform.methods = 'online'
           let myDate = new Date()
           let house = myDate.getHours() + 1
@@ -486,7 +493,7 @@
               type: 'success'
             });
           }
-        }else {
+        } else {
           this.$message.error('尊敬的用户，您尚未登录');
         }
       },
@@ -500,12 +507,12 @@
       //获取购物车
       this.getcartres()
       //设置时间为0.5秒，来延迟判断用户是否灯登录
-      setTimeout(()=>{
+      setTimeout(() => {
         this.gettime()
         this.orderform.time = this.starttime
         this.addressselect = this.alladdress[0].id
         console.log(this.addressselect)
-      },500)
+      }, 500)
     }
   }
 </script>

@@ -38,7 +38,7 @@
     </div>
 
     <div v-else style="text-align: center;">
-      <img src="@/assets/img/nosearch.png">
+      <img src="@/assets/img/nosearch.png" style="height: 400px;width: 400px;">
     </div>
   </div>
 </template>
