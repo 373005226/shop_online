@@ -10,6 +10,11 @@ export const catelogy =(params)=>{
   return http.fetchGet('catelogy/',params)
 }
 
+//获得商品销量排行榜数据
+export const searchcatelogy = (params)=>{
+  return http.fetchGet('goods/?category_type='+params+"&ordering=sold_num")
+}
+
 //获取商品数据
 export const newgoods =(page)=>{
   return http.fetchGet('goods/?is_news=true&page='+page)

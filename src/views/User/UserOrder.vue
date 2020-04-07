@@ -247,6 +247,12 @@
             <h4>订单已经分配完毕，等待配送人员提取货品</h4>
           </el-card>
         </el-timeline-item>
+        <el-timeline-item :timestamp="logisticsinformations.distributor_time" placement="top"
+                          v-if="logisticsinformations.takegoods_status==='online'&&logisticsinformations.distributor!==''&&logisticsinformations.pay_status==='Deliverying'">
+          <el-card>
+            <h4>订单已由送货小哥提取完毕，订单正在配送中，请您保持手机的接通状态</h4>
+          </el-card>
+        </el-timeline-item>
         <el-timeline-item :timestamp="logisticsinformations.delivery_time" placement="top"
                           v-if="logisticsinformations.takegoods_status==='online'&&logisticsinformations.deliveryman!==''">
           <el-card>
@@ -261,7 +267,7 @@
           </el-card>
         </el-timeline-item>
         <el-timeline-item :timestamp="logisticsinformations.success_time" placement="top"
-                          v-if="logisticsinformations.takegoods_status==='self_mention'&&logisticsinformations.success_time!==''">
+                          v-if="logisticsinformations.takegoods_status==='self_mention'&&logisticsinformations.success_time!==''&&logisticsinformations.pay_status==='trade_evaluate'||logisticsinformations.pay_status==='TRADE_SUCCESS'">
           <el-card>
             <h4>自提任务订单结束，祝您购物愉快</h4>
           </el-card>

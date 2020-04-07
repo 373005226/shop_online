@@ -97,7 +97,7 @@
               </div>
               <div class="rightInfo">
                 <div class="shouldPayMoney">
-                  <span>订单总额：</span>
+                  <span>商品总额：</span>
                   <span>¥ {{alltotal}}</span>
                 </div>
               </div>
@@ -489,7 +489,7 @@
         }else {
           this.$message.error('尊敬的用户，您尚未登录');
         }
-      }
+      },
     },
 
     mounted() {
