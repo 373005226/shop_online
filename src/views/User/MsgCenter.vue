@@ -38,7 +38,7 @@
     },
     methods:{
       handleClick(i){
-        if(i == this.init){
+        if(i === this.init){
           return
         }
         this.init = i

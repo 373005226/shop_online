@@ -61,7 +61,7 @@
 
             <div class="item" v-for="(item,index) in integralgoods" :key="index">
               <div class="checkout">
-                                <input type="checkbox" @click="clickchange(item)" :checked="ischeck">
+                <input type="checkbox" @click="clickchange(item)" :checked="ischeck">
               </div>
 
               <div class="goodInfo">
@@ -227,8 +227,8 @@
                           <span>¥{{total}}</span>
                         </div>
                         <div class="linetext">
-                          <span>已优惠 :  </span>
-                          <span>-¥0.00</span>
+                          <span>运费 :  </span>
+                          <span>+0</span>
                         </div>
                       </div>
                     </div>
@@ -272,10 +272,11 @@
     data() {
       return {
         value: '',
+        islogin: false,
         isallcheck: false,
         is_show1: true,
         is_show2: false,
-        active:1,
+        active: 1,
         active1: true,
         active2: false,
         addressselect: [],
@@ -305,34 +306,42 @@
       },
       alltotal() {
         if (this.shippingMethod === 1) {
-          return this.total+10
+          return this.total + 0
         } else {
           return this.total
         }
       }
     },
     methods: {
-      tonext(){
+      //点击下一步跳转到支付页面和地址
+      tonext() {
         this.active = 2
       },
-      handleChange(value){
+
+      handleChange(value) {
         console.log(value)
       },
+
+      //选择收货地址
       selectaddress(item) {
         this.addressselect[item.id] = true
         console.log(item)
         console.log(this.addressselect[item.id])
         this.orderform.address = item
       },
+      //确定为线上送货
       online() {
         this.shippingMethod = 1
       },
+      //确定为线下自提
       self_men() {
         this.shippingMethod = 2
       },
+      //反选选择框
       ischeck() {
         return false
       },
+      //修改订单商品数量
       clickchange(item) {
         console.log(item)
         putcart(item.goods.id, {
@@ -356,6 +365,7 @@
         }
         this.number--
       },
+      //下单
       toorder() {
         console.log(this.orderform)
         if (this.alltotal > 150) {
@@ -386,6 +396,8 @@
           window.location.href = res.alipay_url
         })
       },
+
+      //删除商品
       delccart(id) {
         console.log(id)
         deletecart(id, {
@@ -395,62 +407,97 @@
           location.reload()
         })
       },
+
+      //获取所有的收货地址
+      getaddress() {
+        getuseraddress({
+          headers: {
+            Authorization: 'JWT ' + localStorage.getItem('token')
+          }
+        }).then(res => {
+          this.islogin = true
+          this.alladdress = res
+          this.addressselect[res[0].id] = true
+          this.signer_name = res.signer_name
+          this.orderform.address = res[0]
+        }).catch(error => {
+          if (error.response.status === 401) {
+            this.islogin = false
+            // this.$message.error('尊敬的用户，您尚未登录');
+          }
+        })
+      },
+
+      //获取购物车
+      getcartres() {
+        getcart({
+          headers: {
+            Authorization: 'JWT ' + localStorage.getItem('token')
+          }
+        }).then(res => {
+          this.islogin = true
+          this.productList = res
+        }).catch(error => {
+          if (error.response.status === 401) {
+            this.islogin = false
+          }
+        })
+      },
+
+      //获取积分商品
+      getintegralres() {
+        getintegralgoods({
+          headers: {
+            Authorization: 'JWT ' + localStorage.getItem('token')
+          }
+        }).then(res => {
+          this.islogin = true
+          this.integralgoods = res
+        }).catch(error => {
+          if (error.response.status === 401) {
+            this.islogin = false
+          }
+        })
+      },
+
+      //  获取当前的时间状态
+      gettime() {
+        if(this.islogin===true){
+          this.orderform.methods = 'online'
+          let myDate = new Date()
+          let house = myDate.getHours() + 1
+          let minutes = myDate.getMinutes()
+          this.starttime = house + ':' + minutes
+          console.log(this.starttime)
+
+          if (this.starttime > '20:30') {
+            console.log('error')
+            this.$message.error('时间已经超过20:30，不能继续下单')
+          } else {
+            console.log('succsess')
+            this.$message({
+              message: '正在营业时间范围内，可以继续访问',
+              type: 'success'
+            });
+          }
+        }else {
+          this.$message.error('尊敬的用户，您尚未登录');
+        }
+      }
     },
 
-
-    created() {
-      this.orderform.methods = 'online'
-      let myDate = new Date()
-      let house = myDate.getHours() + 1
-      let minutes = myDate.getMinutes()
-      this.starttime = house + ':' + minutes
-      console.log(this.starttime)
-
-      if (this.starttime > '19:00') {
-        console.log('error')
-        this.$message.error('时间已经超过19:00，不能继续下单')
-      } else {
-        console.log('succsess')
-        this.$message({
-          message: '正在营业时间范围内，可以继续访问',
-          type: 'success'
-        });
-      }
-
-      this.orderform.time = this.starttime
-
-
-      getuseraddress({
-        headers: {
-          Authorization: 'JWT ' + localStorage.getItem('token')
-        }
-      }).then(res => {
-        console.log(res)
-        this.alladdress = res
-        this.addressselect[res[0].id] = true
-        this.signer_name = res.signer_name
-        this.orderform.address = res[0]
-      })
-
-      getcart({
-        headers: {
-          Authorization: 'JWT ' + localStorage.getItem('token')
-        }
-      }).then(res => {
-        console.log(res)
-        this.productList = res
-
-      })
-
+    mounted() {
+      //获取地址
+      this.getaddress()
       //  获取积分商品
-      getintegralgoods({
-        headers: {
-          Authorization: 'JWT ' + localStorage.getItem('token')
-        }
-      }).then(res => {
-        console.log(res)
-        this.integralgoods = res
-      })
+      this.getintegralres()
+      //获取购物车
+      this.getcartres()
+      //设置时间为0.5秒，来延迟判断用户是否灯登录
+      setTimeout(()=>{
+        this.gettime()
+      },500)
+      this.orderform.time = this.starttime
     }
   }
 </script>

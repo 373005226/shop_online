@@ -267,9 +267,16 @@
             }
           }).then(res=>{
             console.log(res)
-            location.reload()
-          }).catch(error=>{
-            console.log(error)
+            // location.reload()
+            this.getfav()
+            this.$message({
+              message: '收藏商品成功',
+              type: 'success'
+            });
+          }).catch(error => {
+            if (error.response.status === 401) {
+              this.$message.error('收藏失败，您尚未登录')
+            }
           })
         },
         delfav(id){
@@ -279,7 +286,15 @@
             }
           }).then(res=>{
             console.log(res)
-            location.reload()
+            this.$message({
+              message: '取消收藏商品成功',
+              type: 'success'
+            });
+            this.getfav()
+          }).catch(error => {
+            if (error.response.status === 401) {
+              this.$message.error('收藏失败，您尚未登录')
+            }
           })
         },
 
@@ -296,31 +311,14 @@
               message: '加入购物车成功',
               type: 'success'
             })
-          }).catch(error=>{
-            console.log(error)
+          }).catch(error => {
+            if (error.response.status === 401) {
+              this.$message.error('加入购物车失败，您尚未登录')
+            }
           })
         },
-
-        // 数量减
-        numReduce(){
-          if(this.number <= 1){
-            this.number = 1;
-            return
-          }
-          this.number--;
-        },
-        // 购买
-        handleBuy(){
-          this.$router.push('/order')
-        },
-      },
-      created() {
-        detail(this.$route.query.id).then(res=>{
-          console.log(res)
-          this.id = res.id
-          this.goods_detail = res
-          this.goodtotal = res.goods_num
-          this.userCommons = res.comment
+      //  判断用户是否是否收藏
+        getfav(){
           getallfav({
             headers: {
               Authorization: 'JWT '+localStorage.getItem('token')
@@ -328,8 +326,21 @@
           }).then(res=>{
             this.isfav = !!(res.find(item => item.goods.id === this.id))
           })
-        })
-
+        },
+        getdetail(){
+          detail(this.$route.query.id).then(res=>{
+            console.log(res)
+            this.id = res.id
+            this.goods_detail = res
+            this.goodtotal = res.goods_num
+            this.userCommons = res.comment
+          })
+        }
+      },
+      //获取商品详情
+      mounted() {
+        this.getdetail()
+        this.getfav()
       }
     }
 </script>
