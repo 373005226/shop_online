@@ -10,24 +10,34 @@
           <!--            <p class="price"> ￥ <strong  v-if="item.specification !== undefined &&  item.specification.length > 0 ">{{item.specification[0].shop_price}}</strong></p>-->
           <!--            <a class="cartBtn"></a>-->
           <!--           </router-link>-->
-          <img :src="item.image">
-          <p class="name">{{item.name}}</p>
-          <p class="price"><strong style="padding-right: 10px">{{item.integral}}</strong>积分<span style="padding-left: 20px;color: #999999">库存:{{item.goods_num}}</span></p>
-          <a class="cartBtn" @click="open(item)"></a>
+          <div v-if="item.goods_num>0">
+            <img :src="item.image">
+            <p class="name">{{item.name}}</p>
+            <p class="price"><strong style="padding-right: 10px">{{item.integral}}</strong>积分<span
+              style="padding-left: 20px;color: #999999">库存:{{item.goods_num}}</span></p>
+            <a class="cartBtn" @click="open(item)"></a>
+          </div>
+          <div v-else>
+            <img :src="item.image" class="none">
+            <p class="name">{{item.name}}</p>
+            <p class="price"><strong style="padding-right: 10px">{{item.integral}}</strong>积分
+            <div class="nonetiele">
+              该商品库存为0
+            </div>
+          </div>
+        </div>
+
+        <div class="page">
+          <el-pagination
+            @current-change="handleCurrentChange"
+            :hide-on-single-page="false"
+            background
+            layout="prev, pager, next"
+            :total="total">
+          </el-pagination>
         </div>
       </div>
-
-      <div class="page">
-        <el-pagination
-          @current-change="handleCurrentChange"
-          :hide-on-single-page="false"
-          background
-          layout="prev, pager, next"
-          :total="total">
-        </el-pagination>
-      </div>
     </div>
-
   </div>
 </template>
 
@@ -37,6 +47,7 @@
   import {userInfo} from '@/api/index'
   import {postintegralgoods} from '@/api/index'
   import {putuserinfo} from '@/api/index'
+
   export default {
     name: "Goods",
     data() {
@@ -45,28 +56,28 @@
         max: '',
         total: 1,
         page: 1,
-        integral:0,
-        member_status:'',
-        username:'',
-        gender:'',
+        integral: 0,
+        member_status: '',
+        username: '',
+        gender: '',
         goodsList: []
       }
     },
     methods: {
-      getgoodList(){
+      getgoodList() {
         integralgoods(this.page).then(res => {
           console.log(res)
-          // this.goodsList = res.results
-          for(let i of res.results){
-            if(i.goods_num >0){
-              this.goodsList.push(i)
-            }
-          }
+          this.goodsList = res.results
+          // for(let i of res.results){
+          //   if(i.goods_num >0){
+          //     this.goodsList.push(i)
+          //   }
+          // }
           console.log(this.goodsList)
           this.total = res.count
         })
       },
-      getaftergoodlist(){
+      getaftergoodlist() {
         integralgoods(this.page).then(res => {
           console.log(res)
           this.goodsList = res.results
@@ -76,21 +87,21 @@
         console.log(value)
         integralgoods(value).then(res => {
           console.log(res)
-          this.goodsList = []
-          for(let i of res.results){
-            console.log(i)
-            if(i.goods_num >0){
-              this.goodsList.push(i)
-            }
-            // this.goodsList=[]
-            // this.goodsList.push(i)
-          }
+          this.goodsList = res.results
+          // for (let i of res.results) {
+          //   console.log(i)
+          //   if (i.goods_num > 0) {
+          //     this.goodsList.push(i)
+          //   }
+          //   // this.goodsList=[]
+          //   // this.goodsList.push(i)
+          // }
         })
         this.page = value
       },
       open(item) {
         console.log(item)
-        if(this.integral>item.integral){
+        if (this.integral > item.integral) {
           this.$confirm('积分商品兑换后，需要在下一次购买才能一并领取', '提示', {
             confirmButtonText: '确认兑换',
             cancelButtonText: '取消兑换',
@@ -98,9 +109,9 @@
           }).then(() => {
             console.log(item.id)
             postintegralgoods({
-              nums:1,
+              nums: 1,
               goods: item.id,
-            },{
+            }, {
               headers: {
                 Authorization: 'JWT ' + localStorage.getItem('token')
               }
@@ -112,19 +123,19 @@
               })
 
               putuserinfo({
-                member_status:this.member_status,
-                username:this.username,
-                integral:this.integral-item.integral,
-                gender:this.gender
-              },{
+                member_status: this.member_status,
+                username: this.username,
+                integral: this.integral - item.integral,
+                gender: this.gender
+              }, {
                 headers: {
                   Authorization: 'JWT ' + localStorage.getItem('token')
                 }
-              }).then(res=>{
+              }).then(res => {
                 console.log(res)
                 this.$notify({
                   title: '提示',
-                  message: '兑换成功，剩余积分为'+res.integral,
+                  message: '兑换成功，剩余积分为' + res.integral,
                   offset: 100
                 })
                 this.integral = res.integral
@@ -133,9 +144,9 @@
               this.getaftergoodlist()
             })
           })
-        }else {
+        } else {
           console.log('faile')
-          this.$message.error('您的积分不够呢,您的积分为'+this.integral)
+          this.$message.error('您的积分不够呢,您的积分为' + this.integral)
         }
       },
     },
@@ -161,8 +172,20 @@
 </script>
 
 <style scoped lang="scss">
+  .none{
+    opacity: 0.5;
+  }
+  .nonetiele{
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    color: #4f4f4f;
+    font-weight: bold;
+  }
   .page {
     text-align: center;
+    width: 1220px;
+    /*margin: 0 auto;*/
   }
 
   .col {

@@ -30,8 +30,6 @@
       return{
         catelogy:[
           {name:'积分商城',url:'/Integral_mall'},
-          {name:"折扣商城",url: '/discount_mall'},
-          {name:'生鲜专场',url:'/'},
         ]
       }
     }
