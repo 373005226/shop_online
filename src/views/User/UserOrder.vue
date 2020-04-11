@@ -34,10 +34,10 @@
                     交易操作
                   </div>
                 </div>
-                <div v-if="orderres.length == 0" style="text-align: center;display: flex;margin: 0 410px">
+                <div v-if="orderinformation.length == 0" style="text-align: center;display: flex;margin: 0 410px">
                   <img src="https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200307142112.png">
                 </div>
-                <div style="text-align: center" v-if="orderres.length == 0">
+                <div style="text-align: center" v-if="orderinformation.length == 0">
                   没有相关订单哦
                 </div>
 
@@ -224,15 +224,13 @@
           </el-card>
         </el-timeline-item>
 
-        <el-timeline-item :timestamp="logisticsinformations.Picking_complete" placement="top"
-                          v-if="logisticsinformations.pay_status==='Picking_complete'">
+        <el-timeline-item :timestamp="logisticsinformations.Picking_complete" placement="top" v-if="logisticsinformations.pay_status==='Picking_complete'">
           <el-card>
             <h4>订单二次检验完毕，等待二次验货</h4>
           </el-card>
         </el-timeline-item>
 
-        <el-timeline-item :timestamp="logisticsinformations.inspecter_time" placement="top"
-                          v-if="logisticsinformations.takegoods_status==='self_mention'&&logisticsinformations.inspecter!==''">
+        <el-timeline-item :timestamp="logisticsinformations.inspecter_time" placement="top" v-if="logisticsinformations.takegoods_status==='self_mention'&&logisticsinformations.inspecter!==''">
           <el-card>
             <h4>订单二次检验完毕，请尽快来超市提取</h4>
           </el-card>
@@ -249,12 +247,6 @@
             <h4>订单已经分配完毕，等待配送人员提取货品</h4>
           </el-card>
         </el-timeline-item>
-        <el-timeline-item :timestamp="logisticsinformations.distributor_time" placement="top"
-                          v-if="logisticsinformations.takegoods_status==='online'&&logisticsinformations.distributor!==''&&logisticsinformations.pay_status==='Deliverying'">
-          <el-card>
-            <h4>订单已由送货小哥提取完毕，订单正在配送中，请您保持手机的接通状态</h4>
-          </el-card>
-        </el-timeline-item>
         <el-timeline-item :timestamp="logisticsinformations.delivery_time" placement="top"
                           v-if="logisticsinformations.takegoods_status==='online'&&logisticsinformations.deliveryman!==''">
           <el-card>
@@ -269,7 +261,7 @@
           </el-card>
         </el-timeline-item>
         <el-timeline-item :timestamp="logisticsinformations.success_time" placement="top"
-                          v-if="logisticsinformations.takegoods_status==='self_mention'&&logisticsinformations.success_time!==''&&logisticsinformations.pay_status==='trade_evaluate'||logisticsinformations.pay_status==='TRADE_SUCCESS'">
+                          v-if="logisticsinformations.takegoods_status==='self_mention'&&logisticsinformations.success_time!==''">
           <el-card>
             <h4>自提任务订单结束，祝您购物愉快</h4>
           </el-card>
@@ -330,7 +322,10 @@
   import UserSide from "@/common/UserSide.vue";
   import NavTab from "@/components/User/navTab.vue";
   import {getorder} from '@/api/index'
-  import {getorderdetail, postcommon, putorder} from '@/api/index'
+  import {getorderdetail,
+    // postcommon,
+    // putorder
+  } from '@/api/index'
 
   export default {
     components: {MyHeader, MyFooter, UserSide, NavTab},
@@ -350,6 +345,7 @@
         evaluateDialogVisible: false,
         orderres: [],
         evaluateinformation: [],
+        orderinformation: [],
         logisticsinformations: [],
         colors: ['#99A9BF', '#F7BA2A', '#FF9900'],
         evaluateform: {
@@ -357,62 +353,67 @@
           common: '',
           goods: 0
         },
-        orderList: [],
+        orderList: [
+          {
+            goodId: 0,
+            name: '草莓',
+            img: 'https://img14.360buyimg.com/n7/jfs/t25519/90/761689188/694412/a788e670/5b7bd4bbN6f5e9cdb.jpg',
+            price: '36',
+            number: 1,
+            order_sn: '92093107',
+            pay_status: "TRADE_SUCCESS",
+            add_time: '2020-2.24 14:55:13',
+          },
+        ],
       }
     },
-    mounted() {
-      setTimeout(() => {
-        this.getallorder()
-      }, 50)
-    },
-    methods: {
-      //获取所有订单
-      getallorder() {
-        getorder({
-          headers: {
-            Authorization: 'JWT ' + localStorage.getItem('token')
-          }
-        }).then(res => {
-          for (let i of res) {
-            getorderdetail(i.id, {
-              headers: {
-                Authorization: 'JWT ' + localStorage.getItem('token')
-              }
-            }).then(result => {
-              this.orderres.push(result)
-            })
-          }
-        })
-      },
-      //提交评论
-      submitevaluate() {
-        console.log(this.evaluateform)
-        postcommon({
-          commenttext: this.evaluateform.common,
-          score: this.evaluateform.score,
-          goods: this.evaluateform.goods
-        }, {
-          headers: {
-            Authorization: 'JWT ' + localStorage.getItem('token')
-          }
-        }).then(res => {
-          console.log(res)
-          putorder(this.orderid, {
-            pay_status: 'TRADE_SUCCESS',
-          }, {
+    created() {
+      getorder({
+        headers: {
+          Authorization: 'JWT ' + localStorage.getItem('token')
+        }
+      }).then(res => {
+        for (let i of res) {
+          getorderdetail(i.id, {
             headers: {
               Authorization: 'JWT ' + localStorage.getItem('token')
             }
-          }).then(res => {
-            console.log(res)
-            this.getallorder()
+          }).then(result => {
+            this.orderres.push(result)
           })
-        }).catch(error => {
-          console.log(error)
-        })
+        }
+      })
+      console.log(this.orderres)
+      this.orderinformation = this.orderres
+    },
+    methods: {
+      submitevaluate() {
+        console.log(this.evaluateform)
+        // postcommon({
+        //   commenttext: this.evaluateform.common,
+        //   score: this.evaluateform.score,
+        //   goods: this.evaluateform.goods
+        // }, {
+        //   headers: {
+        //     Authorization: 'JWT ' + localStorage.getItem('token')
+        //   }
+        // }).then(res => {
+        //   console.log(res)
+        //   putorder(this.orderid, {
+        //     pay_status: 'TRADE_SUCCESS',
+        //   }, {
+        //     headers: {
+        //       Authorization: 'JWT ' + localStorage.getItem('token')
+        //     }
+        //   }).then(res => {
+        //     console.log(res)
+        //     location.reload()
+        //   })
+        // }).catch(error => {
+        //   console.log(error)
+        // })
         this.evaluateDialogVisible = false
       },
-      //评价
       evaluate(id) {
         console.log(id)
         this.orderid = id
@@ -426,7 +427,8 @@
         this.evaluateform.goods = this.evaluateinformation.goods[0].goods.id
         console.log(this.evaluateform.goods)
       },
-      //物流信息
+
+
       logistics(id) {
         console.log(id)
         this.logisticsDialogVisible = true
@@ -438,7 +440,7 @@
         }
       },
       getstatus(index) {
-        if (index === 'TRADE_SUCCESS') {
+        if (index == 'TRADE_SUCCESS') {
           return '订单已完成'
         }
         if (index == "trade_evaluate") {

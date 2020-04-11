@@ -108,14 +108,7 @@
       window.addEventListener('scroll', this.handleScroll);
     },
     created() {
-      getcart({
-        headers: {
-          Authorization: 'JWT ' + localStorage.getItem('token')
-        }
-      }).then(res=>{
-        console.log(res)
-        this.res = res.length
-      })
+      this.getcart()
     },
     computed: {
       cartlength() {
@@ -124,6 +117,15 @@
       }
   },
   methods:{
+    getcart(){
+      getcart({
+        headers: {
+          Authorization: 'JWT ' + localStorage.getItem('token')
+        }
+      }).then(res=>{
+        this.res = res.length
+      })
+    },
     // 搜索框
     search(e){
       let value = e.target.value;

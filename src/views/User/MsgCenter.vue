@@ -27,7 +27,7 @@
     name:"msgCenter",
     data(){
       return{
-        tabList:['严选活动','我的资产','通知消息','物流助手','互动消息'],
+        tabList:[],
         init:0,
         navData:[
           {text:'通知消息'},

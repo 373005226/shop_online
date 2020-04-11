@@ -15,19 +15,19 @@
               </ul>
             </div>
 
-            <div class="nav-sec" v-show="isNavEnter || isMenuEnter"
-                 @mouseenter="isMenuEnter = true" @mouseleave="isMenuEnter = false">
-              <ul v-for="(item,index) in navFirst" v-show="item.type === selected" :key="index">
-                <li v-for="(key,index) in navSec[item.type]" :key="index">
-                  <div class="product">
-                    <a :href="key.link">
-                      <img :src="key.imgUrl" alt="">
-                      <p class="title">{{key.title}}</p>
-                    </a>
-                  </div>
-                </li>
-              </ul>
-            </div>
+<!--            <div class="nav-sec" v-show="isNavEnter || isMenuEnter"-->
+<!--                 @mouseenter="isMenuEnter = true" @mouseleave="isMenuEnter = false">-->
+<!--              <ul v-for="(item,index) in navFirst" v-show="item.type === selected" :key="index">-->
+<!--                <li v-for="(key,index) in navSec[item.type]" :key="index">-->
+<!--                  <div class="product">-->
+<!--                    <a :href="key.link">-->
+<!--                      <img :src="key.imgUrl" alt="">-->
+<!--                      <p class="title">{{key.title}}</p>-->
+<!--                    </a>-->
+<!--                  </div>-->
+<!--                </li>-->
+<!--              </ul>-->
+<!--            </div>-->
         </div>
 
   </div>

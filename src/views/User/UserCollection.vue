@@ -11,7 +11,7 @@
         </div>
         <div class="content">
           <UserSide/>
-          <div v-if="collectionList.length != 0" class="collectionContent">
+          <div v-if="collectionList.length !== 0" class="collectionContent">
             <div class="item" v-for="(item,index) in collectionList" :key=index>
               <div class="main">
                 <div @click="todetail(item.goods.id)">

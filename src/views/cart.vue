@@ -395,7 +395,7 @@
           order_mount: this.alltotal,
           gettime: this.orderform.time,
           takegoods_status: this.orderform.methods,
-          address: this.orderform.address.province + '-' + this.orderform.address.city + '-' + this.orderform.address.district + '-' + this.orderform.address.address,
+          address: this.orderform.address.province + '-' + this.orderform.address.city + '-' + this.orderform .address.district + '-' + this.orderform.address.address,
           signer_name: this.orderform.address.signer_name,
           singer_mobile: this.orderform.address.signer_mobile
         }, {
