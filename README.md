@@ -94,7 +94,7 @@ utils文件夹里面添加一个名为`yunpian.py`的文件，如图：
 
 重写的后台如图所示：
 
-![](https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200413155625.png)
+![](https://txy-tc-ly-1256104767.cos.ap-guangzhou.myqcloud.com/20200413165718.png)
 
 商城首页：
 
