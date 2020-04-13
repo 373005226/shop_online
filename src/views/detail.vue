@@ -171,9 +171,6 @@
                           </div>
                           <div class="content">{{item.commenttext}}</div>
                         </div>
-                      <div class="addtime">
-                        {{item.add_time}}
-                      </div>
                     </div>
 
                   </div>
@@ -299,6 +296,7 @@
           headers: {Authorization: 'JWT ' + localStorage.getItem('token')}
         }).then(res => {
           console.log(res)
+          this.getdetail()
           this.$message({
             message: '加入购物车成功',
             type: 'success'
@@ -847,6 +845,7 @@
           .commons {
             .addtime{
               font-size: 12px;
+              padding-right: 30px;
               color: #909399;
             }
             .item {

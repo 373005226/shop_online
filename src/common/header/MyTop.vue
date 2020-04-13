@@ -57,7 +57,7 @@
           <div v-show="!showNavTop" class="search">
             <div class="searchInputWrap">
               <i class="search-gray icon icon-search"></i>
-              <input type="text" @input="search" class="searchInput" autocomplete="off" maxlength="100" name="searchInput">
+              <input type="text" @input="search" class="searchInput" autocomplete="off" maxlength="100" name="searchInput" @keyup.enter="handleSearch">
               <div class="searchDefaultKeyword" v-show="isShowInfo">{{searchValue}}</div>
             </div>
             <div @click="handleSearch" class="searchButton">
@@ -140,12 +140,6 @@
     },
     // 点击搜索
     handleSearch(){
-      // this.$router.push({
-      //   path:`/search`,
-      //   query:{
-      //     keys:this.value
-      //   }
-      // })
       searchgood(this.value).then(res=>{
         console.log(res)
         this.$store.commit('setsearchgoodslist',res)
