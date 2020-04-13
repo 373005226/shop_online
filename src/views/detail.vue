@@ -171,6 +171,9 @@
                           </div>
                           <div class="content">{{item.commenttext}}</div>
                         </div>
+                      <div class="addtime">
+                        {{item.add_time}}
+                      </div>
                     </div>
 
                   </div>
@@ -779,6 +782,8 @@
 
           .tabContent {
             .commentList {
+              height: 800px;
+              overflow: scroll;
               margin: 0 0 16px;
               border-top: none;
               background-color: #fff;
@@ -840,6 +845,10 @@
           }
 
           .commons {
+            .addtime{
+              font-size: 12px;
+              color: #909399;
+            }
             .item {
               padding: 27px 0 30px;
               margin-left: 30px;

@@ -170,7 +170,7 @@
                               <div style="width: 285px;">
                                 <div class="img">
                                   <img :src="items.goods.images[0].image"
-                                       v-if="items.goods.images[0].image!=undefined&&items.goods.images.length!=0"
+                                       v-if="items.goods.images[0].image!==undefined&&items.goods.images.length!==0"
                                        style="width: 120px;height: 120px;">
                                   <div>
                                     {{items.goods.name}}
@@ -179,7 +179,7 @@
                               </div>
 
                               <div class="price"
-                                   v-if="items.goods.specification[0]!=undefined&&items.goods.specification.length!=0">
+                                   v-if="items.goods.specification[0]!==undefined&&items.goods.specification.length!==0">
                                 {{items.goods.specification[0].shop_price}}
                               </div>
 
@@ -192,7 +192,7 @@
 
                             </div>
                             <div style="position:relative;bottom: 100px;left: 850px;color: #409EFF"
-                                 v-if="item.pay_status!='paying'">
+                                 v-if="item.pay_status!=='paying'">
                               <el-button round @click="evaluate(item.id)">评价</el-button>
                             </div>
 
@@ -338,7 +338,7 @@
         msg: '',
         getmethods: '',
         orderid: '',
-        tabList: ['全部订单', '待付款', '待发货', '已发货', '待评价'],
+        tabList: ['全部订单', '待付款', '待处理', '待收货', '待评价'],
         init: 0,
         logisticsDialogVisible: false,
         evaluateDialogVisible: false,
@@ -356,26 +356,30 @@
         },
       }
     },
-    created() {
-      getorder({
-        headers: {
-          Authorization: 'JWT ' + localStorage.getItem('token')
-        }
-      }).then(res => {
-        for (let i of res) {
-          getorderdetail(i.id, {
-            headers: {
-              Authorization: 'JWT ' + localStorage.getItem('token')
-            }
-          }).then(result => {
-            this.orderres.push(result)
-          })
-        }
-      })
-      console.log(this.orderres)
-      this.orderinformation = this.orderres
+    mounted() {
+      this.getorder()
     },
     methods: {
+      //获取订单信息
+      getorder(){
+        getorder({
+          headers: {
+            Authorization: 'JWT ' + localStorage.getItem('token')
+          }
+        }).then(res => {
+          for (let i of res) {
+            getorderdetail(i.id, {
+              headers: {
+                Authorization: 'JWT ' + localStorage.getItem('token')
+              }
+            }).then(result => {
+              this.orderres.push(result)
+            })
+          }
+        })
+        console.log(this.orderres)
+        this.orderinformation = this.orderres
+      },
       //分离评论文本和星星的方法
       merge(obj1, obj2) {
         var obj3 = {};
@@ -423,10 +427,15 @@
               }
             }).then(res => {
               console.log(res)
-              location.reload()
+              this.$message({
+                message: '评论成功',
+                type: 'success'
+              });
+              this.getorder()
             })
           }).catch(error => {
             console.log(error)
+            this.$message.error('系统评论功能错误');
           })
         }
 
@@ -487,7 +496,7 @@
         this.collectionList.splice(i, 1)
       },
       handleClick(i) {
-        if (i == this.init) {
+        if (i === this.init) {
           return
         }
         this.init = i
