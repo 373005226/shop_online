@@ -1,6 +1,6 @@
 # [shop_online_front](https://github.com/373005226/shop_online_front)
 
-![](https://img.shields.io/badge/author-LY-blue)![](https://img.shields.io/badge/License-MIT-blue)![](https://img.shields.io/badge/build-Django2.2.9-green)![](https://img.shields.io/badge/build-djangorestframework%203.10.3-brightgreen)![](https://img.shields.io/badge/build-vue%20cli%203.11.0-brightgreen)
+![](https://img.shields.io/badge/author-LY-blue) ![](https://img.shields.io/badge/License-MIT-blue) ![](https://img.shields.io/badge/build-Django2.2.9-green) ![](https://img.shields.io/badge/build-djangorestframework%203.10.3-brightgreen) ![](https://img.shields.io/badge/build-vue%20cli%203.11.0-brightgreen)
 
 本项目采用了Django+Django rest-framework来写接口，vue来写前端，elementui来写的后台管理系统，虽然Django有自己的后台管理界面，但是Django拓展功能难度比较大，所以还是选择了elementui来写一个管理系统。
 
