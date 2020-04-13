@@ -66,13 +66,13 @@
     selectPage(index){
       this.curIndex=index;
     },
-    // clearTimer(){
-    //   clearInterval(this.timer);
-    //   this.timer = null;
-    // },
-    // setTimer(){
-    //   this.timer = setInterval(this.next,5000);
-    // }
+    clearTimer(){
+      clearInterval(this.timer);
+      this.timer = null;
+    },
+    setTimer(){
+      this.timer = setInterval(this.next,5000);
+    }
   },
   mounted(){
     this.setTimer();

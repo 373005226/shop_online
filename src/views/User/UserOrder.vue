@@ -15,7 +15,7 @@
             <NavTab :tabList="tabList" @Click="handleClick" :init='init'/>
 
             <transition name="el-fade-in-linear">
-              <div v-if="orderList.length !== 0&&this.init===0" class="orderContent">
+              <div v-if="this.orderres.length !== 0&&this.init===0" class="orderContent">
 
                 <div class="table-top">
                   <div class="shop">
@@ -224,13 +224,15 @@
           </el-card>
         </el-timeline-item>
 
-        <el-timeline-item :timestamp="logisticsinformations.Picking_complete" placement="top" v-if="logisticsinformations.pay_status==='Picking_complete'">
+        <el-timeline-item :timestamp="logisticsinformations.Picking_complete" placement="top"
+                          v-if="logisticsinformations.pay_status==='Picking_complete'">
           <el-card>
             <h4>订单二次检验完毕，等待二次验货</h4>
           </el-card>
         </el-timeline-item>
 
-        <el-timeline-item :timestamp="logisticsinformations.inspecter_time" placement="top" v-if="logisticsinformations.takegoods_status==='self_mention'&&logisticsinformations.inspecter!==''">
+        <el-timeline-item :timestamp="logisticsinformations.inspecter_time" placement="top"
+                          v-if="logisticsinformations.takegoods_status==='self_mention'&&logisticsinformations.inspecter!==''">
           <el-card>
             <h4>订单二次检验完毕，请尽快来超市提取</h4>
           </el-card>
@@ -273,7 +275,7 @@
       title="商品评价"
       :visible.sync="evaluateDialogVisible"
       width="30%">
-      <div v-for="(item,index) in evaluateinformation.goods" :key="index">
+      <div v-for="(item,index) in evaluateinformation" :key="index">
         <div style="display: flex;flex-direction: row;">
           <div style="display: flex;flex-direction: column;">
             <img :src="item.goods.images[0].image" style="width: 150px;height: 150px;">
@@ -281,24 +283,20 @@
           </div>
 
           <div style="width: 500px">
-            <el-form :model="evaluateform" label-width="120px">
+            <el-form label-width="120px">
 
               <el-form-item label="评分">
                 <el-rate
-                  v-model="evaluateform.score"
+                  v-model="score[item.goods.id]"
                   show-text
                   :colors="colors" style="padding-top: 10px;font-size: 10px">
                 </el-rate>
               </el-form-item>
-
-              <!--              <el-form-item label="心得">-->
-              <!--                <el-input type="textarea" v-model="evaluateform.common" :autosize="{ minRows: 5, maxRows: 8}"></el-input>-->
-              <!--              </el-form-item>-->
             </el-form>
-            <el-form :model="evaluateform" label-width="120px">
+            <el-form label-width="120px">
 
               <el-form-item label="心得">
-                <el-input type="textarea" v-model="evaluateform.common"
+                <el-input type="textarea" v-model="commonarea[item.goods.id]"
                           :autosize="{ minRows: 5, maxRows: 8}"></el-input>
               </el-form-item>
             </el-form>
@@ -322,9 +320,10 @@
   import UserSide from "@/common/UserSide.vue";
   import NavTab from "@/components/User/navTab.vue";
   import {getorder} from '@/api/index'
-  import {getorderdetail,
-    // postcommon,
-    // putorder
+  import {
+    getorderdetail,
+    postcommon,
+    putorder
   } from '@/api/index'
 
   export default {
@@ -348,23 +347,13 @@
         orderinformation: [],
         logisticsinformations: [],
         colors: ['#99A9BF', '#F7BA2A', '#FF9900'],
+        score: [],
+        commonarea: [],
         evaluateform: {
           score: 5,
           common: '',
-          goods: 0
+          // goods: 0
         },
-        orderList: [
-          {
-            goodId: 0,
-            name: '草莓',
-            img: 'https://img14.360buyimg.com/n7/jfs/t25519/90/761689188/694412/a788e670/5b7bd4bbN6f5e9cdb.jpg',
-            price: '36',
-            number: 1,
-            order_sn: '92093107',
-            pay_status: "TRADE_SUCCESS",
-            add_time: '2020-2.24 14:55:13',
-          },
-        ],
       }
     },
     created() {
@@ -387,45 +376,73 @@
       this.orderinformation = this.orderres
     },
     methods: {
+      //分离评论文本和星星的方法
+      merge(obj1, obj2) {
+        var obj3 = {};
+
+        Object.keys(obj1).forEach(function (key) {
+          pushIntoObj3(key, obj1[key]);
+        });
+
+        Object.keys(obj2).forEach(function (key) {
+          pushIntoObj3(key, obj2[key]);
+        });
+
+        function pushIntoObj3(key, val) {
+          if (!obj3[key]) {
+            obj3[key] = [];
+          }
+          obj3[key].push(val);
+        }
+        return obj3;
+      },
+      //提交评论
       submitevaluate() {
-        console.log(this.evaluateform)
-        // postcommon({
-        //   commenttext: this.evaluateform.common,
-        //   score: this.evaluateform.score,
-        //   goods: this.evaluateform.goods
-        // }, {
-        //   headers: {
-        //     Authorization: 'JWT ' + localStorage.getItem('token')
-        //   }
-        // }).then(res => {
-        //   console.log(res)
-        //   putorder(this.orderid, {
-        //     pay_status: 'TRADE_SUCCESS',
-        //   }, {
-        //     headers: {
-        //       Authorization: 'JWT ' + localStorage.getItem('token')
-        //     }
-        //   }).then(res => {
-        //     console.log(res)
-        //     location.reload()
-        //   })
-        // }).catch(error => {
-        //   console.log(error)
-        // })
+        console.log(this.score)
+        console.log(this.commonarea)
+        console.log(this.merge(this.score, this.commonarea))
+
+        for (let i in this.merge(this.commonarea, this.score)) {
+          console.log(i)
+          console.log(this.merge(this.commonarea, this.score)[i])
+          postcommon({
+            commenttext: (this.merge(this.commonarea, this.score)[i])[0],
+            score: (this.merge(this.commonarea, this.score)[i])[1],
+            goods: i
+          }, {
+            headers: {
+              Authorization: 'JWT ' + localStorage.getItem('token')
+            }
+          }).then(res => {
+            console.log(res)
+            putorder(this.orderid, {
+              pay_status: 'TRADE_SUCCESS',
+            }, {
+              headers: {
+                Authorization: 'JWT ' + localStorage.getItem('token')
+              }
+            }).then(res => {
+              console.log(res)
+              location.reload()
+            })
+          }).catch(error => {
+            console.log(error)
+          })
+        }
+
         this.evaluateDialogVisible = false
       },
+      //打开评论表
       evaluate(id) {
-        console.log(id)
         this.orderid = id
         this.evaluateDialogVisible = true
         for (let i of this.orderres) {
           if (i.id === id) {
-            this.evaluateinformation = i
+            console.log(i)
+            this.evaluateinformation = i.goods
             console.log(this.evaluateinformation)
           }
         }
-        this.evaluateform.goods = this.evaluateinformation.goods[0].goods.id
-        console.log(this.evaluateform.goods)
       },
 
 
@@ -440,13 +457,13 @@
         }
       },
       getstatus(index) {
-        if (index == 'TRADE_SUCCESS') {
+        if (index === 'TRADE_SUCCESS') {
           return '订单已完成'
         }
-        if (index == "trade_evaluate") {
+        if (index === "trade_evaluate") {
           return '订单已完成，等待用户评价'
         }
-        if (index == 'paying') {
+        if (index === 'paying') {
           return '订单支付中'
         } else {
           return '正在进行中'

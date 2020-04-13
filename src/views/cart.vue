@@ -485,7 +485,7 @@
 
           if (this.starttime > '20:30') {
             console.log('error')
-            this.$message.error('时间已经超过20:30，不能继续下单')
+            this.$message.error('时间已经超过了营业时间，不能继续下单，请您到线下超市购买')
           } else {
             console.log('succsess')
             this.$message({
