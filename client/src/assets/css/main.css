@@ -1,0 +1,110 @@
+@import "./animation.css";
+
+.g-row {
+    width: 1090px;
+    margin-right: auto;
+    margin-left: auto;
+    position: relative;
+}
+.row{
+    width: 1090px;
+    margin: 0 auto;
+    position: relative;
+  }
+.cat-badge{
+    background-position: 0 -51px;
+    height: 19px;
+    width: 19px;
+}
+
+.f-left{
+    float: left;
+}
+.f-right{
+    float: right;
+}
+.lh1{
+    line-height: 1;
+}
+.f-fz14{
+    font-size: 14px;
+}
+.margin-top-10 {
+    margin-top: 10px;
+}
+
+.text-overflow {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
+
+
+/* dialog */
+.widgetDialogContainer{
+
+}
+
+.widgetDialogContainer .mask{
+    background-color: #000;
+    opacity: .8;
+    z-index: 100;
+    position: fixed!important;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.widgetDialogContainer  .ani{
+    z-index: 110;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    opacity: 1;
+}
+.margin-top-50{
+    margin-top: 50px;
+}
+/* 清除浮动 */
+.clearfix:after{
+    display: table;
+    content: " ";
+    clear: both;
+}
+
+/* 面包屑 */
+.crumbs{
+    font-size: 12px;
+    color: #333;
+    line-height: 1;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    align-content: center;
+}
+.crumbs .crumb-name {
+
+}
+.crumbs a{
+    color: #333;
+}
+.crumbs .icon{
+    margin: 0 5px;
+    font-size: 16px;
+    color: #999;
+    height: 11px;
+    display: inline-block;
+}
+.crumbs .cur{
+    color: #999;
+}

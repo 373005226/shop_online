@@ -1,0 +1,118 @@
+@import "default";
+
+@primary: #515a6e !important;
+@color: #515a6e;
+
+@menu-color: hsla(0, 0%, 100%, .7) !important;
+@menu-background: #191a23 !important;
+
+@menu-color-hover: #FFF;
+@menu-background-hover: #000000;
+
+@menu-title-color: hsla(0, 0%, 100%, .7);
+@menu-title-background-color: #191a23;
+
+@menu-title-color-hover: #FFF;
+@menu-title-background-color-hover: #000000;
+
+
+@navbar-color: #fff;
+@navbar-background: #304457;
+
+@vip-color: #c79c6d !important;
+
+.body, .panel {
+  background-color: #1d2935;
+  color: #fff;
+}
+
+.el-form-item__label, .el-breadcrumb__inner {
+  color: #fff !important;
+}
+
+.el-input__inner, .el-input__inner .el-range-input {
+  background-color: #2f3e4e;
+  border-color: rgba(#2f3e4e, 0.5);
+  color: #fff;
+}
+
+.el-button--default {
+  background-color: #2c3e50;
+  color: #fff;
+  border-color: #37495a;
+
+  &:hover {
+    background-color: #536d8a;
+  }
+}
+
+@dark-color: #304457;
+.el-tabs--border-card > .el-tabs__header {
+  background-color: @dark-color;
+  border: none;
+  margin: 0;
+}
+
+.el-tabs--border-card {
+  border: none;
+}
+
+#main .el-tabs__item {
+  background-color: @dark-color;
+}
+
+.el-tabs--border-card > .el-tabs__header .el-tabs__item.is-active {
+  color: #fff !important;
+  border-right-color: @dark-color !important;
+  border-left-color: @dark-color !important;
+  border-bottom: #42b983 2px solid !important;
+}
+
+.el-select-dropdown {
+  background-color: #3a5169;
+  border: 0px;
+
+  .el-select-dropdown__item {
+    color: #fff;
+
+    &:hover {
+      background-color: @dark-color !important;
+    }
+  }
+
+
+}
+
+.el-picker-panel {
+  background-color: @dark-color;
+  border: 0px;
+
+  .el-picker-panel__footer {
+    background-color: @dark-color;
+    border-color: #2c3e50;
+  }
+
+  .el-date-range-picker__content.is-left {
+    border-color: #2c3e50;
+  }
+
+  .el-date-table th, .el-date-range-picker__time-header {
+    border-bottom-color: #2c3e50;
+  }
+}
+
+.el-popper[x-placement^=bottom] .popper__arrow::after {
+  border-bottom-color: @dark-color !important;
+}
+
+.el-table td, .el-table th.is-leaf, .el-table--border, .el-table--group {
+  border-color: #2c3e50;
+}
+
+.el-table th, .el-table tr {
+  background-color: @dark-color;
+}
+
+.el-table--striped .el-table__body tr.el-table__row--striped td {
+  background: #1d2935;
+}
