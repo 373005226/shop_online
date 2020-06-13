@@ -1,0 +1,35 @@
+$top: top;
+$bottom: bottom;
+$left: left;
+$right: right;
+$leftright: ($left, $right);
+$pinkk: #eec2d3;
+$bluee: #409eff;
+$yelloww: #f4d884;
+$grennn: #89dda0;
+$purplee: #78a2ea;
+$lightBluee: #b8d6ff;
+
+$list: bluee pinkk yelloww grennn purplee lightBluee;
+$list1: $bluee $pinkk $yelloww $grennn $purplee $lightBluee;
+%shadow {
+  background: #fff;
+  -webkit-box-shadow: 4px 4px 40px rgba(0, 0, 0, 0.2);
+  box-shadow: 4px 4px 40px rgba(0, 0, 0, 0.2);
+  border-color: rgba(0, 0, 0, 0.2);
+
+  .title {
+    font-size: 14px;
+    padding: 10px;
+
+    i {
+      margin-#{$right}: 5px;
+    }
+  }
+}
+
+@mixin flex($direction:row,$content:space-between) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: space-between;
+}
