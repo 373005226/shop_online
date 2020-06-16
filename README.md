@@ -14,9 +14,11 @@
 
 ### 其余项目地址：
 
-后端地址：[https://github.com/373005226/shop_online_backend](https://github.com/373005226/shop_online_backend)
+后端地址：https://github.com/373005226/shop_online/tree/master/server
 
-后端管理系统地址：[https://github.com/373005226/shopping_admin](https://github.com/373005226/shopping_admin)
+后端管理系统地址：https://github.com/373005226/shop_online/tree/master/admin
+
+前端客户端地址：https://github.com/373005226/shop_online/tree/master/client
 
 项目开发说明，我会在我的博客中写开发项目的思路和详细说明，地址为：[https://www.ly-blog.top/](https://www.ly-blog.top/)，国内地址为：[https://liuyuan636.gitee.io](https://liuyuan636.gitee.io/)
 
