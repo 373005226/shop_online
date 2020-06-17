@@ -4,22 +4,7 @@ import Login from '../views/login/index'
 import Layout from "../views/layout/layout";
 import NotFound from '../views/error/error'
 
-//以下都是要懒加载的数据
-const HomeMain = () => import('../views/home/mainIndex')
-const order = () => import('../views/order/order')
-const order_question = () => import('../views/order/order_question')
-const task = () => import('../views/task/task')
-const ctask = () => import('../views/task/ctask')
-const sales_table = () => import('../views/sales_char/sales_table')
-const comment = () => import('../views/comment/comment')
-const article = () => import('../views/article/article')
-const userInfo = () => import('../views/User/userinfo')
-const distributer =()=>import('../views/distributer/distributer')
-const cdistributer =()=>import('../views/distributer/cdistributer')
-
-
 Vue.use(VueRouter)
-
 let routes = [
     {
         path: '/',
@@ -46,7 +31,7 @@ let routes = [
                 path: '/index',
                 iconCls: 'el-icon-s-home', // 图标样式class
                 name: '主页',
-                component: HomeMain,
+                component: () => import('../views/home/mainIndex'),
                 children: []
             }
         ]
@@ -62,14 +47,14 @@ let routes = [
                 path: '/task',
                 iconCls: 'el-icon-edit-outline', // 图标样式class
                 name: '待验货的订单',
-                component: task,
+                component: () => import('../views/task/task'),
                 children: []
             },
             {
                 path: '/complete_order',
                 iconCls: 'el-icon-edit-outline', // 图标样式class
                 name: '待提取的订单',
-                component: ctask,
+                component: () => import('../views/task/ctask'),
                 children: []
             }
         ]
@@ -85,14 +70,14 @@ let routes = [
                 path: '/distributer',
                 iconCls: 'el-icon-edit-outline', // 图标样式class
                 name: '待分配的订单',
-                component: distributer,
+                component: ()=>import('../views/distributer/distributer'),
                 children: []
             },
             {
                 path: '/complete_distributer',
                 iconCls: 'el-icon-edit-outline', // 图标样式class
                 name: '已分配的订单',
-                component: cdistributer,
+                component: ()=>import('../views/distributer/cdistributer'),
                 children: []
             }
         ]
@@ -108,14 +93,14 @@ let routes = [
                 path: '/order_question',
                 iconCls: 'fa fa-life-ring', // 图标样式class
                 name: '有疑问订单',
-                component: order_question,
+                component: () => import('../views/order/order_question'),
                 children: []
             },
             {
                 path: '/allorder',
                 iconCls: 'fa fa-life-ring', // 图标样式class
                 name: '所有订单',
-                component: order,
+                component: () => import('../views/order/order'),
                 children: []
             }
         ]
@@ -131,7 +116,7 @@ let routes = [
                 path: '/sales_today',
                 iconCls: 'fa fa-life-ring', // 图标样式class
                 name: '数据图标',
-                component: sales_table,
+                component: () => import('../views/sales_char/sales_table'),
                 children: []
             }
         ]
@@ -147,7 +132,7 @@ let routes = [
                 path: '/comment',
                 iconCls: 'fa fa-life-ring', // 图标样式class
                 name: '用户评论',
-                component: comment,
+                component: () => import('../views/comment/comment'),
                 children: []
             }
         ]
@@ -163,7 +148,7 @@ let routes = [
                 path: '/article',
                 iconCls: 'fa fa-life-ring', // 图标样式class
                 name: '商品推销图',
-                component: article,
+                component: () => import('../views/article/article'),
                 children: []
             }
         ]
@@ -179,7 +164,7 @@ let routes = [
                 path: '/userInfo',
                 iconCls: 'el-icon-user-solid', // 图标样式class
                 name: '个人信息',
-                component: userInfo,
+                component: () => import('../views/User/userinfo'),
                 children: []
             }
         ]

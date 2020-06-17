@@ -22,22 +22,22 @@
           <div class="siteNav-r">
             <div class="siteNavItem">
               <div class="siteNavItemHd">
-                <div v-if="$store.state.mobile == '' || $store.state.mobile == null">
-                  <a class="siteNavItem" @click="Login">登录</a>
-                  <span class="siteNavItem">/</span>
-                  <a class="siteNavItem" @click="register">注册</a>
-                </div>
-                <div v-else>
-                  <span style="float:left;">尊敬的用户 </span>
+                <div v-if="$store.state.userInfo">
+                  <span style="float:left;">尊敬的用 </span>
                   <div class="siteNavItemuser">
                     <div class="mobile">
 <!--                      {{mobilephone}}-->
-                      {{ this.$store.state.mobile}}
+                      {{ this.$store.state.userInfo.username}}
 <!--                      {{mobilephone}}-->
                         <span style="margin-left: 10px;">|</span>
                         <span style="margin-left:10px;" @click="Logout">退出登录</span>
                     </div>
                   </div>
+                </div>
+                <div v-else>
+                  <a class="siteNavItem" @click="Login">登录</a>
+                  <span class="siteNavItem">/</span>
+                  <a class="siteNavItem" @click="register">注册</a>
                 </div>
               </div>
             </div>
@@ -114,9 +114,8 @@ export default {
       ]
     }
   },
-  created(){
-    this.$store.state.mobile = localStorage.getItem('mobile')
-    this.$store.state.token = localStorage.getItem('token')
+  mounted(){
+    // this.$store.state.userInfo = JSON.parse(localStorage.getItem('userInfo'))
   },
   methods:{
     // 显示login
@@ -124,8 +123,7 @@ export default {
       this.$router.push('/login')
     },
     Logout(){
-      localStorage.removeItem('mobile')
-      localStorage.removeItem('token')
+      localStorage.removeItem('userInfo')
       location.reload()
     },
     register(){

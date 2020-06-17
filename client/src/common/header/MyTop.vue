@@ -76,7 +76,6 @@
 </template>
 
 <script>
-  import { getcart} from "../../api";
   import {searchgood} from "@/api/goods"
 
   export default {
@@ -85,7 +84,6 @@
     return{
       showNavTop:false,
       value:'',
-      res:'',
       // search
       isShowInfo:true,
       searchValue:'搜索你想要的商品',
@@ -107,9 +105,6 @@
     mounted(){
       window.addEventListener('scroll', this.handleScroll);
     },
-    created() {
-      this.getcart()
-    },
     computed: {
       cartlength() {
         console.log(this.$store.state.cartList.length)
@@ -117,15 +112,6 @@
       }
   },
   methods:{
-    getcart(){
-      getcart({
-        headers: {
-          Authorization: 'JWT ' + localStorage.getItem('token')
-        }
-      }).then(res=>{
-        this.res = res.length
-      })
-    },
     // 搜索框
     search(e){
       let value = e.target.value;

@@ -292,8 +292,6 @@
         addcart({
           nums: this.num,
           goods: this.id,
-        }, {
-          headers: {Authorization: 'JWT ' + localStorage.getItem('token')}
         }).then(res => {
           console.log(res)
           this.getdetail()

@@ -73,8 +73,9 @@
         console.log(Form)
         userlogin({username:Form.username,password: Form.password}).then(res=>{
           console.log(res)
-          this.$store.commit('logintoken',res)
-          this.$store.commit('loginusername',Form.username)
+          this.userInfo.token = 'JWT '+res.token
+          this.userInfo.username = Form.username
+          window.localStorage.setItem('userInfo', JSON.stringify(this.userInfo))
           this.$router.push({
             path:'/'
           })
@@ -87,6 +88,9 @@
         })
 
       }
+    },
+    mounted() {
+      this.userInfo = this.$store.state.userInfo
     },
     components: {
       MyHeader,

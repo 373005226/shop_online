@@ -10,9 +10,9 @@ export default new Vuex.Store({
     token:'',       //token
     searchlist:[],  //搜索结果
     cartList: [],   // 购物车列表
-    userInfo: null, // 用户信息
     list: [],
-    cart:[]
+    cart:[],
+    userInfo: JSON.parse(window.localStorage.getItem('userInfo')) || {},
   },
   getters:{
     gettoken(state){
@@ -21,9 +21,9 @@ export default new Vuex.Store({
     getmobile(state){
       return state.mobile
     },
-      getusername(state){
-      return state.userInfo
-    }
+    getusername(state){
+    return state.userInfo
+  }
   },
   mutations,
   actions
