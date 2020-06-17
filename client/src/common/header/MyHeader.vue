@@ -22,8 +22,8 @@
           <div class="siteNav-r">
             <div class="siteNavItem">
               <div class="siteNavItemHd">
-                <div v-if="$store.state.userInfo">
-                  <span style="float:left;">尊敬的用 </span>
+                <div v-if="this.$store.state.userInfo.username!==undefined">
+                  <span style="float:left;">尊敬的用户 </span>
                   <div class="siteNavItemuser">
                     <div class="mobile">
 <!--                      {{mobilephone}}-->
@@ -114,9 +114,6 @@ export default {
       ]
     }
   },
-  mounted(){
-    // this.$store.state.userInfo = JSON.parse(localStorage.getItem('userInfo'))
-  },
   methods:{
     // 显示login
     Login(){
@@ -140,7 +137,9 @@ export default {
       let phone = this.$store.state.mobile
       return phone.replace( /([0-9]{3})([0-9]{4})([0-9]{4})/,"$1****$3")
     }
-
+  },
+  mounted() {
+    console.log(this.$store.state.userInfo.username)
   }
 }
 </script>

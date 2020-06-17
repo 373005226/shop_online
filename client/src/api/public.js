@@ -12,7 +12,9 @@ axios.defaults.baseURL = 'http://127.0.0.1:8000/'
 axios.interceptors.request.use(config => {
   // 格式化userinfo
   config.headers['Content-Type'] = 'application/json'
-  config.headers.Authorization  = JSON.parse(localStorage.getItem('userInfo')).token || ''
+  if(localStorage.getItem('userInfo')!==null){
+    config.headers.Authorization  = JSON.parse(localStorage.getItem('userInfo')).token || ''
+  }
   return config
 }, error => {
   return Promise.reject(error)
