@@ -61,13 +61,11 @@
     },
     methods: {
       getfav(){
-        getallfav({
-          headers: {
-            Authorization: 'JWT ' + localStorage.getItem('token')
-          }
-        }).then(res => {
+        getallfav().then(res => {
           console.log(res)
           this.collectionList = res
+        }).catch(error=>{
+          console.log(error)
         })
       },
       cancelfav(id) {

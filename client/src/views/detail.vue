@@ -307,11 +307,7 @@
       },
       //  判断用户是否是否收藏
       getfav() {
-        getallfav({
-          headers: {
-            Authorization: 'JWT ' + localStorage.getItem('token')
-          }
-        }).then(res => {
+        getallfav().then(res => {
           this.isfav = !!(res.find(item => item.goods.id === this.id))
         })
       },
@@ -323,13 +319,13 @@
           this.goodtotal = res.goods_num
           this.userCommons = res.comment
           this.specification = res.specification
+          this.getfav()
         })
       }
     },
     //获取商品详情
     mounted() {
       this.getdetail()
-      this.getfav()
     }
   }
 </script>

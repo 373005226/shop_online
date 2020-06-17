@@ -51,8 +51,8 @@ export const adduserfavs =(params,config)=>{
 }
 
 //查询用户收藏的所有商品
-export const getallfav =(params)=>{
-  return http.fetchGet('userfavs/',params)
+export const getallfav =(params,config)=>{
+  return http.fetchGet('userfavs/',params,config)
 }
 
 //删除用户收藏的商品

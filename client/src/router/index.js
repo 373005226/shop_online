@@ -1,97 +1,81 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-const Home =()=>import('../views/Home.vue')
-const detail =()=>import('../views/detail')
-const catelogy =()=>import('../views/catelogy')
-const search =()=>import('../views/search')
-const cart =()=>import('../views/cart')
-const login =()=>import('../views/login')
-const register =()=>import('../views/register')
-const user =()=>import('../views/User/User')
-const MsgCenter =()=>import('../views/User/MsgCenter')
-const address =()=>import('../views/User/Address')
-const UserCollection =()=>import('../views/User/UserCollection')
-const UserOrder =()=>import('../views/User/UserOrder')
-const Integral_mall = ()=>import('../views/Integral_mall')
-const discount_mall =()=>import('../views/discount_mall')
-const integral_goods =()=>import('../views/User/integral_goods')
 
 Vue.use(VueRouter)
-
 const routes = [
   {
     path: '/',
     name: 'home',
-    component: Home,
+    component: ()=>import('../views/Home.vue'),
   },
   {
     path: '/goods',
     name: 'goods',
-    component: catelogy,
+    component: ()=>import('../views/catelogy'),
   },
   {
     path: '/detail',
     name:'商品详情',
-    component:detail
+    component:()=>import('../views/detail')
   },
   {
     path:'/search',
     name:'搜索',
-    component:search
+    component:()=>import('../views/search')
   },
   {
     path:'/cart',
     name:'购物车',
-    component: cart
+    component: ()=>import('../views/cart')
   },
   {
     path:'/login',
     name:'login',
-    component:login
+    component:()=>import('../views/login')
   },
   {
     path:'/register',
     name:'register',
-    component:register
+    component:()=>import('../views/register')
   },
   {
     path:'/user',
     name:'user',
-    component:user
+    component:()=>import('../views/User/User')
   },
   {
     path:'/msgCenter',
     name:'msgCenter',
-    component:MsgCenter
+    component:()=>import('../views/User/MsgCenter')
   },
   {
     path:'/address',
     name:'address',
-    component:address
+    component:()=>import('../views/User/Address')
   },
   {
     path:'/userCollection',
     name:'userCollection',
-    component:UserCollection
+    component:()=>import('../views/User/UserCollection')
   },
   {
     path:'/integral_goods',
     name:'兑换的积分商品',
-    component:integral_goods
+    component:()=>import('../views/User/integral_goods')
   },
   { path: '/userOrder',
     name: 'userOrder',
-    component:UserOrder
+    component:()=>import('../views/User/UserOrder')
   },
   {
     path:'/Integral_mall',
     name:'积分商城',
-    component:Integral_mall
+    component:()=>import('../views/Integral_mall')
   },
   {
     path:'/discount_mall',
     name:'折扣商城',
-    component:discount_mall
+    component:()=>import('../views/discount_mall')
   }
 ]
 
