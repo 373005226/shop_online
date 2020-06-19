@@ -23,7 +23,7 @@ export default new Vuex.Store({
     },
     getusername(state){
     return state.userInfo
-  }
+    }
   },
   mutations,
   actions

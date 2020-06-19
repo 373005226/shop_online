@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { Message } from 'element-ui'
+// import { Message } from 'element-ui'
 import router from "../router"
 
 axios.defaults.timeout = 5000
@@ -10,41 +10,28 @@ axios.defaults.baseURL = 'http://127.0.0.1:8000/'
 
 // 请求之前加上token字段
 axios.interceptors.request.use(config => {
+    // 格式化userinfo
     config.headers['Content-Type'] = 'application/json'
-    config.headers.authorization  = localStorage.getItem('admintoken') || ''
+    if(localStorage.getItem('adminuserInfo')!==null){
+        config.headers.Authorization  = JSON.parse(localStorage.getItem('adminuserInfo')).token || ''
+    }
     return config
 }, error => {
-    console.log(error) // for debug
     return Promise.reject(error)
 })
 
 
 axios.interceptors.response.use(response => {
+    console.log(response)
     return response
 }, error => {
-    console.log(error)
-    if (error.response) { // 响应错误码处理
-        switch (error.response.status) {
-            // 401错误是未登录
-            case 401:
-                Message.error({message:'您未登录',duration:5000})
-                setTimeout(router.push({
-                    path:'/login',
-                    querry:{redirect:router.currentRoute.fullPath}//从哪个页面跳转
-                }),5000)
-                break
-            // 403错误是toekn过期
-            case 403:
-                Message.error({message:'登陆状态过期',duration:5000})
-                setTimeout(router.push({
-                    path:'/login',
-                    querry:{redirect:router.currentRoute.fullPath}//从哪个页面跳转
-                }),5000)
-                break
-            case 500:
-                Message.error({message:'服务器错误',duration:5000})
-                break
-        }
+    console.log(error.response.status)
+    if(error.response.status === 401){
+        window.location.removeItem('adminuserInfo')
+        router.push({
+          path:'/login',
+          querry:{redirect:router.currentRoute.fullPath} //从哪个页面跳转
+        })
     }
     return Promise.reject(error)
 })
@@ -143,6 +130,3 @@ export default {
         })
     }
 }
-
-
-

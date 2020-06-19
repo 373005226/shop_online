@@ -120,8 +120,11 @@
         console.log(phoneForm)
         userregister({username:phoneForm.userphone,code:phoneForm.phonecode,mobile:phoneForm.userphone,password:phoneForm.checkPass}).then(res=>{
           console.log(res)
-          this.$store.commit('logintoken',res.token)
-          this.$store.commit('loginusername',phoneForm.userphone)
+          // this.$store.commit('logintoken',res.token)
+          // this.$store.commit('loginusername',phoneForm.userphone)
+          this.userInfo.token = 'JWT '+res.token
+          this.userInfo.username = phoneForm.userphone
+          window.localStorage.setItem('userInfo', JSON.stringify(this.userInfo))
           // console.log(this.$store.state.mobile)
           // console.log(this.$store.state.token)
           this.$router.push({

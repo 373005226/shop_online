@@ -26,8 +26,8 @@
                   <span style="float:left;">尊敬的用户 </span>
                   <div class="siteNavItemuser">
                     <div class="mobile">
-<!--                      {{mobilephone}}-->
-                      {{ this.$store.state.userInfo.username}}
+                      {{mobilephone}}
+<!--                      {{ this.$store.state.userInfo.username}}-->
 <!--                      {{mobilephone}}-->
                         <span style="margin-left: 10px;">|</span>
                         <span style="margin-left:10px;" @click="Logout">退出登录</span>
@@ -134,7 +134,7 @@ export default {
   },
   computed:{
     mobilephone:function(){
-      let phone = this.$store.state.mobile
+      let phone = this.$store.state.userInfo.username
       return phone.replace( /([0-9]{3})([0-9]{4})([0-9]{4})/,"$1****$3")
     }
   },

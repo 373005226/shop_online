@@ -22,9 +22,17 @@ axios.interceptors.request.use(config => {
 
 
 axios.interceptors.response.use(response => {
+  console.log(response)
   return response
 }, error => {
-  console.log(error)
+  console.log(error.response.status)
+
+  // 因为这个项目不是所有的请求都需要登录，所以不需要401过期就重新请求
+  // window.location.removeItem('userInfo')
+  // router.push({
+  //   path:'/login',
+  //   querry:{redirect:router.currentRoute.fullPath} //从哪个页面跳转
+  // })
   return Promise.reject(error)
 })
 
